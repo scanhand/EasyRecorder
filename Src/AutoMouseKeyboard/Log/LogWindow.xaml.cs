@@ -19,19 +19,37 @@ namespace AMK
     /// </summary>
     public partial class LogWindow : Window
     {
+        public bool IsDestoryWindow { get; set; } = false;
+
         public LogWindow()
         {
             InitializeComponent();
 
-            Loaded += LogWindow_Loaded;
+            this.Loaded += LogWindow_Loaded;
+            this.Closing += LogWindow_Closing;
         }
 
         private void LogWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ALog.OnDebug += (msg) =>
             {
-                listLog.Items.Add(msg);
+                this.InvokeIfRequired(() =>
+                {
+                    this.listLog.Items.Add(msg);
+                    this.listLog.SelectedIndex = this.listLog.Items.Count - 1;
+                    this.listLog.ScrollIntoView(this.listLog.SelectedItem);
+                });
             };
         }
+
+        private void LogWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (IsDestoryWindow)
+                return;
+
+            this.Visibility = Visibility.Hidden;
+            e.Cancel = true;
+        }
+
     }
 }

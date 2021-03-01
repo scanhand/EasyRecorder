@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:AMK"
         mc:Ignorable="d"
         Title="LogWindow" Height="450" Width="800">
-    <Grid>
-        <ListBox x:Name="listLog"></ListBox>
-    </Grid>
+    
+    <DockPanel>
+        <Grid>
+            <ListBox x:Name="listLog"></ListBox>
+        </Grid>
+    </DockPanel>
+    
+    
 </Window>

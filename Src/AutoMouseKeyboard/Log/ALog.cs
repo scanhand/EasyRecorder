@@ -16,7 +16,7 @@ namespace AMK
 
         public static DebugCallback OnDebug;
 
-        static void Initialize()
+        public static void Initialize()
         {
             OnDebug += (message)=> { };
         }
@@ -24,9 +24,10 @@ namespace AMK
         public static string Debug(string format, params object[] args)
         {
             var sb = new StringBuilder();
-            sb.Append($"[{DateTime.Now.ToLongTimeString()}] ");
-            if(IsAppendTime)
-                sb.Append($"{string.Format(format, args)}");
+            if (IsAppendTime)
+                sb.Append($"[{DateTime.Now.ToLongTimeString()}] ");
+            
+            sb.Append(string.Format(format, args));
 
             var log = sb.ToString();
             if(IsOutputConsole) 
