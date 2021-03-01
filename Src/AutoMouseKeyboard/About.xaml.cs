@@ -10,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AMK
+namespace AutoMouseKeyboard
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for About.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class About : Window
     {
-        private LogWindow LogWindow = new LogWindow();
-         
-        public MainWindow()
+        public About()
         {
             InitializeComponent();
-
-            Loaded += MainWindow_Loaded;
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            ALog.Debug("MainWindow_Loaded");
         }
     }
 }

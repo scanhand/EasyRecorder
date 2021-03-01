@@ -10,28 +10,28 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace AMK
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LogWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogWindow : Window
     {
-        private LogWindow LogWindow = new LogWindow();
-         
-        public MainWindow()
+        public LogWindow()
         {
             InitializeComponent();
 
-            Loaded += MainWindow_Loaded;
+            Loaded += LogWindow_Loaded;
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void LogWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MainWindow_Loaded");
+            ALog.OnDebug += (msg) =>
+            {
+                listLog.Items.Add(msg);
+            };
         }
     }
 }
