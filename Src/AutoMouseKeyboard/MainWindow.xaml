@@ -1,12 +1,22 @@
-﻿<Window x:Class="AMK.MainWindow"
+﻿<mah:MetroWindow x:Class="AMK.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AMK"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Auto Mouse &amp; Keyboard" Height="450" Width="800">
+    
     <DockPanel>
+
+        <!-- Tray Icon -->
+        <tb:TaskbarIcon IconSource="icons8-record-64.ico"
+                        ToolTipText="Auto Mouse &amp; Keyboard" 
+                        TrayMouseDoubleClick="TaskbarIcon_TrayMouseDoubleClick"/>
+
+        <!-- Menu -->
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_AutoKeyboardMouse">
                 <MenuItem Header="_Start Hook" Click="MenuItem_StartHook_Click">
@@ -26,9 +36,11 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
+        
+        <!-- -->
         <Grid>
 
         </Grid>
     </DockPanel>
     
-</Window>
+</mah:MetroWindow>

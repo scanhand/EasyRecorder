@@ -16,13 +16,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WindowsInput;
 using WindowsInput.Native;
+using MahApps.Metro.Controls;
 
 namespace AMK
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : MetroWindow
     {
         #region Log
 
@@ -137,6 +138,12 @@ namespace AMK
         private void MenuItem_ShowLog_Click(object sender, RoutedEventArgs e)
         {
             this.LogWindow.Visibility = Visibility.Visible;
+            this.LogWindow.WindowState = WindowState.Normal;
+        }
+
+        private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Normal;
         }
     }
 }
