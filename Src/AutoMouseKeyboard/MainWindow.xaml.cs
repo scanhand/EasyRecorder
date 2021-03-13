@@ -48,6 +48,12 @@ namespace AMK
 
         #endregion
 
+        #region Recorder
+
+        AMKRecorder Recorder = new AMKRecorder();
+
+        #endregion
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +61,7 @@ namespace AMK
             ALog.Initialize();
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
+            this.SizeChanged += MainWindow_SizeChanged;
 
             LogWindow.Show();
             LogWindow.Visibility = Visibility.Hidden;
@@ -74,11 +81,17 @@ namespace AMK
             applicationWatcher.Start();
         }
 
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            gridRecordItem.Width = this.Width;
+        }
+
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
         {
             if (this.HookingState != HookingState.Start)
                 return;
 
+            Recorder.Add(e);
             ALog.Debug("Application window of '{0}' with the title '{1}' was {2}", e.ApplicationData.AppName, e.ApplicationData.AppTitle, e.Event);
         }
 
@@ -87,6 +100,7 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
+            Recorder.Add(e);
             ALog.Debug("Mouse event {0} at point {1},{2}", e.Message.ToString(), e.Point.x, e.Point.y);
         }
 
@@ -95,6 +109,7 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
+            Recorder.Add(e);
             ALog.Debug("Key {0} event of key {1}", e.KeyData.EventType, e.KeyData.Keyname);
         }
 

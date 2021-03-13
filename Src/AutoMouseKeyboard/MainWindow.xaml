@@ -7,10 +7,10 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         mc:Ignorable="d"
-        Title="Auto Mouse &amp; Keyboard" Height="450" Width="800">
-    
-    <DockPanel>
+        Title="Auto Mouse &amp; Keyboard" Height="450" Width="800" MinWidth="400" MinHeight="300">
 
+    <DockPanel LastChildFill="False">
+  
         <!-- Tray Icon -->
         <tb:TaskbarIcon IconSource="icons8-record-64.ico"
                         ToolTipText="Auto Mouse &amp; Keyboard" 
@@ -21,26 +21,69 @@
             <MenuItem Header="_AutoKeyboardMouse">
                 <MenuItem Header="_Start Hook" Click="MenuItem_StartHook_Click">
                     <MenuItem.Icon>
-                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-start-64.png" />
+                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-start-64.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Stop Hook" Click="MenuItem_StopHook_Click">
                     <MenuItem.Icon>
-                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-stop-64.png" />
+                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-stop-64.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Show Log..." Click="MenuItem_ShowLog_Click">
                     <MenuItem.Icon>
-                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-event-log-48.png" />
+                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-event-log-48.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>
-        
-        <!-- -->
-        <Grid>
 
+
+        <!-- Status -->
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </StatusBar.ItemsPanel>
+            <StatusBarItem>
+                <TextBlock Name="lblCursorPosition" Text="Test Statusbar..."/>
+            </StatusBarItem>
+            <Separator Grid.Column="1" />
+            <StatusBarItem Grid.Column="2">
+                <TextBlock Text="c:\path\of\current\file.txt" />
+            </StatusBarItem>
+            <Separator Grid.Column="3" />
+            <StatusBarItem Grid.Column="4">
+                <ProgressBar Value="50" Width="90" Height="16" />
+            </StatusBarItem>
+        </StatusBar>
+
+        <!-- Main -->
+        <Grid x:Name="gridRecordItem">
+            <ListView BorderThickness="1"  >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Company" DisplayMemberBinding="{Binding Company}"></GridViewColumn>
+                        <GridViewColumn Header="Item" >
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
+
     </DockPanel>
     
 </mah:MetroWindow>

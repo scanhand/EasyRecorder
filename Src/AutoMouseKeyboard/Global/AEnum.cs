@@ -11,4 +11,19 @@ namespace AMK
         Start=0,
         Stop=1,
     }
+
+    public enum RecorderType
+    {
+        None,
+        MouseMove,
+        MouseClick,
+        MouseWheel,
+        MouseSmartClick,
+        KeyPress,
+        KeyHotkey,
+        KeyDown,
+        KeyUp,
+        WaitTime,
+        WaitSmart,
+    }
 }
