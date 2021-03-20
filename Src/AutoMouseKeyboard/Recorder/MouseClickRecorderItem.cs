@@ -8,6 +8,8 @@ namespace AMK
 {
     public class MouseClickRecorderItem : AbsRecorderItem
     {
+        public uint MouseData { get; set; } = 0;
+
         public MouseClickRecorderItem()
         {
             this.Recorder = RecorderType.MouseClick;

@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace AMK
 {
-    public class KeyUpRecorderItem : AbsRecorderItem
+    public class ApplicationRecorderItem : AbsRecorderItem
     {
-        public string Keyname;
-        public string UnicodeCharacter;
+        public WindowData ApplicationData { get; set; }
+        public ApplicationEvents Event { get; set; }
 
-        public KeyUpRecorderItem()
+        public ApplicationRecorderItem()
         {
-            this.Recorder = RecorderType.KeyUp;
-            this.Dir = Dir.Up;
+            this.Recorder = RecorderType.Application;
         }
 
         public override bool Play()

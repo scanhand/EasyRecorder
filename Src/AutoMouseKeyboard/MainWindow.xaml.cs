@@ -34,10 +34,10 @@ namespace AMK
         #region Hook
 
         private HookingState HookingState = HookingState.Stop;
-        private readonly ApplicationWatcher applicationWatcher;
-        private readonly EventHookFactory eventHookFactory = new EventHookFactory();
-        private readonly KeyboardWatcher keyboardWatcher;
-        private readonly MouseWatcher mouseWatcher;
+        private readonly ApplicationWatcher ApplicationWatcher;
+        private readonly EventHookFactory EventHookFactory = new EventHookFactory();
+        private readonly KeyboardWatcher KeyboardWatcher;
+        private readonly MouseWatcher MouseWatcher;
 
         #endregion
 
@@ -58,6 +58,9 @@ namespace AMK
         {
             InitializeComponent();
 
+            //Test
+            //this.dockManager.
+
             ALog.Initialize();
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
@@ -68,22 +71,22 @@ namespace AMK
             //Test
             LogWindow.Visibility = Visibility.Visible;
 
-            keyboardWatcher = eventHookFactory.GetKeyboardWatcher();
-            keyboardWatcher.OnKeyInput += KeyboardWatcher_OnKeyInput;
-            keyboardWatcher.Start();
+            KeyboardWatcher = EventHookFactory.GetKeyboardWatcher();
+            KeyboardWatcher.OnKeyInput += KeyboardWatcher_OnKeyInput;
+            KeyboardWatcher.Start();
 
-            mouseWatcher = eventHookFactory.GetMouseWatcher();
-            mouseWatcher.OnMouseInput += MouseWatcher_OnMouseInput;
-            mouseWatcher.Start();
+            MouseWatcher = EventHookFactory.GetMouseWatcher();
+            MouseWatcher.OnMouseInput += MouseWatcher_OnMouseInput;
+            MouseWatcher.Start();
 
-            applicationWatcher = eventHookFactory.GetApplicationWatcher();
-            applicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
-            applicationWatcher.Start();
+            ApplicationWatcher = EventHookFactory.GetApplicationWatcher();
+            ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
+            ApplicationWatcher.Start();
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            gridRecordItem.Width = this.Width;
+            //gridRecordItem.Width = this.Width;
         }
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
@@ -91,8 +94,8 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
-            Recorder.Add(e);
-            ALog.Debug("Application window of '{0}' with the title '{1}' was {2}", e.ApplicationData.AppName, e.ApplicationData.AppTitle, e.Event);
+            this.Recorder.Add(e);
+            //ALog.Debug("Application window of '{0}' with the title '{1}' was {2}", e.ApplicationData.AppName, e.ApplicationData.AppTitle, e.Event);
         }
 
         private void MouseWatcher_OnMouseInput(object sender, EventHook.MouseEventArgs e)
@@ -100,8 +103,8 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
-            Recorder.Add(e);
-            ALog.Debug("Mouse event {0} at point {1},{2}", e.Message.ToString(), e.Point.x, e.Point.y);
+            this.Recorder.Add(e);
+            //ALog.Debug("Mouse event {0} at point {1},{2}", e.Message.ToString(), e.Point.x, e.Point.y);
         }
 
         private void KeyboardWatcher_OnKeyInput(object sender, KeyInputEventArgs e)
@@ -109,17 +112,17 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
-            Recorder.Add(e);
-            ALog.Debug("Key {0} event of key {1}", e.KeyData.EventType, e.KeyData.Keyname);
+            this.Recorder.Add(e);
+            //ALog.Debug("Key {0} event of key {1}", e.KeyData.EventType, e.KeyData.Keyname);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            keyboardWatcher.Stop();
-            mouseWatcher.Stop();
-            applicationWatcher.Stop();
+            KeyboardWatcher.Stop();
+            MouseWatcher.Stop();
+            ApplicationWatcher.Stop();
 
-            eventHookFactory.Dispose();
+            EventHookFactory.Dispose();
 
             LogWindow.IsDestoryWindow = true;
             LogWindow.Close();
@@ -132,12 +135,14 @@ namespace AMK
 
         private void StartHook()
         {
+            this.Recorder.Start();
             this.HookingState = HookingState.Start;
         }
 
         private void StopHook()
         {
             this.HookingState = HookingState.Stop;
+            this.Recorder.Stop();
         }
 
         private void MenuItem_StartHook_Click(object sender, RoutedEventArgs e)

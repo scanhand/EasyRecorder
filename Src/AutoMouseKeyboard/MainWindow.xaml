@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:AMK"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
+        xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
         mc:Ignorable="d"
         Title="Auto Mouse &amp; Keyboard" Height="450" Width="800" MinWidth="400" MinHeight="300">
 
@@ -66,8 +67,17 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!-- Main -->
-        <Grid x:Name="gridRecordItem">
+        <ad:DockingManager x:Name="dockManager" 
+                                   Grid.Row="1">
+            <!--<avd:DockingManager.Theme>
+                <avd:MetroTheme />
+            </avd:DockingManager.Theme>-->
+
+        </ad:DockingManager>
+
+        <!-- Main DockPanel-->
+       
+        <!--<Grid x:Name="gridRecordItem">
             <ListView BorderThickness="1"  >
                 <ListView.View>
                     <GridView>
@@ -82,7 +92,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </Grid>
+        </Grid>-->
 
     </DockPanel>
     

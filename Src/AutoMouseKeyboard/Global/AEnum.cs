@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace AMK
 {
-    public enum HookingState 
+    public enum HookingState
     {
-        Start=0,
-        Stop=1,
+        Start = 0,
+        Stop = 1,
     }
 
     public enum RecorderType
@@ -25,5 +25,19 @@ namespace AMK
         KeyUp,
         WaitTime,
         WaitSmart,
+        Application,
+    }
+
+    public enum Dir
+    {
+        Up,
+        Down,
+    }
+
+    public enum LR
+    {
+        None,
+        Left,
+        Right,
     }
 }

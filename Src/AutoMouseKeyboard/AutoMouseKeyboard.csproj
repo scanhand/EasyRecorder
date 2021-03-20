@@ -38,6 +38,12 @@
     <ApplicationIcon>icons8-record-64.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AvalonDock">
+      <HintPath>dll\DockPanel\AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="AvalonDock.Themes.Metro">
+      <HintPath>dll\DockPanel\AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="ControlzEx, Version=5.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.5.0.0\lib\net452\ControlzEx.dll</HintPath>
     </Reference>
@@ -87,6 +93,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Recorder\AbsRecorderItem.cs" />
+    <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\KeyUpRecorderItem.cs" />
     <Compile Include="Recorder\KeyDownRecorderItem.cs" />
@@ -159,6 +166,7 @@
     <Resource Include="icons8-record-64.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dock\" />
     <Folder Include="UI\" />
   </ItemGroup>
   <ItemGroup>
