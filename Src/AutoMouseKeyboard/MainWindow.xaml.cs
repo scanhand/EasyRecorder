@@ -58,9 +58,6 @@ namespace AMK
         {
             InitializeComponent();
 
-            //Test
-            //this.dockManager.
-
             ALog.Initialize();
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
@@ -82,6 +79,26 @@ namespace AMK
             ApplicationWatcher = EventHookFactory.GetApplicationWatcher();
             ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
             ApplicationWatcher.Start();
+
+            this.Loaded += MainWindow_Loaded1;
+        }
+
+        private void MainWindow_Loaded1(object sender, RoutedEventArgs e)
+        {
+            RecoderListView.Items.Add(new MouseClickRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new KeyDownRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new WaitTimeRecorderItem()
+            {
+
+            });
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)

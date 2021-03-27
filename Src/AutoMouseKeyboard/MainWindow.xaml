@@ -10,6 +10,19 @@
         mc:Ignorable="d"
         Title="Auto Mouse &amp; Keyboard" Height="450" Width="800" MinWidth="400" MinHeight="300">
 
+    <Window.Resources>
+        <!--<DataTemplate x:Key="RecorderItemTemplate">
+            <DockPanel>
+                <Image Source=""/>
+                <TextBlock>
+                    <TextBlock.Text>
+                        <Binding />
+                    </TextBlock.Text>
+                </TextBlock>
+            </DockPanel>
+        </DataTemplate>-->
+    </Window.Resources>
+
     <DockPanel LastChildFill="False">
   
         <!-- Tray Icon -->
@@ -67,33 +80,60 @@
             </StatusBarItem>
         </StatusBar>
 
-        <ad:DockingManager x:Name="dockManager" 
+        <!--<ad:DockingManager x:Name="dockManager" 
                                    Grid.Row="1">
-            <!--<avd:DockingManager.Theme>
+            --><!--<avd:DockingManager.Theme>
                 <avd:MetroTheme />
-            </avd:DockingManager.Theme>-->
+            </avd:DockingManager.Theme>--><!--
 
-        </ad:DockingManager>
+        </ad:DockingManager>-->
 
         <!-- Main DockPanel-->
-       
-        <!--<Grid x:Name="gridRecordItem">
-            <ListView BorderThickness="1"  >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn Header="Company" DisplayMemberBinding="{Binding Company}"></GridViewColumn>
-                        <GridViewColumn Header="Item" >
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock></TextBlock>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </Grid>-->
+        <ListView Name="RecoderListView">
+            <ListView.View>
+                <GridView>
+                    <!-- Item -->
+                    <GridViewColumn Width="200">
+                        <GridViewColumnHeader>Item</GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Source="icons8-record-64.ico" Width="16"/>
+                                    <TextBlock Text="{Binding Recorder}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <!-- Description -->
+                    <GridViewColumn Width="300">
+                        <GridViewColumnHeader>Description</GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Source="icons8-record-64.ico" Width="16"/>
+                                    <TextBlock Text="{Binding Dir}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
 
+                    <!-- Etc -->
+                    <GridViewColumn Width="150">
+                        <GridViewColumnHeader>Etc</GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Source="icons8-record-64.ico" Width="16"/>
+                                    <TextBlock Text="{Binding Point}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
     </DockPanel>
     
 </mah:MetroWindow>
