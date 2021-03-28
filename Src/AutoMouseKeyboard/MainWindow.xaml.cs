@@ -22,7 +22,7 @@ namespace AMK
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// </summary> 
     public partial class MainWindow : MetroWindow
     {
         #region Log
@@ -79,11 +79,9 @@ namespace AMK
             ApplicationWatcher = EventHookFactory.GetApplicationWatcher();
             ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
             ApplicationWatcher.Start();
-
-            this.Loaded += MainWindow_Loaded1;
         }
 
-        private void MainWindow_Loaded1(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             RecoderListView.Items.Add(new MouseClickRecorderItem()
             {
@@ -129,6 +127,14 @@ namespace AMK
             {
 
             });
+
+            this.Recorder.OnAddItem += (item) =>
+            {
+                this.InvokeIfRequired(() =>{
+                    this.RecoderListView.Items.Add(item);
+                    this.RecoderListView.ScrollIntoView(this.RecoderListView.Items[this.RecoderListView.Items.Count - 1]);
+                });
+            };
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -141,8 +147,7 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
-            this.Recorder.Add(e);
-            //ALog.Debug("Application window of '{0}' with the title '{1}' was {2}", e.ApplicationData.AppName, e.ApplicationData.AppTitle, e.Event);
+            this.Recorder.Add(e); 
         }
 
         private void MouseWatcher_OnMouseInput(object sender, EventHook.MouseEventArgs e)
@@ -150,8 +155,7 @@ namespace AMK
             if (this.HookingState != HookingState.Start)
                 return;
 
-            this.Recorder.Add(e);
-            //ALog.Debug("Mouse event {0} at point {1},{2}", e.Message.ToString(), e.Point.x, e.Point.y);
+            this.Recorder.Add(e); 
         }
 
         private void KeyboardWatcher_OnKeyInput(object sender, KeyInputEventArgs e)
@@ -160,7 +164,6 @@ namespace AMK
                 return;
 
             this.Recorder.Add(e);
-            //ALog.Debug("Key {0} event of key {1}", e.KeyData.EventType, e.KeyData.Keyname);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -175,13 +178,11 @@ namespace AMK
             LogWindow.Close();
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            ALog.Debug("MainWindow_Loaded");
-        }
-
         private void StartHook()
         {
+            //Test
+            RecoderListView.Items.Clear();
+
             this.Recorder.Start();
             this.HookingState = HookingState.Start;
         }

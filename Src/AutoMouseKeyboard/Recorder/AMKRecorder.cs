@@ -25,6 +25,19 @@ namespace AMK
 
         private bool IsThreadRecording = false;
 
+        public Action<IRecorderItem> OnAddItem = null;
+
+
+        public AMKRecorder()
+        {
+        }
+
+        public void AddItem(IRecorderItem item)
+        {
+            this.Items.Add(item);
+            if (OnAddItem != null)
+                OnAddItem(item);
+        }
 
         public void Start()
         {
@@ -78,7 +91,7 @@ namespace AMK
                 Event = e.Event,
             };
 
-            this.Items.Add(newRecorder);
+            AddItem(newRecorder);
             this.CurrentRecorder = newRecorder;
         }
 
@@ -100,7 +113,7 @@ namespace AMK
                     MouseData = e.MouseData,
                 };
 
-                this.Items.Add(newRecorder);
+                AddItem(newRecorder);
             }
             else if(e.Message == MouseMessages.WM_LBUTTONUP ||
                     e.Message == MouseMessages.WM_LBUTTONDOWN ||
@@ -115,7 +128,7 @@ namespace AMK
                     MouseData = e.MouseData,
                 };
 
-                this.Items.Add(newRecorder);
+                AddItem(newRecorder);
             }
             else if(e.Message == MouseMessages.WM_MOUSEMOVE)
             {
@@ -128,7 +141,7 @@ namespace AMK
                 if (CurrentRecorder?.IsEqualType(newRecorder) == true)
                     CurrentRecorder.ChildItems.Add(newRecorder);
                 else
-                    this.Items.Add(newRecorder);
+                    AddItem(newRecorder);
             }
 
             this.CurrentRecorder = newRecorder;
@@ -158,9 +171,8 @@ namespace AMK
                 };
             }
 
-            this.Items.Add(newRecorder);
+            AddItem(newRecorder);
             this.CurrentRecorder = newRecorder;
-
         }
 
         private void AddWaitingRecorderItem(float waitingTimeSec)
@@ -180,7 +192,7 @@ namespace AMK
                 return;
             }
 
-            this.Items.Add(newRecorder);
+            AddItem(newRecorder);
             this.CurrentRecorder = newRecorder;
             ALog.Debug("Add Waiting Event!");
         }

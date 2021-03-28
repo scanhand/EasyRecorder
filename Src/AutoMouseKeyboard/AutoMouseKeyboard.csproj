@@ -194,7 +194,10 @@
     <Resource Include="Resources\icons8-cursor-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-timer-64.png" />
+    <Resource Include="Resources\icons8-timer-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-mouse_wheel-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

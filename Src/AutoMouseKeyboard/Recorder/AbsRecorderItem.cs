@@ -27,6 +27,7 @@ namespace AMK
                 {
                     case RecorderType.MouseClick:   return "Resources/icons8-mouse_leftclick-64.png";
                     case RecorderType.MouseMove: return "Resources/icons8-cursor-64.png";
+                    case RecorderType.MouseWheel: return "Resources/icons8-mouse_wheel-64.png";
                     case RecorderType.KeyPress: return "Resources/icons8-keyboard-64.png";
                     case RecorderType.WaitTime: return "Resources/icons8-timer-64.png";
                 }
