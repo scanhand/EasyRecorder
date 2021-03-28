@@ -25,11 +25,15 @@ namespace AMK
             {
                 switch (this.Recorder)
                 {
-                    case RecorderType.MouseClick:   return "Resources/icons8-mouse_leftclick-64.png";
-                    case RecorderType.MouseMove: return "Resources/icons8-cursor-64.png";
-                    case RecorderType.MouseWheel: return "Resources/icons8-mouse_wheel-64.png";
-                    case RecorderType.KeyPress: return "Resources/icons8-keyboard-64.png";
-                    case RecorderType.WaitTime: return "Resources/icons8-timer-64.png";
+                    case RecorderType.KeyDown:          return "Resources/icons8-keydown-64.png";
+                    case RecorderType.KeyUp:            return "Resources/icons8-keyup-64.png";
+                    case RecorderType.MouseClick:       return "Resources/icons8-mouse_leftclick-64.png";
+                    case RecorderType.MouseSmartClick:  return "Resources/icons8-smartmouseclick-64.png";
+                    case RecorderType.MouseMove:        return "Resources/icons8-cursor-64.png";
+                    case RecorderType.MouseWheel:       return "Resources/icons8-mouse_wheel-64.png";
+                    case RecorderType.KeyPress:         return "Resources/icons8-keyboard-64.png";
+                    case RecorderType.WaitTime:         return "Resources/icons8-timer-64.png";
+                    case RecorderType.WaitSmart:        return "Resources/icons8-smarttimer-64.png";
                 }
                 return string.Empty;
             }

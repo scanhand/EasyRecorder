@@ -93,6 +93,26 @@ namespace AMK.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_keydown_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_keydown_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_keyup_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_keyup_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_mouse_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8_mouse_64", resourceCulture);
@@ -126,6 +146,26 @@ namespace AMK.Properties {
         internal static System.Drawing.Bitmap icons8_mouse_wheel_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8_mouse_wheel_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_smartmouseclick_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_smartmouseclick_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_smarttimer_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_smarttimer_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

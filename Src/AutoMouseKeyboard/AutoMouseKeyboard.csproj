@@ -199,5 +199,17 @@
   <ItemGroup>
     <Resource Include="Resources\icons8-mouse_wheel-64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-smarttimer-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-smartmouseclick-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-keyup-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-keydown-64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
