@@ -107,7 +107,7 @@
                     </GridViewColumn>
                     
                     <!-- Description -->
-                    <GridViewColumn Width="300">
+                    <GridViewColumn Width="200">
                         <GridViewColumnHeader>Description</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -120,7 +120,7 @@
                     </GridViewColumn>
 
                     <!-- Etc -->
-                    <GridViewColumn Width="150">
+                    <GridViewColumn Width="200">
                         <GridViewColumnHeader>Etc</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

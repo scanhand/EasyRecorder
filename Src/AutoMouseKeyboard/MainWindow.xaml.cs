@@ -147,7 +147,11 @@ namespace AMK
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //gridRecordItem.Width = this.Width;
+            //this.RecoderListView.Width = this.Width;
+            double width = this.Width - this.BorderThickness.Left -this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
+            ((GridView)this.RecoderListView.View).Columns[0].Width = width * 0.25;
+            ((GridView)this.RecoderListView.View).Columns[1].Width = width * 0.5;
+            ((GridView)this.RecoderListView.View).Columns[2].Width = width * 0.25;
         }
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
