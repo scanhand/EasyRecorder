@@ -12,6 +12,14 @@ namespace AMK
         public WindowData ApplicationData { get; set; }
         public ApplicationEvents Event { get; set; }
 
+        public override string Description 
+        {
+            get
+            {
+                return this.ApplicationData.AppName; 
+            }
+        }
+
         public ApplicationRecorderItem()
         {
             this.Recorder = RecorderType.Application;

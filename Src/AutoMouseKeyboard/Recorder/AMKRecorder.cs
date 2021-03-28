@@ -27,6 +27,7 @@ namespace AMK
 
         public Action<IRecorderItem> OnAddItem = null;
 
+        public Action<IRecorderItem> OnUpdateItem = null;
 
         public AMKRecorder()
         {
@@ -37,6 +38,12 @@ namespace AMK
             this.Items.Add(item);
             if (OnAddItem != null)
                 OnAddItem(item);
+        }
+
+        public void UpdateItem(IRecorderItem item)
+        {
+            if (OnUpdateItem != null)
+                OnUpdateItem(item);
         }
 
         public void Start()
@@ -188,6 +195,7 @@ namespace AMK
             {
                 var item = this.CurrentRecorder as WaitTimeRecorderItem;
                 item.WaitingTimeSec = waitingTimeSec;
+                UpdateItem(item);
                 ALog.Debug("Accumulated time {0} in currentRecorder", item.WaitingTimeSec);
                 return;
             }

@@ -8,6 +8,14 @@ namespace AMK
 {
     public class WaitSmartRecorderItem : AbsRecorderItem
     {
+        public override string Description
+        {
+            get
+            {
+                return string.Format("X: {0}, Y: {1}", this.Point.x, this.Point.y);
+            }
+        }
+
         public WaitSmartRecorderItem()
         {
             this.Recorder = RecorderType.WaitSmart;

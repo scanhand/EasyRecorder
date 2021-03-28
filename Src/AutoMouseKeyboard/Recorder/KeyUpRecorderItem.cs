@@ -12,6 +12,14 @@ namespace AMK
         public string Keyname;
         public string UnicodeCharacter;
 
+        public override string Description
+        {
+            get
+            {
+                return this.Keyname;
+            }
+        }
+
         public KeyUpRecorderItem()
         {
             this.Recorder = RecorderType.KeyUp;

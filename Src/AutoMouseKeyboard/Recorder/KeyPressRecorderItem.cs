@@ -8,6 +8,17 @@ namespace AMK
 {
     public class KeyPressRecorderItem : AbsRecorderItem
     {
+        public string Keyname;
+        public string UnicodeCharacter;
+
+        public override string Description
+        {
+            get
+            {
+                return this.Keyname;
+            }
+        }
+
         public KeyPressRecorderItem()
         {
             this.Recorder = RecorderType.KeyPress;

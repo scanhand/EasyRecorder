@@ -113,7 +113,7 @@
                             <DataTemplate>
                                 <DockPanel>
                                     <Image Source="icons8-record-64.ico" Width="16"/>
-                                    <TextBlock Text="{Binding Dir}"/>
+                                    <TextBlock Text="{Binding Description}"/>
                                 </DockPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

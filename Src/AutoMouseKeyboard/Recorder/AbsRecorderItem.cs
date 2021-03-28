@@ -3,13 +3,14 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AMK
 {
-    public abstract class AbsRecorderItem : IRecorderItem
+    public abstract class AbsRecorderItem : IRecorderItem, INotifyPropertyChanged
     {
         public RecorderType Recorder { get; set; } = RecorderType.None;
 
@@ -41,7 +42,11 @@ namespace AMK
 
         public List<IRecorderItem> ChildItems { get; set; } = new List<IRecorderItem>();
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public abstract bool Play();
+
+        public abstract string Description { get; }
 
         public bool IsSameRecorderType(IRecorderItem item)
         {
@@ -51,6 +56,18 @@ namespace AMK
         public bool IsEqualType(IRecorderItem item)
         {
             return this.Recorder == item?.Recorder;
+        }
+
+        public void NotifyPropertyChanged(string propName)
+        {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+        }
+
+        public void UpdateProperties()
+        {
+            this.NotifyPropertyChanged("Recorder");
+            this.NotifyPropertyChanged("Description");
         }
     }
 }

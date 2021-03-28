@@ -135,6 +135,14 @@ namespace AMK
                     this.RecoderListView.ScrollIntoView(this.RecoderListView.Items[this.RecoderListView.Items.Count - 1]);
                 });
             };
+
+            this.Recorder.OnUpdateItem += (item) =>
+            {
+                this.InvokeIfRequired(() => {
+                    AbsRecorderItem absItem = item as AbsRecorderItem;
+                    absItem.UpdateProperties();
+                });
+            };
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
