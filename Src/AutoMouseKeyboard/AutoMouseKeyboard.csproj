@@ -178,5 +178,23 @@
   <ItemGroup>
     <Resource Include="Resources\icons8-stop-64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-mouse-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-keyboard-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-mouse_rightclick-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-mouse_leftclick-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-cursor-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-timer-64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

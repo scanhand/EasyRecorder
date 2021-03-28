@@ -63,9 +63,59 @@ namespace AMK.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_cursor_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_cursor_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_event_log_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8_event_log_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_keyboard_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_keyboard_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_mouse_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_mouse_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_mouse_leftclick_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_mouse_leftclick_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_mouse_rightclick_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_mouse_rightclick_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +136,16 @@ namespace AMK.Properties {
         internal static System.Drawing.Bitmap icons8_stop_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8_stop_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_timer_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_timer_64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

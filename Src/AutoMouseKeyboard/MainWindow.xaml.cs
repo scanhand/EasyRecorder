@@ -90,7 +90,37 @@ namespace AMK
 
             });
 
+            RecoderListView.Items.Add(new MouseMoveRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new MouseSmartClickRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new MouseWheelRecorderItem()
+            {
+
+            });
+
             RecoderListView.Items.Add(new KeyDownRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new KeyUpRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new KeyPressRecorderItem()
+            {
+
+            });
+
+            RecoderListView.Items.Add(new WaitSmartRecorderItem()
             {
 
             });
