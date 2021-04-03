@@ -15,11 +15,18 @@ namespace AMK
 
         private IRecorderItem CurrentRecorder = null;
 
+        private IRecorderItem CurrentKeyRecorder = null;
+
+        private IRecorderItem CurrentMouseRecorder = null;
+
         private bool IsWaitingTimeEvent = false;
 
         private float CurrentWaitingTimeSec = 0;
 
+        //500 msec
         public float WaitingTimeSec = 0.5f;
+
+        public float KeyPressIntervalTimeSec = 0.2f;
 
         private Thread ThreadRecording = null;
 
@@ -29,21 +36,10 @@ namespace AMK
 
         public Action<IRecorderItem> OnUpdateItem = null;
 
+        public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
+
         public AMKRecorder()
         {
-        }
-
-        public void AddItem(IRecorderItem item)
-        {
-            this.Items.Add(item);
-            if (OnAddItem != null)
-                OnAddItem(item);
-        }
-
-        public void UpdateItem(IRecorderItem item)
-        {
-            if (OnUpdateItem != null)
-                OnUpdateItem(item);
         }
 
         public void Start()
@@ -87,11 +83,7 @@ namespace AMK
 
         public void Add(ApplicationEventArgs e)
         {
-            ALog.Debug("AMKRecorder::Items.Count={0}", this.Items.Count);
-
-            this.CurrentWaitingTimeSec = 0;
             IRecorderItem newRecorder = null;
-
             newRecorder = new ApplicationRecorderItem()
             {
                 ApplicationData = e.ApplicationData,
@@ -104,9 +96,6 @@ namespace AMK
 
         public void Add(MouseEventArgs e)
         {
-            ALog.Debug("AMKRecorder::Items.Count={0}", this.Items.Count);
-
-            this.CurrentWaitingTimeSec = 0;
             IRecorderItem newRecorder = null;
 
             if (e.Message == MouseMessages.WM_WHEELBUTTONUP ||
@@ -119,8 +108,6 @@ namespace AMK
                     Point = e.Point,
                     MouseData = e.MouseData,
                 };
-
-                AddItem(newRecorder);
             }
             else if(e.Message == MouseMessages.WM_LBUTTONUP ||
                     e.Message == MouseMessages.WM_LBUTTONDOWN ||
@@ -134,8 +121,6 @@ namespace AMK
                     Point = e.Point,
                     MouseData = e.MouseData,
                 };
-
-                AddItem(newRecorder);
             }
             else if(e.Message == MouseMessages.WM_MOUSEMOVE)
             {
@@ -145,32 +130,59 @@ namespace AMK
                     MouseData = e.MouseData,
                 };
 
-                if (CurrentRecorder?.IsEqualType(newRecorder) == true)
-                    CurrentRecorder.ChildItems.Add(newRecorder);
-                else
-                    AddItem(newRecorder);
+                if (IsMouseMove())
+                {
+                    ResetWaitingTime();
+                    this.CurrentMouseRecorder.ChildItems.Add(newRecorder);
+                    UpdateItem(this.CurrentMouseRecorder);
+                    return;
+                }
             }
 
-            this.CurrentRecorder = newRecorder;
-
+            AddMouseItem(newRecorder);
         }
 
         public void Add(KeyInputEventArgs e)
         {
-            ALog.Debug("AMKRecorder::Items.Count={0}", this.Items.Count);
-
-            this.CurrentWaitingTimeSec = 0;
             IRecorderItem newRecorder = null;
             if (e.KeyData.EventType == KeyEvent.up)
             {
-                newRecorder = new KeyUpRecorderItem()
+                ALog.Debug("e.KeyData.EventType == KeyEvent.up");
+                if (IsKeyPress())
                 {
-                    Keyname = e.KeyData.Keyname,
-                    UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                };
+                    ALog.Debug("IsKeyPress::True!");
+                    newRecorder = new KeyPressRecorderItem()
+                    {
+                        Keyname = e.KeyData.Keyname,
+                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
+                    };
+
+                    if (this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress)
+                    {
+                        this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
+                        UpdateItem(CurrentKeyRecorder);
+                        return;
+                    }
+                    
+                    ReplaceKeyItem(this.CurrentRecorder, newRecorder);
+                    return;
+                }
+                else
+                {
+                    ALog.Debug("IsKeyPress::False!");
+                    newRecorder = new KeyUpRecorderItem()
+                    {
+                        Keyname = e.KeyData.Keyname,
+                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
+                    };
+                }
             }
             else
             {
+                //it's state on pressing key
+                if (GetLastItem()?.Recorder == RecorderType.KeyDown)
+                    return;
+
                 newRecorder = new KeyDownRecorderItem()
                 {
                     Keyname = e.KeyData.Keyname,
@@ -178,8 +190,38 @@ namespace AMK
                 };
             }
 
-            AddItem(newRecorder);
-            this.CurrentRecorder = newRecorder;
+            AddKeyItem(newRecorder);
+        }
+
+        private IRecorderItem GetLastItem(bool isIgnoreWaitItem = true)
+        {
+            for(int i=Items.Count-1; i>=0; i--)
+            {
+                if (isIgnoreWaitItem && Items[i].Recorder == RecorderType.WaitTime)
+                    continue;
+
+                return Items[i];
+            }
+            return null;
+        }
+
+        private bool IsKeyPress()
+        {
+            if( (this.CurrentKeyRecorder?.Recorder == RecorderType.KeyDown || this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress) &&
+                (DateTime.Now - this.CurrentKeyRecorder?.Time).Value.TotalSeconds < KeyPressIntervalTimeSec)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool IsMouseMove()
+        {
+            if(this.CurrentRecorder?.Recorder == RecorderType.MouseMove)
+                return true;
+
+            return false;
         }
 
         private void AddWaitingRecorderItem(float waitingTimeSec)
@@ -201,8 +243,68 @@ namespace AMK
             }
 
             AddItem(newRecorder);
-            this.CurrentRecorder = newRecorder;
             ALog.Debug("Add Waiting Event!");
+        }
+
+        public void ResetWaitingTime()
+        {
+            this.CurrentWaitingTimeSec = 0;
+        }
+
+        public void AddItem(IRecorderItem item)
+        {
+            ResetWaitingTime();
+            this.CurrentRecorder = item;
+            this.Items.Add(item);
+            if (OnAddItem != null)
+                OnAddItem(item);
+        }
+
+        public void AddMouseItem(IRecorderItem item)
+        {
+            this.CurrentMouseRecorder = item;
+            AddItem(item);
+        }
+
+        public void AddKeyItem(IRecorderItem item)
+        {
+            this.CurrentKeyRecorder = item;
+            AddItem(item);
+        }
+
+        public bool ReplaceItem(IRecorderItem oldItem, IRecorderItem newItem)
+        {
+            int index = this.Items.IndexOf(oldItem);
+            if (index < 0 || index >= this.Items.Count)
+            {
+                ALog.Debug("ReplaceItem::Index is invalide!(Index={0})", index);
+                return false;
+            }
+
+            this.CurrentRecorder = newItem;
+            this.Items[index] = newItem;
+            if (OnReplaceItem != null)
+                OnReplaceItem(oldItem, newItem);
+
+            return true;
+        }
+
+        public bool ReplaceKeyItem(IRecorderItem oldItem, IRecorderItem newItem)
+        {
+            this.CurrentKeyRecorder = newItem;
+            return ReplaceItem(oldItem, newItem);
+        }
+
+        public bool ReplaceMouseItem(IRecorderItem oldItem, IRecorderItem newItem)
+        {
+            this.CurrentMouseRecorder = newItem;
+            return ReplaceItem(oldItem, newItem);
+        }
+
+        public void UpdateItem(IRecorderItem item)
+        {
+            if (OnUpdateItem != null)
+                OnUpdateItem(item);
         }
     }
 }

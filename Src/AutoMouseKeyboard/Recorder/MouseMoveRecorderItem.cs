@@ -15,7 +15,7 @@ namespace AMK
         {
             get
             {
-                return string.Format("X: {0}, Y: {1}", this.Point.x, this.Point.y);
+                return string.Format("X: {0}, Y: {1}, Count={2}", this.Point.x, this.Point.y, this.ChildItems.Count);
             }
         }
 

@@ -12,6 +12,8 @@ namespace AMK
 {
     public abstract class AbsRecorderItem : IRecorderItem, INotifyPropertyChanged
     {
+        public string Id { get; set; }
+
         public RecorderType Recorder { get; set; } = RecorderType.None;
 
         public Dir Dir { get; set; } = Dir.Down;
@@ -20,21 +22,23 @@ namespace AMK
 
         public Point Point { get; set; }
 
+        public DateTime Time { get; set; } = DateTime.Now;
+
         public string ImageSource
         {
             get
             {
                 switch (this.Recorder)
                 {
-                    case RecorderType.KeyDown:          return "Resources/icons8-keydown-64.png";
-                    case RecorderType.KeyUp:            return "Resources/icons8-keyup-64.png";
-                    case RecorderType.MouseClick:       return "Resources/icons8-mouse_leftclick-64.png";
-                    case RecorderType.MouseSmartClick:  return "Resources/icons8-smartmouseclick-64.png";
-                    case RecorderType.MouseMove:        return "Resources/icons8-cursor-64.png";
-                    case RecorderType.MouseWheel:       return "Resources/icons8-mouse_wheel-64.png";
-                    case RecorderType.KeyPress:         return "Resources/icons8-keyboard-64.png";
-                    case RecorderType.WaitTime:         return "Resources/icons8-timer-64.png";
-                    case RecorderType.WaitSmart:        return "Resources/icons8-smarttimer-64.png";
+                    case RecorderType.KeyDown:          return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
+                    case RecorderType.KeyUp:            return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
+                    case RecorderType.MouseClick:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse_leftclick-64.png";
+                    case RecorderType.MouseSmartClick:  return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
+                    case RecorderType.MouseMove:        return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
+                    case RecorderType.MouseWheel:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse_wheel-64.png";
+                    case RecorderType.KeyPress:         return "/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png";
+                    case RecorderType.WaitTime:         return "/AutoMouseKeyboard;component/Resources/icons8-timer-64.png";
+                    case RecorderType.WaitSmart:        return "/AutoMouseKeyboard;component/Resources/icons8-smarttimer-64.png";
                 }
                 return string.Empty;
             }
@@ -47,6 +51,16 @@ namespace AMK
         public abstract bool Play();
 
         public abstract string Description { get; }
+
+        public AbsRecorderItem()
+        {
+            Id = GenerateID();
+        }
+
+        public string GenerateID()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
 
         public bool IsSameRecorderType(IRecorderItem item)
         {
@@ -66,8 +80,10 @@ namespace AMK
 
         public void UpdateProperties()
         {
+            this.NotifyPropertyChanged("ImageSource");
             this.NotifyPropertyChanged("Recorder");
             this.NotifyPropertyChanged("Description");
+            
         }
     }
 }

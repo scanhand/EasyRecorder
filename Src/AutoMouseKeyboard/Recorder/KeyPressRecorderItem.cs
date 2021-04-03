@@ -15,7 +15,7 @@ namespace AMK
         {
             get
             {
-                return this.Keyname;
+                return this.Keyname + ", Count=" + this.ChildItems.Count.ToString();
             }
         }
 

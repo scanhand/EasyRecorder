@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AMK"
+        xmlns:localui="clr-namespace:AMK.UI"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
@@ -90,51 +91,9 @@
         </ad:DockingManager>-->
 
         <!-- Main DockPanel-->
-        <ListView Name="RecoderListView">
-            <ListView.View>
-                <GridView>
-                    <!-- Item -->
-                    <GridViewColumn Width="200">
-                        <GridViewColumnHeader>Item</GridViewColumnHeader>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <Image Source="{Binding ImageSource}" Width="16"/>
-                                    <TextBlock Text="{Binding Recorder}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    
-                    <!-- Description -->
-                    <GridViewColumn Width="200">
-                        <GridViewColumnHeader>Description</GridViewColumnHeader>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <Image Source="icons8-record-64.ico" Width="16"/>
-                                    <TextBlock Text="{Binding Description}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
+        <localui:RecorderItemView x:Name="RecorderView">
 
-                    <!-- Etc -->
-                    <GridViewColumn Width="200">
-                        <GridViewColumnHeader>Etc</GridViewColumnHeader>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <Image Source="icons8-record-64.ico" Width="16"/>
-                                    <TextBlock Text="{Binding Point}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        
+        </localui:RecorderItemView>
     </DockPanel>
     
 </mah:MetroWindow>

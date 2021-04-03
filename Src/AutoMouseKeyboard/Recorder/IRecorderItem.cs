@@ -11,6 +11,8 @@ namespace AMK
 {
     public interface IRecorderItem
     {
+        string Id { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         RecorderType Recorder {get; set;}
 
@@ -21,6 +23,8 @@ namespace AMK
         LR LR { get; set; }
 
         Point Point { get; set; }
+
+        DateTime Time { get; set; }
 
         List<IRecorderItem> ChildItems { get; set; }
 

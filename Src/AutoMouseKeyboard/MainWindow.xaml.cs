@@ -52,7 +52,11 @@ namespace AMK
 
         AMKRecorder Recorder = new AMKRecorder();
 
+        ListView RecorderListView = null;
+
         #endregion
+
+        bool IsInitialize = false;
 
         public MainWindow()
         {
@@ -63,76 +67,43 @@ namespace AMK
             this.Closing += MainWindow_Closing;
             this.SizeChanged += MainWindow_SizeChanged;
 
-            LogWindow.Show();
-            LogWindow.Visibility = Visibility.Hidden;
+            this.LogWindow.Show();
+            this.LogWindow.Visibility = Visibility.Hidden;
             //Test
-            LogWindow.Visibility = Visibility.Visible;
+            this.LogWindow.Visibility = Visibility.Visible;
 
-            KeyboardWatcher = EventHookFactory.GetKeyboardWatcher();
-            KeyboardWatcher.OnKeyInput += KeyboardWatcher_OnKeyInput;
-            KeyboardWatcher.Start();
+            this.KeyboardWatcher = EventHookFactory.GetKeyboardWatcher();
+            this.KeyboardWatcher.OnKeyInput += KeyboardWatcher_OnKeyInput;
+            this.KeyboardWatcher.Start();
 
-            MouseWatcher = EventHookFactory.GetMouseWatcher();
-            MouseWatcher.OnMouseInput += MouseWatcher_OnMouseInput;
-            MouseWatcher.Start();
+            this.MouseWatcher = EventHookFactory.GetMouseWatcher();
+            this.MouseWatcher.OnMouseInput += MouseWatcher_OnMouseInput;
+            this.MouseWatcher.Start();
 
-            ApplicationWatcher = EventHookFactory.GetApplicationWatcher();
-            ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
-            ApplicationWatcher.Start();
+            this.ApplicationWatcher = EventHookFactory.GetApplicationWatcher();
+            this.ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
+            this.ApplicationWatcher.Start();
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            RecoderListView.Items.Add(new MouseClickRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new MouseMoveRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new MouseSmartClickRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new MouseWheelRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new KeyDownRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new KeyUpRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new KeyPressRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new WaitSmartRecorderItem()
-            {
-
-            });
-
-            RecoderListView.Items.Add(new WaitTimeRecorderItem()
-            {
-
-            });
+            //Test
+            this.RecorderListView = this.RecorderView.RecoderListView;
+            this.RecorderListView.Items.Add(new MouseClickRecorderItem());
+            this.RecorderListView.Items.Add(new MouseMoveRecorderItem());
+            this.RecorderListView.Items.Add(new MouseSmartClickRecorderItem());
+            this.RecorderListView.Items.Add(new MouseWheelRecorderItem());
+            this.RecorderListView.Items.Add(new KeyDownRecorderItem());
+            this.RecorderListView.Items.Add(new KeyUpRecorderItem());
+            this.RecorderListView.Items.Add(new KeyPressRecorderItem());
+            this.RecorderListView.Items.Add(new WaitSmartRecorderItem());
+            this.RecorderListView.Items.Add(new WaitTimeRecorderItem());
 
             this.Recorder.OnAddItem += (item) =>
             {
                 this.InvokeIfRequired(() =>{
-                    this.RecoderListView.Items.Add(item);
-                    this.RecoderListView.ScrollIntoView(this.RecoderListView.Items[this.RecoderListView.Items.Count - 1]);
+                    this.RecorderListView.Items.Add(item);
+                    this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
                 });
             };
 
@@ -143,15 +114,30 @@ namespace AMK
                     absItem.UpdateProperties();
                 });
             };
+
+            this.Recorder.OnReplaceItem += (oldItem, newItem) =>
+            {
+                int index = this.RecorderListView.Items.IndexOf(oldItem);
+                this.InvokeIfRequired(() => {
+                    this.RecorderListView.Items[index] = newItem;
+                    AbsRecorderItem absItem = newItem as AbsRecorderItem;
+                    absItem.UpdateProperties();
+                });
+            };
+
+            IsInitialize = true;
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            if (!IsInitialize)
+                return;
+
             //this.RecoderListView.Width = this.Width;
             double width = this.Width - this.BorderThickness.Left -this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
-            ((GridView)this.RecoderListView.View).Columns[0].Width = width * 0.25;
-            ((GridView)this.RecoderListView.View).Columns[1].Width = width * 0.5;
-            ((GridView)this.RecoderListView.View).Columns[2].Width = width * 0.25;
+            ((GridView)this.RecorderListView.View).Columns[0].Width = width * 0.25;
+            ((GridView)this.RecorderListView.View).Columns[1].Width = width * 0.5;
+            ((GridView)this.RecorderListView.View).Columns[2].Width = width * 0.25;
         }
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
@@ -180,20 +166,20 @@ namespace AMK
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            KeyboardWatcher.Stop();
-            MouseWatcher.Stop();
-            ApplicationWatcher.Stop();
+            this.KeyboardWatcher.Stop();
+            this.MouseWatcher.Stop();
+            this.ApplicationWatcher.Stop();
 
-            EventHookFactory.Dispose();
+            this.EventHookFactory.Dispose();
 
-            LogWindow.IsDestoryWindow = true;
-            LogWindow.Close();
+            this.LogWindow.IsDestoryWindow = true;
+            this.LogWindow.Close();
         }
 
         private void StartHook()
         {
             //Test
-            RecoderListView.Items.Clear();
+            this.RecorderListView?.Items.Clear();
 
             this.Recorder.Start();
             this.HookingState = HookingState.Start;
