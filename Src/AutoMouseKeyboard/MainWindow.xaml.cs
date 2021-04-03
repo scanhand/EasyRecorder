@@ -83,12 +83,13 @@ namespace AMK
             this.ApplicationWatcher = EventHookFactory.GetApplicationWatcher();
             this.ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
             this.ApplicationWatcher.Start();
+
+            this.RecorderListView = this.RecorderView.RecoderListView;
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             //Test
-            this.RecorderListView = this.RecorderView.RecoderListView;
             this.RecorderListView.Items.Add(new MouseClickRecorderItem());
             this.RecorderListView.Items.Add(new MouseMoveRecorderItem());
             this.RecorderListView.Items.Add(new MouseSmartClickRecorderItem());
@@ -130,7 +131,7 @@ namespace AMK
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (!IsInitialize)
+            if (this.RecorderListView == null)
                 return;
 
             //this.RecoderListView.Width = this.Width;

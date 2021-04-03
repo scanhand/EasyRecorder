@@ -32,7 +32,13 @@ namespace AMK
                 {
                     case RecorderType.KeyDown:          return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
                     case RecorderType.KeyUp:            return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
-                    case RecorderType.MouseClick:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse_leftclick-64.png";
+                    case RecorderType.MouseClick:
+                        {
+                            if(this.LR == LR.Left)
+                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse_leftclick-64.png";
+                            else
+                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse_rightclick-64.png";
+                        }
                     case RecorderType.MouseSmartClick:  return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
                     case RecorderType.MouseMove:        return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
                     case RecorderType.MouseWheel:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse_wheel-64.png";

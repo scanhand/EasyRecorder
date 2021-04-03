@@ -19,8 +19,6 @@ namespace AMK
 
         private IRecorderItem CurrentMouseRecorder = null;
 
-        private bool IsWaitingTimeEvent = false;
-
         private float CurrentWaitingTimeSec = 0;
 
         //500 msec
@@ -104,10 +102,18 @@ namespace AMK
             {
                 newRecorder = new MouseWheelRecorderItem()
                 {
-                    Dir = e.Message == MouseMessages.WM_WHEELBUTTONUP ? Dir.Up : Dir.Down,
+                    Dir = ((int)e.MouseData) > 0 ? Dir.Up : Dir.Down,
                     Point = e.Point,
                     MouseData = e.MouseData,
                 };
+
+                if(IsMouseWheel())
+                {
+                    ResetWaitingTime();
+                    this.CurrentRecorder.ChildItems.Add(newRecorder);
+                    UpdateItem(this.CurrentRecorder);
+                    return;
+                }
             }
             else if(e.Message == MouseMessages.WM_LBUTTONUP ||
                     e.Message == MouseMessages.WM_LBUTTONDOWN ||
@@ -138,7 +144,6 @@ namespace AMK
                     return;
                 }
             }
-
             AddMouseItem(newRecorder);
         }
 
@@ -219,6 +224,14 @@ namespace AMK
         private bool IsMouseMove()
         {
             if(this.CurrentRecorder?.Recorder == RecorderType.MouseMove)
+                return true;
+
+            return false;
+        }
+
+        private bool IsMouseWheel()
+        {
+            if (this.CurrentRecorder?.Recorder == RecorderType.MouseWheel)
                 return true;
 
             return false;

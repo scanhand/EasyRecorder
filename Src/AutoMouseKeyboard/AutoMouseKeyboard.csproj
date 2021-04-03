@@ -92,6 +92,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Files\AMKFile.cs" />
     <Compile Include="Recorder\AbsRecorderItem.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
