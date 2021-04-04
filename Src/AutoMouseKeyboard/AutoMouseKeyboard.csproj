@@ -93,16 +93,21 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Files\AMKFile.cs" />
+    <Compile Include="Files\AMKFileBody.cs" />
+    <Compile Include="Files\AMKFileHeader.cs" />
     <Compile Include="Recorder\AbsRecorderItem.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
+    <Compile Include="Recorder\AMKKeyRecorder.cs" />
     <Compile Include="Recorder\KeyUpRecorderItem.cs" />
     <Compile Include="Recorder\KeyDownRecorderItem.cs" />
     <Compile Include="Recorder\KeyPressRecorderItem.cs" />
     <Compile Include="Recorder\MouseClickRecorderItem.cs" />
     <Compile Include="Recorder\MouseMoveRecorderItem.cs" />
+    <Compile Include="Recorder\AMKMouseRecorder.cs" />
     <Compile Include="Recorder\MouseSmartClickRecorderItem.cs" />
     <Compile Include="Recorder\MouseWheelRecorderItem.cs" />
+    <Compile Include="Recorder\AMKWaitingRecorder.cs" />
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">

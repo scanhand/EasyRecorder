@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMK
+namespace AMK.Recorder
 {
     public class ApplicationRecorderItem : AbsRecorderItem
     {

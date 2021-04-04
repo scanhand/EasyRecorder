@@ -1,4 +1,5 @@
-﻿using EventHook;
+﻿using AMK.Recorder;
+using EventHook;
 using EventHook.Hooks;
 using System;
 using System.Collections.Generic;
@@ -7,28 +8,25 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AMK
+namespace AMK.Recorder
 {
     public class AMKRecorder
     {
         private List<IRecorderItem> Items = new List<IRecorderItem>();
 
-        private IRecorderItem CurrentRecorder = null;
+        public IRecorderItem CurrentRecorder = null;
 
-        private IRecorderItem CurrentKeyRecorder = null;
+        public IRecorderItem CurrentKeyRecorder = null;
 
-        private IRecorderItem CurrentMouseRecorder = null;
+        public IRecorderItem CurrentMouseRecorder = null;
 
-        private float CurrentWaitingTimeSec = 0;
+        
 
-        //500 msec
-        public float WaitingTimeSec = 0.5f;
+        public AMKMouseRecorder MouseRecorder = null;
 
-        public float KeyPressIntervalTimeSec = 0.2f;
+        public AMKWaitingRecorder WaitingRecorder = null;
 
-        private Thread ThreadRecording = null;
-
-        private bool IsThreadRecording = false;
+        public AMKKeyRecorder KeyRecorder = null;
 
         public Action<IRecorderItem> OnAddItem = null;
 
@@ -38,45 +36,19 @@ namespace AMK
 
         public AMKRecorder()
         {
+            this.MouseRecorder = new AMKMouseRecorder(this);
+            this.KeyRecorder = new AMKKeyRecorder(this);
+            this.WaitingRecorder = new AMKWaitingRecorder(this);
         }
 
         public void Start()
         {
-            if (this.ThreadRecording != null)
-                return;
-
-            this.ThreadRecording = new Thread(() =>
-            {
-                const float waitTime = 0.1f; // 100 mesc
-                while(this.IsThreadRecording)
-                {
-                    if(this.CurrentWaitingTimeSec >= this.WaitingTimeSec)
-                        AddWaitingRecorderItem(this.CurrentWaitingTimeSec);
-
-                    Thread.Sleep((int)(waitTime*1000));
-                    this.CurrentWaitingTimeSec += waitTime;
-                }
-            });
-
-            this.IsThreadRecording = true;
-            this.ThreadRecording.Start();
-
-            ALog.Debug("Recorder.Start()");
+            this.WaitingRecorder.Start();
         }
 
         public void Stop()
         {
-            if (this.ThreadRecording == null)
-                return;
-
-            this.IsThreadRecording = false;
-            while(true)
-            {
-                if (!this.ThreadRecording.IsAlive)
-                    break;
-            }
-            this.ThreadRecording = null;
-            ALog.Debug("Recorder.Stop()");
+            this.WaitingRecorder.Stop();
         }
 
         public void Add(ApplicationEventArgs e)
@@ -94,111 +66,15 @@ namespace AMK
 
         public void Add(MouseEventArgs e)
         {
-            IRecorderItem newRecorder = null;
-
-            if (e.Message == MouseMessages.WM_WHEELBUTTONUP ||
-                e.Message == MouseMessages.WM_WHEELBUTTONDOWN ||
-                e.Message == MouseMessages.WM_MOUSEWHEEL)
-            {
-                newRecorder = new MouseWheelRecorderItem()
-                {
-                    Dir = ((int)e.MouseData) > 0 ? Dir.Up : Dir.Down,
-                    Point = e.Point,
-                    MouseData = e.MouseData,
-                };
-
-                if(IsMouseWheel())
-                {
-                    ResetWaitingTime();
-                    this.CurrentRecorder.ChildItems.Add(newRecorder);
-                    UpdateItem(this.CurrentRecorder);
-                    return;
-                }
-            }
-            else if(e.Message == MouseMessages.WM_LBUTTONUP ||
-                    e.Message == MouseMessages.WM_LBUTTONDOWN ||
-                    e.Message == MouseMessages.WM_RBUTTONUP ||
-                    e.Message == MouseMessages.WM_RBUTTONDOWN )
-            {
-                newRecorder = new MouseClickRecorderItem()
-                {
-                    Dir = e.Message == MouseMessages.WM_LBUTTONUP ? Dir.Up : Dir.Down,
-                    LR = (e.Message == MouseMessages.WM_LBUTTONUP || e.Message == MouseMessages.WM_LBUTTONDOWN) ? LR.Left : LR.Right,
-                    Point = e.Point,
-                    MouseData = e.MouseData,
-                };
-            }
-            else if(e.Message == MouseMessages.WM_MOUSEMOVE)
-            {
-                newRecorder = new MouseMoveRecorderItem()
-                {
-                    Point = e.Point,
-                    MouseData = e.MouseData,
-                };
-
-                if (IsMouseMove())
-                {
-                    ResetWaitingTime();
-                    this.CurrentMouseRecorder.ChildItems.Add(newRecorder);
-                    UpdateItem(this.CurrentMouseRecorder);
-                    return;
-                }
-            }
-            AddMouseItem(newRecorder);
+            this.MouseRecorder.Add(e);
         }
 
         public void Add(KeyInputEventArgs e)
         {
-            IRecorderItem newRecorder = null;
-            if (e.KeyData.EventType == KeyEvent.up)
-            {
-                ALog.Debug("e.KeyData.EventType == KeyEvent.up");
-                if (IsKeyPress())
-                {
-                    ALog.Debug("IsKeyPress::True!");
-                    newRecorder = new KeyPressRecorderItem()
-                    {
-                        Keyname = e.KeyData.Keyname,
-                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                    };
-
-                    if (this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress)
-                    {
-                        this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
-                        UpdateItem(CurrentKeyRecorder);
-                        return;
-                    }
-                    
-                    ReplaceKeyItem(this.CurrentRecorder, newRecorder);
-                    return;
-                }
-                else
-                {
-                    ALog.Debug("IsKeyPress::False!");
-                    newRecorder = new KeyUpRecorderItem()
-                    {
-                        Keyname = e.KeyData.Keyname,
-                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                    };
-                }
-            }
-            else
-            {
-                //it's state on pressing key
-                if (GetLastItem()?.Recorder == RecorderType.KeyDown)
-                    return;
-
-                newRecorder = new KeyDownRecorderItem()
-                {
-                    Keyname = e.KeyData.Keyname,
-                    UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                };
-            }
-
-            AddKeyItem(newRecorder);
+            this.KeyRecorder.Add(e);
         }
 
-        private IRecorderItem GetLastItem(bool isIgnoreWaitItem = true)
+        public IRecorderItem GetLastItem(bool isIgnoreWaitItem = true)
         {
             for(int i=Items.Count-1; i>=0; i--)
             {
@@ -210,63 +86,9 @@ namespace AMK
             return null;
         }
 
-        private bool IsKeyPress()
-        {
-            if( (this.CurrentKeyRecorder?.Recorder == RecorderType.KeyDown || this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress) &&
-                (DateTime.Now - this.CurrentKeyRecorder?.Time).Value.TotalSeconds < KeyPressIntervalTimeSec)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool IsMouseMove()
-        {
-            if(this.CurrentRecorder?.Recorder == RecorderType.MouseMove)
-                return true;
-
-            return false;
-        }
-
-        private bool IsMouseWheel()
-        {
-            if (this.CurrentRecorder?.Recorder == RecorderType.MouseWheel)
-                return true;
-
-            return false;
-        }
-
-        private void AddWaitingRecorderItem(float waitingTimeSec)
-        {
-            IRecorderItem newRecorder = null;
-
-            newRecorder = new WaitTimeRecorderItem()
-            {
-                WaitingTimeSec = waitingTimeSec,
-            };
-
-            if (this.CurrentRecorder?.IsEqualType(newRecorder) == true)
-            {
-                var item = this.CurrentRecorder as WaitTimeRecorderItem;
-                item.WaitingTimeSec = waitingTimeSec;
-                UpdateItem(item);
-                ALog.Debug("Accumulated time {0} in currentRecorder", item.WaitingTimeSec);
-                return;
-            }
-
-            AddItem(newRecorder);
-            ALog.Debug("Add Waiting Event!");
-        }
-
-        public void ResetWaitingTime()
-        {
-            this.CurrentWaitingTimeSec = 0;
-        }
-
         public void AddItem(IRecorderItem item)
         {
-            ResetWaitingTime();
+            this.WaitingRecorder.ResetWaitingTime();
             this.CurrentRecorder = item;
             this.Items.Add(item);
             if (OnAddItem != null)

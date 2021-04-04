@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using WindowsInput;
 using WindowsInput.Native;
 using MahApps.Metro.Controls;
+using AMK.Recorder;
 
 namespace AMK
 {
@@ -55,8 +56,6 @@ namespace AMK
         ListView RecorderListView = null;
 
         #endregion
-
-        bool IsInitialize = false;
 
         public MainWindow()
         {
@@ -125,8 +124,6 @@ namespace AMK
                     absItem.UpdateProperties();
                 });
             };
-
-            IsInitialize = true;
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
