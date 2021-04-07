@@ -10,7 +10,7 @@ namespace AMK.Recorder
 {
     public class AMKMouseRecorder
     {
-        public AMKRecorder AMKRecorder { get; set; }
+        public AMKRecorder AMKRecorder { get; set; } = null;
 
         private AMKWaitingRecorder WaitingRecorder
         {

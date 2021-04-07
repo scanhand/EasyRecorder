@@ -9,7 +9,7 @@ namespace AMK.Recorder
 {
     public class AMKWaitingRecorder
     {
-        public AMKRecorder AMKRecorder { get; set; }
+        public AMKRecorder AMKRecorder { get; set; } = null;
 
         private IRecorderItem CurrentRecorder
         {

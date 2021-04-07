@@ -18,6 +18,8 @@ using WindowsInput;
 using WindowsInput.Native;
 using MahApps.Metro.Controls;
 using AMK.Recorder;
+using System.Windows.Forms;
+using AMK.Files;
 
 namespace AMK
 {
@@ -53,7 +55,7 @@ namespace AMK
 
         AMKRecorder Recorder = new AMKRecorder();
 
-        ListView RecorderListView = null;
+        System.Windows.Controls.ListView RecorderListView = null;
 
         #endregion
 
@@ -88,17 +90,6 @@ namespace AMK
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //Test
-            this.RecorderListView.Items.Add(new MouseClickRecorderItem());
-            this.RecorderListView.Items.Add(new MouseMoveRecorderItem());
-            this.RecorderListView.Items.Add(new MouseSmartClickRecorderItem());
-            this.RecorderListView.Items.Add(new MouseWheelRecorderItem());
-            this.RecorderListView.Items.Add(new KeyDownRecorderItem());
-            this.RecorderListView.Items.Add(new KeyUpRecorderItem());
-            this.RecorderListView.Items.Add(new KeyPressRecorderItem());
-            this.RecorderListView.Items.Add(new WaitSmartRecorderItem());
-            this.RecorderListView.Items.Add(new WaitTimeRecorderItem());
-
             this.Recorder.OnAddItem += (item) =>
             {
                 this.InvokeIfRequired(() =>{
@@ -124,6 +115,18 @@ namespace AMK
                     absItem.UpdateProperties();
                 });
             };
+
+            //Test
+            this.Recorder.AddItem(new MouseClickRecorderItem());
+            this.Recorder.AddItem(new MouseClickRecorderItem());
+            this.Recorder.AddItem(new MouseMoveRecorderItem());
+            this.Recorder.AddItem(new MouseSmartClickRecorderItem());
+            this.Recorder.AddItem(new MouseWheelRecorderItem());
+            this.Recorder.AddItem(new KeyDownRecorderItem());
+            this.Recorder.AddItem(new KeyUpRecorderItem());
+            this.Recorder.AddItem(new KeyPressRecorderItem());
+            this.Recorder.AddItem(new WaitSmartRecorderItem());
+            this.Recorder.AddItem(new WaitTimeRecorderItem());
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -208,6 +211,65 @@ namespace AMK
         private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Normal;
+        }
+
+        private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "c:\\";
+                openFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+                openFileDialog.FilterIndex = 0;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    return;
+
+                //Get the path of specified file
+                string filePath = openFileDialog.FileName;
+
+                AMKFile file = new AMKFile();
+                file.FileName = filePath;
+                if (!file.LoadFile())
+                {
+                    System.Windows.MessageBox.Show("File Load Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                this.Recorder.Items.Clear();
+                this.RecorderListView.Items.Clear();
+
+                foreach(IRecorderItem item in file.FileBody.Items)
+                {
+                    this.Recorder.AddItem(item);
+                }
+            }
+        }
+
+        private void MenuItem_FileSave_Click(object sender, RoutedEventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = "c:\\";
+                saveFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+                saveFileDialog.FilterIndex = 0;
+                saveFileDialog.RestoreDirectory = true;
+
+                if (saveFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                    return;
+
+                //Get the path of specified file
+                string filePath = saveFileDialog.FileName;
+
+                AMKFile file = new AMKFile();
+                file.FileName = filePath;
+                file.FileBody.Items = this.Recorder.Items.Copy<List<IRecorderItem>>();
+                if (!file.SaveFile())
+                {
+                    System.Windows.MessageBox.Show("File Save Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+            }
         }
     }
 }

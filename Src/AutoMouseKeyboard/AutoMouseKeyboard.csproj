@@ -95,7 +95,9 @@
     <Compile Include="Files\AMKFile.cs" />
     <Compile Include="Files\AMKFileBody.cs" />
     <Compile Include="Files\AMKFileHeader.cs" />
+    <Compile Include="Global\ObjectExtensions.cs" />
     <Compile Include="Recorder\AbsRecorderItem.cs" />
+    <Compile Include="Recorder\AMKApplicationRecorder.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\AMKKeyRecorder.cs" />

@@ -12,7 +12,7 @@ namespace AMK.Recorder
 {
     public class AMKRecorder
     {
-        private List<IRecorderItem> Items = new List<IRecorderItem>();
+        public List<IRecorderItem> Items = new List<IRecorderItem>();
 
         public IRecorderItem CurrentRecorder = null;
 
@@ -20,13 +20,13 @@ namespace AMK.Recorder
 
         public IRecorderItem CurrentMouseRecorder = null;
 
-        
-
         public AMKMouseRecorder MouseRecorder = null;
 
         public AMKWaitingRecorder WaitingRecorder = null;
 
         public AMKKeyRecorder KeyRecorder = null;
+
+        public AMKApplicationRecorder ApplicationRecorder = null;
 
         public Action<IRecorderItem> OnAddItem = null;
 
@@ -39,6 +39,7 @@ namespace AMK.Recorder
             this.MouseRecorder = new AMKMouseRecorder(this);
             this.KeyRecorder = new AMKKeyRecorder(this);
             this.WaitingRecorder = new AMKWaitingRecorder(this);
+            this.ApplicationRecorder = new AMKApplicationRecorder(this);
         }
 
         public void Start()
@@ -53,15 +54,7 @@ namespace AMK.Recorder
 
         public void Add(ApplicationEventArgs e)
         {
-            IRecorderItem newRecorder = null;
-            newRecorder = new ApplicationRecorderItem()
-            {
-                ApplicationData = e.ApplicationData,
-                Event = e.Event,
-            };
-
-            AddItem(newRecorder);
-            this.CurrentRecorder = newRecorder;
+            this.ApplicationRecorder.Add(e);
         }
 
         public void Add(MouseEventArgs e)

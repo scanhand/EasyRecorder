@@ -50,9 +50,18 @@
                         <Image Source="/AutoMouseKeyboard;component/Resources/icons8-event-log-48.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="File Save..." Click="MenuItem_FileSave_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-event-log-48.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="File Load..." Click="MenuItem_FileLoad_Click">
+                    <MenuItem.Icon>
+                        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-event-log-48.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
-
 
         <!-- Status -->
         <StatusBar DockPanel.Dock="Bottom">

@@ -14,7 +14,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("Time: {0:F0} msec", WaitingTimeSec * 1000.0f);
+                return string.Format("Time: {0:F1} sec", WaitingTimeSec);
             }
         }
 

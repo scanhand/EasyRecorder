@@ -21,5 +21,18 @@ namespace AMK.Files
         {
             return JsonConvert.SerializeObject(this);
         }
+
+        public static AMKFileHeader FromJsonString(string json)
+        {
+            AMKFileHeader fileHeader = null;
+            
+            fileHeader = JsonConvert.DeserializeObject<AMKFileHeader>(json, new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
+            });
+
+            return fileHeader;
+        }
     }
 }

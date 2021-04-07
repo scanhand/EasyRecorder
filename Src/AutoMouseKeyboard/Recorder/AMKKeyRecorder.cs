@@ -9,7 +9,7 @@ namespace AMK.Recorder
 {
     public class AMKKeyRecorder
     {
-        public AMKRecorder AMKRecorder { get; set; }
+        public AMKRecorder AMKRecorder { get; set; } = null;
 
         private float KeyPressIntervalTimeSec = 0.2f;
 
