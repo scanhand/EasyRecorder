@@ -14,7 +14,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"{this.Dir.ToString()} X: {this.Point.x}, Y: {this.Point.y} Count: {this.ChildItems.Count}");
+                return string.Format($"\t{this.Dir.ToString()}\tX: {this.Point.x}\tY: {this.Point.y}\tCount: {this.ChildItems.Count}");
             }
         }
 

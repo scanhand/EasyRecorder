@@ -40,4 +40,19 @@ namespace AMK
         Left,
         Right,
     }
+
+    public enum AMKState
+    {
+        None,
+        Recording,
+        Pause,
+        Stop,
+        Playing,
+    }
+
+    public enum RecorderItemState
+    {
+        None,
+        Activated,
+    }
 }

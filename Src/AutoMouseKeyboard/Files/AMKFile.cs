@@ -53,6 +53,10 @@ namespace AMK.Files
             //FileStream
             try
             {
+                //If already the file is exist, first delete it.
+                if (File.Exists(this.FileName))
+                    File.Delete(this.FileName);
+
                 using (FileStream fs = File.Open(this.FileName, FileMode.CreateNew))
                 {
                     //AMK File Keyword

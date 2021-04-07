@@ -12,9 +12,37 @@ namespace AMK.Recorder
 {
     public class AMKRecorder
     {
+        public AMKState State = AMKState.None;
+
         public List<IRecorderItem> Items = new List<IRecorderItem>();
 
-        public IRecorderItem CurrentRecorder = null;
+        private IRecorderItem _CurrentRecoder = null;
+
+        public IRecorderItem CurrentRecorder
+        {
+            get
+            {
+                return _CurrentRecoder;
+            }
+
+            set
+            {
+                IRecorderItem lastRecorderItem = _CurrentRecoder;
+                _CurrentRecoder = value;
+
+                if(lastRecorderItem != null)
+                {
+                    lastRecorderItem.State = RecorderItemState.None;
+                    OnUpdateItem(lastRecorderItem);
+                }
+
+                if(_CurrentRecoder != null)
+                {
+                    _CurrentRecoder.State = RecorderItemState.Activated;
+                    OnUpdateItem(_CurrentRecoder);
+                }
+            }
+        }
 
         public IRecorderItem CurrentKeyRecorder = null;
 
@@ -28,6 +56,8 @@ namespace AMK.Recorder
 
         public AMKApplicationRecorder ApplicationRecorder = null;
 
+        public AMKPlayer Player = null;
+
         public Action<IRecorderItem> OnAddItem = null;
 
         public Action<IRecorderItem> OnUpdateItem = null;
@@ -40,15 +70,18 @@ namespace AMK.Recorder
             this.KeyRecorder = new AMKKeyRecorder(this);
             this.WaitingRecorder = new AMKWaitingRecorder(this);
             this.ApplicationRecorder = new AMKApplicationRecorder(this);
+            this.Player = new AMKPlayer(this);
         }
 
-        public void Start()
+        public void StartRecording()
         {
+            this.State = AMKState.Recording;
             this.WaitingRecorder.Start();
         }
 
-        public void Stop()
+        public void StopRecording()
         {
+            this.State = AMKState.Stop;
             this.WaitingRecorder.Stop();
         }
 
@@ -133,6 +166,34 @@ namespace AMK.Recorder
         {
             if (OnUpdateItem != null)
                 OnUpdateItem(item);
+        }
+
+        private void ResetToStart()
+        {
+            this.CurrentRecorder = this.Items[0];
+        }
+
+        public bool StartPlaying()
+        {
+            if (this.Items.Count <= 0)
+            {
+                ALog.Debug("AMKRecorder::StartPlaying::Item's count is 0.");
+                return false;
+            }
+
+            ALog.Debug("AMKRecorder::Start Playing");
+            ResetToStart();
+
+            this.State = AMKState.Playing;
+            this.Player.Start();
+            return true;
+        }
+
+        public void StopPlaying()
+        {
+            ALog.Debug("AMKRecorder::Stop Playing");
+            this.Player.Stop();
+            this.State = AMKState.Stop;
         }
     }
 }

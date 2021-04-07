@@ -14,6 +14,8 @@ namespace AMK.Recorder
     {
         public string Id { get; set; }
 
+        public RecorderItemState State { get; set; }
+
         public RecorderType Recorder { get; set; } = RecorderType.None;
 
         public Dir Dir { get; set; } = Dir.Down;
@@ -60,7 +62,8 @@ namespace AMK.Recorder
 
         public AbsRecorderItem()
         {
-            Id = GenerateID();
+            this.Id = GenerateID();
+            this.State = RecorderItemState.None;
         }
 
         public string GenerateID()

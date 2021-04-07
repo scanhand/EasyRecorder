@@ -13,6 +13,8 @@ namespace AMK.Recorder
     {
         string Id { get; set; }
 
+        RecorderItemState State  { get; set; }
+
         [JsonConverter(typeof(StringEnumConverter))]
         RecorderType Recorder {get; set;}
 

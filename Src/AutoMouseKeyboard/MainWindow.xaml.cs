@@ -177,29 +177,29 @@ namespace AMK
             this.LogWindow.Close();
         }
 
-        private void StartHook()
+        private void StartRecording()
         {
             //Test
             this.RecorderListView?.Items.Clear();
 
-            this.Recorder.Start();
+            this.Recorder.StartRecording();
             this.HookingState = HookingState.Start;
         }
 
-        private void StopHook()
+        private void StopRecording()
         {
             this.HookingState = HookingState.Stop;
-            this.Recorder.Stop();
+            this.Recorder.StopRecording();
         }
 
-        private void MenuItem_StartHook_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
-            StartHook();
+            StartRecording();
         }
 
-        private void MenuItem_StopHook_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
         {
-            StopHook();
+            StopRecording();
         }
 
         private void MenuItem_ShowLog_Click(object sender, RoutedEventArgs e)
@@ -211,6 +211,16 @@ namespace AMK
         private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Normal;
+        }
+
+        private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recorder.StartPlaying();
+        }
+
+        private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recorder.StopPlaying();
         }
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
@@ -237,9 +247,9 @@ namespace AMK
                 }
 
                 this.Recorder.Items.Clear();
-                this.RecorderListView.Items.Clear();
+                this.RecorderListView?.Items.Clear();
 
-                foreach(IRecorderItem item in file.FileBody.Items)
+                foreach (IRecorderItem item in file.FileBody.Items)
                 {
                     this.Recorder.AddItem(item);
                 }

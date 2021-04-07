@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AMK.Recorder
@@ -14,7 +15,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("Time: {0:F1} sec", WaitingTimeSec);
+                return string.Format("Time: {0:F1} sec", this.WaitingTimeSec);
             }
         }
 
@@ -25,6 +26,7 @@ namespace AMK.Recorder
 
         public override bool Play()
         {
+            Thread.Sleep((int)(this.WaitingTimeSec * 1000));
             return true;
         }
     }

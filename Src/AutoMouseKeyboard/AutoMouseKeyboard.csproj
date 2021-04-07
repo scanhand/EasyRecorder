@@ -98,6 +98,7 @@
     <Compile Include="Global\ObjectExtensions.cs" />
     <Compile Include="Recorder\AbsRecorderItem.cs" />
     <Compile Include="Recorder\AMKApplicationRecorder.cs" />
+    <Compile Include="Recorder\AMKPlayer.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\AMKKeyRecorder.cs" />
@@ -224,6 +225,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-keydown-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-fileload-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-filesave-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

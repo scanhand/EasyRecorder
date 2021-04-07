@@ -15,7 +15,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return this.Keyname + ", Count=" + this.ChildItems.Count.ToString();
+                return string.Format($"{this.Keyname}\tCount={this.ChildItems.Count.ToString()}");
             }
         }
 

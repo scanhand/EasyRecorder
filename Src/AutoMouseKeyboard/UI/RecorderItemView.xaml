@@ -30,7 +30,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image Source="/AutoMouseKeyboard;component/icons8-record-64.ico" Width="16"/>
+                                    <!--<Image Source="/AutoMouseKeyboard;component/icons8-record-64.ico" Width="16"/>-->
                                     <TextBlock Text="{Binding Description}"/>
                                 </DockPanel>
                             </DataTemplate>

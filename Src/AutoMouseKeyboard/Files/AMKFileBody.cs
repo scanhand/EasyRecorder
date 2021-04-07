@@ -14,7 +14,10 @@ namespace AMK.Files
 
         public string ToJsonString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this, new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+            });
         }
 
         public static AMKFileBody FromJsonString(string json)
@@ -25,6 +28,7 @@ namespace AMK.Files
             {
                 NullValueHandling = NullValueHandling.Ignore,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
+                TypeNameHandling = TypeNameHandling.Auto,
             });
 
             return fileBody;
