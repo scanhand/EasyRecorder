@@ -1,10 +1,13 @@
-﻿using EventHook.Hooks;
+﻿using AMK.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Interop;
 using WindowsInput;
 
 namespace AMK.Recorder
@@ -28,13 +31,20 @@ namespace AMK.Recorder
 
         public override bool Play()
         {
-            var sim = new InputSimulator();
-            sim.Mouse.MoveMouseTo(this.Point.X, this.Point.Y);
+            Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
+            GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
 
-            foreach(var item in this.ChildItems)
+            DateTime lastTime = this.Time;
+            foreach (var item in this.ChildItems)
             {
-                sim.Mouse.MoveMouseTo(item.Point.X, item.Point.Y);
-                //Thread.Sleep(1);
+                if ((item.Time - lastTime).TotalSeconds > AUtil.MouseSimulatorMiniumSleepTimeSec)
+                {
+                    GM.Instance.InputSimulator.Mouse.Sleep(item.Time - lastTime);
+                    lastTime = item.Time;
+                }
+
+                pt = AUtil.ToMouseSimulatorPoint(item.Point);
+                GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             }
             return true;
         }
