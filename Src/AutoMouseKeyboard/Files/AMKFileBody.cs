@@ -16,7 +16,10 @@ namespace AMK.Files
         {
             return JsonConvert.SerializeObject(this, new JsonSerializerSettings()
             {
+                NullValueHandling = NullValueHandling.Ignore,
+                MissingMemberHandling = MissingMemberHandling.Ignore,
                 TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
             });
         }
 
@@ -29,6 +32,7 @@ namespace AMK.Files
                 NullValueHandling = NullValueHandling.Ignore,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 TypeNameHandling = TypeNameHandling.Auto,
+                TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
             });
 
             return fileBody;

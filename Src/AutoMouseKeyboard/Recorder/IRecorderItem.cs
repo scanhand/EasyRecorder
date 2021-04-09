@@ -1,11 +1,11 @@
-﻿using EventHook.Hooks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AMK.Recorder
 {
@@ -13,6 +13,7 @@ namespace AMK.Recorder
     {
         string Id { get; set; }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         RecorderItemState State  { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]

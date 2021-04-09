@@ -1,5 +1,4 @@
-﻿using EventHook.Hooks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
@@ -7,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AMK.Recorder
 {
@@ -26,6 +26,7 @@ namespace AMK.Recorder
 
         public DateTime Time { get; set; } = DateTime.Now;
 
+        [JsonIgnore]
         public string ImageSource
         {
             get
@@ -56,9 +57,10 @@ namespace AMK.Recorder
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public abstract bool Play();
-
+        [JsonIgnore]
         public abstract string Description { get; }
+
+        public abstract bool Play();
 
         public AbsRecorderItem()
         {

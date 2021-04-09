@@ -53,9 +53,9 @@ namespace AMK
 
         #region Recorder
 
-        AMKRecorder Recorder = new AMKRecorder();
+        private AMKRecorder Recorder = new AMKRecorder();
 
-        System.Windows.Controls.ListView RecorderListView = null;
+        private System.Windows.Controls.ListView RecorderListView = null;
 
         #endregion
 
@@ -180,6 +180,7 @@ namespace AMK
         private void StartRecording()
         {
             //Test
+            this.Recorder.Reset();
             this.RecorderListView?.Items.Clear();
 
             this.Recorder.StartRecording();
@@ -225,60 +226,56 @@ namespace AMK
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 0;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            //Get the path of specified file
+            string filePath = openFileDialog.FileName;
+
+            AMKFile file = new AMKFile();
+            file.FileName = filePath;
+            if (!file.LoadFile())
             {
-                openFileDialog.InitialDirectory = "c:\\";
-                openFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
-                openFileDialog.FilterIndex = 0;
-                openFileDialog.RestoreDirectory = true;
+                System.Windows.MessageBox.Show("File Load Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
-                if (openFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                    return;
+            this.Recorder.Reset();
+            this.RecorderListView?.Items.Clear();
 
-                //Get the path of specified file
-                string filePath = openFileDialog.FileName;
-
-                AMKFile file = new AMKFile();
-                file.FileName = filePath;
-                if (!file.LoadFile())
-                {
-                    System.Windows.MessageBox.Show("File Load Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                this.Recorder.Items.Clear();
-                this.RecorderListView?.Items.Clear();
-
-                foreach (IRecorderItem item in file.FileBody.Items)
-                {
-                    this.Recorder.AddItem(item);
-                }
+            foreach (IRecorderItem item in file.FileBody.Items)
+            {
+                this.Recorder.AddItem(item);
             }
         }
 
         private void MenuItem_FileSave_Click(object sender, RoutedEventArgs e)
         {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = "c:\\";
+            saveFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return;
+
+            //Get the path of specified file
+            string filePath = saveFileDialog.FileName;
+
+            AMKFile file = new AMKFile();
+            file.FileName = filePath;
+            file.FileBody.Items = this.Recorder.Items.Copy<List<IRecorderItem>>();
+            if (!file.SaveFile())
             {
-                saveFileDialog.InitialDirectory = "c:\\";
-                saveFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
-                saveFileDialog.FilterIndex = 0;
-                saveFileDialog.RestoreDirectory = true;
-
-                if (saveFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
-                    return;
-
-                //Get the path of specified file
-                string filePath = saveFileDialog.FileName;
-
-                AMKFile file = new AMKFile();
-                file.FileName = filePath;
-                file.FileBody.Items = this.Recorder.Items.Copy<List<IRecorderItem>>();
-                if (!file.SaveFile())
-                {
-                    System.Windows.MessageBox.Show("File Save Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+                System.Windows.MessageBox.Show("File Save Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
     }

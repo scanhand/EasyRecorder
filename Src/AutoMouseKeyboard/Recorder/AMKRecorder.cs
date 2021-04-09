@@ -73,6 +73,11 @@ namespace AMK.Recorder
             this.Player = new AMKPlayer(this);
         }
 
+        public void Reset()
+        {
+            this.Items.Clear();
+        }
+
         public void StartRecording()
         {
             this.State = AMKState.Recording;
@@ -102,12 +107,12 @@ namespace AMK.Recorder
 
         public IRecorderItem GetLastItem(bool isIgnoreWaitItem = true)
         {
-            for(int i=Items.Count-1; i>=0; i--)
+            for(int i=this.Items.Count-1; i>=0; i--)
             {
-                if (isIgnoreWaitItem && Items[i].Recorder == RecorderType.WaitTime)
+                if (isIgnoreWaitItem && this.Items[i].Recorder == RecorderType.WaitTime)
                     continue;
 
-                return Items[i];
+                return this.Items[i];
             }
             return null;
         }

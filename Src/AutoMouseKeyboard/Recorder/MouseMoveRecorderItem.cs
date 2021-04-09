@@ -17,7 +17,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"\t\tX: {this.Point.x}\tY: {this.Point.y}\tCount={this.ChildItems.Count}");
+                return string.Format($"\t\tX: {this.Point.X}\tY: {this.Point.Y}\tCount={this.ChildItems.Count}");
             }
         }
 
@@ -29,11 +29,11 @@ namespace AMK.Recorder
         public override bool Play()
         {
             var sim = new InputSimulator();
-            sim.Mouse.MoveMouseTo(this.Point.x, this.Point.y);
+            sim.Mouse.MoveMouseTo(this.Point.X, this.Point.Y);
 
             foreach(var item in this.ChildItems)
             {
-                sim.Mouse.MoveMouseTo(item.Point.x, item.Point.y);
+                sim.Mouse.MoveMouseTo(item.Point.X, item.Point.Y);
                 //Thread.Sleep(1);
             }
             return true;
