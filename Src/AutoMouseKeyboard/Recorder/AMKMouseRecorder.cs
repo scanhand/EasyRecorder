@@ -69,7 +69,7 @@ namespace AMK.Recorder
                 {
                     Dir = ((int)e.MouseData) > 0 ? Dir.Up : Dir.Down,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
-                    MouseData = e.MouseData,
+                    MouseData = (int)e.MouseData,
                 };
 
                 if (IsMouseWheel())
@@ -90,7 +90,7 @@ namespace AMK.Recorder
                     Dir = e.Message == MouseMessages.WM_LBUTTONUP ? Dir.Up : Dir.Down,
                     LR = (e.Message == MouseMessages.WM_LBUTTONUP || e.Message == MouseMessages.WM_LBUTTONDOWN) ? LR.Left : LR.Right,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
-                    MouseData = e.MouseData,
+                    MouseData = (int)e.MouseData,
                 };
             }
             else if (e.Message == MouseMessages.WM_MOUSEMOVE)
@@ -98,7 +98,7 @@ namespace AMK.Recorder
                 newRecorder = new MouseMoveRecorderItem()
                 {
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
-                    MouseData = e.MouseData,
+                    MouseData = (int)e.MouseData,
                 };
 
                 if (IsMouseMove())

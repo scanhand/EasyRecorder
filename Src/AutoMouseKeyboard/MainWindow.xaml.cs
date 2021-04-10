@@ -116,12 +116,23 @@ namespace AMK
                 });
             };
 
+            this.Recorder.OnResetItem += () =>
+            {
+                this.InvokeIfRequired(() =>
+                {
+                    this.RecorderListView?.Items.Clear();
+                });
+            };
+
             //Test
+            this.Recorder.AddItem(new MouseWheelRecorderItem()
+            {
+                MouseData = 1024,
+            });
             this.Recorder.AddItem(new MouseClickRecorderItem());
             this.Recorder.AddItem(new MouseClickRecorderItem());
             this.Recorder.AddItem(new MouseMoveRecorderItem());
             this.Recorder.AddItem(new MouseSmartClickRecorderItem());
-            this.Recorder.AddItem(new MouseWheelRecorderItem());
             this.Recorder.AddItem(new KeyDownRecorderItem());
             this.Recorder.AddItem(new KeyUpRecorderItem());
             this.Recorder.AddItem(new KeyPressRecorderItem());
@@ -167,6 +178,9 @@ namespace AMK
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            this.Recorder.StopRecording();
+            this.Recorder.StopPlaying();
+
             this.KeyboardWatcher.Stop();
             this.MouseWatcher.Stop();
             this.ApplicationWatcher.Stop();
@@ -179,10 +193,7 @@ namespace AMK
 
         private void StartRecording()
         {
-            //Test
             this.Recorder.Reset();
-            this.RecorderListView?.Items.Clear();
-
             this.Recorder.StartRecording();
             this.HookingState = HookingState.Start;
         }
@@ -227,7 +238,6 @@ namespace AMK
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
@@ -247,7 +257,6 @@ namespace AMK
             }
 
             this.Recorder.Reset();
-            this.RecorderListView?.Items.Clear();
 
             foreach (IRecorderItem item in file.FileBody.Items)
             {
@@ -258,7 +267,6 @@ namespace AMK
         private void MenuItem_FileSave_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = "c:\\";
             saveFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;

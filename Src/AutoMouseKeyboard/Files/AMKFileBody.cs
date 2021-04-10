@@ -14,13 +14,14 @@ namespace AMK.Files
 
         public string ToJsonString()
         {
-            return JsonConvert.SerializeObject(this, new JsonSerializerSettings()
+            string json = JsonConvert.SerializeObject(this, new JsonSerializerSettings()
             {
                 NullValueHandling = NullValueHandling.Ignore,
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 TypeNameHandling = TypeNameHandling.Auto,
                 TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Full,
             });
+            return json;
         }
 
         public static AMKFileBody FromJsonString(string json)

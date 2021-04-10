@@ -64,6 +64,8 @@ namespace AMK.Recorder
 
         public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 
+        public Action OnResetItem = null;
+
         public AMKRecorder()
         {
             this.MouseRecorder = new AMKMouseRecorder(this);
@@ -76,6 +78,8 @@ namespace AMK.Recorder
         public void Reset()
         {
             this.Items.Clear();
+            if (OnResetItem != null)
+                OnResetItem();
         }
 
         public void StartRecording()

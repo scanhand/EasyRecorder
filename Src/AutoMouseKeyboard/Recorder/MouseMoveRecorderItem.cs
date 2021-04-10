@@ -14,7 +14,7 @@ namespace AMK.Recorder
 {
     public class MouseMoveRecorderItem : AbsRecorderItem
     {
-        public uint MouseData { get; set; } = 0;
+        public int MouseData { get; set; } = 0;
 
         public override string Description
         {
