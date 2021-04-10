@@ -116,6 +116,7 @@
     <Compile Include="Recorder\AMKWaitingRecorder.cs" />
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
+    <Compile Include="UI\AMKCommander.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>
     </Compile>

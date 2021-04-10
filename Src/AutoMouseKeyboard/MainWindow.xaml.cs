@@ -20,6 +20,7 @@ using MahApps.Metro.Controls;
 using AMK.Recorder;
 using System.Windows.Forms;
 using AMK.Files;
+using AMK.UI;
 
 namespace AMK
 {
@@ -36,7 +37,8 @@ namespace AMK
 
         #region Hook
 
-        private HookingState HookingState = HookingState.Stop;
+        private AMKRecordingState RecordingState = AMKRecordingState.Stop;
+        private AMKPlayingState PlayingState = AMKPlayingState.Stop;
         private readonly ApplicationWatcher ApplicationWatcher;
         private readonly EventHookFactory EventHookFactory = new EventHookFactory();
         private readonly KeyboardWatcher KeyboardWatcher;
@@ -44,10 +46,9 @@ namespace AMK
 
         #endregion
 
-        #region Input
+        #region Commander
 
-        // Simulate each key stroke
-        InputSimulator inputSimulator = new InputSimulator();
+        public AMKCommander Commander = new AMKCommander();
 
         #endregion
 
@@ -68,11 +69,13 @@ namespace AMK
             this.Closing += MainWindow_Closing;
             this.SizeChanged += MainWindow_SizeChanged;
 
+            //Log
             this.LogWindow.Show();
             this.LogWindow.Visibility = Visibility.Hidden;
             //Test
             this.LogWindow.Visibility = Visibility.Visible;
 
+            //Hooking
             this.KeyboardWatcher = EventHookFactory.GetKeyboardWatcher();
             this.KeyboardWatcher.OnKeyInput += KeyboardWatcher_OnKeyInput;
             this.KeyboardWatcher.Start();
@@ -86,6 +89,20 @@ namespace AMK
             this.ApplicationWatcher.Start();
 
             this.RecorderListView = this.RecorderView.RecoderListView;
+
+            //Commander
+            this.Commander.OnRecording += () => {
+                if (this.RecordingState == AMKRecordingState.Stop)
+                    this.StartRecording();
+                else
+                    this.StopRecording();
+            };
+            this.Commander.OnPlaying += () => {
+                if (this.PlayingState == AMKPlayingState.Stop)
+                    this.StartPlaying();
+                else
+                    this.StopPlaying();
+            };
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -157,7 +174,7 @@ namespace AMK
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
         {
-            if (this.HookingState != HookingState.Start)
+            if (this.RecordingState != AMKRecordingState.Start)
                 return;
 
             this.Recorder.Add(e); 
@@ -165,7 +182,7 @@ namespace AMK
 
         private void MouseWatcher_OnMouseInput(object sender, EventHook.MouseEventArgs e)
         {
-            if (this.HookingState != HookingState.Start)
+            if (this.RecordingState != AMKRecordingState.Start)
                 return;
 
             this.Recorder.Add(e); 
@@ -173,7 +190,10 @@ namespace AMK
 
         private void KeyboardWatcher_OnKeyInput(object sender, KeyInputEventArgs e)
         {
-            if (this.HookingState != HookingState.Start)
+            if (this.Commander.ProcessKey(e))
+                return;
+
+            if (this.RecordingState != AMKRecordingState.Start)
                 return;
 
             this.Recorder.Add(e);
@@ -196,15 +216,29 @@ namespace AMK
 
         private void StartRecording()
         {
+            ALog.Debug("StartRecording");
+            this.RecordingState = AMKRecordingState.Start;
             this.Recorder.Reset();
             this.Recorder.StartRecording();
-            this.HookingState = HookingState.Start;
         }
 
         private void StopRecording()
         {
-            this.HookingState = HookingState.Stop;
+            ALog.Debug("StopRecording");
             this.Recorder.StopRecording();
+            this.RecordingState = AMKRecordingState.Stop;
+        }
+
+        private void StartPlaying()
+        {
+            this.PlayingState = AMKPlayingState.Start;
+            this.Recorder.StartPlaying();
+        }
+
+        private void StopPlaying()
+        {
+            this.Recorder.StopPlaying();
+            this.PlayingState = AMKPlayingState.Stop;
         }
 
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
@@ -230,12 +264,12 @@ namespace AMK
 
         private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
         {
-            this.Recorder.StartPlaying();
+            StartPlaying();
         }
 
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)
         {
-            this.Recorder.StopPlaying();
+            StopPlaying();
         }
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
