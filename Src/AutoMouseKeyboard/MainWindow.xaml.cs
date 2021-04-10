@@ -132,11 +132,7 @@ namespace AMK
             };
 
             //Test
-            this.Recorder.AddItem(new MouseWheelRecorderItem()
-            {
-                MouseData = 1024,
-            });
-            this.Recorder.AddItem(new MouseClickRecorderItem());
+            this.Recorder.AddItem(new MouseWheelRecorderItem());
             this.Recorder.AddItem(new MouseClickRecorderItem());
             this.Recorder.AddItem(new MouseMoveRecorderItem());
             this.Recorder.AddItem(new MouseSmartClickRecorderItem());

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using AMK.Global;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsInput.Native;
 
 namespace AMK.Recorder
 {
@@ -27,6 +29,9 @@ namespace AMK.Recorder
 
         public override bool Play()
         {
+            //KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Whatever");
+            VirtualKeyCode 
+            GM.Instance.InputSimulator.Keyboard.KeyDown()
             return true;
         }
     }
