@@ -11,7 +11,7 @@ namespace AMK.Recorder
     {
         public AMKRecorder AMKRecorder { get; set; } = null;
 
-        private float KeyPressIntervalTimeSec = 0.2f;
+        private float KeyPressIntervalTimeSec = 0.5f;
 
         private AMKWaitingRecorder WaitingRecorder
         {
@@ -45,10 +45,18 @@ namespace AMK.Recorder
         private bool IsKeyPress()
         {
             if ((this.CurrentKeyRecorder?.Recorder == RecorderType.KeyDown || this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress) &&
-                (DateTime.Now - this.CurrentKeyRecorder?.Time).Value.TotalSeconds < KeyPressIntervalTimeSec)
+                (DateTime.Now - this.CurrentKeyRecorder?.GetVeryLastTime()).Value.TotalSeconds < KeyPressIntervalTimeSec)
             {
                 return true;
             }
+
+            return false;
+        }
+
+        private bool IsCurrentKeyPress()
+        {
+            if (this.CurrentRecorder?.Recorder == RecorderType.KeyPress)
+                return true;
 
             return false;
         }
@@ -58,29 +66,25 @@ namespace AMK.Recorder
             IRecorderItem newRecorder = null;
             if (e.KeyData.EventType == KeyEvent.up)
             {
-                ALog.Debug("e.KeyData.EventType == KeyEvent.up");
                 if (IsKeyPress())
                 {
-                    ALog.Debug("IsKeyPress::True!");
+                    ALog.Debug("KeyEvent.Up, IsKeyPress: True");
+                    if (IsCurrentKeyPress())
+                        return;
+
+                    //Remove KeyDown item
+                    this.AMKRecorder.DeleteItem(this.CurrentKeyRecorder);
+                    this.AMKRecorder.ResetCurrentRecorder();
+
                     newRecorder = new KeyPressRecorderItem()
                     {
                         Keyname = e.KeyData.Keyname,
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
                     };
-
-                    if (this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress)
-                    {
-                        this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
-                        this.AMKRecorder.UpdateItem(CurrentKeyRecorder);
-                        return;
-                    }
-
-                    this.AMKRecorder.ReplaceKeyItem(this.CurrentRecorder, newRecorder);
-                    return;
                 }
                 else
                 {
-                    ALog.Debug("IsKeyPress::False!");
+                    ALog.Debug("KeyEvent.Up, IsKeyPress: False");
                     newRecorder = new KeyUpRecorderItem()
                     {
                         Keyname = e.KeyData.Keyname,
@@ -93,6 +97,20 @@ namespace AMK.Recorder
                 //it's state on pressing key
                 if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyDown)
                     return;
+
+                if(IsCurrentKeyPress())
+                {
+                    newRecorder = new KeyPressRecorderItem()
+                    {
+                        Keyname = e.KeyData.Keyname,
+                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
+                    };
+
+                    this.AMKRecorder.ResetWaitingTime();
+                    this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
+                    this.AMKRecorder.UpdateItem(CurrentKeyRecorder);
+                    return;
+                }
 
                 newRecorder = new KeyDownRecorderItem()
                 {

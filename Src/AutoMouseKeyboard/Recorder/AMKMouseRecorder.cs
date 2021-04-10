@@ -2,6 +2,7 @@
 using EventHook.Hooks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,7 +42,7 @@ namespace AMK.Recorder
             this.AMKRecorder = recorder;
         }
 
-        private bool IsMouseWheel()
+        private bool IsCurrentMouseWheel()
         {
             if (this.CurrentRecorder?.Recorder == RecorderType.MouseWheel)
                 return true;
@@ -49,11 +50,25 @@ namespace AMK.Recorder
             return false;
         }
 
-        private bool IsMouseMove()
+        private bool IsCurrentMouseMove()
         {
             if (this.CurrentRecorder?.Recorder == RecorderType.MouseMove)
                 return true;
 
+            return false;
+        }
+
+        private bool IsIgnoreMouseMove(IRecorderItem item)
+        {
+            MouseMoveRecorderItem mouseItem = item as MouseMoveRecorderItem;
+            Trace.Assert(mouseItem != null, "IsIgnoreMouseMove::mouseItem is null");
+            if(this.CurrentRecorder?.Recorder == RecorderType.MouseWheel ||
+                this.CurrentRecorder?.Recorder == RecorderType.MouseMove ||
+                 this.CurrentRecorder?.Recorder == RecorderType.MouseClick)
+            {
+                if (mouseItem.Point == this.CurrentRecorder?.Point)
+                    return true;
+            }
             return false;
         }
 
@@ -72,7 +87,7 @@ namespace AMK.Recorder
                     MouseData = (int)e.MouseData,
                 };
 
-                if (IsMouseWheel())
+                if (IsCurrentMouseWheel())
                 {
                     this.WaitingRecorder.ResetWaitingTime();
                     this.CurrentRecorder.ChildItems.Add(newRecorder);
@@ -101,7 +116,13 @@ namespace AMK.Recorder
                     MouseData = (int)e.MouseData,
                 };
 
-                if (IsMouseMove())
+                if (IsIgnoreMouseMove(newRecorder))
+                {
+                    ALog.Debug("AMKMouseRecorder::Add(MouseEvent)::IsIgnoreMouseMove");
+                    return;
+                }
+
+                if (IsCurrentMouseMove())
                 {
                     this.WaitingRecorder.ResetWaitingTime();
                     this.CurrentMouseRecorder.ChildItems.Add(newRecorder);

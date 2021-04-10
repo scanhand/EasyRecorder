@@ -124,6 +124,13 @@ namespace AMK
                 });
             };
 
+            this.Recorder.OnDeleteItem += (item) =>
+            {
+                this.InvokeIfRequired(() => {
+                    this.RecorderListView?.Items.Remove(item);
+                });
+            };
+
             //Test
             this.Recorder.AddItem(new MouseWheelRecorderItem()
             {
@@ -147,9 +154,9 @@ namespace AMK
 
             //this.RecoderListView.Width = this.Width;
             double width = this.Width - this.BorderThickness.Left -this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
-            ((GridView)this.RecorderListView.View).Columns[0].Width = width * 0.25;
-            ((GridView)this.RecorderListView.View).Columns[1].Width = width * 0.5;
-            ((GridView)this.RecorderListView.View).Columns[2].Width = width * 0.25;
+            ((GridView)this.RecorderListView.View).Columns[0].Width = width * 0.24;
+            ((GridView)this.RecorderListView.View).Columns[1].Width = width * 0.48;
+            ((GridView)this.RecorderListView.View).Columns[2].Width = width * 0.24;
         }
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)

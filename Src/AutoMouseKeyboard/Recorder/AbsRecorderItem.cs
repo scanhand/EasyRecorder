@@ -27,6 +27,15 @@ namespace AMK.Recorder
         public DateTime Time { get; set; } = DateTime.Now;
 
         [JsonIgnore]
+        public bool IsSelected
+        {
+            get
+            {
+                return this.State == RecorderItemState.Activated;
+            }
+        }
+
+        [JsonIgnore]
         public string ImageSource
         {
             get
@@ -94,7 +103,15 @@ namespace AMK.Recorder
             this.NotifyPropertyChanged("ImageSource");
             this.NotifyPropertyChanged("Recorder");
             this.NotifyPropertyChanged("Description");
-            
+            this.NotifyPropertyChanged("IsSelected");
+        }
+
+        public DateTime GetVeryLastTime()
+        {
+            if (this.ChildItems.Count <= 0)
+                return this.Time;
+
+            return this.ChildItems.Last().Time;
         }
     }
 }

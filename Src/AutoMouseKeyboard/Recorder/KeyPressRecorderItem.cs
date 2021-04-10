@@ -15,7 +15,17 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"{this.Keyname}\tCount={this.ChildItems.Count.ToString()}");
+                StringBuilder sb = new StringBuilder();
+
+                sb.Append(this.Keyname);
+                foreach (var i in this.ChildItems)
+                {
+                    KeyPressRecorderItem item = i as KeyPressRecorderItem;
+                    if (item == null)
+                        continue;
+                    sb.Append(item.Keyname);
+                }
+                return sb.ToString();
             }
         }
 

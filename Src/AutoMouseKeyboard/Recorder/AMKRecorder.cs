@@ -64,6 +64,8 @@ namespace AMK.Recorder
 
         public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 
+        public Action<IRecorderItem> OnDeleteItem = null;
+
         public Action OnResetItem = null;
 
         public AMKRecorder()
@@ -121,9 +123,27 @@ namespace AMK.Recorder
             return null;
         }
 
+        public IRecorderItem GetLastKeyItem(bool isIgnoreWaitItem = true)
+        {
+            for (int i = this.Items.Count - 1; i >= 0; i--)
+            {
+                if (isIgnoreWaitItem && this.Items[i].Recorder == RecorderType.WaitTime)
+                    continue;
+
+                if(this.Items[i].Recorder == RecorderType.KeyUp ||
+                    this.Items[i].Recorder == RecorderType.KeyDown ||
+                     this.Items[i].Recorder == RecorderType.KeyPress)
+                    return this.Items[i];
+            }
+            return null;
+        }
+
         public void AddItem(IRecorderItem item)
         {
-            this.WaitingRecorder.ResetWaitingTime();
+            if (item == null)
+                return;
+
+            ResetWaitingTime();
             this.CurrentRecorder = item;
             this.Items.Add(item);
             if (OnAddItem != null)
@@ -132,14 +152,25 @@ namespace AMK.Recorder
 
         public void AddMouseItem(IRecorderItem item)
         {
+            if (item == null)
+                return;
+
             this.CurrentMouseRecorder = item;
             AddItem(item);
         }
 
         public void AddKeyItem(IRecorderItem item)
         {
+            if (item == null)
+                return;
+
             this.CurrentKeyRecorder = item;
             AddItem(item);
+        }
+
+        public void ResetWaitingTime()
+        {
+            this.WaitingRecorder.ResetWaitingTime();
         }
 
         public bool ReplaceItem(IRecorderItem oldItem, IRecorderItem newItem)
@@ -151,6 +182,7 @@ namespace AMK.Recorder
                 return false;
             }
 
+            ResetWaitingTime();
             this.CurrentRecorder = newItem;
             this.Items[index] = newItem;
             if (OnReplaceItem != null)
@@ -171,8 +203,27 @@ namespace AMK.Recorder
             return ReplaceItem(oldItem, newItem);
         }
 
+        public bool DeleteItem(IRecorderItem item)
+        {
+            if (item == null)
+                return false;
+            
+            this.Items.Remove(item);
+            if (OnDeleteItem != null)
+                OnDeleteItem(item);
+
+            return true;
+        }
+
+        public void ResetCurrentRecorder()
+        {
+            this.CurrentRecorder = GetLastItem();
+            this.CurrentKeyRecorder = GetLastKeyItem();
+        }
+
         public void UpdateItem(IRecorderItem item)
         {
+            //Do not call ResetWaitingTime()
             if (OnUpdateItem != null)
                 OnUpdateItem(item);
         }
