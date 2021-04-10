@@ -235,7 +235,6 @@ namespace EventHook.Hooks
         /// </summary>
         internal int VkCode;
 
-
         /// <summary>
         ///     Create raw keyevent arguments.
         /// </summary>

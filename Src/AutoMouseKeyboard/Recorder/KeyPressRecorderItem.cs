@@ -1,13 +1,16 @@
-﻿using System;
+﻿using AMK.Global;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsInput.Native;
 
 namespace AMK.Recorder
 {
     public class KeyPressRecorderItem : AbsRecorderItem
     {
+        public int VkCode;
         public string Keyname;
         public string UnicodeCharacter;
 
@@ -36,6 +39,21 @@ namespace AMK.Recorder
 
         public override bool Play()
         {
+            GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)this.VkCode);
+
+            DateTime lastTime = this.Time;
+            foreach (var i in this.ChildItems)
+            {
+                KeyPressRecorderItem item = i as KeyPressRecorderItem;
+
+                if ((item.Time - lastTime).TotalSeconds > AUtil.KeyboardSimulatorMiniumSleepTimeSec)
+                {
+                    GM.Instance.InputSimulator.Mouse.Sleep(item.Time - lastTime);
+                    lastTime = item.Time;
+                }
+
+                GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)item.VkCode);
+            }
             return true;
         }
     }

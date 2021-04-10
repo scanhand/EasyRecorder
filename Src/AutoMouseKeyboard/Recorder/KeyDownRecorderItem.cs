@@ -10,6 +10,7 @@ namespace AMK.Recorder
 {
     public class KeyDownRecorderItem : AbsRecorderItem
     {
+        public int VkCode;
         public string Keyname;
         public string UnicodeCharacter;
 
@@ -29,9 +30,7 @@ namespace AMK.Recorder
 
         public override bool Play()
         {
-            //KeyCode thisKeyCode = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Whatever");
-            VirtualKeyCode 
-            GM.Instance.InputSimulator.Keyboard.KeyDown()
+            GM.Instance.InputSimulator.Keyboard.KeyDown((VirtualKeyCode)this.VkCode);
             return true;
         }
     }

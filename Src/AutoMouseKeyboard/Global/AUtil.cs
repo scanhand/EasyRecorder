@@ -13,6 +13,8 @@ namespace AMK.Global
 
         public const double MouseSimulatorMiniumSleepTimeSec = 0.02; //20 msec
 
+        public const double KeyboardSimulatorMiniumSleepTimeSec = 0.02; //20 msec
+
         public static Point ToMouseSimulatorPoint(Point pt)
         {
             //Temp

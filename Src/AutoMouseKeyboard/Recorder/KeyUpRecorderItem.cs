@@ -1,14 +1,17 @@
-﻿using EventHook;
+﻿using AMK.Global;
+using EventHook;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsInput.Native;
 
 namespace AMK.Recorder
 {
     public class KeyUpRecorderItem : AbsRecorderItem
     {
+        public int VkCode;
         public string Keyname;
         public string UnicodeCharacter;
 
@@ -28,6 +31,7 @@ namespace AMK.Recorder
 
         public override bool Play()
         {
+            GM.Instance.InputSimulator.Keyboard.KeyUp((VirtualKeyCode)this.VkCode);
             return true;
         }
     }

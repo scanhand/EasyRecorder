@@ -78,6 +78,7 @@ namespace AMK.Recorder
 
                     newRecorder = new KeyPressRecorderItem()
                     {
+                        VkCode = e.KeyData.VkCode,
                         Keyname = e.KeyData.Keyname,
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
                     };
@@ -87,6 +88,7 @@ namespace AMK.Recorder
                     ALog.Debug("KeyEvent.Up, IsKeyPress: False");
                     newRecorder = new KeyUpRecorderItem()
                     {
+                        VkCode = e.KeyData.VkCode,
                         Keyname = e.KeyData.Keyname,
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
                     };
@@ -102,6 +104,7 @@ namespace AMK.Recorder
                 {
                     newRecorder = new KeyPressRecorderItem()
                     {
+                        VkCode = e.KeyData.VkCode,
                         Keyname = e.KeyData.Keyname,
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
                     };
@@ -114,6 +117,7 @@ namespace AMK.Recorder
 
                 newRecorder = new KeyDownRecorderItem()
                 {
+                    VkCode = e.KeyData.VkCode,
                     Keyname = e.KeyData.Keyname,
                     UnicodeCharacter = e.KeyData.UnicodeCharacter,
                 };

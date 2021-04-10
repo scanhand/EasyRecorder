@@ -20,6 +20,7 @@ namespace EventHook
     public class KeyData
     {
         public KeyEvent EventType;
+        public int VkCode;
         public string Keyname;
         public string UnicodeCharacter;
     }
@@ -130,7 +131,8 @@ namespace EventHook
             {
                 UnicodeCharacter = e.Character,
                 Keyname = e.Key.ToString(),
-                EventType = (KeyEvent)e.EventType
+                EventType = (KeyEvent)e.EventType,
+                VkCode = e.VkCode,
             });
         }
 
