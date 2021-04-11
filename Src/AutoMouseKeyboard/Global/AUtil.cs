@@ -33,6 +33,18 @@ namespace AMK.Global
             window.Top = posY;
         }
 
+        public static void MoveToLeftBottom(Window window)
+        {
+            double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
+            double screenLeft = System.Windows.SystemParameters.WorkArea.Left;
+
+            double posX = screenLeft;
+            double posY = screenHeight - window.Height;
+
+            window.Left = posX;
+            window.Top = posY;
+        }
+
         public static void MoveToCenter(Window window)
         {
             double screenHeight = System.Windows.SystemParameters.WorkArea.Height;

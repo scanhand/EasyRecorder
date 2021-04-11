@@ -13,7 +13,7 @@ namespace AMK.Recorder
 {
     public class AMKRecorder
     {
-        public AMKState State = AMKState.None;
+        public AMKState State = AMKState.Stop;
 
         public List<IRecorderItem> Items = new List<IRecorderItem>();
 
@@ -229,10 +229,7 @@ namespace AMK.Recorder
                 OnUpdateItem(item);
         }
 
-        private void ResetToStart()
-        {
-            this.CurrentRecorder = this.Items[0];
-        }
+        
 
         public bool StartPlaying()
         {
@@ -243,7 +240,7 @@ namespace AMK.Recorder
             }
 
             ALog.Debug("AMKRecorder::Start Playing");
-            ResetToStart();
+            //ResetToStart();
 
             this.State = AMKState.Playing;
             this.Player.Start();

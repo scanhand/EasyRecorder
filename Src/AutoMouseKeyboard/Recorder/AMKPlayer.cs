@@ -12,7 +12,7 @@ namespace AMK.Recorder
     {
         public AMKRecorder AMKRecorder { get; set; } = null;
 
-        private bool IsThreadEnable = false;
+        public bool IsThreadEnable = false;
 
         private Thread ThreadPlayer = null;
 
@@ -31,6 +31,10 @@ namespace AMK.Recorder
             }
         }
 
+        public Action OnStartPlaying = null;
+
+        public Action<bool> OnStopPlaying = null;
+
         public AMKPlayer(AMKRecorder recorder)
         {
             this.AMKRecorder = recorder;
@@ -42,24 +46,47 @@ namespace AMK.Recorder
 
             this.ThreadPlayer = new Thread(() =>
             {
-                while(IsThreadEnable)
+                bool isLastStep = false;
+                if (OnStartPlaying != null)
+                    OnStartPlaying();
+
+                ResetToStart();
+                while (IsThreadEnable)
                 {
-                    this.CurrentRecorder.Play(this);
+                    if (!this.CurrentRecorder.Play(this))
+                        break;
+
+                    if (IsLastStep())
+                    {
+                        isLastStep = true;
+                        break;
+                    }
 
                     if (!NextStep())
                         break;
-
-                    Thread.Sleep(1);
                 }
+
+                if (OnStopPlaying != null)
+                    OnStopPlaying(isLastStep);
             });
 
             this.IsThreadEnable = true;
-            this.LastItem = null;
+            ResetLastItem();
             this.ThreadPlayer.Start();
             return true;
         }
 
-        public bool NextStep()
+        private void ResetToStart()
+        {
+            this.CurrentRecorder = this.AMKRecorder.Items.First();
+        }
+
+        private bool IsLastStep()
+        {
+            return this.CurrentRecorder.Equals(this.AMKRecorder.Items.Last());
+        }
+
+        private bool NextStep()
         {
             int index = this.AMKRecorder.Items.IndexOf(this.CurrentRecorder);
             if (index == -1)
@@ -103,6 +130,11 @@ namespace AMK.Recorder
             }
 
             return true;
+        }
+
+        public void ResetLastItem()
+        {
+            this.LastItem = null;
         }
 
         public double WaitingPlaying(IRecorderItem item)

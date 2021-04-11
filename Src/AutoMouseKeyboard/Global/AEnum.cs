@@ -6,18 +6,6 @@ using System.Threading.Tasks;
 
 namespace AMK
 {
-    public enum AMKRecordingState
-    {
-        Start = 0,
-        Stop = 1,
-    }
-
-    public enum AMKPlayingState
-    {
-        Start = 0,
-        Stop = 1,
-    }
-
     public enum RecorderType
     {
         None,

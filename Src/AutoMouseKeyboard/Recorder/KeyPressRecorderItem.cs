@@ -45,6 +45,9 @@ namespace AMK.Recorder
             GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)this.VkCode);
             foreach (var i in this.ChildItems)
             {
+                if (!player.IsThreadEnable)
+                    return false;
+
                 KeyPressRecorderItem item = i as KeyPressRecorderItem;
                 //Waiting
                 player.WaitingPlaying(item);

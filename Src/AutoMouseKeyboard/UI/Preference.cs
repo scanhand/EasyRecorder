@@ -18,6 +18,9 @@ namespace AMK.UI
         public Window MainWindow { get; set; } = null;
 
         [JsonIgnore]
+        public Window LogWindow { get; set; } = null;
+
+        [JsonIgnore]
         public MenuItem MenuAlwaysTopItem { get; set; } = null;
 
         public bool Load()
@@ -30,8 +33,10 @@ namespace AMK.UI
         {
             this.MenuAlwaysTopItem.IsChecked = this.IsTopMost;
             this.MainWindow.Topmost = this.IsTopMost;
+            this.LogWindow.Topmost = this.IsTopMost;
 
             AUtil.MoveToRightBottom(this.MainWindow);
+            AUtil.MoveToLeftBottom(this.LogWindow);
             return true;
         }
 

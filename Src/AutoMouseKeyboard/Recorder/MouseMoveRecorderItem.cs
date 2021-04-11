@@ -38,6 +38,9 @@ namespace AMK.Recorder
             GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             foreach (var item in this.ChildItems)
             {
+                if (!player.IsThreadEnable)
+                    return false;
+
                 //Waiting
                 player.WaitingPlaying(item);
                 //Action

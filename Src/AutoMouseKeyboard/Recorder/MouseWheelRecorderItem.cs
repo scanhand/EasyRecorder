@@ -37,6 +37,9 @@ namespace AMK.Recorder
                 if (mouseItem == null)
                     continue;
 
+                if (!player.IsThreadEnable)
+                    return false;
+
                 //Waiting
                 player.WaitingPlaying(item);
                 //Action

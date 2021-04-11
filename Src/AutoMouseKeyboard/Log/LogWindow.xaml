@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:AMK"
         mc:Ignorable="d"
         ShowInTaskbar="False"
-        Title="LogWindow" Height="450" Width="800">
+        Title="LogWindow" Height="300" Width="450">
     
     <DockPanel>
         <Grid>
