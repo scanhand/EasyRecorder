@@ -91,13 +91,15 @@ namespace AMK
             this.RecorderListView = this.RecorderView.RecoderListView;
 
             //Commander
-            this.Commander.OnRecording += () => {
+            this.Commander.OnRecording += () =>
+            {
                 if (this.RecordingState == AMKRecordingState.Stop)
                     this.StartRecording();
                 else
                     this.StopRecording();
             };
-            this.Commander.OnPlaying += () => {
+            this.Commander.OnPlaying += () =>
+            {
                 if (this.PlayingState == AMKPlayingState.Stop)
                     this.StartPlaying();
                 else
@@ -107,9 +109,15 @@ namespace AMK
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            //Initialize Preference
+            Preference.Instance.MainWindow = this;
+            Preference.Instance.MenuAlwaysTopItem = this.MenuAlwaysTopMostItem;
+            Preference.Instance.Load();
+
             this.Recorder.OnAddItem += (item) =>
             {
-                this.InvokeIfRequired(() =>{
+                this.InvokeIfRequired(() =>
+                {
                     this.RecorderListView.Items.Add(item);
                     this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
                 });
@@ -117,16 +125,21 @@ namespace AMK
 
             this.Recorder.OnUpdateItem += (item) =>
             {
-                this.InvokeIfRequired(() => {
+                this.InvokeIfRequired(() =>
+                {
                     AbsRecorderItem absItem = item as AbsRecorderItem;
                     absItem.UpdateProperties();
+
+                    if(absItem.State == RecorderItemState.Activated)
+                        this.RecorderListView.ScrollIntoView(item);
                 });
             };
 
             this.Recorder.OnReplaceItem += (oldItem, newItem) =>
             {
                 int index = this.RecorderListView.Items.IndexOf(oldItem);
-                this.InvokeIfRequired(() => {
+                this.InvokeIfRequired(() =>
+                {
                     this.RecorderListView.Items[index] = newItem;
                     AbsRecorderItem absItem = newItem as AbsRecorderItem;
                     absItem.UpdateProperties();
@@ -143,7 +156,8 @@ namespace AMK
 
             this.Recorder.OnDeleteItem += (item) =>
             {
-                this.InvokeIfRequired(() => {
+                this.InvokeIfRequired(() =>
+                {
                     this.RecorderListView?.Items.Remove(item);
                 });
             };
@@ -166,7 +180,7 @@ namespace AMK
                 return;
 
             //this.RecoderListView.Width = this.Width;
-            double width = this.Width - this.BorderThickness.Left -this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
+            double width = this.Width - this.BorderThickness.Left - this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
             ((GridView)this.RecorderListView.View).Columns[0].Width = width * 0.24;
             ((GridView)this.RecorderListView.View).Columns[1].Width = width * 0.48;
             ((GridView)this.RecorderListView.View).Columns[2].Width = width * 0.24;
@@ -177,7 +191,7 @@ namespace AMK
             if (this.RecordingState != AMKRecordingState.Start)
                 return;
 
-            this.Recorder.Add(e); 
+            this.Recorder.Add(e);
         }
 
         private void MouseWatcher_OnMouseInput(object sender, EventHook.MouseEventArgs e)
@@ -185,7 +199,7 @@ namespace AMK
             if (this.RecordingState != AMKRecordingState.Start)
                 return;
 
-            this.Recorder.Add(e); 
+            this.Recorder.Add(e);
         }
 
         private void KeyboardWatcher_OnKeyInput(object sender, KeyInputEventArgs e)
@@ -323,5 +337,20 @@ namespace AMK
                 return;
             }
         }
+
+        private void MenuItem_AlwaysTopMost_Click(object sender, RoutedEventArgs e)
+        {
+            this.Topmost = this.MenuAlwaysTopMostItem.IsChecked;
+        }
+
+        private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to exit the program?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes)
+                return;
+
+            System.Windows.Application.Current.Shutdown();
+        }
+
     }
 }

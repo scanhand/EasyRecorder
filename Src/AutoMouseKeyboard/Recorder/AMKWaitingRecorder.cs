@@ -94,6 +94,7 @@ namespace AMK.Recorder
             {
                 var item = this.CurrentRecorder as WaitTimeRecorderItem;
                 item.WaitingTimeSec = waitingTimeSec;
+                item.Time = newRecorder.Time;
                 this.AMKRecorder.UpdateItem(item);
                 ALog.Debug("Accumulated time {0} in currentRecorder", item.WaitingTimeSec);
                 return;

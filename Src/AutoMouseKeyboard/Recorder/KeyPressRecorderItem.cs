@@ -37,21 +37,18 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.KeyPress;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)this.VkCode);
-
-            DateTime lastTime = this.Time;
             foreach (var i in this.ChildItems)
             {
                 KeyPressRecorderItem item = i as KeyPressRecorderItem;
-
-                if ((item.Time - lastTime).TotalSeconds > AUtil.KeyboardSimulatorMiniumSleepTimeSec)
-                {
-                    GM.Instance.InputSimulator.Mouse.Sleep(item.Time - lastTime);
-                    lastTime = item.Time;
-                }
-
+                //Waiting
+                player.WaitingPlaying(item);
+                //Action
                 GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)item.VkCode);
             }
             return true;

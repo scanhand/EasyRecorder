@@ -24,9 +24,11 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.WaitTime;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
-            Thread.Sleep((int)(this.WaitingTimeSec * 1000));
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             return true;
         }
     }

@@ -21,8 +21,11 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.WaitSmart;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             return true;
         }
     }

@@ -20,7 +20,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"\t\tX: {this.Point.X}\tY: {this.Point.Y}\tCount={this.ChildItems.Count}");
+                return string.Format($"X: {this.Point.X},Y: {this.Point.Y},Count={this.ChildItems.Count}");
             }
         }
 
@@ -29,20 +29,18 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.MouseMove;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
             GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
-
-            DateTime lastTime = this.Time;
             foreach (var item in this.ChildItems)
             {
-                if ((item.Time - lastTime).TotalSeconds > AUtil.MouseSimulatorMiniumSleepTimeSec)
-                {
-                    GM.Instance.InputSimulator.Mouse.Sleep(item.Time - lastTime);
-                    lastTime = item.Time;
-                }
-
+                //Waiting
+                player.WaitingPlaying(item);
+                //Action
                 pt = AUtil.ToMouseSimulatorPoint(item.Point);
                 GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             }

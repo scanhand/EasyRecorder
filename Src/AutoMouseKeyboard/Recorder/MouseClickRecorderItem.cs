@@ -16,7 +16,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"{this.LR.ToString()}\t{this.Dir.ToString()}\tX: {this.Point.X}\tY: {this.Point.Y}");
+                return string.Format($"{this.LR.ToString()},{this.Dir.ToString()},X: {this.Point.X},Y: {this.Point.Y}");
             }
         }
 
@@ -25,8 +25,11 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.MouseClick;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
             GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
 

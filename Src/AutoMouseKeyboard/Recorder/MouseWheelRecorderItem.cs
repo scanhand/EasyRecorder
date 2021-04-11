@@ -16,7 +16,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"\t{this.Dir.ToString()}\tX: {this.Point.X}\tY: {this.Point.Y}\tCount: {this.ChildItems.Count}");
+                return string.Format($"{this.Dir.ToString()},X: {this.Point.X},Y: {this.Point.Y},Count: {this.ChildItems.Count}");
             }
         }
 
@@ -25,23 +25,21 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.MouseWheel;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             GM.Instance.InputSimulator.Mouse.VerticalScroll(this.MouseData);
-
-            DateTime lastTime = this.Time;
             foreach (var item in this.ChildItems)
             {
                 MouseWheelRecorderItem mouseItem = item as MouseWheelRecorderItem;
                 if (mouseItem == null)
                     continue;
 
-                if ((item.Time - lastTime).TotalSeconds > AUtil.MouseSimulatorMiniumSleepTimeSec)
-                {
-                    GM.Instance.InputSimulator.Mouse.Sleep(item.Time - lastTime);
-                    lastTime = item.Time;
-                }
-
+                //Waiting
+                player.WaitingPlaying(item);
+                //Action
                 GM.Instance.InputSimulator.Mouse.VerticalScroll(mouseItem.MouseData);
             }
             return true;

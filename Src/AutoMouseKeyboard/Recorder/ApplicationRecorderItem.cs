@@ -25,7 +25,7 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.Application;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
             return true;
         }

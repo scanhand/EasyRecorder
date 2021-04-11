@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AMK.Global;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,8 @@ namespace AMK.Recorder
         private bool IsThreadEnable = false;
 
         private Thread ThreadPlayer = null;
+
+        private IRecorderItem LastItem { get; set; } = null;
 
         private IRecorderItem CurrentRecorder
         {
@@ -41,7 +44,7 @@ namespace AMK.Recorder
             {
                 while(IsThreadEnable)
                 {
-                    this.CurrentRecorder.Play();
+                    this.CurrentRecorder.Play(this);
 
                     if (!NextStep())
                         break;
@@ -51,6 +54,7 @@ namespace AMK.Recorder
             });
 
             this.IsThreadEnable = true;
+            this.LastItem = null;
             this.ThreadPlayer.Start();
             return true;
         }
@@ -97,7 +101,22 @@ namespace AMK.Recorder
                 }
                 Thread.Sleep(100);
             }
+
             return true;
+        }
+
+        public double WaitingPlaying(IRecorderItem item)
+        {
+            if(this.LastItem == null)
+                this.LastItem = item;
+
+            double timeSec = (item.Time - this.LastItem.Time).TotalSeconds;
+            if (timeSec > AUtil.SimulatorMiniumSleepTimeSec)
+            {
+                Thread.Sleep((int)(timeSec * 1000.0));
+                this.LastItem = item;
+            }
+            return timeSec;
         }
     }
 }

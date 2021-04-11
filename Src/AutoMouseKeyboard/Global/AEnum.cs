@@ -22,6 +22,8 @@ namespace AMK
     {
         None,
         MouseMove,
+        MouseDown,
+        MouseUp,
         MouseClick,
         MouseWheel,
         MouseSmartClick,

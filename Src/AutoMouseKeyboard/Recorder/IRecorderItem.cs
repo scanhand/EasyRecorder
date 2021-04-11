@@ -33,7 +33,7 @@ namespace AMK.Recorder
 
         bool IsEqualType(IRecorderItem item);
 
-        bool Play();
+        bool Play(AMKPlayer player);
 
         DateTime GetVeryLastTime();
     }

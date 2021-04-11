@@ -69,7 +69,7 @@ namespace AMK.Recorder
         [JsonIgnore]
         public abstract string Description { get; }
 
-        public abstract bool Play();
+        public abstract bool Play(AMKPlayer player);
 
         public AbsRecorderItem()
         {

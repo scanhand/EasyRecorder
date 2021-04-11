@@ -1,12 +1,14 @@
-﻿using System;
+﻿using AMK.Global;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace AMK.Recorder
 {
-    public class MouseSmartClickRecorderItem : AbsRecorderItem
+    public class MouseDownRecorderItem : AbsRecorderItem
     {
         public int MouseData { get; set; } = 0;
 
@@ -14,13 +16,13 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("X: {0}, Y: {1}", this.Point.X, this.Point.Y);
+                return string.Format($"{this.LR.ToString()},X: {this.Point.X},Y: {this.Point.Y}");
             }
         }
 
-        public MouseSmartClickRecorderItem()
+        public MouseDownRecorderItem()
         {
-            this.Recorder = RecorderType.MouseSmartClick;
+            this.Recorder = RecorderType.MouseDown;
         }
 
         public override bool Play(AMKPlayer player)
@@ -28,6 +30,10 @@ namespace AMK.Recorder
             //Waiting
             player.WaitingPlaying(this);
             //Action
+            if (this.LR == LR.Left)
+                GM.Instance.InputSimulator.Mouse.LeftButtonDown();
+            else
+                GM.Instance.InputSimulator.Mouse.RightButtonDown();
             return true;
         }
     }

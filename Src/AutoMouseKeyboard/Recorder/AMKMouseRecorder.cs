@@ -95,15 +95,24 @@ namespace AMK.Recorder
                     return;
                 }
             }
-            else if (e.Message == MouseMessages.WM_LBUTTONUP ||
-                    e.Message == MouseMessages.WM_LBUTTONDOWN ||
-                    e.Message == MouseMessages.WM_RBUTTONUP ||
-                    e.Message == MouseMessages.WM_RBUTTONDOWN)
+            else if (e.Message == MouseMessages.WM_LBUTTONDOWN ||
+                     e.Message == MouseMessages.WM_RBUTTONDOWN)
             {
-                newRecorder = new MouseClickRecorderItem()
+                newRecorder = new MouseDownRecorderItem()
                 {
-                    Dir = e.Message == MouseMessages.WM_LBUTTONUP ? Dir.Up : Dir.Down,
-                    LR = (e.Message == MouseMessages.WM_LBUTTONUP || e.Message == MouseMessages.WM_LBUTTONDOWN) ? LR.Left : LR.Right,
+                    Dir = Dir.Down,
+                    LR = e.Message == MouseMessages.WM_LBUTTONDOWN ? LR.Left : LR.Right,
+                    Point = new System.Windows.Point(e.Point.x, e.Point.y),
+                    MouseData = (int)e.MouseData,
+                };
+            }
+            else if (e.Message == MouseMessages.WM_LBUTTONUP ||
+                     e.Message == MouseMessages.WM_RBUTTONUP)
+            {
+                newRecorder = new MouseUpRecorderItem()
+                {
+                    Dir = Dir.Down,
+                    LR = e.Message == MouseMessages.WM_LBUTTONUP ? LR.Left : LR.Right,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
                     MouseData = (int)e.MouseData,
                 };

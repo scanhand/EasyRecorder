@@ -9,7 +9,7 @@
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
         xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
         mc:Ignorable="d"
-        Title="Auto Mouse &amp; Keyboard" Height="450" Width="800" MinWidth="400" MinHeight="300">
+        Title="Auto Mouse &amp; Keyboard" Height="300" Width="500" MinWidth="200" MinHeight="200">
 
     <Window.Resources>
         <ImageSource x:Key="LeftMouseClick">Resources/icons8-mouse_leftclick-64.png</ImageSource>
@@ -33,8 +33,34 @@
                         TrayMouseDoubleClick="TaskbarIcon_TrayMouseDoubleClick"/>
 
         <!-- Menu -->
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_AutoKeyboardMouse">
+        <Menu DockPanel.Dock="Top" FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
+            <MenuItem Header="_File">
+               
+                <MenuItem Header="File Save..." Click="MenuItem_FileSave_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/icons8-filesave-64.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="File Load..." Click="MenuItem_FileLoad_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/icons8-fileload-64.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="_Show Log..." Click="MenuItem_ShowLog_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/icons8-event-log-48.png" Width="16"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+                <MenuItem Header="Always Top most" x:Name="MenuAlwaysTopMostItem" Click="MenuItem_AlwaysTopMost_Click" IsCheckable="True" >
+                </MenuItem>
+                
+                <MenuItem Header="Exit" Click="MenuItem_Exit_Click">
+                </MenuItem>
+
+            </MenuItem>
+            <MenuItem Header="_Recorder">
                 <MenuItem Header="Start _Recording" Click="MenuItem_StartRecording_Click">
                     <MenuItem.Icon>
                         <Image Source="Resources/icons8-start-64.png" Width="16"/>
@@ -45,27 +71,11 @@
                         <Image Source="Resources/icons8-stop-64.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
-
+            </MenuItem>
+            <MenuItem Header="_Player">
                 <MenuItem Header="Start Playing" Click="MenuItem_StartPlaying_Click">
                 </MenuItem>
-
                 <MenuItem Header="Stop Playing" Click="MenuItem_StopPlaying_Click">
-                </MenuItem>
-
-                <MenuItem Header="_Show Log..." Click="MenuItem_ShowLog_Click">
-                    <MenuItem.Icon>
-                        <Image Source="Resources/icons8-event-log-48.png" Width="16"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="File Save..." Click="MenuItem_FileSave_Click">
-                    <MenuItem.Icon>
-                        <Image Source="Resources/icons8-filesave-64.png" Width="16"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="File Load..." Click="MenuItem_FileLoad_Click">
-                    <MenuItem.Icon>
-                        <Image Source="Resources/icons8-fileload-64.png" Width="16"/>
-                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </Menu>

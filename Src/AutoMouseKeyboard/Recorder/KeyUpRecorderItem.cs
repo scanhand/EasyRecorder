@@ -29,8 +29,11 @@ namespace AMK.Recorder
             this.Dir = Dir.Up;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             GM.Instance.InputSimulator.Keyboard.KeyUp((VirtualKeyCode)this.VkCode);
             return true;
         }

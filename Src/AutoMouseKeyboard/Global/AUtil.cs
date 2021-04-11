@@ -11,9 +11,7 @@ namespace AMK.Global
     {
         public const double MouseSimulatorMaxValue = 65535.0;
 
-        public const double MouseSimulatorMiniumSleepTimeSec = 0.02; //20 msec
-
-        public const double KeyboardSimulatorMiniumSleepTimeSec = 0.02; //20 msec
+        public const double SimulatorMiniumSleepTimeSec = 0.02; //20 msec
 
         public static Point ToMouseSimulatorPoint(Point pt)
         {
@@ -21,6 +19,30 @@ namespace AMK.Global
             double screenWidth = 1920;
             double screenHeight = 1080;
             return new Point(MouseSimulatorMaxValue * (pt.X / screenWidth), MouseSimulatorMaxValue * (pt.Y / screenHeight));
+        }
+
+        public static void MoveToRightBottom(Window window)
+        {
+            double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
+            double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
+
+            double posX = screenWidth - window.Width;
+            double posY = screenHeight - window.Height;
+
+            window.Left = posX;
+            window.Top = posY;
+        }
+
+        public static void MoveToCenter(Window window)
+        {
+            double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
+            double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
+
+            double posX = (screenWidth/2) - (window.Width/2);
+            double posY = (screenHeight/2) - (window.Height/2);
+
+            window.Left = posX;
+            window.Top = posY;
         }
     }
 }

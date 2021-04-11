@@ -28,8 +28,11 @@ namespace AMK.Recorder
             this.Dir = Dir.Down;
         }
 
-        public override bool Play()
+        public override bool Play(AMKPlayer player)
         {
+            //Waiting
+            player.WaitingPlaying(this);
+            //Action
             GM.Instance.InputSimulator.Keyboard.KeyDown((VirtualKeyCode)this.VkCode);
             return true;
         }
