@@ -74,7 +74,7 @@ namespace AMK.Recorder
 
                     //Remove KeyDown item
                     this.AMKRecorder.DeleteItem(this.CurrentKeyRecorder);
-                    this.AMKRecorder.ResetCurrentRecorder();
+                    this.AMKRecorder.ResetCurrentRecorderbyLast();
 
                     newRecorder = new KeyPressRecorderItem()
                     {

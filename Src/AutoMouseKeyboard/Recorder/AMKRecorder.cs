@@ -87,6 +87,7 @@ namespace AMK.Recorder
 
         public void StartRecording()
         {
+            this.ResetCurrentRecorder();
             this.State = AMKState.Recording;
             this.WaitingRecorder.Start();
         }
@@ -169,6 +170,13 @@ namespace AMK.Recorder
             AddItem(item);
         }
 
+        public void ResetCurrentRecorder()
+        {
+            this.CurrentRecorder = null;
+            this.CurrentKeyRecorder = null;
+            this.CurrentMouseRecorder = null;
+        }
+
         public void ResetWaitingTime()
         {
             this.WaitingRecorder.ResetWaitingTime();
@@ -216,7 +224,7 @@ namespace AMK.Recorder
             return true;
         }
 
-        public void ResetCurrentRecorder()
+        public void ResetCurrentRecorderbyLast()
         {
             this.CurrentRecorder = GetLastItem();
             this.CurrentKeyRecorder = GetLastKeyItem();
