@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -25,6 +26,9 @@ namespace AMK.Recorder
         public Point Point { get; set; }
 
         public DateTime Time { get; set; } = DateTime.Now;
+
+        [JsonIgnore]
+        public double ResidualTimeSec { get; set; } = 0;
 
         [JsonIgnore]
         public bool IsSelected

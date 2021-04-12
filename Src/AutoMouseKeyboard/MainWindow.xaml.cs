@@ -21,6 +21,7 @@ using AMK.Recorder;
 using System.Windows.Forms;
 using AMK.Files;
 using AMK.UI;
+using AMK.Global;
 
 namespace AMK
 {
@@ -368,6 +369,14 @@ namespace AMK
                 return;
 
             System.Windows.Application.Current.Shutdown();
+        }
+
+        private void MenuItem_About_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWindow = new AboutWindow();
+            aboutWindow.Owner = this;
+            aboutWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            aboutWindow.ShowDialog();
         }
 
     }

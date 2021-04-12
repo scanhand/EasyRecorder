@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -28,6 +29,8 @@ namespace AMK.Recorder
         Point Point { get; set; }
 
         DateTime Time { get; set; }
+
+        double ResidualTimeSec { get; set; }
 
         List<IRecorderItem> ChildItems { get; set; }
 

@@ -8,7 +8,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Windows.Threading;
 
-namespace AMK
+namespace System
 {
     public static class WPFThreadingExtensions
     {

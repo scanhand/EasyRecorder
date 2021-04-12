@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AutoMouseKeyboard
+namespace AMK
 {
     /// <summary>
-    /// Interaction logic for About.xaml
+    /// Interaction logic for PreferenceWindow.xaml
     /// </summary>
-    public partial class About : Window
+    public partial class PreferenceWindow : Window
     {
-        public About()
+        public PreferenceWindow()
         {
             InitializeComponent();
         }

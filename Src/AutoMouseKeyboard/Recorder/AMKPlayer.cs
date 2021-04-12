@@ -1,6 +1,7 @@
 ﻿using AMK.Global;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -142,12 +143,25 @@ namespace AMK.Recorder
             if(this.LastItem == null)
                 this.LastItem = item;
 
-            double timeSec = (item.Time - this.LastItem.Time).TotalSeconds;
-            if (timeSec > AUtil.SimulatorMiniumSleepTimeSec)
+            double timeSec = (item.Time - this.LastItem.Time).TotalSeconds + this.LastItem.ResidualTimeSec;
+            if (timeSec < 0)
+                timeSec = 0;
+
+            double startTime = Stopwatch.GetTimestamp();
+            if (timeSec < AUtil.SimulatorMiniumSleepTimeSec)
             {
-                Thread.Sleep((int)(timeSec * 1000.0));
-                this.LastItem = item;
+                while (true)
+                {
+                    if (timeSec <= (((double)Stopwatch.GetTimestamp() - startTime) / (double)Stopwatch.Frequency))
+                        break;
+                }
             }
+            else
+            {
+                Thread.Sleep((int)(timeSec * 1000));
+            }
+            this.LastItem = item;
+            this.LastItem.ResidualTimeSec = timeSec - (((double)Stopwatch.GetTimestamp() - startTime) / (double)Stopwatch.Frequency);
             return timeSec;
         }
     }
