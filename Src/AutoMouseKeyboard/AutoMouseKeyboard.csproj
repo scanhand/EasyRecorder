@@ -96,6 +96,7 @@
     <Compile Include="Files\AMKFileBody.cs" />
     <Compile Include="Files\AMKFileHeader.cs" />
     <Compile Include="Global\AUtil.cs" />
+    <Compile Include="Global\BackgroundQueue.cs" />
     <Compile Include="Global\GM.cs" />
     <Compile Include="Global\ObjectExtensions.cs" />
     <Compile Include="Global\SingletonBase.cs" />

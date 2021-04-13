@@ -42,6 +42,7 @@ namespace AMK
         private readonly EventHookFactory EventHookFactory = new EventHookFactory();
         private readonly KeyboardWatcher KeyboardWatcher;
         private readonly MouseWatcher MouseWatcher;
+        private BackgroundQueue TaskQueue = new BackgroundQueue();
 
         #endregion
 
@@ -117,49 +118,64 @@ namespace AMK
 
             this.Recorder.OnAddItem += (item) =>
             {
-                this.InvokeIfRequired(() =>
+                this.TaskQueue.QueueTask(() =>
                 {
-                    this.RecorderListView.Items.Add(item);
-                    this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
+                    this.InvokeIfRequired(() =>
+                    {
+                        this.RecorderListView.Items.Add(item);
+                        this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
+                    });
                 });
             };
 
             this.Recorder.OnUpdateItem += (item) =>
             {
-                this.InvokeIfRequired(() =>
+                this.TaskQueue.QueueTask(() =>
                 {
-                    AbsRecorderItem absItem = item as AbsRecorderItem;
-                    absItem.UpdateProperties();
+                    this.InvokeIfRequired(() =>
+                    {
+                        AbsRecorderItem absItem = item as AbsRecorderItem;
+                        absItem.UpdateProperties();
 
-                    if(absItem.State == RecorderItemState.Activated)
-                        this.RecorderListView.ScrollIntoView(item);
+                        if (absItem.State == RecorderItemState.Activated)
+                            this.RecorderListView.ScrollIntoView(item);
+                    });
                 });
             };
 
             this.Recorder.OnReplaceItem += (oldItem, newItem) =>
             {
-                int index = this.RecorderListView.Items.IndexOf(oldItem);
-                this.InvokeIfRequired(() =>
+                this.TaskQueue.QueueTask(() =>
                 {
-                    this.RecorderListView.Items[index] = newItem;
-                    AbsRecorderItem absItem = newItem as AbsRecorderItem;
-                    absItem.UpdateProperties();
+                    int index = this.RecorderListView.Items.IndexOf(oldItem);
+                    this.InvokeIfRequired(() =>
+                    {
+                        this.RecorderListView.Items[index] = newItem;
+                        AbsRecorderItem absItem = newItem as AbsRecorderItem;
+                        absItem.UpdateProperties();
+                    });
                 });
             };
 
             this.Recorder.OnResetItem += () =>
             {
-                this.InvokeIfRequired(() =>
+                this.TaskQueue.QueueTask(() =>
                 {
-                    this.RecorderListView?.Items.Clear();
+                    this.InvokeIfRequired(() =>
+                    {
+                        this.RecorderListView?.Items.Clear();
+                    });
                 });
             };
 
             this.Recorder.OnDeleteItem += (item) =>
             {
-                this.InvokeIfRequired(() =>
+                this.TaskQueue.QueueTask(() =>
                 {
-                    this.RecorderListView?.Items.Remove(item);
+                    this.InvokeIfRequired(() =>
+                    {
+                        this.RecorderListView?.Items.Remove(item);
+                    });
                 });
             };
 
@@ -213,6 +229,8 @@ namespace AMK
 
         private void MouseWatcher_OnMouseInput(object sender, EventHook.MouseEventArgs e)
         {
+            UpdateMousePosition(e);
+
             if (this.Recorder.State != AMKState.Recording)
                 return;
 
@@ -377,6 +395,14 @@ namespace AMK
             aboutWindow.Owner = this;
             aboutWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             aboutWindow.ShowDialog();
+        }
+
+        private void UpdateMousePosition(EventHook.MouseEventArgs e)
+        {
+            this.InvokeIfRequired(() =>
+            {
+                lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
+            });
         }
 
     }

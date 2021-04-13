@@ -90,7 +90,7 @@
                 <ItemsPanelTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="200" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
@@ -104,21 +104,13 @@
             </StatusBarItem>
             <Separator Grid.Column="1" />
             <StatusBarItem Grid.Column="2">
-                <TextBlock Text="c:\path\of\current\file.txt" />
+                <TextBlock Name="lblMousePosition" Text="X: 000, Y: 000" />
             </StatusBarItem>
             <Separator Grid.Column="3" />
             <StatusBarItem Grid.Column="4">
                 <ProgressBar Value="50" Width="90" Height="16" />
             </StatusBarItem>
         </StatusBar>
-
-        <!--<ad:DockingManager x:Name="dockManager" 
-                                   Grid.Row="1">
-            --><!--<avd:DockingManager.Theme>
-                <avd:MetroTheme />
-            </avd:DockingManager.Theme>--><!--
-
-        </ad:DockingManager>-->
 
         <!-- Main DockPanel-->
         <localui:RecorderItemView x:Name="RecorderView">

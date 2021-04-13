@@ -238,8 +238,6 @@ namespace AMK.Recorder
                 OnUpdateItem(item);
         }
 
-        
-
         public bool StartPlaying()
         {
             if (this.Items.Count <= 0)
