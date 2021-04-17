@@ -123,6 +123,9 @@
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
     <Compile Include="UI\AMKCommander.cs" />
+    <Compile Include="UI\AMKStatusBar.xaml.cs">
+      <DependentUpon>AMKStatusBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Preference.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>
@@ -158,6 +161,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="PreferenceWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\AMKStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +253,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-filesave-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-video-record-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-play-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

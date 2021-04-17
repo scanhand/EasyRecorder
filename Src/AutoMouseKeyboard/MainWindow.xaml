@@ -84,33 +84,8 @@
             </MenuItem>
         </Menu>
 
-        <!-- Status -->
-        <StatusBar DockPanel.Dock="Bottom">
-            <StatusBar.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                    </Grid>
-                </ItemsPanelTemplate>
-            </StatusBar.ItemsPanel>
-            <StatusBarItem>
-                <TextBlock Name="lblCursorPosition" Text="Test Statusbar..."/>
-            </StatusBarItem>
-            <Separator Grid.Column="1" />
-            <StatusBarItem Grid.Column="2">
-                <TextBlock Name="lblMousePosition" Text="X: 000, Y: 000" />
-            </StatusBarItem>
-            <Separator Grid.Column="3" />
-            <StatusBarItem Grid.Column="4">
-                <ProgressBar Value="50" Width="90" Height="16" />
-            </StatusBarItem>
-        </StatusBar>
+        <!-- Status --> 
+        <localui:AMKStatusBar DockPanel.Dock="Bottom" x:Name="MainStatusBar"/>
 
         <!-- Main DockPanel-->
         <localui:RecorderItemView x:Name="RecorderView">

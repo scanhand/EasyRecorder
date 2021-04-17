@@ -401,7 +401,7 @@ namespace AMK
         {
             this.InvokeIfRequired(() =>
             {
-                lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
+                //lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
             });
         }
 
