@@ -15,6 +15,8 @@ namespace AMK.Recorder
 
         public bool IsThreadEnable = false;
 
+        public bool IsInfinitePlaying { get; set; } = true;
+
         private Thread ThreadPlayer = null;
 
         private IRecorderItem LastItem { get; set; } = null;
@@ -59,6 +61,12 @@ namespace AMK.Recorder
 
                     if (IsLastStep())
                     {
+                        if(IsInfinitePlaying)
+                        {
+                            ResetToStart();
+                            continue;
+                        }
+
                         isLastStep = true;
                         break;
                     }

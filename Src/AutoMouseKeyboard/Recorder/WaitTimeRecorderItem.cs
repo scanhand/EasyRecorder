@@ -29,7 +29,14 @@ namespace AMK.Recorder
         {
             //Waiting
             player.WaitingPlaying(this);
-            //Action
+            foreach (var item in this.ChildItems)
+            {
+                if (!player.IsThreadEnable)
+                    return false;
+
+                //Waiting
+                player.WaitingPlaying(item);
+            }
             return true;
         }
     }
