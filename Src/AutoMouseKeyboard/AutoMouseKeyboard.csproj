@@ -126,6 +126,7 @@
     <Compile Include="UI\AMKStatusBar.xaml.cs">
       <DependentUpon>AMKStatusBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\AMKStatusBarItem.cs" />
     <Compile Include="UI\Preference.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>

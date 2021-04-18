@@ -38,7 +38,6 @@ namespace AMK.UI
             foreach(var i in this.RecoderListView.SelectedItems)
             {
                 IRecorderItem item = i as IRecorderItem;
-                ALog.Debug("PlaySelectedItems::Recorder={0}", item.Recorder);
                 item.Play(this.Recorder.Player);
 
                 Thread.Sleep(1);

@@ -106,6 +106,12 @@ namespace AMK
                 else
                     this.StartPlaying();
             };
+
+            //Status
+            this.Recorder.OnChangedState += (s) =>
+            {
+                this.MainStatusBar.SetCurrentState(s);
+            };
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -401,7 +407,7 @@ namespace AMK
         {
             this.InvokeIfRequired(() =>
             {
-                //lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
+                this.MainStatusBar.lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
             });
         }
 

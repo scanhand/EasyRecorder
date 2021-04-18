@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:AMK.UI"
+             xmlns:local="clr-namespace:AMK.UI" 
              mc:Ignorable="d">
     <StatusBar>
         <StatusBar.ItemsPanel>
@@ -25,7 +25,7 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="imgStatusStatusBar" Grid.Column="0" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" Width="16"/>
+                <Image x:Name="imgStatusStatusBar" Grid.Column="0" Source="{Binding Path=StatusImageSource}" Width="16"/>
                 <TextBlock x:Name="txtStatusStatusBar"  Grid.Column="1" Text="Test Statusbar..."/>
             </Grid>
         </StatusBarItem>

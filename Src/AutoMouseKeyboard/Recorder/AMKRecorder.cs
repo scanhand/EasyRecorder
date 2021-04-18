@@ -14,7 +14,24 @@ namespace AMK.Recorder
 {
     public class AMKRecorder
     {
-        public AMKState State = AMKState.Stop;
+        private AMKState _State = AMKState.Stop;
+        public AMKState State
+        {
+            get
+            {
+                return _State;
+            }
+
+            set
+            {
+                _State = value;
+                if(OnChangedState != null)
+                    OnChangedState(_State);
+            }
+               
+        }
+
+        public Action<AMKState> OnChangedState = null;
 
         public List<IRecorderItem> Items = new List<IRecorderItem>();
 
