@@ -44,6 +44,7 @@ namespace AMK.Global
         Pause,
         Stop,
         Playing,
+        PlayDone,
     }
 
     public enum RecorderItemState

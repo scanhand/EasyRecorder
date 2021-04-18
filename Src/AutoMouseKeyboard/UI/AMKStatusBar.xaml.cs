@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,10 +24,22 @@ namespace AMK.UI
     {
         public AMKStatusBarItem StatusBarItem { get; set; } = new AMKStatusBarItem();
 
+        private DoubleAnimation FadeInOutAnimation = null;
+
         public AMKStatusBar()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            
             this.DataContext = this.StatusBarItem;
+
+            this.FadeInOutAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromSeconds(1)),
+                AutoReverse = true,
+                RepeatBehavior = RepeatBehavior.Forever,
+            };
         }
 
         public void SetCurrentState(AMKState state)
@@ -35,13 +48,34 @@ namespace AMK.UI
             {
                 if (state == AMKState.Playing)
                 {
+                    this.StatusBarItem.StatusText = "Playing...";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
+                    this.imgStatusStatusBar.BeginAnimation(OpacityProperty, this.FadeInOutAnimation);
+                }
+                else if (state == AMKState.PlayDone)
+                {
+                    this.StatusBarItem.StatusText = "Done";
+                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-simplestop-64.png";
+                    this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
                 else if(state == AMKState.Recording)
                 {
+                    this.StatusBarItem.StatusText = "Recording...";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
+                    this.imgStatusStatusBar.BeginAnimation(OpacityProperty, this.FadeInOutAnimation);
                 }
-
+                else if (state == AMKState.Pause)
+                {
+                    this.StatusBarItem.StatusText = "Pause";
+                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-pause-64.png";
+                    this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
+                }
+                else if (state == AMKState.Stop || state == AMKState.None)
+                {
+                    this.StatusBarItem.StatusText = string.Empty;
+                    this.StatusBarItem.StatusImageSource = string.Empty;
+                    this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
+                }
                 this.StatusBarItem.UpdateProperties();
             });
         }

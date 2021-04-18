@@ -11,6 +11,8 @@ namespace AMK.UI
     {
         public string StatusImageSource { get; set; }
 
+        public string StatusText { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged(string propName)
@@ -22,6 +24,7 @@ namespace AMK.UI
         public void UpdateProperties()
         {
             this.NotifyPropertyChanged("StatusImageSource");
+            this.NotifyPropertyChanged("StatusText");
         }
     }
 }

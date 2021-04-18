@@ -56,5 +56,11 @@ namespace AMK.Global
             window.Left = posX;
             window.Top = posY;
         }
+
+        public static bool IsStop(AMKState state)
+        {
+            return (state == AMKState.Stop || state == AMKState.PlayDone || state == AMKState.None);
+        }
+
     }
 }

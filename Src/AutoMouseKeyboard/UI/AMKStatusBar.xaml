@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AMK.UI" 
              mc:Ignorable="d">
+    
     <StatusBar>
         <StatusBar.ItemsPanel>
             <ItemsPanelTemplate>
@@ -19,14 +20,15 @@
                 </Grid>
             </ItemsPanelTemplate>
         </StatusBar.ItemsPanel>
-        <StatusBarItem>
+        <StatusBarItem Grid.Column="0" >
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Image x:Name="imgStatusStatusBar" Grid.Column="0" Source="{Binding Path=StatusImageSource}" Width="16"/>
-                <TextBlock x:Name="txtStatusStatusBar"  Grid.Column="1" Text="Test Statusbar..."/>
+                <Image x:Name="imgStatusStatusBar" Grid.Column="0" Source="{Binding StatusImageSource}" Width="16">
+                </Image>
+                <TextBlock x:Name="txtStatusStatusBar" Grid.Column="1" Text="{Binding StatusText}" Margin="5,0,0,0" />
             </Grid>
         </StatusBarItem>
         <Separator Grid.Column="1" />
@@ -35,7 +37,6 @@
         </StatusBarItem>
         <Separator Grid.Column="3" />
         <StatusBarItem Grid.Column="4">
-            <ProgressBar Value="50" Width="90" Height="16" />
         </StatusBarItem>
     </StatusBar>
 </UserControl>

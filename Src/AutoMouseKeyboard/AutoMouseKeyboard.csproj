@@ -86,6 +86,9 @@
     <Reference Include="WindowsInput">
       <HintPath>dll\WindowsInput\WindowsInput.dll</HintPath>
     </Reference>
+    <Reference Include="WpfAnimatedGif">
+      <HintPath>dll\GIF\WpfAnimatedGif.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -260,6 +263,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-play-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-pause-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-simplestop-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

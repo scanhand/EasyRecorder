@@ -94,17 +94,17 @@ namespace AMK
             //Commander
             this.Commander.OnRecording += () =>
             {
-                if (this.Recorder.State != AMKState.Stop)
-                    this.Stop();
-                else
+                if (AUtil.IsStop(this.Recorder.State))
                     this.StartRecording(); 
+                else
+                    this.Stop();
             };
             this.Commander.OnPlaying += () =>
             {
-                if (this.Recorder.State != AMKState.Stop)
-                    this.Stop();
+                if (AUtil.IsStop(this.Recorder.State))
+                    this.StartPlaying(); 
                 else
-                    this.StartPlaying();
+                    this.Stop();
             };
 
             //Status
@@ -197,7 +197,14 @@ namespace AMK
             {
                 this.InvokeIfRequired(() =>
                 {
-                    this.Recorder.State = AMKState.Stop;
+                    if (isLastStep)
+                    {
+                        this.Recorder.State = AMKState.PlayDone;
+                    }
+                    else
+                    {
+                        this.Recorder.State = AMKState.Stop;
+                    }
                 });
             };
 
