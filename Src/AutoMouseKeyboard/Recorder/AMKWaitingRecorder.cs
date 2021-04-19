@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -32,9 +33,9 @@ namespace AMK.Recorder
         private bool IsThreadRecording = false;
 
         //500 msec
-        public float WaitingTimeSec = 0.5f;
+        public double WaitingTimeSec = 0.500f;
 
-        private float CurrentWaitingTimeSec = 0;
+        private double CurrentWaitingTimeSec = 0;
 
         public AMKWaitingRecorder(AMKRecorder recorder)
         {
@@ -45,18 +46,22 @@ namespace AMK.Recorder
         {
             if (this.ThreadRecording != null)
                 return false;
-
+ 
             this.ThreadRecording = new Thread(() =>
             {
-                const float waitTime = 0.1f; // 100 mesc
+                const double waitTime = 0.02f; // 20 mesc
+                
                 while (this.IsThreadRecording)
                 {
+                    double startTime = Stopwatch.GetTimestamp();
                     if (this.CurrentWaitingTimeSec >= this.WaitingTimeSec)
                         AddWaitingRecorderItem(this.CurrentWaitingTimeSec);
 
                     Thread.Sleep((int)(waitTime * 1000));
-                    this.CurrentWaitingTimeSec += waitTime;
+                    this.CurrentWaitingTimeSec += (((double)Stopwatch.GetTimestamp() - startTime) / (double)Stopwatch.Frequency);
                 }
+
+                AddWaitingRecorderItem(this.CurrentWaitingTimeSec);
             });
 
             this.IsThreadRecording = true;
@@ -71,17 +76,28 @@ namespace AMK.Recorder
             if (this.ThreadRecording == null)
                 return;
 
+            int tryCount = 0;
+            const int timeInterval = 20;
+            const int waitTime = 1000 / timeInterval; 
             this.IsThreadRecording = false;
             while (true)
             {
                 if (!this.ThreadRecording.IsAlive)
                     break;
+
+                if (tryCount++ >= waitTime)
+                {
+                    this.ThreadRecording.Abort();
+                    break;
+                }
+
+                Thread.Sleep(timeInterval);
             }
             this.ThreadRecording = null;
             ALog.Debug("WaitingRecorder.Stop()");
         }
 
-        private void AddWaitingRecorderItem(float waitingTimeSec)
+        private void AddWaitingRecorderItem(double waitingTimeSec)
         {
             IRecorderItem newRecorder = null;
 

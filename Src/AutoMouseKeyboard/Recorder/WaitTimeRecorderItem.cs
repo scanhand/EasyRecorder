@@ -10,13 +10,13 @@ namespace AMK.Recorder
 {
     class WaitTimeRecorderItem : AbsRecorderItem
     {
-        public float WaitingTimeSec {get; set;} = 0;
+        public double WaitingTimeSec {get; set;} = 0;
 
         public override string Description
         {
             get
             {
-                return string.Format("Time: {0:F1} sec", this.WaitingTimeSec);
+                return string.Format("Time: {0:F2} sec", this.WaitingTimeSec);
             }
         }
 

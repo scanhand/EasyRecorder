@@ -78,6 +78,7 @@ namespace AMK.Recorder
                 if (OnStopPlaying != null)
                     OnStopPlaying(isLastStep);
             });
+            this.ThreadPlayer.Priority = ThreadPriority.Highest;
 
             this.IsThreadEnable = true;
             ResetLastItem();
@@ -123,7 +124,8 @@ namespace AMK.Recorder
 
             IsThreadEnable = false;
             int tryCount = 0;
-            const int timeOutCount = 1000 / 100; // 1000mesc / 100msec
+            const int timeInterval = 100;
+            const int timeOutCount = 1000 / timeInterval; // 1000mesc / 100msec
             while(true)
             {
                 if (!ThreadPlayer.IsAlive)
@@ -135,7 +137,7 @@ namespace AMK.Recorder
                     ThreadPlayer = null;
                     break;
                 }
-                Thread.Sleep(100);
+                Thread.Sleep(timeInterval);
             }
 
             return true;
