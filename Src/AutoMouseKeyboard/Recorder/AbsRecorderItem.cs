@@ -27,6 +27,8 @@ namespace AMK.Recorder
 
         public DateTime Time { get; set; } = DateTime.Now;
 
+        public string Memo { get; set; } = string.Empty;
+
         [JsonIgnore]
         public double ResidualTimeSec { get; set; } = 0;
 

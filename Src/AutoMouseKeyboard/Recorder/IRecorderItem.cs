@@ -32,6 +32,8 @@ namespace AMK.Recorder
 
         double ResidualTimeSec { get; set; }
 
+        string Memo { get; set; }
+
         List<IRecorderItem> ChildItems { get; set; }
 
         bool IsEqualType(IRecorderItem item);

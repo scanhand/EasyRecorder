@@ -54,9 +54,15 @@ namespace AMK
 
         #region Recorder
 
-        private AMKRecorder Recorder = new AMKRecorder();
+        public AMKRecorder Recorder = new AMKRecorder();
 
-        private System.Windows.Controls.ListView RecorderListView = null;
+        private System.Windows.Controls.ListView RecorderListView
+        {
+            get
+            {
+                return this.RecorderView.RecoderListView;
+            }
+        }
 
         #endregion
 
@@ -64,10 +70,14 @@ namespace AMK
         {
             InitializeComponent();
 
+            //Global Manager
+            GM.Instance.MainWindow = this;
+
             ALog.Initialize();
             this.Loaded += MainWindow_Loaded;
             this.Closing += MainWindow_Closing;
             this.SizeChanged += MainWindow_SizeChanged;
+            this.StateChanged += MainWindow_StateChanged;
 
             //Log
             this.LogWindow.Show();
@@ -88,25 +98,9 @@ namespace AMK
             this.ApplicationWatcher.OnApplicationWindowChange += ApplicationWatcher_OnApplicationWindowChange;
             this.ApplicationWatcher.Start();
 
-            this.RecorderListView = this.RecorderView.RecoderListView;
+            //RecorderView
             this.RecorderView.Recorder = this.Recorder;
-
-            //Commander
-            this.Commander.OnRecording += () =>
-            {
-                if (AUtil.IsStop(this.Recorder.State))
-                    this.StartRecording(); 
-                else
-                    this.Stop();
-            };
-            this.Commander.OnPlaying += () =>
-            {
-                if (AUtil.IsStop(this.Recorder.State))
-                    this.StartPlaying(); 
-                else
-                    this.Stop();
-            };
-
+           
             //Status
             this.Recorder.OnChangedState += (s) =>
             {
@@ -222,14 +216,32 @@ namespace AMK
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            ResizeRecorderListViewColumn();
+        }
+
+        private void MainWindow_StateChanged(object sender, EventArgs e)
+        {
+            ResizeRecorderListViewColumn();
+        }
+
+        private void ResizeRecorderListViewColumn()
+        {
             if (this.RecorderListView == null)
                 return;
 
-            //this.RecoderListView.Width = this.Width;
-            double width = this.Width - this.BorderThickness.Left - this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
-            ((GridView)this.RecorderListView.View).Columns[0].Width = width * 0.24;
-            ((GridView)this.RecorderListView.View).Columns[1].Width = width * 0.48;
-            ((GridView)this.RecorderListView.View).Columns[2].Width = width * 0.24;
+            const int columnCount = 3;
+            double totalWidth = 0;
+            for (int i = 0; i < columnCount; i++)
+                totalWidth += ((GridView)this.RecorderListView.View).Columns[i].Width;
+
+            double[] totalWidthFactor = new double[columnCount];
+            for (int i = 0; i < columnCount; i++)
+                totalWidthFactor[i] = ((GridView)this.RecorderListView.View).Columns[i].Width / totalWidth;
+
+            this.RecorderListView.Width = this.ActualWidth;
+            double width = this.ActualWidth - this.BorderThickness.Left - this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
+            for (int i = 0; i < columnCount; i++)
+                ((GridView)this.RecorderListView.View).Columns[i].Width = width * totalWidthFactor[i];
         }
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
@@ -276,30 +288,30 @@ namespace AMK
             this.LogWindow.Close();
         }
 
-        private void StartRecording()
+        public void StartRecording()
         {
             ALog.Debug("StartRecording");
             this.Recorder.Reset();
             this.Recorder.StartRecording();
         }
 
-        private void StopRecording()
+        public void StopRecording()
         {
             ALog.Debug("StopRecording");
             this.Recorder.StopRecording();
         }
 
-        private void StartPlaying()
+        public void StartPlaying()
         {
             this.Recorder.StartPlaying();
         }
 
-        private void StopPlaying()
+        public void StopPlaying()
         {
             this.Recorder.StopPlaying();
         }
 
-        private void Stop()
+        public void Stop()
         {
             this.Recorder.StopPlaying();
             this.Recorder.StopRecording();

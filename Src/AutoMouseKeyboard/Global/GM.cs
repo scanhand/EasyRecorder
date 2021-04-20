@@ -11,6 +11,8 @@ namespace AMK.Global
     {
         public InputSimulator InputSimulator = new InputSimulator();
 
+        public MainWindow MainWindow { get; set; } = null;
+
         public GM()
         {
 

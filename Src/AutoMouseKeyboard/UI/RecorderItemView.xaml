@@ -25,8 +25,8 @@
         <ListView Name="RecoderListView" ItemContainerStyle="{StaticResource RecorderListStyle}">
             <ListView.ContextMenu>
                 <ContextMenu FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
-                    <MenuItem Header="Play Selected Items"
-                              Click="MenuItem_PlaySelectedItems_Click"/>
+                    <MenuItem Header="Play Items" Click="MenuItem_PlaySelectedItems_Click"/>
+                    <MenuItem Header="Delete Items" Click="MenuItem_DeleteSelectedItems_Click" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>
@@ -57,14 +57,13 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!-- Etc -->
+                    <!-- Memo -->
                     <GridViewColumn Width="200">
-                        <GridViewColumnHeader>Etc</GridViewColumnHeader>
+                        <GridViewColumnHeader>Memo</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image Source="/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png" Width="16"/>
-                                    <TextBlock Text="{Binding Point}"/>
+                                    <TextBlock Text="{Binding Memo}"/>
                                 </DockPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

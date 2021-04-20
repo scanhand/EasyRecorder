@@ -242,6 +242,16 @@ namespace AMK.Recorder
             return true;
         }
 
+        public bool DeleteItem(List<IRecorderItem> items)
+        {
+            if (items == null)
+                return false;
+
+            for (int i = 0; i < items.Count; i++)
+                this.DeleteItem(items[i]);
+            return true;
+        }
+
         public void ResetCurrentRecorderbyLast()
         {
             this.CurrentRecorder = GetLastItem();
