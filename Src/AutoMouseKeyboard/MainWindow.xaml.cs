@@ -275,8 +275,7 @@ namespace AMK
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.Recorder.StopRecording();
-            this.Recorder.StopPlaying();
+            this.Recorder.StopAll();
 
             this.KeyboardWatcher.Stop();
             this.MouseWatcher.Stop();
@@ -316,8 +315,14 @@ namespace AMK
 
         public void Stop()
         {
+            this.Recorder.StopAll();
+        }
+
+        public void ResetItems()
+        {
             this.Recorder.StopPlaying();
             this.Recorder.StopRecording();
+            this.Recorder.Reset();
         }
 
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
@@ -349,6 +354,11 @@ namespace AMK
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)
         {
             StopPlaying();
+        }
+
+        private void MenuItem_ResetItems_Click(object sender, RoutedEventArgs e)
+        {
+            ResetItems();
         }
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)

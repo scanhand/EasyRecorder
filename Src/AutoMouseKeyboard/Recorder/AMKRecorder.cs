@@ -116,6 +116,12 @@ namespace AMK.Recorder
             this.WaitingRecorder.Stop();
         }
 
+        public void StopAll()
+        {
+            this.StopRecording();
+            this.StopPlaying();
+        }
+
         public void Add(ApplicationEventArgs e)
         {
             this.ApplicationRecorder.Add(e);

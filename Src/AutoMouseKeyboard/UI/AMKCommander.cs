@@ -65,6 +65,7 @@ namespace AMK.UI
 
         private void OnRecording()
         {
+            ALog.Debug("AMKCommander::OnRecording::State={0}", this.Recorder.State);
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.RecordingPause;
@@ -72,13 +73,13 @@ namespace AMK.UI
             }
             else
             {
-                this.MainWindow.Stop();
-                this.Recorder.State = AMKState.RecordingPause;
+                Stop();
             }
         }
 
         private void OnPlaying()
         {
+            ALog.Debug("AMKCommander::OnPlaying::State={0}", this.Recorder.State);
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.PlayingPause;
@@ -86,14 +87,26 @@ namespace AMK.UI
             }
             else
             {
-                this.MainWindow.Stop();
-                this.Recorder.State = AMKState.PlayingPause;
+                Stop();
             }
+        }
+
+        private void Stop()
+        {
+            AMKState state = AMKState.RecordingPause;
+            if (this.Recorder.State == AMKState.Playing)
+                state = AMKState.PlayingPause;
+            else if (this.Recorder.State == AMKState.Recording)
+                state = AMKState.RecordingPause;
+
+            this.MainWindow.Stop();
+            this.Recorder.State = state;
         }
 
         private void OnPushKey(VirtualKeyCode key)
         {
-            if(key == VirtualKeyCode.DELETE && AUtil.IsStop(this.Recorder.State))
+            ALog.Debug("AMKCommander::OnPushKey::VirtualKeyCode={0}", key.ToString());
+            if (key == VirtualKeyCode.DELETE && AUtil.IsStop(this.Recorder.State))
             {
                 DeleteKey();
             }
