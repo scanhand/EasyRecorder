@@ -16,7 +16,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"{this.LR.ToString()},{this.Dir.ToString()},X: {this.Point.X},Y: {this.Point.Y}");
+                return string.Format("{0,6}, X: {1,4}, Y: {2,4}", this.LR.ToString(), this.Point.X, this.Point.Y);
             }
         }
 

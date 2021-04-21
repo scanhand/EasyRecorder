@@ -53,7 +53,6 @@ namespace AMK.Recorder
                 if (OnStartPlaying != null)
                     OnStartPlaying();
 
-                ResetToStart();
                 while (IsThreadEnable)
                 {
                     if (!this.CurrentRecorder.Play(this))
@@ -86,7 +85,7 @@ namespace AMK.Recorder
             return true;
         }
 
-        private void ResetToStart()
+        public void ResetToStart()
         {
             this.CurrentRecorder = this.AMKRecorder.Items.First();
         }
@@ -119,27 +118,26 @@ namespace AMK.Recorder
 
         public bool Stop()
         {
-            if (ThreadPlayer == null || !ThreadPlayer.IsAlive)
+            if (this.ThreadPlayer == null || !this.ThreadPlayer.IsAlive)
                 return true;
 
-            IsThreadEnable = false;
+            this.IsThreadEnable = false;
             int tryCount = 0;
-            const int timeInterval = 100;
-            const int timeOutCount = 1000 / timeInterval; // 1000mesc / 100msec
+            const int timeInterval = 20;
+            const int timeOutCount = 1000 / timeInterval; // 1000mesc / 20msec
             while(true)
             {
-                if (!ThreadPlayer.IsAlive)
+                if (!this.ThreadPlayer.IsAlive)
                     break;
 
                 if (tryCount++ > timeOutCount)
                 {
-                    ThreadPlayer.Abort();
-                    ThreadPlayer = null;
+                    this.ThreadPlayer.Abort();
                     break;
                 }
                 Thread.Sleep(timeInterval);
             }
-
+            this.ThreadPlayer = null;
             return true;
         }
 

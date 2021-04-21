@@ -50,19 +50,23 @@ namespace AMK.Recorder
                 {
                     case RecorderType.KeyDown:          return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
                     case RecorderType.KeyUp:            return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
+                    case RecorderType.MouseUp:
+                    case RecorderType.MouseDown:
                     case RecorderType.MouseClick:
                         {
                             if(this.LR == LR.Left)
-                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse_leftclick-64.png";
+                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png";
                             else
-                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse_rightclick-64.png";
+                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse-rightclick-64.png";
                         }
                     case RecorderType.MouseSmartClick:  return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
                     case RecorderType.MouseMove:        return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
-                    case RecorderType.MouseWheel:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse_wheel-64.png";
+                    case RecorderType.MouseWheel:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
                     case RecorderType.KeyPress:         return "/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png";
                     case RecorderType.WaitTime:         return "/AutoMouseKeyboard;component/Resources/icons8-timer-64.png";
                     case RecorderType.WaitSmart:        return "/AutoMouseKeyboard;component/Resources/icons8-smarttimer-64.png";
+                   
+
                 }
                 return string.Empty;
             }

@@ -73,19 +73,19 @@ namespace AMK.Recorder
 
         public void Stop()
         {
-            if (this.ThreadRecording == null)
+            if (this.ThreadRecording == null || !this.ThreadRecording.IsAlive)
                 return;
 
             int tryCount = 0;
             const int timeInterval = 20;
-            const int waitTime = 1000 / timeInterval; 
+            const int timeOutCount = 1000 / timeInterval; 
             this.IsThreadRecording = false;
             while (true)
             {
                 if (!this.ThreadRecording.IsAlive)
                     break;
 
-                if (tryCount++ >= waitTime)
+                if (tryCount++ >= timeOutCount)
                 {
                     this.ThreadRecording.Abort();
                     break;

@@ -143,13 +143,13 @@
     <value>..\Resources\icons8-mouse-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_mouse_leftclick_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-mouse_leftclick-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\icons8-mouse-leftclick-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_mouse_rightclick_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-mouse_rightclick-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\icons8-mouse-rightclick-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_mouse_wheel_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-mouse_wheel-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <value>..\Resources\icons8-mouse-wheel-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_pause_64" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icons8-pause-64.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

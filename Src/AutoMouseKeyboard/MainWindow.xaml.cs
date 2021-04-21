@@ -288,10 +288,11 @@ namespace AMK
             this.LogWindow.Close();
         }
 
-        public void StartRecording()
+        public void StartRecording(bool isReset)
         {
             ALog.Debug("StartRecording");
-            this.Recorder.Reset();
+            if(isReset)
+                this.Recorder.Reset();
             this.Recorder.StartRecording();
         }
 
@@ -301,8 +302,10 @@ namespace AMK
             this.Recorder.StopRecording();
         }
 
-        public void StartPlaying()
+        public void StartPlaying(bool isReset)
         {
+            if(isReset)
+                this.Recorder.ResetToStart();
             this.Recorder.StartPlaying();
         }
 
@@ -319,7 +322,7 @@ namespace AMK
 
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
-            StartRecording();
+            StartRecording(true);
         }
 
         private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
@@ -340,7 +343,7 @@ namespace AMK
 
         private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
         {
-            StartPlaying();
+            StartPlaying(true);
         }
 
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)

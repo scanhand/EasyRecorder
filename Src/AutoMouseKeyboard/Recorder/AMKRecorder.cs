@@ -274,7 +274,6 @@ namespace AMK.Recorder
             }
 
             ALog.Debug("AMKRecorder::Start Playing");
-
             this.State = AMKState.Playing;
             this.Player.Start();
             return true;
@@ -285,6 +284,12 @@ namespace AMK.Recorder
             ALog.Debug("AMKRecorder::Stop Playing");
             this.Player.Stop();
             this.State = AMKState.Stop;
+        }
+
+        public void ResetToStart()
+        {
+            ALog.Debug("AMKRecorder::ResetToStart");
+            this.Player.ResetToStart();
         }
     }
 }

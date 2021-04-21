@@ -39,11 +39,11 @@ namespace AMK.Global
 
     public enum AMKState
     {
-        None,
         Recording,
-        Pause,
+        RecordingPause,
         Stop,
         Playing,
+        PlayingPause,
         PlayDone,
     }
 

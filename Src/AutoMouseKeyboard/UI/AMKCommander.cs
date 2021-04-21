@@ -14,7 +14,7 @@ namespace AMK.UI
     {
         public VirtualKeyCode RecordingVKeyCode = VirtualKeyCode.F4;
 
-        public VirtualKeyCode PlayingVKeyCode = VirtualKeyCode.F5;
+        public VirtualKeyCode PlayingVKeyCode = VirtualKeyCode.F3;
 
         public MainWindow MainWindow
         {
@@ -65,18 +65,30 @@ namespace AMK.UI
 
         private void OnRecording()
         {
-            if (AUtil.IsStop(this.Recorder.State))
-                this.MainWindow.StartRecording(); 
+            if (AUtil.IsStopPause(this.Recorder.State))
+            {
+                bool isReset = this.Recorder.State != AMKState.RecordingPause;
+                this.MainWindow.StartRecording(isReset);
+            }
             else
+            {
                 this.MainWindow.Stop();
+                this.Recorder.State = AMKState.RecordingPause;
+            }
         }
 
         private void OnPlaying()
         {
-            if (AUtil.IsStop(this.Recorder.State))
-                this.MainWindow.StartPlaying(); 
+            if (AUtil.IsStopPause(this.Recorder.State))
+            {
+                bool isReset = this.Recorder.State != AMKState.PlayingPause;
+                this.MainWindow.StartPlaying(isReset);
+            }
             else
+            {
                 this.MainWindow.Stop();
+                this.Recorder.State = AMKState.PlayingPause;
+            }
         }
 
         private void OnPushKey(VirtualKeyCode key)

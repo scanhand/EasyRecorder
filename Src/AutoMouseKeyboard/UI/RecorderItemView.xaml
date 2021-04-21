@@ -32,7 +32,7 @@
             <ListView.View>
                 <GridView>
                     <!-- Item -->
-                    <GridViewColumn Width="200">
+                    <GridViewColumn Width="100">
                         <GridViewColumnHeader>Item</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -58,7 +58,7 @@
                     </GridViewColumn>
 
                     <!-- Memo -->
-                    <GridViewColumn Width="200">
+                    <GridViewColumn Width="50">
                         <GridViewColumnHeader>Memo</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

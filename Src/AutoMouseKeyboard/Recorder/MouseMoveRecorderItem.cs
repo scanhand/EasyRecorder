@@ -20,7 +20,15 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format($"X: {this.Point.X},Y: {this.Point.Y},Count={this.ChildItems.Count}");
+                StringBuilder sb = new StringBuilder();
+                sb.AppendFormat("X: {0,4}, Y: {1,4}", this.Point.X, this.Point.Y);
+                if(this.ChildItems.Count > 0)
+                {
+                    sb.Append(" > ");
+                    IRecorderItem last = this.ChildItems.Last();
+                    sb.AppendFormat("X: {0,4}, Y: {1,4}", last.Point.X, last.Point.Y); ;
+                }
+                return sb.ToString();
             }
         }
 

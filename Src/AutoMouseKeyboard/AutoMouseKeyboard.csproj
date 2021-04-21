@@ -181,11 +181,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -193,7 +188,6 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -226,10 +220,10 @@
     <Resource Include="Resources\icons8-keyboard-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-mouse_rightclick-64.png" />
+    <Resource Include="Resources\icons8-mouse-rightclick-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-mouse_leftclick-64.png" />
+    <Resource Include="Resources\icons8-mouse-leftclick-64.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-cursor-64.png" />
@@ -238,7 +232,7 @@
     <Resource Include="Resources\icons8-timer-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-mouse_wheel-64.png" />
+    <Resource Include="Resources\icons8-mouse-wheel-64.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-smarttimer-64.png" />

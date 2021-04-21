@@ -59,7 +59,12 @@ namespace AMK.Global
 
         public static bool IsStop(AMKState state)
         {
-            return (state == AMKState.Stop || state == AMKState.PlayDone || state == AMKState.None);
+            return (state == AMKState.Stop || state == AMKState.PlayDone);
+        }
+
+        public static bool IsStopPause(AMKState state)
+        {
+            return (state == AMKState.Stop || state == AMKState.PlayDone || state == AMKState.PlayingPause || state == AMKState.RecordingPause);
         }
 
     }
