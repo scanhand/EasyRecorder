@@ -20,13 +20,13 @@ namespace AMK.Recorder
             {
                 StringBuilder sb = new StringBuilder();
 
-                sb.Append(this.Keyname);
+                sb.AppendFormat("[{0}]",this.Keyname);
                 foreach (var i in this.ChildItems)
                 {
                     KeyPressRecorderItem item = i as KeyPressRecorderItem;
                     if (item == null)
                         continue;
-                    sb.Append(item.Keyname);
+                    sb.AppendFormat("[{0}]", item.Keyname);
                 }
                 return sb.ToString();
             }

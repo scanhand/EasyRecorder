@@ -22,6 +22,7 @@ using System.Windows.Forms;
 using AMK.Files;
 using AMK.UI;
 using AMK.Global;
+using AvalonDock.Themes;
 
 namespace AMK
 {
@@ -65,6 +66,8 @@ namespace AMK
         }
 
         #endregion
+
+        public Theme DockTheme { get; set; } = new MetroTheme();
 
         public MainWindow()
         {
@@ -179,7 +182,7 @@ namespace AMK
                 });
             };
 
-            this.Recorder.Player.OnStartPlaying += () =>
+            this.Recorder.OnStartPlaying += () =>
             {
                 this.InvokeIfRequired(() =>
                 {
@@ -187,7 +190,7 @@ namespace AMK
                 });
             };
 
-            this.Recorder.Player.OnStopPlaying += (isLastStep) =>
+            this.Recorder.OnStopPlaying += (isLastStep) =>
             {
                 this.InvokeIfRequired(() =>
                 {
@@ -212,6 +215,11 @@ namespace AMK
             this.Recorder.AddItem(new KeyPressRecorderItem());
             this.Recorder.AddItem(new WaitSmartRecorderItem());
             this.Recorder.AddItem(new WaitTimeRecorderItem());
+        }
+
+        private void LayoutRoot_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -303,13 +311,15 @@ namespace AMK
 
         public void StartPlaying(bool isReset)
         {
-            if(isReset)
+            ALog.Debug("StartPlaying::IsReset={0}", isReset);
+            if (isReset)
                 this.Recorder.ResetToStart();
             this.Recorder.StartPlaying();
         }
 
         public void StopPlaying()
         {
+            ALog.Debug("StopPlaying");
             this.Recorder.StopPlaying();
         }
 
@@ -442,6 +452,5 @@ namespace AMK
                 this.MainStatusBar.lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
             });
         }
-
     }
 }

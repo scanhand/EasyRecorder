@@ -19,7 +19,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return this.Keyname;
+                return string.Format($"{this.Keyname}");
             }
         }
 

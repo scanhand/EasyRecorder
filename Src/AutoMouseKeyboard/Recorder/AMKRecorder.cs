@@ -25,10 +25,10 @@ namespace AMK.Recorder
             set
             {
                 _State = value;
-                if(OnChangedState != null)
+                if (OnChangedState != null)
                     OnChangedState(_State);
             }
-               
+
         }
 
         public Action<AMKState> OnChangedState = null;
@@ -49,13 +49,13 @@ namespace AMK.Recorder
                 IRecorderItem lastRecorderItem = _CurrentRecoder;
                 _CurrentRecoder = value;
 
-                if(lastRecorderItem != null)
+                if (lastRecorderItem != null)
                 {
                     lastRecorderItem.State = RecorderItemState.None;
                     OnUpdateItem(lastRecorderItem);
                 }
 
-                if(_CurrentRecoder != null)
+                if (_CurrentRecoder != null)
                 {
                     _CurrentRecoder.State = RecorderItemState.Activated;
                     OnUpdateItem(_CurrentRecoder);
@@ -86,6 +86,32 @@ namespace AMK.Recorder
         public Action<IRecorderItem> OnDeleteItem = null;
 
         public Action OnResetItem = null;
+
+        public Action OnStartPlaying 
+        {
+            get
+            {
+                return this.Player.OnStartPlaying;
+            }
+
+            set
+            {
+                this.Player.OnStartPlaying = value;
+            }
+        }
+
+        public Action<bool> OnStopPlaying
+        {
+            get
+            {
+                return this.Player.OnStopPlaying;
+            }
+
+            set
+            {
+                this.Player.OnStopPlaying = value;
+            }
+        }
 
         public AMKRecorder()
         {

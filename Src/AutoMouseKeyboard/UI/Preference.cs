@@ -34,8 +34,7 @@ namespace AMK.UI
             this.MenuAlwaysTopItem.IsChecked = this.IsTopMost;
             this.MainWindow.Topmost = this.IsTopMost;
             this.LogWindow.Topmost = this.IsTopMost;
-
-            AUtil.MoveToRightBottom(this.MainWindow);
+            
             AUtil.MoveToLeftBottom(this.LogWindow);
             return true;
         }

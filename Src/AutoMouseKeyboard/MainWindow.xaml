@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AMK"
         xmlns:localui="clr-namespace:AMK.UI"
+        xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
+        xmlns:avaMetro="clr-namespace:AvalonDock.Themes;assembly=AvalonDock.Themes.Metro"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification"
-        xmlns:ad="clr-namespace:AvalonDock;assembly=AvalonDock"
-        mc:Ignorable="d"
-        Title="Auto Mouse &amp; Keyboard" Height="300" Width="500" MinWidth="200" MinHeight="200">
+        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification" xmlns:ad="https://github.com/Dirkster99/AvalonDock"
+                 mc:Ignorable="d"
+        Title="Auto Mouse &amp; Keyboard" Width="900" Height="600" MinWidth="200" MinHeight="200">
 
     <Window.Resources>
         <ImageSource x:Key="LeftMouseClick">Resources/icons8-mouse-leftclick-64.png</ImageSource>
@@ -26,7 +27,7 @@
     </Window.Resources>
 
     <DockPanel LastChildFill="False">
-  
+
         <!-- Tray Icon -->
         <tb:TaskbarIcon IconSource="icons8-record-64.ico"
                         ToolTipText="Auto Mouse &amp; Keyboard" 
@@ -35,7 +36,7 @@
         <!-- Menu -->
         <Menu DockPanel.Dock="Top" FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
             <MenuItem Header="_File">
-               
+
                 <MenuItem Header="File Save..." Click="MenuItem_FileSave_Click">
                     <MenuItem.Icon>
                         <Image Source="Resources/icons8-filesave-64.png" Width="16"/>
@@ -55,7 +56,7 @@
 
                 <MenuItem Header="Always Top most" x:Name="MenuAlwaysTopMostItem" Click="MenuItem_AlwaysTopMost_Click" IsCheckable="True" >
                 </MenuItem>
-                
+
                 <MenuItem Header="Exit" Click="MenuItem_Exit_Click">
                 </MenuItem>
 
@@ -89,13 +90,38 @@
             </MenuItem>
         </Menu>
 
-        <!-- Status --> 
+        <!-- Status -->
         <localui:AMKStatusBar DockPanel.Dock="Bottom" x:Name="MainStatusBar"/>
 
-        <!-- Main DockPanel-->
-        <localui:RecorderItemView x:Name="RecorderView">
-
-        </localui:RecorderItemView>
+        <!-- Main DockPanel -->
+        <DockingManager x:Name="dockManager">
+            <!--<avalonDock:DockingManager.Theme>
+                <avaMetro:MetroTheme/>
+            </avalonDock:DockingManager.Theme>-->
+            <LayoutRoot>
+                <LayoutPanel Orientation="Vertical">
+                    <LayoutAnchorablePane DockHeight="100">
+                        <ad:LayoutAnchorable x:Name="dockSequenceDiagram"
+                                                Title="Auto Mouse &amp; Keyboard Group" 
+                                                CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False"
+                                                CanMove="False" AutoHideMinWidth="300">
+                            <StackPanel Orientation="Vertical">
+                            </StackPanel>
+                        </ad:LayoutAnchorable>
+                    </LayoutAnchorablePane>
+                    <LayoutDocumentPane DockHeight="*">
+                        <ad:LayoutDocument Title="Recorder Item" 
+                                            ContentId="recorderItem"
+                                            CanClose="False"
+                                            CanFloat="False"
+                                            CanMove="False">
+                            <localui:RecorderItemView x:Name="RecorderView">
+                            </localui:RecorderItemView>
+                        </ad:LayoutDocument>
+                    </LayoutDocumentPane>
+                </LayoutPanel>
+            </LayoutRoot>
+        </DockingManager>
     </DockPanel>
-    
+
 </mah:MetroWindow>

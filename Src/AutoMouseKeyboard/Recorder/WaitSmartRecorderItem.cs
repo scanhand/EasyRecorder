@@ -13,7 +13,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("X: {0}, Y: {1}", this.Point.X, this.Point.Y);
+                return string.Format("X: {0,4}, Y: {1,4}", this.Point.X, this.Point.Y);
             }
         }
 
