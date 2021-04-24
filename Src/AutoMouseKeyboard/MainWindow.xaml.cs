@@ -65,6 +65,8 @@ namespace AMK
             }
         }
 
+        ToastWindow ToastWindow = new ToastWindow();
+
         #endregion
 
         public Theme DockTheme { get; set; } = new MetroTheme();
@@ -182,6 +184,23 @@ namespace AMK
                 });
             };
 
+            this.Recorder.OnStartRecording += () =>
+            {
+                this.InvokeIfRequired(() =>
+                {
+                    this.ToastWindow.SetState(AMKState.Recording);
+                    this.ToastWindow.Show();
+                });
+            };
+
+            this.Recorder.OnStopRecording += () =>
+            {
+                this.InvokeIfRequired(() =>
+                {
+                    this.ToastWindow.Hide();
+                });
+            };
+
             this.Recorder.OnStartPlaying += () =>
             {
                 this.InvokeIfRequired(() =>
@@ -283,6 +302,7 @@ namespace AMK
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            this.ToastWindow.Close();
             this.Recorder.StopAll();
 
             this.KeyboardWatcher.Stop();

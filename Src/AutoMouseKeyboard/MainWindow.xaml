@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AMK"
         xmlns:localui="clr-namespace:AMK.UI"
+        xmlns:localgroup="clr-namespace:AMK.Group"
         xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
         xmlns:avaMetro="clr-namespace:AvalonDock.Themes;assembly=AvalonDock.Themes.Metro"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -100,13 +101,19 @@
             </avalonDock:DockingManager.Theme>-->
             <LayoutRoot>
                 <LayoutPanel Orientation="Vertical">
-                    <LayoutAnchorablePane DockHeight="100">
+                    <LayoutAnchorablePane DockHeight="250">
                         <ad:LayoutAnchorable x:Name="dockSequenceDiagram"
                                                 Title="Auto Mouse &amp; Keyboard Group" 
                                                 CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False"
                                                 CanMove="False" AutoHideMinWidth="300">
-                            <StackPanel Orientation="Vertical">
-                            </StackPanel>
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect>
+                                    </DropShadowEffect>
+                                </Border.Effect>
+                                <localgroup:AMKGroupControl x:Name="MainGroup">
+                            </localgroup:AMKGroupControl>
+                            </Border>
                         </ad:LayoutAnchorable>
                     </LayoutAnchorablePane>
                     <LayoutDocumentPane DockHeight="*">

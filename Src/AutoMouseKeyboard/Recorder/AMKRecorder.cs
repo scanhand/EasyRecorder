@@ -113,6 +113,10 @@ namespace AMK.Recorder
             }
         }
 
+        public Action OnStartRecording = null;
+
+        public Action OnStopRecording = null;
+
         public AMKRecorder()
         {
             this.MouseRecorder = new AMKMouseRecorder(this);
@@ -131,6 +135,7 @@ namespace AMK.Recorder
 
         public void StartRecording()
         {
+            OnStartRecording();
             this.ResetCurrentRecorder();
             this.State = AMKState.Recording;
             this.WaitingRecorder.Start();
@@ -140,6 +145,7 @@ namespace AMK.Recorder
         {
             this.State = AMKState.Stop;
             this.WaitingRecorder.Stop();
+            OnStopRecording();
         }
 
         public void StopAll()
@@ -299,6 +305,7 @@ namespace AMK.Recorder
 
         public bool StartPlaying()
         {
+            
             if (this.Items.Count <= 0)
             {
                 ALog.Debug("AMKRecorder::StartPlaying::Item's count is 0.");

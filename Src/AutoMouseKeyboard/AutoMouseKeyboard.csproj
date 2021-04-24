@@ -118,6 +118,10 @@
     <Compile Include="Global\GM.cs" />
     <Compile Include="Global\ObjectExtensions.cs" />
     <Compile Include="Global\SingletonBase.cs" />
+    <Compile Include="Global\TaskEx.cs" />
+    <Compile Include="Group\AMKGroupControl.xaml.cs">
+      <DependentUpon>AMKGroupControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PreferenceWindow.xaml.cs">
       <DependentUpon>PreferenceWindow.xaml</DependentUpon>
     </Compile>
@@ -149,7 +153,15 @@
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ToastMessageItem.cs" />
+    <Compile Include="UI\ToastWindow.xaml.cs">
+      <DependentUpon>ToastWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Group\AMKGroupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -188,6 +200,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\RecorderItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\ToastWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
