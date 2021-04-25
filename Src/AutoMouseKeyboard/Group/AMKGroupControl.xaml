@@ -9,7 +9,7 @@
     <Grid>
         <diagram:DiagramScrollView>
             <diagram:DiagramView Name="editorDiagram" AllowDrop="True"
-                                 ShowGrid="True" GridCellSize="120,100" DocumentSize="2000,2000">
+                                 ShowGrid="True" GridCellSize="100,100" DocumentSize="1000,1000">
             </diagram:DiagramView>
         </diagram:DiagramScrollView>
     </Grid>

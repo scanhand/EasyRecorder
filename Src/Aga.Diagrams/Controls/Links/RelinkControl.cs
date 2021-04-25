@@ -7,11 +7,11 @@ using System.Windows;
 
 namespace Aga.Diagrams.Controls
 {
-	public class RelinkControl : Control
-	{
-		static RelinkControl()
-		{
-			FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(RelinkControl), new FrameworkPropertyMetadata(typeof(RelinkControl)));
-		}
-	}
+    public class RelinkControl : Control
+    {
+        static RelinkControl()
+        {
+            FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(RelinkControl), new FrameworkPropertyMetadata(typeof(RelinkControl)));
+        }
+    }
 }

@@ -9,119 +9,119 @@ using Aga.Diagrams.Adorners;
 
 namespace Aga.Diagrams.Controls
 {
-	public abstract class DiagramItem : Control
-	{
-		#region Properties
+    public abstract class DiagramItem : Control
+    {
+        #region Properties
 
-		private Adorner SelectionAdorner { get; set; }
+        private Adorner SelectionAdorner { get; set; }
 
-		public object ModelElement { get; set; }
+        public object ModelElement { get; set; }
 
-		#region IsSelected Property
+        #region IsSelected Property
 
-		public bool IsSelected
-		{
-			get { return (bool)GetValue(IsSelectedProperty); }
-			internal set { SetValue(IsSelectedProperty, value); }
-		}
+        public bool IsSelected
+        {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            internal set { SetValue(IsSelectedProperty, value); }
+        }
 
-		internal static readonly DependencyProperty IsSelectedProperty =
-			DependencyProperty.Register("IsSelected",
-									   typeof(bool),
-									   typeof(DiagramItem),
-									   new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnIsSelectedChanged)));
+        internal static readonly DependencyProperty IsSelectedProperty =
+            DependencyProperty.Register("IsSelected",
+                                       typeof(bool),
+                                       typeof(DiagramItem),
+                                       new FrameworkPropertyMetadata(false, new PropertyChangedCallback(OnIsSelectedChanged)));
 
-		private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			if (!(bool)e.NewValue)
-			{
-				d.ClearValue(IsPrimarySelectionProperty);
-				(d as DiagramItem).HideSelectionAdorner();
-			}
-			else
-				(d as DiagramItem).ShowSelectionAdorner();
-		}
+        private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(bool)e.NewValue)
+            {
+                d.ClearValue(IsPrimarySelectionProperty);
+                (d as DiagramItem).HideSelectionAdorner();
+            }
+            else
+                (d as DiagramItem).ShowSelectionAdorner();
+        }
 
-		protected virtual void IsSelectedChanged()
-		{
-		}
+        protected virtual void IsSelectedChanged()
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region IsPrimarySelection Property
+        #region IsPrimarySelection Property
 
-		public bool IsPrimarySelection
-		{
-			get { return (bool)GetValue(IsPrimarySelectionProperty); }
-			internal set { SetValue(IsPrimarySelectionProperty, value); }
-		}
+        public bool IsPrimarySelection
+        {
+            get { return (bool)GetValue(IsPrimarySelectionProperty); }
+            internal set { SetValue(IsPrimarySelectionProperty, value); }
+        }
 
-		internal static readonly DependencyProperty IsPrimarySelectionProperty =
-			DependencyProperty.Register("IsPrimarySelection",
-									   typeof(bool),
-									   typeof(DiagramItem),
-									   new FrameworkPropertyMetadata(false));
+        internal static readonly DependencyProperty IsPrimarySelectionProperty =
+            DependencyProperty.Register("IsPrimarySelection",
+                                       typeof(bool),
+                                       typeof(DiagramItem),
+                                       new FrameworkPropertyMetadata(false));
 
-		#endregion
+        #endregion
 
-		#region CanMove Property
+        #region CanMove Property
 
-		public bool CanMove
-		{
-			get { return (bool)GetValue(CanMoveProperty); }
-			set { SetValue(CanMoveProperty, value); }
-		}
+        public bool CanMove
+        {
+            get { return (bool)GetValue(CanMoveProperty); }
+            set { SetValue(CanMoveProperty, value); }
+        }
 
-		public static readonly DependencyProperty CanMoveProperty =
-			DependencyProperty.Register("CanMove",
-									   typeof(bool),
-									   typeof(DiagramItem),
-									   new FrameworkPropertyMetadata(true));
+        public static readonly DependencyProperty CanMoveProperty =
+            DependencyProperty.Register("CanMove",
+                                       typeof(bool),
+                                       typeof(DiagramItem),
+                                       new FrameworkPropertyMetadata(true));
 
-		#endregion
+        #endregion
 
-		#region CanSelect Property
+        #region CanSelect Property
 
-		public bool CanSelect
-		{
-			get { return (bool)GetValue(CanSelectProperty); }
-			set { SetValue(CanSelectProperty, value); }
-		}
+        public bool CanSelect
+        {
+            get { return (bool)GetValue(CanSelectProperty); }
+            set { SetValue(CanSelectProperty, value); }
+        }
 
-		public static readonly DependencyProperty CanSelectProperty =
-			DependencyProperty.Register("CanSelect",
-									   typeof(bool),
-									   typeof(DiagramItem),
-									   new FrameworkPropertyMetadata(true));
+        public static readonly DependencyProperty CanSelectProperty =
+            DependencyProperty.Register("CanSelect",
+                                       typeof(bool),
+                                       typeof(DiagramItem),
+                                       new FrameworkPropertyMetadata(true));
 
-		#endregion
+        #endregion
 
-		public abstract Rect Bounds { get; }
+        public abstract Rect Bounds { get; }
 
-		#endregion
+        #endregion
 
-		protected void HideSelectionAdorner()
-		{
-			if (SelectionAdorner != null)
-			{
-				AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
-				if (adornerLayer != null)
-					adornerLayer.Remove(SelectionAdorner);
-				SelectionAdorner = null;
-			}
-		}
+        protected void HideSelectionAdorner()
+        {
+            if (SelectionAdorner != null)
+            {
+                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
+                if (adornerLayer != null)
+                    adornerLayer.Remove(SelectionAdorner);
+                SelectionAdorner = null;
+            }
+        }
 
-		protected void ShowSelectionAdorner()
-		{
-			var adornerLayer = AdornerLayer.GetAdornerLayer(this);
-			if (adornerLayer != null)
-			{
-				SelectionAdorner = CreateSelectionAdorner();
-				SelectionAdorner.Visibility = Visibility.Visible;
-				adornerLayer.Add(SelectionAdorner);
-			}
-		}
+        protected void ShowSelectionAdorner()
+        {
+            var adornerLayer = AdornerLayer.GetAdornerLayer(this);
+            if (adornerLayer != null)
+            {
+                SelectionAdorner = CreateSelectionAdorner();
+                SelectionAdorner.Visibility = Visibility.Visible;
+                adornerLayer.Add(SelectionAdorner);
+            }
+        }
 
-		protected abstract Adorner CreateSelectionAdorner();
-	}
+        protected abstract Adorner CreateSelectionAdorner();
+    }
 }

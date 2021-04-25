@@ -10,34 +10,34 @@ using System.Windows.Controls;
 
 namespace Aga.Diagrams.Adorners
 {
-	public class SelectionAdorner : Adorner
-	{
-		private VisualCollection _visuals;
-		private Control _control;
+    public class SelectionAdorner : Adorner
+    {
+        private VisualCollection _visuals;
+        private Control _control;
 
-		protected override int VisualChildrenCount
-		{
-			get { return _visuals.Count; }
-		}
+        protected override int VisualChildrenCount
+        {
+            get { return _visuals.Count; }
+        }
 
-		public SelectionAdorner(DiagramItem item, Control control)
-			: base(item)
-		{
-			_control = control;
-			_control.DataContext = item;
-			_visuals = new VisualCollection(this);
-			_visuals.Add(_control);
-		}
+        public SelectionAdorner(DiagramItem item, Control control)
+            : base(item)
+        {
+            _control = control;
+            _control.DataContext = item;
+            _visuals = new VisualCollection(this);
+            _visuals.Add(_control);
+        }
 
-		protected override Size ArrangeOverride(Size finalSize)
-		{
-			_control.Arrange(new Rect(finalSize));
-			return finalSize;
-		}
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            _control.Arrange(new Rect(finalSize));
+            return finalSize;
+        }
 
-		protected override Visual GetVisualChild(int index)
-		{
-			return _visuals[index];
-		}
-	}
+        protected override Visual GetVisualChild(int index)
+        {
+            return _visuals[index];
+        }
+    }
 }

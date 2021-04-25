@@ -6,8 +6,8 @@ using System.Windows;
 
 namespace Aga.Diagrams.Controls
 {
-	public interface INode
-	{
-		IEnumerable<IPort> Ports { get; }
-	}
+    public interface INode
+    {
+        IEnumerable<IPort> Ports { get; }
+    }
 }

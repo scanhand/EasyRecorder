@@ -100,12 +100,11 @@
                 <avaMetro:MetroTheme/>
             </avalonDock:DockingManager.Theme>-->
             <LayoutRoot>
-                <LayoutPanel Orientation="Vertical">
-                    <LayoutAnchorablePane DockHeight="250">
+                <LayoutPanel Orientation="Horizontal">
+                    <LayoutAnchorablePane DockWidth="300">
                         <ad:LayoutAnchorable x:Name="dockSequenceDiagram"
                                                 Title="Auto Mouse &amp; Keyboard Group" 
-                                                CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False"
-                                                CanMove="False" AutoHideMinWidth="300">
+                                                CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False" CanMove="False">
                             <Border>
                                 <localgroup:AMKGroupControl x:Name="MainGroup">
                                 </localgroup:AMKGroupControl>

@@ -6,18 +6,18 @@ using System.Collections.ObjectModel;
 
 namespace Aga.Diagrams.FlowChart
 {
-	public class FlowchartModel
-	{
-		private ObservableCollection<FlowNode> _nodes = new ObservableCollection<FlowNode>();
-		public ObservableCollection<FlowNode> Nodes
-		{
-			get { return _nodes; }
-		}
+    public class FlowchartModel
+    {
+        private ObservableCollection<FlowNode> _nodes = new ObservableCollection<FlowNode>();
+        public ObservableCollection<FlowNode> Nodes
+        {
+            get { return _nodes; }
+        }
 
-		private ObservableCollection<Link> _links = new ObservableCollection<Link>();
-		public ObservableCollection<Link> Links
-		{
-			get { return _links; }
-		}
-	}
+        private ObservableCollection<Link> _links = new ObservableCollection<Link>();
+        public ObservableCollection<Link> Links
+        {
+            get { return _links; }
+        }
+    }
 }

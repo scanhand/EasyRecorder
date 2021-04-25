@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Aga.Diagrams.Controls
 {
-	public enum LinkThumbKind
-	{
-		Source, Target
-	}
+    public enum LinkThumbKind
+    {
+        Source, Target
+    }
 }

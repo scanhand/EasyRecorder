@@ -141,9 +141,6 @@
     <Compile Include="Util\VisualHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Controls\ClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Themes\RelinkControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

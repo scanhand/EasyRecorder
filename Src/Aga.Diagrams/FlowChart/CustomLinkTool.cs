@@ -10,24 +10,24 @@ using System.Windows.Controls;
 
 namespace Aga.Diagrams.FlowChart
 {
-	public class CustomLinkTool : LinkTool
-	{
-		public CustomLinkTool(DiagramView view)
-			: base(view)
-		{
-		}
+    public class CustomLinkTool : LinkTool
+    {
+        public CustomLinkTool(DiagramView view)
+            : base(view)
+        {
+        }
 
-		protected override ILink CreateNewLink(IPort port)
-		{
-			var link = new OrthogonalLink();
-			BindNewLinkToPort(port, link);
-			return link;
-		}
+        protected override ILink CreateNewLink(IPort port)
+        {
+            var link = new OrthogonalLink();
+            BindNewLinkToPort(port, link);
+            return link;
+        }
 
-		protected override void UpdateLink(Point point, IPort port)
-		{
-			base.UpdateLink(point, port);
-			var link = Link as OrthogonalLink;
-		}
-	}
+        protected override void UpdateLink(Point point, IPort port)
+        {
+            base.UpdateLink(point, port);
+            var link = Link as OrthogonalLink;
+        }
+    }
 }
