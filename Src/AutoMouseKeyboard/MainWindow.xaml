@@ -107,12 +107,8 @@
                                                 CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False"
                                                 CanMove="False" AutoHideMinWidth="300">
                             <Border>
-                                <Border.Effect>
-                                    <DropShadowEffect>
-                                    </DropShadowEffect>
-                                </Border.Effect>
                                 <localgroup:AMKGroupControl x:Name="MainGroup">
-                            </localgroup:AMKGroupControl>
+                                </localgroup:AMKGroupControl>
                             </Border>
                         </ad:LayoutAnchorable>
                     </LayoutAnchorablePane>

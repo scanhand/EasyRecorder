@@ -307,5 +307,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aga.Diagrams\Aga.Diagrams.csproj">
+      <Project>{988e94fb-0936-4b88-acb9-4f9ce80c8ac3}</Project>
+      <Name>Aga.Diagrams</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
