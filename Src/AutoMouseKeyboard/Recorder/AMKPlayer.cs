@@ -156,17 +156,13 @@ namespace AMK.Recorder
                 timeSec = 0;
 
             double startTime = Stopwatch.GetTimestamp();
-            if (timeSec < AUtil.SimulatorMiniumSleepTimeSec)
+            while (true)
             {
-                while (true)
-                {
-                    if (timeSec <= (((double)Stopwatch.GetTimestamp() - startTime) / (double)Stopwatch.Frequency))
-                        break;
-                }
-            }
-            else
-            {
-                Thread.Sleep((int)(timeSec * 1000));
+                if (timeSec <= (((double)Stopwatch.GetTimestamp() - startTime) / (double)Stopwatch.Frequency))
+                    break;
+
+                if (timeSec > AUtil.SimulatorMiniumSleepTimeSec)
+                    Thread.Sleep(1);
             }
             this.LastItem = item;
             this.LastItem.ResidualTimeSec = timeSec - (((double)Stopwatch.GetTimestamp() - startTime) / (double)Stopwatch.Frequency);

@@ -42,7 +42,20 @@ namespace AMK.Recorder
         }
 
         [JsonIgnore]
-        public string ImageSource
+        public string StatusImageSource
+        {
+            get
+            {
+                switch(this.State)
+                {
+                case RecorderItemState.Activated: return "/AutoMouseKeyboard;component/Resources/icons8-arrow-64.png";
+                }
+                return string.Empty;
+            }
+        }
+
+        [JsonIgnore]
+        public string ItemImageSource
         {
             get
             {
@@ -110,7 +123,8 @@ namespace AMK.Recorder
 
         public void UpdateProperties()
         {
-            this.NotifyPropertyChanged("ImageSource");
+            this.NotifyPropertyChanged("StatusImageSource");
+            this.NotifyPropertyChanged("ItemImageSource");
             this.NotifyPropertyChanged("Recorder");
             this.NotifyPropertyChanged("Description");
             this.NotifyPropertyChanged("IsSelected");

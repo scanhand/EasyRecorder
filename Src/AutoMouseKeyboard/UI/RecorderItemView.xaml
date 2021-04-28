@@ -31,13 +31,25 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
+                    <!-- Status -->
+                    <GridViewColumn Width="30">
+                        <GridViewColumnHeader></GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Image Source="{Binding StatusImageSource}" Width="16"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
                     <!-- Item -->
                     <GridViewColumn Width="100">
                         <GridViewColumnHeader>Item</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image Source="{Binding ImageSource}" Width="16"/>
+                                    <Image Source="{Binding ItemImageSource}" Width="16"/>
                                     <TextBlock Text="{Binding Recorder}"/>
                                 </DockPanel>
                             </DataTemplate>
@@ -50,7 +62,6 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <!--<Image Source="/AutoMouseKeyboard;component/icons8-record-64.ico" Width="16"/>-->
                                     <TextBlock Text="{Binding Description}"/>
                                 </DockPanel>
                             </DataTemplate>

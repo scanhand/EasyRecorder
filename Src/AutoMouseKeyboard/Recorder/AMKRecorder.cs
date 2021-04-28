@@ -335,7 +335,6 @@ namespace AMK.Recorder
 
         public bool StartPlaying()
         {
-            
             if (this.Items.Count <= 0)
             {
                 ALog.Debug("AMKRecorder::StartPlaying::Item's count is 0.");
