@@ -29,6 +29,21 @@ namespace AMK.Recorder
 
         public string Memo { get; set; } = string.Empty;
 
+        public virtual double TotalTimeDurationSec
+        {
+            get
+            {
+                double totalWaitingTimeSec = 0;
+                IRecorderItem prevItem = this;
+                foreach (var item in this.ChildItems)
+                {
+                    totalWaitingTimeSec += (item.Time - prevItem.Time).TotalSeconds;
+                    prevItem = item;
+                }
+                return totalWaitingTimeSec;
+            }
+        }
+
         [JsonIgnore]
         public double ResidualTimeSec { get; set; } = 0;
 

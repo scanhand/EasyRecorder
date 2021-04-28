@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <Style x:Key="RecorderListStyle" TargetType="{x:Type ListViewItem}">
             <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="IsSelected" Value="{Binding Mode=OneWay, Path=IsSelected}" />
+            <!--<Setter Property="IsSelected" Value="{Binding Mode=OneWay, Path=IsSelected}" />-->
             <Style.Triggers>
                 <Trigger Property="IsSelected" Value="True">
                     <Setter Property="Background" Value="OrangeRed"/>

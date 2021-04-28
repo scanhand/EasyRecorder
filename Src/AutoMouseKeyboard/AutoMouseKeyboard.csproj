@@ -150,7 +150,7 @@
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
     <Compile Include="UI\AMKCommander.cs" />
-    <Compile Include="UI\AMKRecorderItemConfigManager.cs" />
+    <Compile Include="Recorder\AMKRecorderItemConfigManager.cs" />
     <Compile Include="UI\AMKStatusBar.xaml.cs">
       <DependentUpon>AMKStatusBar.xaml</DependentUpon>
     </Compile>

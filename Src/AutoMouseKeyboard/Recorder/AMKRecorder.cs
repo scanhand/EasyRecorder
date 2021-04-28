@@ -124,6 +124,15 @@ namespace AMK.Recorder
             this.WaitingRecorder = new AMKWaitingRecorder(this);
             this.ApplicationRecorder = new AMKApplicationRecorder(this);
             this.Player = new AMKPlayer(this);
+
+            AMKRecorderItemConfigManager.Instance.OnReplaceItem += (oldItem, newItem) =>
+            {
+                double totalTimeSpanSec = newItem.TotalTimeDurationSec - oldItem.TotalTimeDurationSec;
+                ReplaceItem(oldItem, newItem);
+                TimeSpan decreaseTime = TimeSpan.FromSeconds(totalTimeSpanSec);
+                //Adjust a timestamp in remained items
+                AdjustTimeSpanbyItem(newItem, decreaseTime);
+            };
         }
 
         public void Reset()
@@ -279,13 +288,9 @@ namespace AMK.Recorder
                 int removedItemIndex = this.Items.IndexOf(item);
                 IRecorderItem prevItem = this.Items[removedItemIndex -1];
                 TimeSpan decreaseTime = GetTimeSpan(item as AbsRecorderItem, prevItem as AbsRecorderItem);
-                
+
                 //Adjust a timestamp in remained items
-                for (int i = removedItemIndex + 1; i < this.Items.Count; i++)
-                {
-                    AbsRecorderItem recorderItem = this.Items[i] as AbsRecorderItem;
-                    recorderItem.AdjustTimeSpan(decreaseTime);
-                }
+                AdjustTimeSpanbyItem(item, decreaseTime);
             }
 
             this.Items.Remove(item);
@@ -293,6 +298,20 @@ namespace AMK.Recorder
                 OnDeleteItem(item);
 
             return true;
+        }
+
+        private void AdjustTimeSpanbyItem(IRecorderItem item, TimeSpan decreaseTime)
+        {
+            if (IsLastItem(item))
+                return;
+
+            int startIndex = this.Items.IndexOf(item);
+            //Adjust a timestamp in remained items
+            for (int i = startIndex + 1; i < this.Items.Count; i++)
+            {
+                AbsRecorderItem recorderItem = this.Items[i] as AbsRecorderItem;
+                recorderItem.AdjustTimeSpan(decreaseTime);
+            }
         }
 
         private bool IsLastItem(IRecorderItem item)

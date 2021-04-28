@@ -106,7 +106,7 @@
                     <LayoutAnchorablePane DockWidth="300">
                         <ad:LayoutAnchorable x:Name="dockSequenceDiagram"
                                                 Title="Auto Mouse &amp; Keyboard Group" 
-                                                CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False" CanMove="False">
+                                                CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False" CanMove="False" >
                             <Border>
                                 <localgroup:AMKGroupControl x:Name="MainGroup">
                                 </localgroup:AMKGroupControl>

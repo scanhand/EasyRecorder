@@ -190,7 +190,6 @@ namespace Aga.Diagrams.FlowChart
             return item;
         }
 
-
         private Aga.Diagrams.Controls.IPort FindPort(FlowNode node, PortKinds portKind)
         {
             var inode = _view.Items.FirstOrDefault(p => p.ModelElement == node) as Aga.Diagrams.Controls.INode;
@@ -282,9 +281,19 @@ namespace Aga.Diagrams.FlowChart
         public bool CanExecuteCommand(System.Windows.Input.ICommand command, object parameter)
         {
             if (command == ApplicationCommands.Delete)
+            {
+                var nodes = _view.Selection.Select(p => p.ModelElement as FlowNode).Where(p => p != null && p.Kind == NodeKinds.Start);
+                if (nodes != null && nodes.Count() > 0)
+                {
+                    MessageBox.Show("Can not delete a Start Node", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
                 return true;
+            }
             else
+            {
                 return false;
+            }
         }
 
         #endregion

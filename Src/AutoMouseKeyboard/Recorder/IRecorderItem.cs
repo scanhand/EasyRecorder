@@ -30,6 +30,9 @@ namespace AMK.Recorder
 
         DateTime Time { get; set; }
 
+        [JsonIgnore]
+        double TotalTimeDurationSec { get; }
+
         double ResidualTimeSec { get; set; }
 
         string Memo { get; set; }

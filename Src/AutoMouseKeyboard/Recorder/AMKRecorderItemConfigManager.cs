@@ -1,5 +1,6 @@
 ﻿using AMK.Global;
 using AMK.Recorder;
+using AMK.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace AMK.UI
+namespace AMK.Recorder
 {
-    public static class AMKRecorderItemConfigManager
+    public class AMKRecorderItemConfigManager : SingletonBase<AMKRecorderItemConfigManager>
     {
-        public static Action<IRecorderItem, IRecorderItem> OnUpdateItem = null;
+        public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 
-        public static void ShowConfigWindow(IRecorderItem item)
+        public void ShowConfigWindow(IRecorderItem item)
         {
             IRecorderItemConfig config = CreateRecorderItemConfig(item);
-            config.RecorderItem = item;
+            config.RecorderItem = item.Copy();
             Window window = config as Window;
             window.Owner = GM.Instance.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -24,12 +25,16 @@ namespace AMK.UI
                 return;
 
             IRecorderItem updatedItem = config.RecorderItem.Copy();
-            OnUpdateItem(item, updatedItem);
+            OnReplaceItem(item, updatedItem);
         }
 
-        private static IRecorderItemConfig CreateRecorderItemConfig(IRecorderItem item)
+        private IRecorderItemConfig CreateRecorderItemConfig(IRecorderItem item)
         {
-            IRecorderItemConfig recorderItemConfig = new WaitingTimeRecorderItemConfig();
+            IRecorderItemConfig recorderItemConfig = null;
+            switch(item.Recorder)
+            {
+                case RecorderType.WaitTime: recorderItemConfig = new WaitingTimeRecorderItemConfig(); break;
+            }
             return recorderItemConfig;
         }
     }

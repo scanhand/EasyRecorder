@@ -69,7 +69,11 @@ namespace AMK
 
         #endregion
 
+        #region Theme
+
         public Theme DockTheme { get; set; } = new MetroTheme();
+
+        #endregion
 
         public MainWindow()
         {
@@ -223,11 +227,6 @@ namespace AMK
                         this.Recorder.State = AMKState.Stop;
                     }
                 });
-            };
-
-            AMKRecorderItemConfigManager.OnUpdateItem += (oldItem, newItem) =>
-            {
-                this.Recorder.ReplaceItem(oldItem, newItem);
             };
 
             //Test
@@ -495,8 +494,7 @@ namespace AMK
             if (item == null)
                 return;
 
-            AMKRecorderItemConfigManager.ShowConfigWindow(item);
+            AMKRecorderItemConfigManager.Instance.ShowConfigWindow(item);
         }
-
     }
 }

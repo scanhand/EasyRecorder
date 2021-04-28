@@ -12,18 +12,26 @@ namespace AMK.Recorder
     {
         public double WaitingTimeSec {get; set;} = 0;
 
-        public override string Description
+        public override double TotalTimeDurationSec
         {
             get
             {
                 double totalWaitingTimeSec = this.WaitingTimeSec;
                 IRecorderItem prevItem = this;
-                foreach(var item in this.ChildItems)
+                foreach (var item in this.ChildItems)
                 {
                     totalWaitingTimeSec += (item.Time - prevItem.Time).TotalSeconds;
                     prevItem = item;
                 }
-                return string.Format("Time: {0:F2} sec", totalWaitingTimeSec);
+                return totalWaitingTimeSec;
+            }
+        }
+
+        public override string Description
+        {
+            get
+            {
+                return string.Format("Time: {0:F2} sec", this.TotalTimeDurationSec);
             }
         }
 

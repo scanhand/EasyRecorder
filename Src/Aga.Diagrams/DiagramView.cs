@@ -9,6 +9,7 @@ using Aga.Diagrams.Controls;
 using Aga.Diagrams.Tools;
 using System.Windows.Media;
 using System.Windows.Input;
+using Aga.Diagrams.FlowChart;
 
 namespace Aga.Diagrams
 {
@@ -284,9 +285,14 @@ namespace Aga.Diagrams
         private void ExecuteCommand(object sender, ExecutedRoutedEventArgs e)
         {
             if (Controller != null)
+            {
                 Controller.ExecuteCommand(e.Command, e.Parameter);
+            }
+
             if (e.Command == ApplicationCommands.Delete)
+            {
                 Selection.Clear();
+            }
         }
 
         private void CanExecuteCommand(object sender, CanExecuteRoutedEventArgs e)
