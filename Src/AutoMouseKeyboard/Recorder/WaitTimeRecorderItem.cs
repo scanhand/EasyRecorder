@@ -16,7 +16,14 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("Time: {0:F2} sec", this.WaitingTimeSec);
+                double totalWaitingTimeSec = this.WaitingTimeSec;
+                IRecorderItem prevItem = this;
+                foreach(var item in this.ChildItems)
+                {
+                    totalWaitingTimeSec += (item.Time - prevItem.Time).TotalSeconds;
+                    prevItem = item;
+                }
+                return string.Format("Time: {0:F2} sec", totalWaitingTimeSec);
             }
         }
 

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AMK.UI"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="WaitingTime Recorder Item Config" Height="450" Width="400">
+        Title="WaitTime Configuration" Height="200" Width="400">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -18,20 +18,24 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
+        <!-- Waiting Time-->
+        <Label Content="Waiting Time:" Grid.Row="1" VerticalAlignment="Center"/>
+        <TextBox x:Name="textBoxWaitingTime" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" />
+        <Label Content="seconds" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center"/>
+
+        <!-- Ok & Cancel Button -->
+        <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
             <StackPanel Orientation="Horizontal">
-                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-start-64.png" ></Image>
+                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-ok-64.png" ></Image>
                 <Label VerticalAlignment="Center">OK</Label>
             </StackPanel>
         </Button>
-
-        <Button Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
+        <Button x:Name="buttonCancel" Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
             <StackPanel Orientation="Horizontal">
-                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-stop-64.png" ></Image>
+                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-cancel-64.png" ></Image>
                 <Label VerticalAlignment="Center">Cancel</Label>
             </StackPanel>
         </Button>

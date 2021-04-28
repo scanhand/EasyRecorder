@@ -26,6 +26,19 @@ namespace AMK.UI
         public WaitingTimeRecorderItemConfig()
         {
             InitializeComponent();
+
+            this.KeyDown += (e, k) =>
+            {
+                if(k.Key == Key.Enter)
+                    buttonOK.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            };
+
+            this.Loaded += WaitingTimeRecorderItemConfig_Loaded;
+        }
+
+        private void WaitingTimeRecorderItemConfig_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.textBoxWaitingTime.Focus();
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
