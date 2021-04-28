@@ -145,10 +145,12 @@
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
     <Compile Include="UI\AMKCommander.cs" />
+    <Compile Include="UI\AMKRecorderItemConfigManager.cs" />
     <Compile Include="UI\AMKStatusBar.xaml.cs">
       <DependentUpon>AMKStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\AMKStatusBarItem.cs" />
+    <Compile Include="UI\IRecorderItemConfig.cs" />
     <Compile Include="UI\Preference.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>
@@ -156,6 +158,9 @@
     <Compile Include="UI\ToastMessageItem.cs" />
     <Compile Include="UI\ToastWindow.xaml.cs">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\WaitingTimeRecorderItemConfig.xaml.cs">
+      <DependentUpon>WaitingTimeRecorderItemConfig.xaml</DependentUpon>
     </Compile>
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
@@ -204,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\ToastWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\WaitingTimeRecorderItemConfig.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

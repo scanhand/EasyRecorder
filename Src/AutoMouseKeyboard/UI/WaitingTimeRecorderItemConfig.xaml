@@ -1,0 +1,40 @@
+﻿<mah:MetroWindow x:Class="AMK.UI.WaitingTimeRecorderItemConfig"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AMK.UI"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        mc:Ignorable="d"
+        Title="WaitingTime Recorder Item Config" Height="450" Width="400">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-start-64.png" ></Image>
+                <Label VerticalAlignment="Center">OK</Label>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-stop-64.png" ></Image>
+                <Label VerticalAlignment="Center">Cancel</Label>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</mah:MetroWindow>

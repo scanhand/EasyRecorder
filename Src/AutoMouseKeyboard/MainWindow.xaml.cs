@@ -105,6 +105,7 @@ namespace AMK
 
             //RecorderView
             this.RecorderView.Recorder = this.Recorder;
+            this.RecorderListView.MouseDoubleClick += RecorderListView_MouseDoubleClick;
            
             //Status
             this.Recorder.OnChangedState += (s) =>
@@ -222,6 +223,11 @@ namespace AMK
                         this.Recorder.State = AMKState.Stop;
                     }
                 });
+            };
+
+            AMKRecorderItemConfigManager.OnUpdateItem += (oldItem, newItem) =>
+            {
+                this.Recorder.ReplaceItem(oldItem, newItem);
             };
 
             //Test
@@ -465,6 +471,14 @@ namespace AMK
             aboutWindow.ShowDialog();
         }
 
+        private void MenuItem_ResetToStart_Click(object sender, RoutedEventArgs e)
+        {
+            if (!AUtil.IsStopPause(this.Recorder.State))
+                return;
+
+            this.Recorder.ResetToStart();
+        }
+
         private void UpdateMousePosition(EventHook.MouseEventArgs e)
         {
             this.InvokeIfRequired(() =>
@@ -472,5 +486,15 @@ namespace AMK
                 this.MainStatusBar.lblMousePosition.Text = string.Format("X: {0,4:D}, Y: {1,4:D}", e.Point.x, e.Point.y);
             });
         }
+
+        private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            IRecorderItem item = this.RecorderListView.SelectedItem as IRecorderItem;
+            if (item == null)
+                return;
+
+            AMKRecorderItemConfigManager.ShowConfigWindow(item);
+        }
+
     }
 }
