@@ -123,5 +123,14 @@ namespace AMK.Recorder
 
             return this.ChildItems.Last().Time;
         }
+
+        public void AdjustTimeSpan(TimeSpan span)
+        {
+            this.Time += span;
+            for(int i=0; i<this.ChildItems.Count; i++)
+            {
+                this.ChildItems[i].Time += span;
+            }
+        }
     }
 }

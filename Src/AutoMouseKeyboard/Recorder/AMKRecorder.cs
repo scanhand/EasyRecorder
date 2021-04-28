@@ -273,11 +273,41 @@ namespace AMK.Recorder
             if (item == null)
                 return false;
             
+            //check is this last item
+            if(!IsFirstItem(item))
+            {
+                int removedItemIndex = this.Items.IndexOf(item);
+                IRecorderItem prevItem = this.Items[removedItemIndex -1];
+                TimeSpan decreaseTime = GetTimeSpan(item as AbsRecorderItem, prevItem as AbsRecorderItem);
+                
+                //Adjust a timestamp in remained items
+                for (int i = removedItemIndex + 1; i < this.Items.Count; i++)
+                {
+                    AbsRecorderItem recorderItem = this.Items[i] as AbsRecorderItem;
+                    recorderItem.AdjustTimeSpan(decreaseTime);
+                }
+            }
+
             this.Items.Remove(item);
             if (OnDeleteItem != null)
                 OnDeleteItem(item);
 
             return true;
+        }
+
+        private bool IsLastItem(IRecorderItem item)
+        {
+            return this.Items.Last().Equals(item);
+        }
+
+        private bool IsFirstItem(IRecorderItem item)
+        {
+            return this.Items.First().Equals(item);
+        }
+
+        private TimeSpan GetTimeSpan(AbsRecorderItem item, AbsRecorderItem prevItem)
+        {
+            return prevItem.GetVeryLastTime() - item.GetVeryLastTime();
         }
 
         public bool DeleteItem(List<IRecorderItem> items)
