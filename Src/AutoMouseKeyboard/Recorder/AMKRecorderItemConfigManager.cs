@@ -37,6 +37,8 @@ namespace AMK.Recorder
                 case RecorderType.MouseClick: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
                 case RecorderType.MouseUp: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
                 case RecorderType.MouseDown: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
+                case RecorderType.KeyDown: recorderItemConfig = new KeyUpDownRecorderItemConfig(); break;
+                case RecorderType.KeyUp: recorderItemConfig = new KeyUpDownRecorderItemConfig(); break;
             }
             return recorderItemConfig;
         }

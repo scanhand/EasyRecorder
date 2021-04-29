@@ -8,17 +8,17 @@ using WindowsInput.Native;
 
 namespace AMK.Recorder
 {
-    public class KeyDownRecorderItem : AbsRecorderItem
+    public class KeyDownRecorderItem : AbsRecorderItem, IKeyRecorderItem
     {
-        public int VkCode;
-        public string Keyname;
-        public string UnicodeCharacter;
+        public int VkCode { get; set; }
+        public string Keyname { get; set; }
+        public string UnicodeCharacter { get; set; }
 
         public override string Description
         {
             get
             {
-                return string.Format($"{this.Keyname}");
+                return string.Format("[{0}]", this.Keyname);
             }
         }
 

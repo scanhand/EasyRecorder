@@ -134,6 +134,7 @@
     <Compile Include="Recorder\AMKApplicationRecorder.cs" />
     <Compile Include="Recorder\AMKPlayer.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
+    <Compile Include="Recorder\IKeyRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\AMKKeyRecorder.cs" />
     <Compile Include="Recorder\KeyUpRecorderItem.cs" />
@@ -156,6 +157,9 @@
     </Compile>
     <Compile Include="UI\AMKStatusBarItem.cs" />
     <Compile Include="UI\IRecorderItemConfig.cs" />
+    <Compile Include="UI\KeyUpDownRecorderItemConfig.xaml.cs">
+      <DependentUpon>KeyUpDownRecorderItemConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\Preference.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>
@@ -211,6 +215,10 @@
     <Page Include="UI\AMKStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\KeyUpDownRecorderItemConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\RecorderItemView.xaml">
       <SubType>Designer</SubType>
