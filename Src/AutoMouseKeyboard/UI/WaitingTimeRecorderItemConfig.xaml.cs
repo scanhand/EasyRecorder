@@ -38,6 +38,8 @@ namespace AMK.UI
 
         private void WaitingTimeRecorderItemConfig_Loaded(object sender, RoutedEventArgs e)
         {
+            this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
+
             WaitTimeRecorderItem item =  this.RecorderItem as WaitTimeRecorderItem;
 
             this.textBoxWaitingTime.Text = string.Format("{0:F2}", item.TotalTimeDurationSec);

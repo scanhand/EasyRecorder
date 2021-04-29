@@ -34,6 +34,9 @@ namespace AMK.Recorder
             switch(item.Recorder)
             {
                 case RecorderType.WaitTime: recorderItemConfig = new WaitingTimeRecorderItemConfig(); break;
+                case RecorderType.MouseClick: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
+                case RecorderType.MouseUp: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
+                case RecorderType.MouseDown: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
             }
             return recorderItemConfig;
         }

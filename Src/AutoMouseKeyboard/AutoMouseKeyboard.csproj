@@ -164,6 +164,9 @@
     <Compile Include="UI\ToastWindow.xaml.cs">
       <DependentUpon>ToastWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MouseClickRecorderItemConfig.xaml.cs">
+      <DependentUpon>MouseClickRecorderItemConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\WaitingTimeRecorderItemConfig.xaml.cs">
       <DependentUpon>WaitingTimeRecorderItemConfig.xaml</DependentUpon>
     </Compile>
@@ -216,6 +219,10 @@
     <Page Include="UI\ToastWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MouseClickRecorderItemConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\WaitingTimeRecorderItemConfig.xaml">
       <SubType>Designer</SubType>

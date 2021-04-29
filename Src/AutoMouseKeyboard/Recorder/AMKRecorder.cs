@@ -302,7 +302,7 @@ namespace AMK.Recorder
 
         private void AdjustTimeSpanbyItem(IRecorderItem item, TimeSpan decreaseTime)
         {
-            if (IsLastItem(item))
+            if (IsLastItem(item) || decreaseTime.TotalSeconds == 0)
                 return;
 
             int startIndex = this.Items.IndexOf(item);

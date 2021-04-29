@@ -29,7 +29,10 @@ namespace AMK.Recorder
         {
             //Waiting
             player.WaitingPlaying(this);
+
             //Action
+            Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
+            GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             if (this.LR == LR.Left)
                 GM.Instance.InputSimulator.Mouse.LeftButtonDown();
             else
