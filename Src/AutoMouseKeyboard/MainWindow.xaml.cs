@@ -233,6 +233,8 @@ namespace AMK
             this.Recorder.AddItem(new MouseWheelRecorderItem());
             this.Recorder.AddItem(new MouseClickRecorderItem());
             this.Recorder.AddItem(new MouseMoveRecorderItem());
+            this.Recorder.AddItem(new MouseDownRecorderItem());
+            this.Recorder.AddItem(new MouseUpRecorderItem());
             this.Recorder.AddItem(new MouseSmartClickRecorderItem());
             this.Recorder.AddItem(new KeyDownRecorderItem());
             this.Recorder.AddItem(new KeyUpRecorderItem());

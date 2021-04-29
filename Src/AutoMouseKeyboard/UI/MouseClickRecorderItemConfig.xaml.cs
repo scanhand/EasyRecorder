@@ -1,4 +1,5 @@
-﻿using AMK.Recorder;
+﻿using AMK.Global;
+using AMK.Recorder;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,32 @@ namespace AMK.UI
     /// </summary>
     public partial class MouseClickRecorderItemConfig : MetroWindow, IRecorderItemConfig
     {
+        #region inner
+
+        class ButtonItem
+        {
+            public LR LR { get; set; }
+            public ButtonItem(LR lr)
+            {
+                this.LR = lr;
+            }
+
+            public override string ToString()
+            {
+                return this.LR.ToString();
+            }
+        }
+
+        #endregion
+
         public IRecorderItem RecorderItem { get; set; } 
 
         public MouseClickRecorderItemConfig()
         {
             InitializeComponent();
+            
+            this.comboLRButton.Items.Add(new ButtonItem(LR.Left));
+            this.comboLRButton.Items.Add(new ButtonItem(LR.Right));
 
             this.KeyDown += (e, k) =>
             {
@@ -40,10 +62,19 @@ namespace AMK.UI
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
 
+            SetMouseButtonCombobox(this.RecorderItem.LR);
             this.textBoxX.Text = string.Format("{0}", (int)this.RecorderItem.Point.X);
             this.textBoxY.Text = string.Format("{0}", (int)this.RecorderItem.Point.Y);
             this.textBoxX.Focus();
             this.textBoxX.SelectAll();
+        }
+
+        private void SetMouseButtonCombobox(LR lr)
+        {
+            if (lr == LR.None)
+                return;
+
+            this.comboLRButton.SelectedItem = this.comboLRButton.Items.OfType<ButtonItem>().First(f => f.LR == lr);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
@@ -61,6 +92,7 @@ namespace AMK.UI
                 return;
             }
             this.RecorderItem.Point = new Point(inputX, inputY);
+            this.RecorderItem.LR = (this.comboLRButton.SelectedItem as ButtonItem).LR;
 
             this.DialogResult = true;
         }
