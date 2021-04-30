@@ -61,7 +61,7 @@ namespace AMK
         {
             get
             {
-                return this.RecorderView.RecoderListView;
+                return this.RecorderView.RecorderListView;
             }
         }
 
@@ -109,7 +109,6 @@ namespace AMK
 
             //RecorderView
             this.RecorderView.Recorder = this.Recorder;
-            this.RecorderListView.MouseDoubleClick += RecorderListView_MouseDoubleClick;
            
             //Status
             this.Recorder.OnChangedState += (s) =>
@@ -135,6 +134,19 @@ namespace AMK
                         this.RecorderListView.Items.Add(item);
                         this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
                     });
+                });
+            };
+
+            this.Recorder.OnInsertItem += (prevItem, newItem) =>
+            {
+                this.InvokeIfRequired(() =>
+                {
+                    int startIndex = -1;
+                    if (prevItem != null)
+                        startIndex = this.RecorderListView.Items.IndexOf(prevItem);
+                    
+                    this.RecorderListView.Items.Insert(startIndex+1, newItem);
+                    this.RecorderListView.ScrollIntoView(newItem);
                 });
             };
 
@@ -490,13 +502,5 @@ namespace AMK
             });
         }
 
-        private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            IRecorderItem item = this.RecorderListView.SelectedItem as IRecorderItem;
-            if (item == null)
-                return;
-
-            AMKRecorderItemConfigManager.Instance.ShowConfigWindow(item);
-        }
     }
 }

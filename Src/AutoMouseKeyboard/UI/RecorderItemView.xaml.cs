@@ -24,20 +24,30 @@ namespace AMK.UI
     {
         public AMKRecorder Recorder { get; set; } = null;
 
+        public AMKRecorderItemConfigManager RecorderItemConfigManager
+        {
+            get
+            {
+                return this.Recorder.RecorderItemConfigManager;
+            }
+        }
+
         public RecorderItemView()
         {
             InitializeComponent();
+
+            this.MouseDoubleClick += RecorderListView_MouseDoubleClick;
         }
 
         public void DeleteSelectedItems()
         {
-            if (this.RecoderListView.SelectedItems == null || this.RecoderListView.SelectedItems.Count <= 0)
+            if (this.RecorderListView.SelectedItems == null || this.RecorderListView.SelectedItems.Count <= 0)
                 return;
 
             this.Recorder.Player.ResetLastItem();
 
             List<IRecorderItem> deleteItems = new List<IRecorderItem>();
-            foreach (var i in this.RecoderListView.SelectedItems)
+            foreach (var i in this.RecorderListView.SelectedItems)
             {
                 IRecorderItem item = i as IRecorderItem;
                 deleteItems.Add(item);
@@ -47,11 +57,11 @@ namespace AMK.UI
 
         private void MenuItem_PlaySelectedItems_Click(object sender, RoutedEventArgs e)
         {
-            if (this.RecoderListView.SelectedItems == null || this.RecoderListView.SelectedItems.Count <= 0)
+            if (this.RecorderListView.SelectedItems == null || this.RecorderListView.SelectedItems.Count <= 0)
                 return;
 
             this.Recorder.Player.ResetLastItem();
-            foreach(var i in this.RecoderListView.SelectedItems)
+            foreach(var i in this.RecorderListView.SelectedItems)
             {
                 IRecorderItem item = i as IRecorderItem;
                 item.Play(this.Recorder.Player);
@@ -63,6 +73,25 @@ namespace AMK.UI
         private void MenuItem_DeleteSelectedItems_Click(object sender, RoutedEventArgs e)
         {
             DeleteSelectedItems();
+        }
+
+        private void MenuItem_ModifySelectedItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+        }
+
+        private void MenuItem_WaitingNewItems_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem());
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
+        private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
         }
     }
 }

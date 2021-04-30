@@ -59,7 +59,7 @@ namespace AMK.UI
                 return;
             }
 
-            if(totalWaitnigTime <= 0)
+            if(totalWaitnigTime < 0)
             {
                 MessageBox.Show("The Waiting time must be more than 0 seconds.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;

@@ -75,9 +75,13 @@ namespace AMK.Recorder
 
         public AMKApplicationRecorder ApplicationRecorder = null;
 
+        public AMKRecorderItemConfigManager RecorderItemConfigManager = null;
+
         public AMKPlayer Player = null;
 
         public Action<IRecorderItem> OnAddItem = null;
+
+        public Action<IRecorderItem, IRecorderItem> OnInsertItem = null;
 
         public Action<IRecorderItem> OnUpdateItem = null;
 
@@ -124,8 +128,9 @@ namespace AMK.Recorder
             this.WaitingRecorder = new AMKWaitingRecorder(this);
             this.ApplicationRecorder = new AMKApplicationRecorder(this);
             this.Player = new AMKPlayer(this);
+            this.RecorderItemConfigManager = new AMKRecorderItemConfigManager(this);
 
-            AMKRecorderItemConfigManager.Instance.OnReplaceItem += (oldItem, newItem) =>
+            this.RecorderItemConfigManager.OnReplaceItem += (oldItem, newItem) =>
             {
                 double totalTimeSpanSec = newItem.TotalTimeDurationSec - oldItem.TotalTimeDurationSec;
                 ReplaceItem(oldItem, newItem);
@@ -312,6 +317,25 @@ namespace AMK.Recorder
                 AbsRecorderItem recorderItem = this.Items[i] as AbsRecorderItem;
                 recorderItem.AdjustTimeSpan(decreaseTime);
             }
+        }
+
+        public bool InsertItem(IRecorderItem prevItem, IRecorderItem newItem)
+        {
+            int startIndex = -1;
+            if(prevItem != null)
+                startIndex = this.Items.IndexOf(prevItem);
+
+            this.Items.Insert(startIndex + 1, newItem);
+            if (OnInsertItem != null)
+                OnInsertItem(prevItem, newItem);
+
+            TimeSpan increaseTimeSec = TimeSpan.FromSeconds(newItem.TotalTimeDurationSec);
+            for (int i = startIndex + 1; i < this.Items.Count; i++)
+            {
+                AbsRecorderItem recorderItem = this.Items[i] as AbsRecorderItem;
+                recorderItem.AdjustTimeSpan(increaseTimeSec);
+            }
+            return true;
         }
 
         private bool IsLastItem(IRecorderItem item)

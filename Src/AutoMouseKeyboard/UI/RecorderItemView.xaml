@@ -22,11 +22,19 @@
     </UserControl.Resources>
     
     <Grid>
-        <ListView Name="RecoderListView" ItemContainerStyle="{StaticResource RecorderListStyle}">
+        <ListView Name="RecorderListView" ItemContainerStyle="{StaticResource RecorderListStyle}">
             <ListView.ContextMenu>
                 <ContextMenu FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
+                    <MenuItem Header="Add Items">
+                        <MenuItem Header="Mouse Down"></MenuItem>
+                        <MenuItem Header="Mouse Up"></MenuItem>
+                        <MenuItem Header="Key Up"></MenuItem>
+                        <MenuItem Header="Key Down"></MenuItem>
+                        <MenuItem Header="Waiting Time" Click="MenuItem_WaitingNewItems_Click"></MenuItem>
+                    </MenuItem>
                     <MenuItem Header="Play Items" Click="MenuItem_PlaySelectedItems_Click"/>
                     <MenuItem Header="Delete Items" Click="MenuItem_DeleteSelectedItems_Click" />
+                    <MenuItem Header="Modify Item..." Click="MenuItem_ModifySelectedItem_Click" />
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>

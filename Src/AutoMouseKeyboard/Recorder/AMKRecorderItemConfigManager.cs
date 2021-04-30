@@ -10,11 +10,38 @@ using System.Windows;
 
 namespace AMK.Recorder
 {
-    public class AMKRecorderItemConfigManager : SingletonBase<AMKRecorderItemConfigManager>
+    public class AMKRecorderItemConfigManager
     {
+        public AMKRecorder AMKRecorder { get; set; } = null;
+
         public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 
-        public void ShowConfigWindow(IRecorderItem item)
+        public AMKRecorderItemConfigManager(AMKRecorder recorder)
+        {
+            this.AMKRecorder = recorder;
+        }
+
+        public bool ShowModifyConfigWindow(IRecorderItem prevItem)
+        {
+            if (prevItem == null)
+                return false;
+
+            IRecorderItemConfig config = CreateRecorderItemConfig(prevItem);
+            config.RecorderItem = prevItem.Copy();
+            Window window = config as Window;
+            window.Owner = GM.Instance.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            if (window.ShowDialog() == false)
+                return false;
+
+            IRecorderItem modifiedItem = config.RecorderItem.Copy();
+            if(OnReplaceItem != null)
+                OnReplaceItem(prevItem, modifiedItem);
+
+            return true;
+        }
+
+        public IRecorderItem ShowNewConfigWindow(IRecorderItem item)
         {
             IRecorderItemConfig config = CreateRecorderItemConfig(item);
             config.RecorderItem = item.Copy();
@@ -22,10 +49,9 @@ namespace AMK.Recorder
             window.Owner = GM.Instance.MainWindow;
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             if (window.ShowDialog() == false)
-                return;
+                return null;
 
-            IRecorderItem updatedItem = config.RecorderItem.Copy();
-            OnReplaceItem(item, updatedItem);
+            return config.RecorderItem.Copy();
         }
 
         private IRecorderItemConfig CreateRecorderItemConfig(IRecorderItem item)
