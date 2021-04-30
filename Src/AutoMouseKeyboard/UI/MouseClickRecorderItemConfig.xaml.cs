@@ -72,7 +72,7 @@ namespace AMK.UI
         private void SetMouseButtonCombobox(LR lr)
         {
             if (lr == LR.None)
-                return;
+                lr = LR.Left;  //default
 
             this.comboLRButton.SelectedItem = this.comboLRButton.Items.OfType<ButtonItem>().First(f => f.LR == lr);
         }

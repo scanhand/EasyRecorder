@@ -55,7 +55,7 @@ namespace AMK.UI
             this.Recorder.DeleteItem(deleteItems);
         }
 
-        private void MenuItem_PlaySelectedItems_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_PlayItems_Click(object sender, RoutedEventArgs e)
         {
             if (this.RecorderListView.SelectedItems == null || this.RecorderListView.SelectedItems.Count <= 0)
                 return;
@@ -70,19 +70,55 @@ namespace AMK.UI
             }
         }
 
-        private void MenuItem_DeleteSelectedItems_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_DeleteItems_Click(object sender, RoutedEventArgs e)
         {
             DeleteSelectedItems();
         }
 
-        private void MenuItem_ModifySelectedItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_ModifyItem_Click(object sender, RoutedEventArgs e)
         {
             this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
         }
 
-        private void MenuItem_WaitingNewItems_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_NewWaitingItem_Click(object sender, RoutedEventArgs e)
         {
             IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem());
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
+        private void MenuItem_NewMouseDownItem_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseDownRecorderItem());
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
+        private void MenuItem_NewMouseUpItem_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseUpRecorderItem());
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
+        private void MenuItem_NewKeyUpItem_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpRecorderItem());
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
+        private void MenuItem_NewKeyDownItem_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyDownRecorderItem());
             if (newItem == null)
                 return;
 
