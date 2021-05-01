@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Aga.Diagrams
 {
@@ -9,9 +6,9 @@ namespace Aga.Diagrams
     public enum DragThumbKinds
     {
         None = 0,
-        Top = 1, 
-        Left = 2, 
-        Bottom = 4, 
+        Top = 1,
+        Left = 2,
+        Bottom = 4,
         Right = 8,
         Center = 16,
         TopLeft = Top | Left,

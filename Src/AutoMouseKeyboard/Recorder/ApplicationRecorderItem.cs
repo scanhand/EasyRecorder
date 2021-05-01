@@ -1,10 +1,5 @@
-﻿using EventHook;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AMK.Global;
+﻿using AMK.Global;
+using EventHook;
 
 namespace AMK.Recorder
 {
@@ -13,7 +8,7 @@ namespace AMK.Recorder
         public WindowData ApplicationData { get; set; } = new WindowData();
         public ApplicationEvents Event { get; set; }
 
-        public override string Description 
+        public override string Description
         {
             get
             {

@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Aga.Diagrams
 {
-    public class DiagramScrollView: ScrollViewer
+    public class DiagramScrollView : ScrollViewer
     {
         double _dx = 0;
         double _dy = 0;
@@ -17,7 +13,7 @@ namespace Aga.Diagrams
 
         public double Sensitivity { get; set; }
         public double ScrollStep { get; set; }
-        public double Delay 
+        public double Delay
         {
             get { return _timer.Interval.TotalMilliseconds; }
             set { _timer.Interval = TimeSpan.FromMilliseconds(value); }

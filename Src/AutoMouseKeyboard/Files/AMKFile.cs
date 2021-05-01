@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AMK.Files
 {
@@ -28,8 +24,8 @@ namespace AMK.Files
             {
                 header = this.FileHeader.ToJsonString();
             }
-            catch(Exception ex) 
-            { 
+            catch (Exception ex)
+            {
                 ALog.Debug($"AMKFile SaveFile Error - Header! ({ex.Message})");
                 return false;
             }
@@ -87,7 +83,7 @@ namespace AMK.Files
                 byte[] fileKeyword = new byte[AMKFileHeader.AMKFileKeyword.Length];
 
                 ret = fs.Read(fileKeyword, 0, fileKeyword.Length);
-                if(ret <= 0 || ret != fileKeyword.Length || Encoding.ASCII.GetString(fileKeyword) != AMKFileHeader.AMKFileKeyword)
+                if (ret <= 0 || ret != fileKeyword.Length || Encoding.ASCII.GetString(fileKeyword) != AMKFileHeader.AMKFileKeyword)
                 {
                     ALog.Debug($"AMKFile LoadFile Error - File Keyword");
                     return false;
@@ -96,18 +92,18 @@ namespace AMK.Files
                 //Header
                 Array.Clear(this.FileHeaderRaw, 0, this.FileHeaderRaw.Length);
                 ret = fs.Read(this.FileHeaderRaw, 0, this.FileHeaderRaw.Length);
-                if(ret <= 0 || ret != this.FileHeaderRaw.Length)
+                if (ret <= 0 || ret != this.FileHeaderRaw.Length)
                 {
                     ALog.Debug($"AMKFile LoadFile Error - Header");
                     return false;
                 }
-                
+
                 try
                 {
                     string strHeader = Encoding.UTF8.GetString(this.FileHeaderRaw);
                     this.FileHeader = AMKFileHeader.FromJsonString(strHeader);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     ALog.Debug($"AMKFile LoadFile Error - FileHeader! ({ex.Message})");
                     return false;
@@ -115,7 +111,7 @@ namespace AMK.Files
 
                 //Body
                 long remainLength = fs.Length - fs.Position;
-                if(remainLength <= 0)
+                if (remainLength <= 0)
                 {
                     ALog.Debug($"AMKFile LoadFile Error - Body");
                     return false;

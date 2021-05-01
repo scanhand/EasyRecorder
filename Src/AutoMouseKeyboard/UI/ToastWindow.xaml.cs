@@ -1,20 +1,8 @@
 ﻿using AMK.Global;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Threading;
 
 namespace AMK.UI
 {
@@ -68,17 +56,16 @@ namespace AMK.UI
 
         private string GetImageSource(AMKState state)
         {
-            switch(state)
+            switch (state)
             {
                 default:
                 case AMKState.Recording: return "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
             }
-            return string.Empty;
         }
 
         private string GetBGColor(AMKState state)
         {
-            switch(state)
+            switch (state)
             {
                 default:
                 case AMKState.Recording: return Colors.LightGray.ToString();

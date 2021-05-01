@@ -1,12 +1,7 @@
-﻿using EventHook;
+﻿using AMK.Global;
+using EventHook;
 using EventHook.Hooks;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -63,7 +58,7 @@ namespace AMK.Recorder
         {
             MouseMoveRecorderItem mouseItem = item as MouseMoveRecorderItem;
             Trace.Assert(mouseItem != null, "IsIgnoreMouseMove::mouseItem is null");
-            if(this.CurrentRecorder?.Recorder == RecorderType.MouseWheel ||
+            if (this.CurrentRecorder?.Recorder == RecorderType.MouseWheel ||
                 this.CurrentRecorder?.Recorder == RecorderType.MouseMove ||
                  this.CurrentRecorder?.Recorder == RecorderType.MouseClick)
             {

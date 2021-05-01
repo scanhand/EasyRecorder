@@ -1,12 +1,8 @@
-﻿using System;
+﻿using Aga.Diagrams.Adorners;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Media;
-using Aga.Diagrams.Adorners;
 
 namespace Aga.Diagrams.Controls
 {
@@ -22,7 +18,7 @@ namespace Aga.Diagrams.Controls
 
         #region Content Property
 
-        public object Content 
+        public object Content
         {
             get { return (bool)GetValue(ContentProperty); }
             set { SetValue(ContentProperty, value); }

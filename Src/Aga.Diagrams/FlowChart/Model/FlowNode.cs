@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace Aga.Diagrams.FlowChart
@@ -15,8 +12,8 @@ namespace Aga.Diagrams.FlowChart
         public int Column
         {
             get { return _column; }
-            set 
-            { 
+            set
+            {
                 _column = value;
                 OnPropertyChanged("Column");
             }
@@ -26,8 +23,8 @@ namespace Aga.Diagrams.FlowChart
         public int Row
         {
             get { return _row; }
-            set 
-            { 
+            set
+            {
                 _row = value;
                 OnPropertyChanged("Row");
             }
@@ -51,7 +48,7 @@ namespace Aga.Diagrams.FlowChart
 
         public IEnumerable<PortKinds> GetPorts()
         {
-            switch(Kind)
+            switch (Kind)
             {
                 case NodeKinds.Start:
                     yield return PortKinds.Bottom;

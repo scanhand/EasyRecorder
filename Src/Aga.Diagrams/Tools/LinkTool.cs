@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using System.Windows;
+﻿using Aga.Diagrams.Adorners;
 using Aga.Diagrams.Controls;
-using System.Windows.Documents;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using Aga.Diagrams.Adorners;
+using System.Windows.Input;
 
 namespace Aga.Diagrams.Tools
 {
-    public class LinkTool: ILinkTool
+    public class LinkTool : ILinkTool
     {
         protected DiagramView View { get; private set; }
         protected IDiagramController Controller { get { return View.Controller; } }

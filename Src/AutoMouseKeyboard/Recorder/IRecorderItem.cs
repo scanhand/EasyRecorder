@@ -1,12 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using AMK.Global;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -15,10 +12,10 @@ namespace AMK.Recorder
         string Id { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        RecorderItemState State  { get; set; }
+        RecorderItemState State { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        RecorderType Recorder {get; set;}
+        RecorderType Recorder { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         Dir Dir { get; set; }

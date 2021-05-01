@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Controls;
 
 namespace Aga.Diagrams.Controls
 {
@@ -130,7 +128,7 @@ namespace Aga.Diagrams.Controls
         public abstract bool IsNear(Point point);
 
 
-        protected override void  OnPreviewMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
+        protected override void OnPreviewMouseLeftButtonDown(System.Windows.Input.MouseButtonEventArgs e)
         {
             if (CanCreateLink)
             {

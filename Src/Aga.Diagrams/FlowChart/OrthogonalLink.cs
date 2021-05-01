@@ -1,11 +1,7 @@
-﻿using System;
+﻿using Aga.Diagrams.Controls;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
-using Aga.Diagrams.Controls;
-using Aga.Diagrams;
-using System.Windows.Controls;
 
 namespace Aga.Diagrams.FlowChart
 {
@@ -51,7 +47,7 @@ namespace Aga.Diagrams.FlowChart
             if (p0 == p1)
                 return points;
 
-            
+
             var p2 = new Point(GetNearestCross(p0.X, p1.X), GetNearestCross(p0.Y, p1.Y));
             var p3 = new Point(GetNearestCross(p1.X, p0.X), GetNearestCross(p1.Y, p0.Y));
             if (p2 == p3)

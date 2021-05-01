@@ -1,10 +1,6 @@
-﻿using EventHook;
+﻿using AMK.Global;
+using EventHook;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -101,7 +97,7 @@ namespace AMK.Recorder
                 if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyDown)
                     return;
 
-                if(IsCurrentKeyPress())
+                if (IsCurrentKeyPress())
                 {
                     newRecorder = new KeyPressRecorderItem()
                     {

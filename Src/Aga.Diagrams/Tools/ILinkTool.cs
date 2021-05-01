@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Aga.Diagrams.Controls;
 using System.Windows;
-using Aga.Diagrams.Controls;
 
 namespace Aga.Diagrams.Tools
 {

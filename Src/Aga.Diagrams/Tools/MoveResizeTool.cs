@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-using System.Windows;
+﻿using Aga.Diagrams.Adorners;
 using Aga.Diagrams.Controls;
-using System.Windows.Documents;
+using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
-using Aga.Diagrams.Adorners;
+using System.Windows.Documents;
+using System.Windows.Input;
 
 namespace Aga.Diagrams.Tools
 {
@@ -94,7 +92,7 @@ namespace Aga.Diagrams.Tools
         {
             return true;
         }
-        
+
         public virtual void EndDrag(bool doCommit)
         {
             if (doCommit)

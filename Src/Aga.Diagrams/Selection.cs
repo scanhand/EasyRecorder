@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Aga.Diagrams.Controls;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
-using System.Windows;
-using Aga.Diagrams.Controls;
+using System.Linq;
 
 namespace Aga.Diagrams
 {

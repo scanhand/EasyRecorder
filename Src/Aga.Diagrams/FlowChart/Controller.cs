@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Aga.Diagrams;
-using System.Windows;
-using System.Windows.Shapes;
-using System.Windows.Controls;
-using System.Windows.Media;
-using Aga.Diagrams.Controls;
-using System.Windows.Input;
+﻿using Aga.Diagrams.Controls;
+using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Aga.Diagrams.FlowChart
 {
@@ -266,7 +263,7 @@ namespace Aga.Diagrams.FlowChart
 
                 _model.Links.Remove((link as LinkBase).ModelElement as Link);
                 _model.Links.Add(
-                    new Link((FlowNode)source.ModelElement, (PortKinds)sourcePort.Tag, 
+                    new Link((FlowNode)source.ModelElement, (PortKinds)sourcePort.Tag,
                         (FlowNode)target.ModelElement, (PortKinds)targetPort.Tag)
                         );
             }

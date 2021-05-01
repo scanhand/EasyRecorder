@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace AMK.Global
 {
@@ -50,8 +45,8 @@ namespace AMK.Global
             double screenHeight = System.Windows.SystemParameters.WorkArea.Height;
             double screenWidth = System.Windows.SystemParameters.WorkArea.Width;
 
-            double posX = (screenWidth/2) - (window.Width/2);
-            double posY = (screenHeight/2) - (window.Height/2);
+            double posX = (screenWidth / 2) - (window.Width / 2);
+            double posY = (screenHeight / 2) - (window.Height / 2);
 
             window.Left = posX;
             window.Top = posY;

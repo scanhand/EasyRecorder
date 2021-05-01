@@ -1,28 +1,15 @@
-﻿using EventHook;
+﻿using AMK.Files;
+using AMK.Global;
+using AMK.Recorder;
+using AMK.UI;
+using AvalonDock.Themes;
+using EventHook;
+using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using WindowsInput;
-using WindowsInput.Native;
-using MahApps.Metro.Controls;
-using AMK.Recorder;
 using System.Windows.Forms;
-using AMK.Files;
-using AMK.UI;
-using AMK.Global;
-using AvalonDock.Themes;
 
 namespace AMK
 {
@@ -109,7 +96,7 @@ namespace AMK
 
             //RecorderView
             this.RecorderView.Recorder = this.Recorder;
-           
+
             //Status
             this.Recorder.OnChangedState += (s) =>
             {
@@ -144,8 +131,8 @@ namespace AMK
                     int startIndex = -1;
                     if (prevItem != null)
                         startIndex = this.RecorderListView.Items.IndexOf(prevItem);
-                    
-                    this.RecorderListView.Items.Insert(startIndex+1, newItem);
+
+                    this.RecorderListView.Items.Insert(startIndex + 1, newItem);
                     this.RecorderListView.ScrollIntoView(newItem);
                 });
             };
@@ -336,14 +323,6 @@ namespace AMK
             this.LogWindow.Close();
         }
 
-        public void StartRecording(bool isReset)
-        {
-            ALog.Debug("StartRecording");
-            if(isReset)
-                this.Recorder.Reset();
-            this.Recorder.StartRecording();
-        }
-
         public void StopRecording()
         {
             ALog.Debug("StopRecording");
@@ -364,26 +343,14 @@ namespace AMK
             this.Recorder.StopPlaying();
         }
 
-        public void Stop()
-        {
-            this.Recorder.StopAll();
-        }
-
-        public void ResetItems()
-        {
-            this.Recorder.StopPlaying();
-            this.Recorder.StopRecording();
-            this.Recorder.Reset();
-        }
-
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
-            StartRecording(true);
+            this.Recorder.StartRecording(true);
         }
 
         private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
         {
-            StopRecording();
+            this.Recorder.StopRecording();
         }
 
         private void MenuItem_ShowLog_Click(object sender, RoutedEventArgs e)
@@ -404,12 +371,12 @@ namespace AMK
 
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)
         {
-            StopPlaying();
+            this.Recorder.StopPlaying();
         }
 
         private void MenuItem_ResetItems_Click(object sender, RoutedEventArgs e)
         {
-            ResetItems();
+            this.Recorder.ResetItems();
         }
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
@@ -488,9 +455,6 @@ namespace AMK
 
         private void MenuItem_ResetToStart_Click(object sender, RoutedEventArgs e)
         {
-            if (!AUtil.IsStopPause(this.Recorder.State))
-                return;
-
             this.Recorder.ResetToStart();
         }
 

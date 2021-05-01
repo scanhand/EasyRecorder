@@ -1,13 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using AMK.Global;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -61,9 +58,9 @@ namespace AMK.Recorder
         {
             get
             {
-                switch(this.State)
+                switch (this.State)
                 {
-                case RecorderItemState.Activated: return "/AutoMouseKeyboard;component/Resources/icons8-arrow-64.png";
+                    case RecorderItemState.Activated: return "/AutoMouseKeyboard;component/Resources/icons8-arrow-64.png";
                 }
                 return string.Empty;
             }
@@ -76,24 +73,24 @@ namespace AMK.Recorder
             {
                 switch (this.Recorder)
                 {
-                    case RecorderType.KeyDown:          return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
-                    case RecorderType.KeyUp:            return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
+                    case RecorderType.KeyDown: return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
+                    case RecorderType.KeyUp: return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
                     case RecorderType.MouseUp:
                     case RecorderType.MouseDown:
                     case RecorderType.MouseClick:
                         {
-                            if(this.LR == LR.Left)
+                            if (this.LR == LR.Left)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png";
                             else
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-rightclick-64.png";
                         }
-                    case RecorderType.MouseSmartClick:  return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
-                    case RecorderType.MouseMove:        return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
-                    case RecorderType.MouseWheel:       return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
-                    case RecorderType.KeyPress:         return "/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png";
-                    case RecorderType.WaitTime:         return "/AutoMouseKeyboard;component/Resources/icons8-timer-64.png";
-                    case RecorderType.WaitSmart:        return "/AutoMouseKeyboard;component/Resources/icons8-smarttimer-64.png";
-                   
+                    case RecorderType.MouseSmartClick: return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
+                    case RecorderType.MouseMove: return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
+                    case RecorderType.MouseWheel: return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
+                    case RecorderType.KeyPress: return "/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png";
+                    case RecorderType.WaitTime: return "/AutoMouseKeyboard;component/Resources/icons8-timer-64.png";
+                    case RecorderType.WaitSmart: return "/AutoMouseKeyboard;component/Resources/icons8-smarttimer-64.png";
+
 
                 }
                 return string.Empty;
@@ -156,7 +153,7 @@ namespace AMK.Recorder
         public void AdjustTimeSpan(TimeSpan span)
         {
             this.Time += span;
-            for(int i=0; i<this.ChildItems.Count; i++)
+            for (int i = 0; i < this.ChildItems.Count; i++)
             {
                 this.ChildItems[i].Time += span;
             }

@@ -1,14 +1,8 @@
-﻿using AMK.Recorder;
-using AMK.UI;
+﻿using AMK.Global;
 using EventHook;
-using EventHook.Hooks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using AMK.Global;
 
 namespace AMK.Recorder
 {
@@ -91,7 +85,7 @@ namespace AMK.Recorder
 
         public Action OnResetItem = null;
 
-        public Action OnStartPlaying 
+        public Action OnStartPlaying
         {
             get
             {
@@ -147,7 +141,15 @@ namespace AMK.Recorder
                 OnResetItem();
         }
 
-        public void StartRecording()
+        public void StartRecording(bool isReset)
+        {
+            ALog.Debug("StartRecording");
+            if (isReset)
+                this.Reset();
+            StartRecording();
+        }
+
+        private void StartRecording()
         {
             OnStartRecording();
             this.ResetCurrentRecorder();
@@ -157,6 +159,7 @@ namespace AMK.Recorder
 
         public void StopRecording()
         {
+            ALog.Debug("StopRecording");
             this.State = AMKState.Stop;
             this.WaitingRecorder.Stop();
             OnStopRecording();
@@ -164,8 +167,17 @@ namespace AMK.Recorder
 
         public void StopAll()
         {
+            ALog.Debug("StopAll");
             this.StopRecording();
             this.StopPlaying();
+        }
+
+        public void ResetItems()
+        {
+            ALog.Debug("ResetItems");
+            this.StopPlaying();
+            this.StopRecording();
+            this.Reset();
         }
 
         public void Add(ApplicationEventArgs e)
@@ -185,7 +197,7 @@ namespace AMK.Recorder
 
         public IRecorderItem GetLastItem(bool isIgnoreWaitItem = true)
         {
-            for(int i=this.Items.Count-1; i>=0; i--)
+            for (int i = this.Items.Count - 1; i >= 0; i--)
             {
                 if (isIgnoreWaitItem && this.Items[i].Recorder == RecorderType.WaitTime)
                     continue;
@@ -202,7 +214,7 @@ namespace AMK.Recorder
                 if (isIgnoreWaitItem && this.Items[i].Recorder == RecorderType.WaitTime)
                     continue;
 
-                if(this.Items[i].Recorder == RecorderType.KeyUp ||
+                if (this.Items[i].Recorder == RecorderType.KeyUp ||
                     this.Items[i].Recorder == RecorderType.KeyDown ||
                      this.Items[i].Recorder == RecorderType.KeyPress)
                     return this.Items[i];
@@ -286,12 +298,12 @@ namespace AMK.Recorder
         {
             if (item == null)
                 return false;
-            
+
             //check is this last item
-            if(!IsFirstItem(item))
+            if (!IsFirstItem(item))
             {
                 int removedItemIndex = this.Items.IndexOf(item);
-                IRecorderItem prevItem = this.Items[removedItemIndex -1];
+                IRecorderItem prevItem = this.Items[removedItemIndex - 1];
                 TimeSpan decreaseTime = GetTimeSpan(item as AbsRecorderItem, prevItem as AbsRecorderItem);
 
                 //Adjust a timestamp in remained items
@@ -322,7 +334,7 @@ namespace AMK.Recorder
         public bool InsertItem(IRecorderItem prevItem, IRecorderItem newItem)
         {
             int startIndex = -1;
-            if(prevItem != null)
+            if (prevItem != null)
                 startIndex = this.Items.IndexOf(prevItem);
 
             this.Items.Insert(startIndex + 1, newItem);
@@ -400,6 +412,9 @@ namespace AMK.Recorder
         public void ResetToStart()
         {
             ALog.Debug("AMKRecorder::ResetToStart");
+            if (!AUtil.IsStopPause(this.State))
+                return;
+
             this.Player.ResetToStart();
         }
     }

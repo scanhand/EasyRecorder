@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls.Primitives;
-using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Aga.Diagrams.Adorners;
 
 namespace Aga.Diagrams.Controls
 {
-    public class DragThumb: Control
+    public class DragThumb : Control
     {
         public DragThumbKinds Kind { get; set; }
 

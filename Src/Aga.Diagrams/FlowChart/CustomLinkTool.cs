@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Aga.Diagrams.Controls;
 using Aga.Diagrams.Tools;
-using Aga.Diagrams.Controls;
 using System.Windows;
-using Aga.Diagrams;
-using System.Windows.Controls;
 
 namespace Aga.Diagrams.FlowChart
 {

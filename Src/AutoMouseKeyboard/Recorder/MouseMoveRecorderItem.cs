@@ -1,14 +1,7 @@
 ﻿using AMK.Global;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
-using System.Windows.Interop;
-using WindowsInput;
 
 namespace AMK.Recorder
 {
@@ -22,7 +15,7 @@ namespace AMK.Recorder
             {
                 StringBuilder sb = new StringBuilder();
                 sb.AppendFormat("X: {0,4}, Y: {1,4}", this.Point.X, this.Point.Y);
-                if(this.ChildItems.Count > 0)
+                if (this.ChildItems.Count > 0)
                 {
                     sb.Append(" > ");
                     IRecorderItem last = this.ChildItems.Last();

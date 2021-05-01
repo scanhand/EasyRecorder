@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AMK.Files
 {
@@ -28,7 +23,7 @@ namespace AMK.Files
         public static AMKFileHeader FromJsonString(string json)
         {
             AMKFileHeader fileHeader = null;
-            
+
             fileHeader = JsonConvert.DeserializeObject<AMKFileHeader>(json, new JsonSerializerSettings()
             {
                 NullValueHandling = NullValueHandling.Ignore,

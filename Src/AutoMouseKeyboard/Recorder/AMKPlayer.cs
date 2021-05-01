@@ -1,11 +1,8 @@
 ﻿using AMK.Global;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AMK.Recorder
 {
@@ -60,7 +57,7 @@ namespace AMK.Recorder
 
                     if (IsLastStep())
                     {
-                        if(IsInfinitePlaying)
+                        if (IsInfinitePlaying)
                         {
                             ResetToStart();
                             continue;
@@ -125,7 +122,7 @@ namespace AMK.Recorder
             int tryCount = 0;
             const int timeInterval = 20;
             const int timeOutCount = 1000 / timeInterval; // 1000mesc / 20msec
-            while(true)
+            while (true)
             {
                 if (!this.ThreadPlayer.IsAlive)
                     break;
@@ -148,7 +145,7 @@ namespace AMK.Recorder
 
         public double WaitingPlaying(IRecorderItem item)
         {
-            if(this.LastItem == null)
+            if (this.LastItem == null)
                 this.LastItem = item;
 
             double timeSec = (item.Time - this.LastItem.Time).TotalSeconds + this.LastItem.ResidualTimeSec;

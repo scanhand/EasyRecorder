@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Aga.Diagrams.Adorners
 {
-    public abstract class DragAdorner: Adorner
+    public abstract class DragAdorner : Adorner
     {
         public DiagramView View { get; private set; }
         protected bool DoCommit { get; set; }
@@ -16,7 +12,7 @@ namespace Aga.Diagrams.Adorners
         protected Point Start { get; set; }
         protected Point End { get; set; }
 
-        protected DragAdorner(DiagramView view, Point start): base(view)
+        protected DragAdorner(DiagramView view, Point start) : base(view)
         {
             View = view;
             End = Start = start;

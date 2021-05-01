@@ -23,18 +23,51 @@
     
     <Grid>
         <ListView Name="RecorderListView" ItemContainerStyle="{StaticResource RecorderListStyle}">
+            <!-- Context Menu -->
             <ListView.ContextMenu>
                 <ContextMenu FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
                     <MenuItem Header="Add Items">
-                        <MenuItem Header="Mouse Down" Click="MenuItem_NewMouseDownItem_Click"></MenuItem>
-                        <MenuItem Header="Mouse Up" Click="MenuItem_NewMouseUpItem_Click"></MenuItem>
-                        <MenuItem Header="Key Up" Click="MenuItem_NewKeyUpItem_Click"></MenuItem>
-                        <MenuItem Header="Key Down" Click="MenuItem_NewKeyDownItem_Click"></MenuItem>
-                        <MenuItem Header="Waiting Time" Click="MenuItem_NewWaitingItem_Click"></MenuItem>
+                        <MenuItem Header="Mouse Down" Click="MenuItem_NewMouseDownItem_Click">
+                            <MenuItem.Icon>
+                                <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                         <MenuItem Header="Mouse Up" Click="MenuItem_NewMouseUpItem_Click">
+                            <MenuItem.Icon>
+                                <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Key Up" Click="MenuItem_NewKeyUpItem_Click">
+                            <MenuItem.Icon>
+                                <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Key Down" Click="MenuItem_NewKeyDownItem_Click">
+                            <MenuItem.Icon>
+                                <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Waiting Time" Click="MenuItem_NewWaitingItem_Click">
+                            <MenuItem.Icon>
+                                <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-timer-64.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Play Items" Click="MenuItem_PlayItems_Click"/>
-                    <MenuItem Header="Delete Items" Click="MenuItem_DeleteItems_Click" />
-                    <MenuItem Header="Modify Item..." Click="MenuItem_ModifyItem_Click" />
+                    <MenuItem Header="Play Items" Click="MenuItem_PlayItems_Click">
+                        <MenuItem.Icon>
+                            <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Modify Item..." Click="MenuItem_ModifyItem_Click" >
+                        <MenuItem.Icon>
+                            <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-pencil-64.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Delete Items" Click="MenuItem_DeleteItems_Click" >
+                        <MenuItem.Icon>
+                            <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-delete-bin-64.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </ContextMenu>
             </ListView.ContextMenu>
             <ListView.View>

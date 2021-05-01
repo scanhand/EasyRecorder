@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Aga.Diagrams.Controls
 {
-    public class LinkThumb: Control
+    public class LinkThumb : Control
     {
         public LinkThumbKind Kind { get; set; }
         protected Point? MouseDownPoint { get; set; }

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Aga.Diagrams.Controls;
 using System.Windows;
-using Aga.Diagrams.Controls;
 
 namespace Aga.Diagrams.Tools
 {

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AMK
 {
@@ -18,7 +15,7 @@ namespace AMK
 
         public static void Initialize()
         {
-            OnDebug += (message)=> { };
+            OnDebug += (message) => { };
         }
 
         public static string Debug(string format, params object[] args)
@@ -26,11 +23,11 @@ namespace AMK
             var sb = new StringBuilder();
             if (IsAppendTime)
                 sb.Append($"[{DateTime.Now.ToLongTimeString()}] ");
-            
+
             sb.Append(string.Format(format, args));
 
             var log = sb.ToString();
-            if(IsOutputConsole) 
+            if (IsOutputConsole)
                 Trace.WriteLine(log);
 
             OnDebug(log);

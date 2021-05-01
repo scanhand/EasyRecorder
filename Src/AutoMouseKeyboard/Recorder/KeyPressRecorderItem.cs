@@ -1,9 +1,5 @@
 ﻿using AMK.Global;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using WindowsInput.Native;
 
 namespace AMK.Recorder
@@ -19,14 +15,14 @@ namespace AMK.Recorder
             get
             {
                 StringBuilder sb = new StringBuilder();
-                if(!string.IsNullOrEmpty(this.Keyname))
-                    sb.AppendFormat("[{0}]",this.Keyname);
+                if (!string.IsNullOrEmpty(this.Keyname))
+                    sb.AppendFormat("[{0}]", this.Keyname);
                 foreach (var i in this.ChildItems)
                 {
                     KeyPressRecorderItem item = i as KeyPressRecorderItem;
                     if (item == null)
                         continue;
-                    if(!string.IsNullOrEmpty(this.Keyname))
+                    if (!string.IsNullOrEmpty(this.Keyname))
                         sb.AppendFormat("[{0}]", item.Keyname);
                 }
                 return sb.ToString();

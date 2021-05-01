@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Aga.Diagrams.Tools;
 using System.Linq;
-using System.Text;
-using Aga.Diagrams.Tools;
-using Aga.Diagrams;
-using System.Windows;
 
 namespace Aga.Diagrams.FlowChart
 {
     public class CustomMoveResizeTool : MoveResizeTool
     {
         private FlowchartModel _model;
- 
+
         public CustomMoveResizeTool(DiagramView view, FlowchartModel model)
             : base(view)
         {
@@ -20,7 +15,7 @@ namespace Aga.Diagrams.FlowChart
 
         public override bool CanDrop()
         {
-            foreach(var item in DragItems)
+            foreach (var item in DragItems)
             {
                 var column = (int)(item.Bounds.X / View.GridCellSize.Width);
                 var row = (int)(item.Bounds.Y / View.GridCellSize.Height);

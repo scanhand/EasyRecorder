@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Aga.Diagrams.FlowChart
 {
@@ -21,8 +17,8 @@ namespace Aga.Diagrams.FlowChart
         public string Text
         {
             get { return _text; }
-            set 
-            { 
+            set
+            {
                 _text = value;
                 OnPropertyChanged("Text");
             }

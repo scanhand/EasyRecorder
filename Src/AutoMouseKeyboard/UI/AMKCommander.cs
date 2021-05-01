@@ -2,10 +2,6 @@
 using AMK.Recorder;
 using EventHook;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WindowsInput.Native;
 
 namespace AMK.UI
@@ -24,12 +20,12 @@ namespace AMK.UI
             }
         }
 
-        private RecorderItemView RecorderView 
-        { 
+        private RecorderItemView RecorderView
+        {
             get
             {
                 return this.MainWindow.RecorderView;
-            } 
+            }
         }
 
         private AMKRecorder Recorder
@@ -42,7 +38,7 @@ namespace AMK.UI
 
         public bool ProcessKey(KeyInputEventArgs e)
         {
-            if(e.KeyData.VkCode == (int)this.RecordingVKeyCode)
+            if (e.KeyData.VkCode == (int)this.RecordingVKeyCode)
             {
                 if (e.KeyData.EventType != KeyEvent.up)
                     OnRecording();
@@ -69,7 +65,7 @@ namespace AMK.UI
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.RecordingPause;
-                this.MainWindow.StartRecording(isReset);
+                this.Recorder.StartRecording(isReset);
             }
             else
             {
@@ -99,7 +95,7 @@ namespace AMK.UI
             else if (this.Recorder.State == AMKState.Recording)
                 state = AMKState.RecordingPause;
 
-            this.MainWindow.Stop();
+            this.Recorder.StopAll();
             this.Recorder.State = state;
         }
 

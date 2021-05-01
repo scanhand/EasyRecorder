@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
+﻿using System.Diagnostics;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AMK.Recorder
 {
@@ -46,11 +41,11 @@ namespace AMK.Recorder
         {
             if (this.ThreadRecording != null)
                 return false;
- 
+
             this.ThreadRecording = new Thread(() =>
             {
                 const double waitTime = 0.02f; // 20 mesc
-                
+
                 while (this.IsThreadRecording)
                 {
                     double startTime = Stopwatch.GetTimestamp();
@@ -78,7 +73,7 @@ namespace AMK.Recorder
 
             int tryCount = 0;
             const int timeInterval = 20;
-            const int timeOutCount = 1000 / timeInterval; 
+            const int timeOutCount = 1000 / timeInterval;
             this.IsThreadRecording = false;
             while (true)
             {

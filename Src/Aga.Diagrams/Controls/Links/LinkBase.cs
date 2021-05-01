@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows;
-using System.Windows.Media;
+﻿using Aga.Diagrams.Adorners;
+using System;
 using System.ComponentModel;
-using Aga.Diagrams.Adorners;
+using System.Windows;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace Aga.Diagrams.Controls
 {

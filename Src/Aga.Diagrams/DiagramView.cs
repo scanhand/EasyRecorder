@@ -1,15 +1,13 @@
-﻿using System;
+﻿using Aga.Diagrams.Controls;
+using Aga.Diagrams.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows;
-using Aga.Diagrams.Controls;
-using Aga.Diagrams.Tools;
-using System.Windows.Media;
 using System.Windows.Input;
-using Aga.Diagrams.FlowChart;
+using System.Windows.Media;
 
 namespace Aga.Diagrams
 {
@@ -115,7 +113,7 @@ namespace Aga.Diagrams
             get { return _inputTool; }
             set
             {
-                if (value == null) 
+                if (value == null)
                     throw new ArgumentNullException("value");
                 _inputTool = value;
             }

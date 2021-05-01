@@ -1,10 +1,5 @@
 ﻿using AMK.Global;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -34,7 +29,7 @@ namespace AMK.UI
             this.MenuAlwaysTopItem.IsChecked = this.IsTopMost;
             this.MainWindow.Topmost = this.IsTopMost;
             this.LogWindow.Topmost = this.IsTopMost;
-            
+
             AUtil.MoveToLeftBottom(this.LogWindow);
             return true;
         }

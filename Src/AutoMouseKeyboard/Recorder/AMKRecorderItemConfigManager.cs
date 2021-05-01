@@ -1,11 +1,6 @@
 ﻿using AMK.Global;
-using AMK.Recorder;
 using AMK.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace AMK.Recorder
@@ -35,7 +30,7 @@ namespace AMK.Recorder
                 return false;
 
             IRecorderItem modifiedItem = config.RecorderItem.Copy();
-            if(OnReplaceItem != null)
+            if (OnReplaceItem != null)
                 OnReplaceItem(prevItem, modifiedItem);
 
             return true;
@@ -57,7 +52,7 @@ namespace AMK.Recorder
         private IRecorderItemConfig CreateRecorderItemConfig(IRecorderItem item)
         {
             IRecorderItemConfig recorderItemConfig = null;
-            switch(item.Recorder)
+            switch (item.Recorder)
             {
                 case RecorderType.WaitTime: recorderItemConfig = new WaitingTimeRecorderItemConfig(); break;
                 case RecorderType.MouseClick: recorderItemConfig = new MouseClickRecorderItemConfig(); break;

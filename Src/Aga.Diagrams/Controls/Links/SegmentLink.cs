@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
 namespace Aga.Diagrams.Controls
 {
-    public class SegmentLink: LinkBase
+    public class SegmentLink : LinkBase
     {
         static SegmentLink()
         {

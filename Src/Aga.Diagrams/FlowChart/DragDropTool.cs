@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Aga.Diagrams.Tools;
 using System.Linq;
-using System.Text;
-using Aga.Diagrams.Tools;
-using Aga.Diagrams;
 using System.Windows;
 
 namespace Aga.Diagrams.FlowChart
 {
     public class DragDropTool : IDragDropTool
     {
-        DiagramView _view; 
+        DiagramView _view;
         FlowchartModel _model;
         int _row, _column;
 
