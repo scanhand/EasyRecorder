@@ -16,9 +16,22 @@ namespace AMK.Recorder
             }
         }
 
+        public override string RecorderDesc
+        {
+            get
+            {
+                string desc = string.Empty;
+                if (this.Dir == Dir.Up)
+                    desc = "Mouse Up";
+                else
+                    desc = "Mouse Down";
+                return desc;
+            }
+        }
+
         public MouseUpDownRecorderItem()
         {
-            this.Recorder = RecorderType.MouseDown;
+            this.Recorder = RecorderType.MouseUpDown;
         }
 
         public override bool Play(AMKPlayer player)
@@ -46,9 +59,7 @@ namespace AMK.Recorder
                 else if (this.Button == ButtonType.Right)
                     GM.Instance.InputSimulator.Mouse.RightButtonUp();
                 else if (this.Button == ButtonType.Wheel)
-                {
                     GM.Instance.InputSimulator.Mouse.MiddleButtonUp();
-                }
             }
             return true;
         }

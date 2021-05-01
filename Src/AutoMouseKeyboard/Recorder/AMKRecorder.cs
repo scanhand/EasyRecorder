@@ -223,8 +223,7 @@ namespace AMK.Recorder
                 if (isIgnoreWaitItem && this.Items[i].Recorder == RecorderType.WaitTime)
                     continue;
 
-                if (this.Items[i].Recorder == RecorderType.KeyUp ||
-                    this.Items[i].Recorder == RecorderType.KeyDown ||
+                if (this.Items[i].Recorder == RecorderType.KeyUpDown ||
                      this.Items[i].Recorder == RecorderType.KeyPress)
                     return this.Items[i];
             }

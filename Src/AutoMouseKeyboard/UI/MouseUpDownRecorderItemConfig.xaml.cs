@@ -110,7 +110,6 @@ namespace AMK.UI
             this.RecorderItem.Point = new Point(inputX, inputY);
             this.RecorderItem.Button = (this.comboLRButton.SelectedItem as ButtonItem).LR;
             this.RecorderItem.Dir = (this.comboUpDownButton.SelectedItem as UpDownItem).Dir;
-            //TODO: RecorderType
 
             this.DialogResult = true;
         }

@@ -41,7 +41,7 @@ namespace AMK.Recorder
 
         private bool IsKeyPress()
         {
-            if ((this.CurrentKeyRecorder?.Recorder == RecorderType.KeyDown || this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress) &&
+            if ((this.CurrentKeyRecorder?.Recorder == RecorderType.KeyUpDown || this.CurrentKeyRecorder?.Recorder == RecorderType.KeyPress) &&
                 (DateTime.Now - this.CurrentKeyRecorder?.GetVeryLastTime()).Value.TotalSeconds < KeyPressIntervalTimeSec)
             {
                 return true;
@@ -83,7 +83,7 @@ namespace AMK.Recorder
                 else
                 {
                     ALog.Debug("KeyEvent.Up, IsKeyPress: False");
-                    newRecorder = new KeyUpRecorderItem()
+                    newRecorder = new KeyUpDownRecorderItem()
                     {
                         VkCode = e.KeyData.VkCode,
                         Keyname = e.KeyData.Keyname,
@@ -94,7 +94,8 @@ namespace AMK.Recorder
             else
             {
                 //it's state on pressing key
-                if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyDown)
+                if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown &&
+                     this.AMKRecorder.GetLastItem()?.Dir == Dir.Down)
                     return;
 
                 if (IsCurrentKeyPress())
@@ -112,8 +113,9 @@ namespace AMK.Recorder
                     return;
                 }
 
-                newRecorder = new KeyDownRecorderItem()
+                newRecorder = new KeyUpDownRecorderItem()
                 {
+                    Dir = Dir.Down,
                     VkCode = e.KeyData.VkCode,
                     Keyname = e.KeyData.Keyname,
                     UnicodeCharacter = e.KeyData.UnicodeCharacter,

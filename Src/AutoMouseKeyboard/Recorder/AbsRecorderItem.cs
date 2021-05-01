@@ -16,7 +16,7 @@ namespace AMK.Recorder
 
         public RecorderType Recorder { get; set; } = RecorderType.None;
 
-        public string RecorderDesc
+        public virtual string RecorderDesc
         {
             get
             {
@@ -81,19 +81,25 @@ namespace AMK.Recorder
             {
                 switch (this.Recorder)
                 {
-                    case RecorderType.KeyDown: return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
-                    case RecorderType.KeyUp: return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
-                    case RecorderType.MouseUp:
-                    case RecorderType.MouseDown:
+                    case RecorderType.KeyUpDown:
+                        {
+                            if(this.Dir == Dir.Up)
+                                return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
+                            else if (this.Dir == Dir.Down)
+                                return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
+                        }
+                        break;
+                    case RecorderType.MouseUpDown:
                     case RecorderType.MouseClick:
                         {
                             if (this.Button == ButtonType.Left)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png";
                             else if (this.Button == ButtonType.Wheel)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
-                            else
+                            else if (this.Button == ButtonType.Right)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-rightclick-64.png";
                         }
+                        break;
                     case RecorderType.MouseSmartClick: return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
                     case RecorderType.MouseMove: return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
                     case RecorderType.MouseWheel: return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";

@@ -7,10 +7,8 @@ namespace AMK.Global
         None,
         [Description("Mouse Move")]
         MouseMove,
-        [Description("Mouse Down")]
-        MouseDown,
-        [Description("Mouse Up")]
-        MouseUp,
+        [Description("Mouse UpDown")]
+        MouseUpDown,
         [Description("Mouse Click")]
         MouseClick,
         [Description("Mouse Wheel")]
@@ -21,10 +19,8 @@ namespace AMK.Global
         KeyPress,
         [Description("Hot Key Press")]
         KeyHotkey,
-        [Description("Key Down")]
-        KeyDown,
-        [Description("Key Up")]
-        KeyUp,
+        [Description("Key UpDown")]
+        KeyUpDown,
         [Description("Waiting Time")]
         WaitTime,
         [Description("Waiting Smart")]

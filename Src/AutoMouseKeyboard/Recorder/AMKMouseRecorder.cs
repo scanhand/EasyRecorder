@@ -92,7 +92,6 @@ namespace AMK.Recorder
             {
                 newRecorder = new MouseUpDownRecorderItem()
                 {
-                    Recorder = RecorderType.MouseUp,
                     Dir = Dir.Up,
                     Button = ButtonType.Wheel,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
@@ -103,7 +102,6 @@ namespace AMK.Recorder
             {
                 newRecorder = new MouseUpDownRecorderItem()
                 {
-                    Recorder = RecorderType.MouseDown,
                     Dir = Dir.Down,
                     Button = ButtonType.Wheel,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
@@ -115,7 +113,6 @@ namespace AMK.Recorder
             {
                 newRecorder = new MouseUpDownRecorderItem()
                 {
-                    Recorder = RecorderType.MouseDown,
                     Dir = Dir.Down,
                     Button = e.Message == MouseMessages.WM_LBUTTONDOWN ? ButtonType.Left : ButtonType.Right,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
@@ -127,7 +124,6 @@ namespace AMK.Recorder
             {
                 newRecorder = new MouseUpDownRecorderItem()
                 {
-                    Recorder = RecorderType.MouseUp,
                     Dir = Dir.Up,
                     Button = e.Message == MouseMessages.WM_LBUTTONUP ? ButtonType.Left : ButtonType.Right,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),

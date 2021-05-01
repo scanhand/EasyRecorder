@@ -1,4 +1,5 @@
-﻿using AMK.Recorder;
+﻿using AMK.Global;
+using AMK.Recorder;
 using MahApps.Metro.Controls;
 using System;
 using System.Linq;
@@ -15,6 +16,20 @@ namespace AMK.UI
     public partial class KeyUpDownRecorderItemConfig : MetroWindow, IRecorderItemConfig
     {
         #region inner
+
+        class UpDownItem
+        {
+            public Dir Dir { get; set; }
+            public UpDownItem(Dir dir)
+            {
+                this.Dir = dir;
+            }
+
+            public override string ToString()
+            {
+                return this.Dir.ToString();
+            }
+        }
 
         class KeyItem
         {
@@ -46,6 +61,9 @@ namespace AMK.UI
         {
             InitializeComponent();
 
+            this.comboUpDownButton.Items.Add(new UpDownItem(Dir.Up));
+            this.comboUpDownButton.Items.Add(new UpDownItem(Dir.Down));
+
             foreach (var key in Enum.GetValues(typeof(VirtualKeyCode)))
                 this.comboKey.Items.Add(new KeyItem((VirtualKeyCode)key));
 
@@ -62,7 +80,13 @@ namespace AMK.UI
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
 
+            SetUpDownButtonCombobox(this.RecorderItem.Dir);
             SetKeyButtonCombobox((VirtualKeyCode)this.RecorderKeyItem.VkCode);
+        }
+
+        private void SetUpDownButtonCombobox(Dir dir)
+        {
+            this.comboUpDownButton.SelectedItem = this.comboUpDownButton.Items.OfType<UpDownItem>().First(f => f.Dir == dir);
         }
 
         private void SetKeyButtonCombobox(VirtualKeyCode vkCode)
@@ -72,6 +96,7 @@ namespace AMK.UI
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+            this.RecorderItem.Dir = (this.comboUpDownButton.SelectedItem as UpDownItem).Dir;
             IKeyRecorderItem keyItem = this.RecorderItem as IKeyRecorderItem;
             VirtualKeyCode vkCode = (this.comboKey.SelectedItem as KeyItem).VKKeyCode;
             keyItem.VkCode = (int)vkCode;

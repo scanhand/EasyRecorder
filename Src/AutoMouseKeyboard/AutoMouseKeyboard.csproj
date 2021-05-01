@@ -139,8 +139,7 @@
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\AMKKeyRecorder.cs" />
     <Compile Include="Recorder\IWaitRecorderItem.cs" />
-    <Compile Include="Recorder\KeyUpRecorderItem.cs" />
-    <Compile Include="Recorder\KeyDownRecorderItem.cs" />
+    <Compile Include="Recorder\KeyUpDownRecorderItem.cs" />
     <Compile Include="Recorder\KeyPressRecorderItem.cs" />
     <Compile Include="Recorder\MouseClickRecorderItem.cs" />
     <Compile Include="Recorder\MouseUpDownRecorderItem.cs" />

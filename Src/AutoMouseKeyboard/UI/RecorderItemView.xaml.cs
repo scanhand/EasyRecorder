@@ -99,7 +99,7 @@ namespace AMK.UI
 
         private void MenuItem_NewKeyUpItem_Click(object sender, RoutedEventArgs e)
         {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpRecorderItem());
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpDownRecorderItem());
             if (newItem == null)
                 return;
 
@@ -108,7 +108,7 @@ namespace AMK.UI
 
         private void MenuItem_NewKeyDownItem_Click(object sender, RoutedEventArgs e)
         {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyDownRecorderItem());
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpDownRecorderItem());
             if (newItem == null)
                 return;
 
