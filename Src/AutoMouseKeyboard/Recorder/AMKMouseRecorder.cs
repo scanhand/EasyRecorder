@@ -90,8 +90,9 @@ namespace AMK.Recorder
             }
             else if (e.Message == MouseMessages.WM_WHEELBUTTONUP)
             {
-                newRecorder = new MouseUpRecorderItem()
+                newRecorder = new MouseUpDownRecorderItem()
                 {
+                    Recorder = RecorderType.MouseUp,
                     Dir = Dir.Up,
                     Button = ButtonType.Wheel,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
@@ -100,8 +101,9 @@ namespace AMK.Recorder
             }
             else if (e.Message == MouseMessages.WM_WHEELBUTTONDOWN)
             {
-                newRecorder = new MouseDownRecorderItem()
+                newRecorder = new MouseUpDownRecorderItem()
                 {
+                    Recorder = RecorderType.MouseDown,
                     Dir = Dir.Down,
                     Button = ButtonType.Wheel,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
@@ -111,8 +113,9 @@ namespace AMK.Recorder
             else if (e.Message == MouseMessages.WM_LBUTTONDOWN ||
                      e.Message == MouseMessages.WM_RBUTTONDOWN)
             {
-                newRecorder = new MouseDownRecorderItem()
+                newRecorder = new MouseUpDownRecorderItem()
                 {
+                    Recorder = RecorderType.MouseDown,
                     Dir = Dir.Down,
                     Button = e.Message == MouseMessages.WM_LBUTTONDOWN ? ButtonType.Left : ButtonType.Right,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
@@ -122,9 +125,10 @@ namespace AMK.Recorder
             else if (e.Message == MouseMessages.WM_LBUTTONUP ||
                      e.Message == MouseMessages.WM_RBUTTONUP)
             {
-                newRecorder = new MouseUpRecorderItem()
+                newRecorder = new MouseUpDownRecorderItem()
                 {
-                    Dir = Dir.Down,
+                    Recorder = RecorderType.MouseUp,
+                    Dir = Dir.Up,
                     Button = e.Message == MouseMessages.WM_LBUTTONUP ? ButtonType.Left : ButtonType.Right,
                     Point = new System.Windows.Point(e.Point.x, e.Point.y),
                     MouseData = (int)e.MouseData,

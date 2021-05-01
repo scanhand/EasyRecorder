@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AMK.UI"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="MouseClick Configuration" Height="220" Width="400">
+        Title="MouseClick Configuration" Height="250" Width="400">
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -19,30 +19,35 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- Icon -->
         <Image Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-64.png" HorizontalAlignment="Left" Width="32"/>
 
+        <!-- Up Down -->
+        <Label Content="Up &amp; Down:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <ComboBox x:Name="comboUpDownButton" Grid.Row="1" Grid.Column="1" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>
+
         <!-- LR -->
-        <Label Content="Mouse Button:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <ComboBox x:Name="comboLRButton" Grid.Row="1" Grid.Column="1" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>
+        <Label Content="Mouse Button:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <ComboBox x:Name="comboLRButton" Grid.Row="2" Grid.Column="1" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>
         
         <!-- X, Y-->
-        <Label Content="X:" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="textBoxX" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,5" />
-        <Label Content="Y:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="textBoxY" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,5" />
+        <Label Content="X:" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxX" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,5" />
+        <Label Content="Y:" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxY" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,0,5" />
 
         <!-- Ok & Cancel Button -->
-        <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
+        <Button x:Name="buttonOK" Grid.Row="5" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-ok-64.png" ></Image>
                 <Label VerticalAlignment="Center">OK</Label>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonCancel" Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
+        <Button x:Name="buttonCancel" Grid.Row="5" Grid.Column="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-cancel-64.png" ></Image>
                 <Label VerticalAlignment="Center">Cancel</Label>

@@ -16,6 +16,20 @@ namespace AMK.UI
     {
         #region inner
 
+        class UpDownItem
+        {
+            public Dir Dir { get; set; }
+            public UpDownItem(Dir dir)
+            {
+                this.Dir = dir;
+            }
+
+            public override string ToString()
+            {
+                return this.Dir.ToString();
+            }
+        }
+
         class ButtonItem
         {
             public ButtonType LR { get; set; }
@@ -38,6 +52,9 @@ namespace AMK.UI
         {
             InitializeComponent();
 
+            this.comboUpDownButton.Items.Add(new UpDownItem(Dir.Up));
+            this.comboUpDownButton.Items.Add(new UpDownItem(Dir.Down));
+
             this.comboLRButton.Items.Add(new ButtonItem(ButtonType.Left));
             this.comboLRButton.Items.Add(new ButtonItem(ButtonType.Right));
             this.comboLRButton.Items.Add(new ButtonItem(ButtonType.Wheel));
@@ -55,11 +72,17 @@ namespace AMK.UI
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
 
+            SetUpDownButtonCombobox(this.RecorderItem.Dir);
             SetMouseButtonCombobox(this.RecorderItem.Button);
             this.textBoxX.Text = string.Format("{0}", (int)this.RecorderItem.Point.X);
             this.textBoxY.Text = string.Format("{0}", (int)this.RecorderItem.Point.Y);
             this.textBoxX.Focus();
             this.textBoxX.SelectAll();
+        }
+
+        private void SetUpDownButtonCombobox(Dir dir)
+        {
+            this.comboUpDownButton.SelectedItem = this.comboUpDownButton.Items.OfType<UpDownItem>().First(f => f.Dir == dir);
         }
 
         private void SetMouseButtonCombobox(ButtonType lr)
@@ -86,6 +109,8 @@ namespace AMK.UI
             }
             this.RecorderItem.Point = new Point(inputX, inputY);
             this.RecorderItem.Button = (this.comboLRButton.SelectedItem as ButtonItem).LR;
+            this.RecorderItem.Dir = (this.comboUpDownButton.SelectedItem as UpDownItem).Dir;
+            //TODO: RecorderType
 
             this.DialogResult = true;
         }

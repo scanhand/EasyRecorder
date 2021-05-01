@@ -100,8 +100,6 @@ namespace AMK.Recorder
                     case RecorderType.KeyPress: return "/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png";
                     case RecorderType.WaitTime: return "/AutoMouseKeyboard;component/Resources/icons8-timer-64.png";
                     case RecorderType.WaitSmart: return "/AutoMouseKeyboard;component/Resources/icons8-smarttimer-64.png";
-
-
                 }
                 return string.Empty;
             }

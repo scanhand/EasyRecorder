@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace AMK.Recorder
 {
-    public class MouseUpRecorderItem : AbsRecorderItem
+    public class MouseUpDownRecorderItem : AbsRecorderItem
     {
         public int MouseData { get; set; } = 0;
 
@@ -11,26 +11,27 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("X: {0,4}, Y: {1,4}, {2,-5}", this.Point.X, this.Point.Y, this.Button.ToString());
+                return string.Format("X: {0,4}, Y: {1,4}, {2,-5}, {3,-5}", this.Point.X, this.Point.Y, this.Button.ToString(), this.Dir.ToString());
             }
         }
 
-        public MouseUpRecorderItem()
+        public MouseUpDownRecorderItem()
         {
-            this.Recorder = RecorderType.MouseUp;
+            this.Recorder = RecorderType.MouseDown;
         }
 
         public override bool Play(AMKPlayer player)
         {
             //Waiting
             player.WaitingPlaying(this);
+
             //Action
             Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
             GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             if (this.Button == ButtonType.Left)
-                GM.Instance.InputSimulator.Mouse.LeftButtonUp();
+                GM.Instance.InputSimulator.Mouse.LeftButtonDown();
             else
-                GM.Instance.InputSimulator.Mouse.RightButtonUp();
+                GM.Instance.InputSimulator.Mouse.RightButtonDown();
             return true;
         }
     }

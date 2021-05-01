@@ -143,11 +143,10 @@
     <Compile Include="Recorder\KeyDownRecorderItem.cs" />
     <Compile Include="Recorder\KeyPressRecorderItem.cs" />
     <Compile Include="Recorder\MouseClickRecorderItem.cs" />
-    <Compile Include="Recorder\MouseDownRecorderItem.cs" />
+    <Compile Include="Recorder\MouseUpDownRecorderItem.cs" />
     <Compile Include="Recorder\MouseMoveRecorderItem.cs" />
     <Compile Include="Recorder\AMKMouseRecorder.cs" />
     <Compile Include="Recorder\MouseSmartClickRecorderItem.cs" />
-    <Compile Include="Recorder\MouseUpRecorderItem.cs" />
     <Compile Include="Recorder\MouseWheelRecorderItem.cs" />
     <Compile Include="Recorder\AMKWaitingRecorder.cs" />
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
