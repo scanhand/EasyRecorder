@@ -31,9 +31,7 @@ namespace AMK.UI
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
 
-            WaitTimeRecorderItem item = this.RecorderItem as WaitTimeRecorderItem;
-
-            this.textBoxWaitingTime.Text = string.Format("{0:F2}", item.TotalTimeDurationSec);
+            this.textBoxWaitingTime.Text = string.Format("{0:F2}", this.RecorderItem.TotalTimeDurationSec);
             this.textBoxWaitingTime.Focus();
             this.textBoxWaitingTime.SelectAll();
         }
@@ -57,12 +55,12 @@ namespace AMK.UI
                 return;
             }
 
-            WaitTimeRecorderItem item = this.RecorderItem as WaitTimeRecorderItem;
-            item.WaitingTimeSec = 0;
-            item.ChildItems.Clear();
-            item.ChildItems.Add(new WaitTimeRecorderItem()
+            IWaitRecorderItem waitItem = this.RecorderItem as IWaitRecorderItem;
+            waitItem.WaitingTimeSec = 0;
+            this.RecorderItem.ChildItems.Clear();
+            this.RecorderItem.ChildItems.Add(new WaitTimeRecorderItem()
             {
-                Time = item.Time + TimeSpan.FromSeconds(totalWaitnigTime),
+                Time = this.RecorderItem.Time + TimeSpan.FromSeconds(totalWaitnigTime),
             });
 
             this.DialogResult = true;

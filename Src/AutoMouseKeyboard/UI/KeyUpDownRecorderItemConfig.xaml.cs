@@ -1,6 +1,7 @@
 ﻿using AMK.Recorder;
 using MahApps.Metro.Controls;
 using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,6 +34,14 @@ namespace AMK.UI
 
         public IRecorderItem RecorderItem { get; set; }
 
+        private IKeyRecorderItem RecorderKeyItem
+        {
+            get
+            {
+                return this.RecorderItem as IKeyRecorderItem;
+            }
+        }
+
         public KeyUpDownRecorderItemConfig()
         {
             InitializeComponent();
@@ -52,6 +61,13 @@ namespace AMK.UI
         private void KeyUpDownRecorderItemConfig_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
+
+            SetKeyButtonCombobox((VirtualKeyCode)this.RecorderKeyItem.VkCode);
+        }
+
+        private void SetKeyButtonCombobox(VirtualKeyCode vkCode)
+        {
+            this.comboKey.SelectedItem = this.comboKey.Items.OfType<KeyItem>().First(p => p.VKKeyCode == vkCode);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)

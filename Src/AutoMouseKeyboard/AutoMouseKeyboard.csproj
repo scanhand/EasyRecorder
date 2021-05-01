@@ -137,6 +137,7 @@
     <Compile Include="Recorder\IKeyRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\AMKKeyRecorder.cs" />
+    <Compile Include="Recorder\IWaitRecorderItem.cs" />
     <Compile Include="Recorder\KeyUpRecorderItem.cs" />
     <Compile Include="Recorder\KeyDownRecorderItem.cs" />
     <Compile Include="Recorder\KeyPressRecorderItem.cs" />
@@ -275,12 +276,6 @@
     <Resource Include="Resources\icons8-stop-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icons8-mouse-64.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\icons8-keyboard-64.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\icons8-mouse-rightclick-64.png" />
   </ItemGroup>
   <ItemGroup>
@@ -360,6 +355,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-triangle-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-mouse-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-keyboard-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-waitclock-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@ namespace AMK.Recorder
 {
     public class KeyDownRecorderItem : AbsRecorderItem, IKeyRecorderItem
     {
-        public int VkCode { get; set; }
+        public int VkCode { get; set; } = (int)VirtualKeyCode.SPACE;
         public string Keyname { get; set; }
         public string UnicodeCharacter { get; set; }
 

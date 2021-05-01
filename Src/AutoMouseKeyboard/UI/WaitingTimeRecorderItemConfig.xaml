@@ -20,6 +20,9 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
+        
+        <!-- Icon -->
+        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-waitclock-64.png" HorizontalAlignment="Left" Width="32"/>
 
         <!-- Waiting Time-->
         <Label Content="Waiting Time:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>

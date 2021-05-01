@@ -2,8 +2,10 @@
 
 namespace AMK.Recorder
 {
-    public class WaitSmartRecorderItem : AbsRecorderItem
+    public class WaitSmartRecorderItem : AbsRecorderItem, IWaitRecorderItem
     {
+        public double WaitingTimeSec { get; set; } = 0;
+
         public override string Description
         {
             get

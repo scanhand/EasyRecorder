@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AMK.UI"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="MouseClick Configuration" Height="200" Width="400">
+        Title="Key Configuration" Height="200" Width="400">
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
@@ -20,7 +20,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
+        <!-- Icon -->
+        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png" HorizontalAlignment="Left" Width="32"/>
+
         <!-- Key -->
         <Label Content="Key:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <ComboBox x:Name="comboKey" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>

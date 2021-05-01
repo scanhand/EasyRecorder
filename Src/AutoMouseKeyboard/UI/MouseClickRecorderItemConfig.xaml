@@ -21,7 +21,10 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
+        <!-- Icon -->
+        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-64.png" HorizontalAlignment="Left" Width="32"/>
+
         <!-- LR -->
         <Label Content="Mouse Button:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
         <ComboBox x:Name="comboLRButton" Grid.Row="1" Grid.Column="1" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>
