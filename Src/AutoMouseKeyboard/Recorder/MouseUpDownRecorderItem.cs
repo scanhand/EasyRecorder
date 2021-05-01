@@ -1,5 +1,6 @@
 ﻿using AMK.Global;
 using System.Windows;
+using System.Windows.Input;
 
 namespace AMK.Recorder
 {
@@ -28,10 +29,27 @@ namespace AMK.Recorder
             //Action
             Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
             GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
-            if (this.Button == ButtonType.Left)
-                GM.Instance.InputSimulator.Mouse.LeftButtonDown();
+
+            if (this.Dir == Dir.Down)
+            {
+                if (this.Button == ButtonType.Left)
+                    GM.Instance.InputSimulator.Mouse.LeftButtonDown();
+                else if (this.Button == ButtonType.Right)
+                    GM.Instance.InputSimulator.Mouse.RightButtonDown();
+                else if (this.Button == ButtonType.Wheel)
+                    GM.Instance.InputSimulator.Mouse.MiddleButtonDown();
+            }
             else
-                GM.Instance.InputSimulator.Mouse.RightButtonDown();
+            {
+                if (this.Button == ButtonType.Left)
+                    GM.Instance.InputSimulator.Mouse.LeftButtonUp();
+                else if (this.Button == ButtonType.Right)
+                    GM.Instance.InputSimulator.Mouse.RightButtonUp();
+                else if (this.Button == ButtonType.Wheel)
+                {
+                    GM.Instance.InputSimulator.Mouse.MiddleButtonUp();
+                }
+            }
             return true;
         }
     }

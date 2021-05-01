@@ -10,9 +10,9 @@ using System.Windows.Input;
 namespace AMK.UI
 {
     /// <summary>
-    /// Interaction logic for MouseClickRecorderItemConfig.xaml
+    /// Interaction logic for MouseUpDownRecorderItemConfig.xaml
     /// </summary>
-    public partial class MouseClickRecorderItemConfig : MetroWindow, IRecorderItemConfig
+    public partial class MouseUpDownRecorderItemConfig : MetroWindow, IRecorderItemConfig
     {
         #region inner
 
@@ -48,7 +48,7 @@ namespace AMK.UI
 
         public IRecorderItem RecorderItem { get; set; }
 
-        public MouseClickRecorderItemConfig()
+        public MouseUpDownRecorderItemConfig()
         {
             InitializeComponent();
 
@@ -65,10 +65,10 @@ namespace AMK.UI
                     buttonOK.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             };
 
-            this.Loaded += MouseClickRecorderItemConfig_Loaded;
+            this.Loaded += MouseUpDownRecorderItemConfig_Loaded;
         }
 
-        private void MouseClickRecorderItemConfig_Loaded(object sender, RoutedEventArgs e)
+        private void MouseUpDownRecorderItemConfig_Loaded(object sender, RoutedEventArgs e)
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
 

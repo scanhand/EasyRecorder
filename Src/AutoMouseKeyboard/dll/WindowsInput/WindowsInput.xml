@@ -99,6 +99,26 @@
             Simulates a mouse right button double-click gesture.
             </summary>
         </member>
+        <member name="M:WindowsInput.IMouseSimulator.MiddleButtonDown">
+            <summary>
+            Simulates a mouse middle button down gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.IMouseSimulator.MiddleButtonUp">
+            <summary>
+            Simulates a mouse middle button up gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.IMouseSimulator.MiddleButtonClick">
+            <summary>
+            Simulates a mouse middle button click gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.IMouseSimulator.MiddleButtonDoubleClick">
+            <summary>
+            Simulates a mouse middle button double-click gesture.
+            </summary>
+        </member>
         <member name="M:WindowsInput.IMouseSimulator.XButtonDown(System.Int32)">
             <summary>
             Simulates a mouse X button down gesture.
@@ -313,6 +333,26 @@
         <member name="M:WindowsInput.MouseSimulator.RightButtonDoubleClick">
             <summary>
             Simulates a mouse right button double-click gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.MouseSimulator.MiddleButtonDown">
+            <summary>
+            Simulates a mouse middle button down gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.MouseSimulator.MiddleButtonUp">
+            <summary>
+            Simulates a mouse middle button up gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.MouseSimulator.MiddleButtonClick">
+            <summary>
+            Simulates a mouse middle-click gesture.
+            </summary>
+        </member>
+        <member name="M:WindowsInput.MouseSimulator.MiddleButtonDoubleClick">
+            <summary>
+            Simulates a mouse middle button double-click gesture.
             </summary>
         </member>
         <member name="M:WindowsInput.MouseSimulator.XButtonDown(System.Int32)">
