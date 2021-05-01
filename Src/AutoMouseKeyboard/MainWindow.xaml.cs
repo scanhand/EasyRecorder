@@ -281,9 +281,6 @@ namespace AMK
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)
         {
-            if (this.Recorder.State != AMKState.Recording)
-                return;
-
             this.Recorder.Add(e);
         }
 
@@ -291,18 +288,12 @@ namespace AMK
         {
             UpdateMousePosition(e);
 
-            if (this.Recorder.State != AMKState.Recording)
-                return;
-
             this.Recorder.Add(e);
         }
 
         private void KeyboardWatcher_OnKeyInput(object sender, KeyInputEventArgs e)
         {
             if (this.Commander.ProcessKey(e))
-                return;
-
-            if (this.Recorder.State != AMKState.Recording)
                 return;
 
             this.Recorder.Add(e);
@@ -345,37 +336,44 @@ namespace AMK
 
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_StartRecording_Click");
             this.Recorder.StartRecording(true);
         }
 
         private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_StopRecording_Click");
             this.Recorder.StopRecording();
         }
 
         private void MenuItem_ShowLog_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_ShowLog_Click");
             this.LogWindow.Visibility = Visibility.Visible;
             this.LogWindow.WindowState = WindowState.Normal;
         }
 
         private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("TaskbarIcon_TrayMouseDoubleClick");
             this.WindowState = WindowState.Normal;
         }
 
         private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_StartPlaying_Click");
             StartPlaying(true);
         }
 
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_StopPlaying_Click");
             this.Recorder.StopPlaying();
         }
 
         private void MenuItem_ResetItems_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_ResetItems_Click");
             this.Recorder.ResetItems();
         }
 

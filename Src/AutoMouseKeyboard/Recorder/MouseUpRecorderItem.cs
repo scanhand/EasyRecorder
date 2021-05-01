@@ -11,7 +11,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("X: {0,4}, Y: {1,4}, {2,-5}", this.Point.X, this.Point.Y, this.LR.ToString());
+                return string.Format("X: {0,4}, Y: {1,4}, {2,-5}", this.Point.X, this.Point.Y, this.Button.ToString());
             }
         }
 
@@ -27,7 +27,7 @@ namespace AMK.Recorder
             //Action
             Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
             GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
-            if (this.LR == LR.Left)
+            if (this.Button == ButtonType.Left)
                 GM.Instance.InputSimulator.Mouse.LeftButtonUp();
             else
                 GM.Instance.InputSimulator.Mouse.RightButtonUp();

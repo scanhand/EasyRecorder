@@ -21,7 +21,7 @@ namespace AMK.Recorder
         Dir Dir { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
-        LR LR { get; set; }
+        ButtonType Button { get; set; }
 
         Point Point { get; set; }
 

@@ -16,9 +16,17 @@ namespace AMK.Recorder
 
         public RecorderType Recorder { get; set; } = RecorderType.None;
 
+        public string RecorderDesc
+        {
+            get
+            {
+                return this.Recorder.ToDescription();
+            }
+        }
+
         public Dir Dir { get; set; } = Dir.Down;
 
-        public LR LR { get; set; } = LR.None;
+        public ButtonType Button { get; set; } = ButtonType.None;
 
         public Point Point { get; set; }
 
@@ -79,8 +87,10 @@ namespace AMK.Recorder
                     case RecorderType.MouseDown:
                     case RecorderType.MouseClick:
                         {
-                            if (this.LR == LR.Left)
+                            if (this.Button == ButtonType.Left)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png";
+                            else if (this.Button == ButtonType.Wheel)
+                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
                             else
                                 return "/AutoMouseKeyboard;component/Resources/icons8-mouse-rightclick-64.png";
                         }

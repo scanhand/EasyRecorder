@@ -182,16 +182,25 @@ namespace AMK.Recorder
 
         public void Add(ApplicationEventArgs e)
         {
+            if (this.State != AMKState.Recording)
+                return;
+
             this.ApplicationRecorder.Add(e);
         }
 
         public void Add(MouseEventArgs e)
         {
+            if (this.State != AMKState.Recording)
+                return;
+
             this.MouseRecorder.Add(e);
         }
 
         public void Add(KeyInputEventArgs e)
         {
+            if (this.State != AMKState.Recording)
+                return;
+
             this.KeyRecorder.Add(e);
         }
 

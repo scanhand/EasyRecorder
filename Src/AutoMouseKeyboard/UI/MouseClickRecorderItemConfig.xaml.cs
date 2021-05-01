@@ -18,8 +18,8 @@ namespace AMK.UI
 
         class ButtonItem
         {
-            public LR LR { get; set; }
-            public ButtonItem(LR lr)
+            public ButtonType LR { get; set; }
+            public ButtonItem(ButtonType lr)
             {
                 this.LR = lr;
             }
@@ -38,8 +38,9 @@ namespace AMK.UI
         {
             InitializeComponent();
 
-            this.comboLRButton.Items.Add(new ButtonItem(LR.Left));
-            this.comboLRButton.Items.Add(new ButtonItem(LR.Right));
+            this.comboLRButton.Items.Add(new ButtonItem(ButtonType.Left));
+            this.comboLRButton.Items.Add(new ButtonItem(ButtonType.Right));
+            this.comboLRButton.Items.Add(new ButtonItem(ButtonType.Wheel));
 
             this.KeyDown += (e, k) =>
             {
@@ -54,17 +55,17 @@ namespace AMK.UI
         {
             this.Title = this.RecorderItem.Recorder.ToString() + " Configuration";
 
-            SetMouseButtonCombobox(this.RecorderItem.LR);
+            SetMouseButtonCombobox(this.RecorderItem.Button);
             this.textBoxX.Text = string.Format("{0}", (int)this.RecorderItem.Point.X);
             this.textBoxY.Text = string.Format("{0}", (int)this.RecorderItem.Point.Y);
             this.textBoxX.Focus();
             this.textBoxX.SelectAll();
         }
 
-        private void SetMouseButtonCombobox(LR lr)
+        private void SetMouseButtonCombobox(ButtonType lr)
         {
-            if (lr == LR.None)
-                lr = LR.Left;  //default
+            if (lr == ButtonType.None)
+                lr = ButtonType.Left;  //default
 
             this.comboLRButton.SelectedItem = this.comboLRButton.Items.OfType<ButtonItem>().First(f => f.LR == lr);
         }
@@ -84,7 +85,7 @@ namespace AMK.UI
                 return;
             }
             this.RecorderItem.Point = new Point(inputX, inputY);
-            this.RecorderItem.LR = (this.comboLRButton.SelectedItem as ButtonItem).LR;
+            this.RecorderItem.Button = (this.comboLRButton.SelectedItem as ButtonItem).LR;
 
             this.DialogResult = true;
         }

@@ -92,7 +92,7 @@
                             <DataTemplate>
                                 <DockPanel>
                                     <Image Source="{Binding ItemImageSource}" Width="16"/>
-                                    <TextBlock Text="{Binding Recorder}"/>
+                                    <TextBlock Text="{Binding RecorderDesc}"/>
                                 </DockPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
