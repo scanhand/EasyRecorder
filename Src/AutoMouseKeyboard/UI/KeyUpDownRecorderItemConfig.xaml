@@ -23,7 +23,7 @@
         
         <!-- Key -->
         <Label Content="Key:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <ComboBox x:Name="comboKey" Grid.Row="1" Grid.Column="1" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>
+        <ComboBox x:Name="comboKey" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" IsEditable="False" IsReadOnly="True" Margin="5,0,0,5"/>
 
         <!-- Ok & Cancel Button -->
         <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">

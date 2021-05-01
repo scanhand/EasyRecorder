@@ -70,6 +70,7 @@
                     </MenuItem>
                 </ContextMenu>
             </ListView.ContextMenu>
+            <!-- List Items -->
             <ListView.View>
                 <GridView>
                     <!-- Status -->
@@ -78,7 +79,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <Image Source="{Binding StatusImageSource}" Width="16"/>
+                                    <Image Source="{Binding StatusImageSource}" Width="12"/>
                                 </DockPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

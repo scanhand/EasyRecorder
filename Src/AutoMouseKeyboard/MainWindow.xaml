@@ -103,7 +103,7 @@
             </avalonDock:DockingManager.Theme>-->
             <LayoutRoot>
                 <LayoutPanel Orientation="Horizontal">
-                    <LayoutAnchorablePane DockWidth="300">
+                    <LayoutAnchorablePane DockWidth="350">
                         <ad:LayoutAnchorable x:Name="dockSequenceDiagram"
                                                 Title="Auto Mouse &amp; Keyboard Group" 
                                                 CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False" CanMove="False" >

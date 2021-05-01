@@ -60,7 +60,7 @@ namespace AMK.Recorder
             {
                 switch (this.State)
                 {
-                    case RecorderItemState.Activated: return "/AutoMouseKeyboard;component/Resources/icons8-arrow-64.png";
+                    case RecorderItemState.Activated: return "/AutoMouseKeyboard;component/Resources/icons8-triangle-64.png";
                 }
                 return string.Empty;
             }

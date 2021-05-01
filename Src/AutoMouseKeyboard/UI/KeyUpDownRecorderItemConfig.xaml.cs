@@ -56,6 +56,11 @@ namespace AMK.UI
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
         {
+            IKeyRecorderItem keyItem = this.RecorderItem as IKeyRecorderItem;
+            VirtualKeyCode vkCode = (this.comboKey.SelectedItem as KeyItem).VKKeyCode;
+            keyItem.VkCode = (int)vkCode;
+            keyItem.Keyname = vkCode.ToString();
+
             this.DialogResult = true;
         }
 
