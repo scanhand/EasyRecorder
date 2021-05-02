@@ -1,4 +1,5 @@
 ﻿using AMK.Global;
+using System.Windows;
 
 namespace AMK.Recorder
 {
@@ -10,7 +11,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("X: {0,4}, Y: {1,4}, {2,-6}, Count: {3,3}", this.Point.X, this.Point.Y, this.Dir.ToString(), this.ChildItems.Count);
+                return string.Format("X: {0,4}, Y: {1,4}, {2,-6}, Count: {3,3}", this.Point.X, this.Point.Y, this.Dir.ToString(), this.ChildItems.Count + 1);
             }
         }
 
@@ -24,6 +25,8 @@ namespace AMK.Recorder
             //Waiting
             player.WaitingPlaying(this);
             //Action
+            Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
+            GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             GM.Instance.InputSimulator.Mouse.VerticalScroll(this.MouseData);
             foreach (var item in this.ChildItems)
             {

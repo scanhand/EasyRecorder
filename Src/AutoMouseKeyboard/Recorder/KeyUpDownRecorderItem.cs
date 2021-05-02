@@ -1,4 +1,5 @@
 ﻿using AMK.Global;
+using System.Windows;
 using WindowsInput.Native;
 
 namespace AMK.Recorder
@@ -40,8 +41,12 @@ namespace AMK.Recorder
         {
             //Waiting
             player.WaitingPlaying(this);
+
             //Action
-            if(this.Dir == Dir.Up)
+            Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
+            GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
+            
+            if (this.Dir == Dir.Up)
                 GM.Instance.InputSimulator.Keyboard.KeyUp((VirtualKeyCode)this.VkCode);
             else if (this.Dir == Dir.Down)
                 GM.Instance.InputSimulator.Keyboard.KeyDown((VirtualKeyCode)this.VkCode);

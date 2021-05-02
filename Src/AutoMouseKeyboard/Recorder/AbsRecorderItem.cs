@@ -12,7 +12,7 @@ namespace AMK.Recorder
     {
         public string Id { get; set; }
 
-        public RecorderItemState State { get; set; }
+        public RecorderItemState State { get; set; } = RecorderItemState.None;
 
         public RecorderType Recorder { get; set; } = RecorderType.None;
 
@@ -28,7 +28,7 @@ namespace AMK.Recorder
 
         public ButtonType Button { get; set; } = ButtonType.None;
 
-        public Point Point { get; set; }
+        public Point Point { get; set; } = new Point();
 
         public DateTime Time { get; set; } = DateTime.Now;
 
@@ -123,7 +123,6 @@ namespace AMK.Recorder
         public AbsRecorderItem()
         {
             this.Id = GenerateID();
-            this.State = RecorderItemState.None;
         }
 
         public string GenerateID()

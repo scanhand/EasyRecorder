@@ -79,7 +79,7 @@ namespace AMK.UI
             this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
         }
 
-        private void MenuItem_NewMouseDownItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_NewMouseUpDownItem_Click(object sender, RoutedEventArgs e)
         {
             IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseUpDownRecorderItem());
             if (newItem == null)
@@ -88,25 +88,7 @@ namespace AMK.UI
             this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
         }
 
-        private void MenuItem_NewMouseUpItem_Click(object sender, RoutedEventArgs e)
-        {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseUpDownRecorderItem());
-            if (newItem == null)
-                return;
-
-            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
-        }
-
-        private void MenuItem_NewKeyUpItem_Click(object sender, RoutedEventArgs e)
-        {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpDownRecorderItem());
-            if (newItem == null)
-                return;
-
-            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
-        }
-
-        private void MenuItem_NewKeyDownItem_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_NewKeyUpDownItem_Click(object sender, RoutedEventArgs e)
         {
             IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpDownRecorderItem());
             if (newItem == null)

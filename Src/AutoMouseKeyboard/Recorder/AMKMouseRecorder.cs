@@ -38,9 +38,10 @@ namespace AMK.Recorder
             this.AMKRecorder = recorder;
         }
 
-        private bool IsCurrentMouseWheel()
+        private bool IsCurrentMouseWheelDir(IRecorderItem newRecorderItem)
         {
-            if (this.CurrentRecorder?.Recorder == RecorderType.MouseWheel)
+            if (this.CurrentRecorder?.Recorder == RecorderType.MouseWheel &&
+                this.CurrentRecorder.Dir == newRecorderItem.Dir)
                 return true;
 
             return false;
@@ -80,7 +81,7 @@ namespace AMK.Recorder
                     MouseData = (int)e.MouseData,
                 };
 
-                if (IsCurrentMouseWheel())
+                if (IsCurrentMouseWheelDir(newRecorder))
                 {
                     this.WaitingRecorder.ResetWaitingTime();
                     this.CurrentRecorder.ChildItems.Add(newRecorder);
@@ -152,7 +153,25 @@ namespace AMK.Recorder
                     return;
                 }
             }
+
+            //Need to delete Unnecessary a mouse move item
+            if(IsCurrentSingleMouseMove(newRecorder))
+                this.AMKRecorder.DeleteItem(this.CurrentRecorder);
+            
             this.AMKRecorder.AddMouseItem(newRecorder);
+        }
+
+        private bool IsCurrentSingleMouseMove(IRecorderItem newItem)
+        {
+            if (newItem.Recorder == RecorderType.MouseMove)
+                return false;
+
+            if (this.CurrentRecorder?.Recorder == RecorderType.MouseMove &&
+                this.CurrentRecorder.ChildItems.Count <= 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
