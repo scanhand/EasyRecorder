@@ -7,11 +7,15 @@ namespace AMK.Recorder
     {
         public int MouseData { get; set; } = 0;
 
+        public const int UpMouseData = -7864320;
+
+        public const int DownMouseData = 7864320;
+
         public override string Description
         {
             get
             {
-                return string.Format("X: {0,4}, Y: {1,4}, {2,-6}, Count: {3,3}", this.Point.X, this.Point.Y, this.Dir.ToString(), this.ChildItems.Count + 1);
+                return string.Format("{0,-6}, Count: {1,3}", this.Dir.ToString(), this.ChildItems.Count + 1);
             }
         }
 
@@ -25,8 +29,6 @@ namespace AMK.Recorder
             //Waiting
             player.WaitingPlaying(this);
             //Action
-            Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
-            GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
             GM.Instance.InputSimulator.Mouse.VerticalScroll(this.MouseData);
             foreach (var item in this.ChildItems)
             {

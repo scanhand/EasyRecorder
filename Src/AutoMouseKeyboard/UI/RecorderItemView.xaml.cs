@@ -1,4 +1,5 @@
 ﻿using AMK.Recorder;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
@@ -72,7 +73,7 @@ namespace AMK.UI
 
         private void MenuItem_NewWaitingItem_Click(object sender, RoutedEventArgs e)
         {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem());
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem() { Time = GetNewItemTime()+TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
             if (newItem == null)
                 return;
 
@@ -81,7 +82,7 @@ namespace AMK.UI
 
         private void MenuItem_NewMouseUpDownItem_Click(object sender, RoutedEventArgs e)
         {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseUpDownRecorderItem());
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseUpDownRecorderItem() { Time = GetNewItemTime() + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
             if (newItem == null)
                 return;
 
@@ -90,7 +91,16 @@ namespace AMK.UI
 
         private void MenuItem_NewKeyUpDownItem_Click(object sender, RoutedEventArgs e)
         {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpDownRecorderItem());
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyUpDownRecorderItem() { Time = GetNewItemTime() + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
+        private void MenuItem_NewMouseWheelItem_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new MouseWheelRecorderItem() { Time = GetNewItemTime() + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
             if (newItem == null)
                 return;
 
@@ -100,6 +110,20 @@ namespace AMK.UI
         private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+        }
+
+        private DateTime GetNewItemTime()
+        {
+            DateTime dateTime = DateTime.Now;
+            if (this.RecorderListView.SelectedItem == null)
+            {
+                if(this.RecorderListView.Items.Count <= 0)
+                    return dateTime;
+
+                return (this.RecorderListView.Items[0] as IRecorderItem).Time;
+            }
+
+            return (this.RecorderListView.SelectedItem as IRecorderItem).Time;
         }
     }
 }

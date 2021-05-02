@@ -60,7 +60,7 @@ namespace AMK.Recorder
                 case RecorderType.MouseUpDown: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
                 case RecorderType.MouseSmartClick: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
                 case RecorderType.MouseMove: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
-                case RecorderType.MouseWheel: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
+                case RecorderType.MouseWheel: recorderItemConfig = new MouseWheelRecorderItemConfig(); break;
                 case RecorderType.KeyUpDown: recorderItemConfig = new KeyUpDownRecorderItemConfig(); break;
                 case RecorderType.KeyPress: recorderItemConfig = new KeyUpDownRecorderItemConfig(); break;
             }

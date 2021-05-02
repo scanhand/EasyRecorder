@@ -115,6 +115,8 @@ namespace AMK.Recorder
 
         public Action OnStopRecording = null;
 
+        public const double MinimumTimeSpan = 0.1;
+
         public AMKRecorder()
         {
             this.MouseRecorder = new AMKMouseRecorder(this);
