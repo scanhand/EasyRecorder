@@ -31,6 +31,11 @@
                                 <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-64.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                        <MenuItem Header="Mouse Click" Click="MenuItem_NewMouseClickItem_Click">
+                            <MenuItem.Icon>
+                                <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                         <MenuItem Header="Mouse Wheel" Click="MenuItem_NewMouseWheelItem_Click">
                             <MenuItem.Icon>
                                 <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png"/>
