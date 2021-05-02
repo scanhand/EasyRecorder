@@ -56,7 +56,7 @@ namespace AMK.Recorder
             {
                 case RecorderType.WaitSmart: recorderItemConfig = new WaitingTimeRecorderItemConfig(); break;
                 case RecorderType.WaitTime: recorderItemConfig = new WaitingTimeRecorderItemConfig(); break;
-                case RecorderType.MouseClick: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
+                case RecorderType.MouseClick: recorderItemConfig = new MouseClickRecorderItemConfig(); break;
                 case RecorderType.MouseUpDown: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
                 case RecorderType.MouseSmartClick: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;
                 case RecorderType.MouseMove: recorderItemConfig = new MouseUpDownRecorderItemConfig(); break;

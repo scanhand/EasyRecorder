@@ -160,6 +160,9 @@
     <Compile Include="UI\KeyUpDownRecorderItemConfig.xaml.cs">
       <DependentUpon>KeyUpDownRecorderItemConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MouseClickRecorderItemConfig.xaml.cs">
+      <DependentUpon>MouseClickRecorderItemConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\MouseWheelRecorderItemConfig.xaml.cs">
       <DependentUpon>MouseWheelRecorderItemConfig.xaml</DependentUpon>
     </Compile>
@@ -220,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\KeyUpDownRecorderItemConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\MouseClickRecorderItemConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

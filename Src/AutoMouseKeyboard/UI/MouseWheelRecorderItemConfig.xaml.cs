@@ -87,6 +87,9 @@ namespace AMK.UI
 
             Dir dir = (this.comboUpDownButton.SelectedItem as UpDownItem).Dir;
             int mouseData = dir == Dir.Down ? MouseWheelRecorderItem.UpMouseData : MouseWheelRecorderItem.DownMouseData;
+
+            this.RecorderItem.Dir = dir;
+            this.RecorderItem.ChildItems.Clear();
             for (int i = 1; i < wheelCount; i++)
             {
                 this.RecorderItem.ChildItems.Add(new MouseWheelRecorderItem()
@@ -96,8 +99,7 @@ namespace AMK.UI
                     Time = this.RecorderItem.Time + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan * i),
                 });
             }
-
-            this.RecorderItem.Dir = dir;
+            
             this.DialogResult = true;
         }
 

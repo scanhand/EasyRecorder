@@ -58,6 +58,15 @@ namespace AMK.Recorder
             return false;
         }
 
+        private bool IsLastKeyDown()
+        {
+            if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown &&
+                    this.AMKRecorder.GetLastItem()?.Dir == Dir.Down)
+                return true;
+
+            return false;
+        }
+
         public void Add(KeyInputEventArgs e)
         {
             IRecorderItem newRecorder = null;
@@ -94,8 +103,7 @@ namespace AMK.Recorder
             else
             {
                 //it's state on pressing key
-                if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown &&
-                     this.AMKRecorder.GetLastItem()?.Dir == Dir.Down)
+                if (IsLastKeyDown())
                     return;
 
                 if (IsCurrentKeyPress())
@@ -109,7 +117,7 @@ namespace AMK.Recorder
 
                     this.AMKRecorder.ResetWaitingTime();
                     this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(CurrentKeyRecorder);
+                    this.AMKRecorder.UpdateItem(this.CurrentKeyRecorder);
                     return;
                 }
 
