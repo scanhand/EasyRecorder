@@ -83,7 +83,7 @@ namespace AMK.Recorder
                 {
                     case RecorderType.KeyUpDown:
                         {
-                            if(this.Dir == Dir.Up)
+                            if (this.Dir == Dir.Up)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
                             else if (this.Dir == Dir.Down)
                                 return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";

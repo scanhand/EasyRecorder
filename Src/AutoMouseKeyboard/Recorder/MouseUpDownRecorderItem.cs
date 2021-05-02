@@ -1,10 +1,9 @@
 ﻿using AMK.Global;
 using System.Windows;
-using System.Windows.Input;
 
 namespace AMK.Recorder
 {
-    public class MouseUpDownRecorderItem : AbsRecorderItem
+    public class MouseUpDownRecorderItem : AbsRecorderItem, IMouseRecorderItem
     {
         public int MouseData { get; set; } = 0;
 

@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace AMK.Recorder
 {
-    public class MouseMoveRecorderItem : AbsRecorderItem
+    public class MouseMoveRecorderItem : AbsRecorderItem, IMouseRecorderItem
     {
         public int MouseData { get; set; } = 0;
 

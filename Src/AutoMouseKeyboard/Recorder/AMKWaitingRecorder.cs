@@ -28,7 +28,7 @@ namespace AMK.Recorder
         private bool IsThreadRecording = false;
 
         //500 msec
-        public double WaitingTimeSec = 0.500f;
+        public double WaitingTimeSec = 0.500;
 
         private double CurrentWaitingTimeSec = 0;
 

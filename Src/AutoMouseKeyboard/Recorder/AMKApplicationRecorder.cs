@@ -4,7 +4,7 @@ namespace AMK.Recorder
 {
     public class AMKApplicationRecorder
     {
-        public AMKRecorder AMKRecorder { get; set; } = null;
+        private AMKRecorder AMKRecorder { get; set; } = null;
 
         public AMKApplicationRecorder(AMKRecorder recorder)
         {

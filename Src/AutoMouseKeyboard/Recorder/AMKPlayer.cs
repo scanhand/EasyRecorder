@@ -8,11 +8,11 @@ namespace AMK.Recorder
 {
     public class AMKPlayer
     {
-        public AMKRecorder AMKRecorder { get; set; } = null;
-
         public bool IsThreadEnable = false;
 
         public bool IsInfinitePlaying { get; set; } = true;
+
+        private AMKRecorder AMKRecorder { get; set; } = null;
 
         private Thread ThreadPlayer = null;
 

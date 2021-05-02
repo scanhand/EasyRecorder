@@ -8,7 +8,7 @@ namespace AMK.Recorder
 {
     public class AMKMouseRecorder
     {
-        public AMKRecorder AMKRecorder { get; set; } = null;
+        private AMKRecorder AMKRecorder { get; set; } = null;
 
         private AMKWaitingRecorder WaitingRecorder
         {
@@ -182,7 +182,7 @@ namespace AMK.Recorder
                      e.Message == MouseMessages.WM_RBUTTONUP ||
                      e.Message == MouseMessages.WM_WHEELBUTTONUP)
             {
-                if(IsMouseButtonPress())
+                if (IsMouseButtonPress())
                 {
                     ALog.Debug("MouseEvent.Up, IsMouseButtonPress: True");
                     if (IsCurrentMouseClick())
@@ -234,9 +234,9 @@ namespace AMK.Recorder
             }
 
             //Need to delete Unnecessary a mouse move item
-            if(IsCurrentSingleMouseMove(newRecorder))
+            if (IsCurrentSingleMouseMove(newRecorder))
                 this.AMKRecorder.DeleteItem(this.CurrentRecorder);
-            
+
             this.AMKRecorder.AddMouseItem(newRecorder);
         }
     }

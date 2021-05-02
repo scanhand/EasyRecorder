@@ -7,7 +7,7 @@ namespace AMK.Recorder
 {
     public class AMKRecorderItemConfigManager
     {
-        public AMKRecorder AMKRecorder { get; set; } = null;
+        private AMKRecorder AMKRecorder { get; set; } = null;
 
         public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 

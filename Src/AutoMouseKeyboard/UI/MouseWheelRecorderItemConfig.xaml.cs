@@ -79,7 +79,7 @@ namespace AMK.UI
                 return;
             }
 
-            if(wheelCount < 1)
+            if (wheelCount < 1)
             {
                 MessageBox.Show("Wheel Count must more than 1.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
@@ -99,7 +99,7 @@ namespace AMK.UI
                     Time = this.RecorderItem.Time + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan * i),
                 });
             }
-            
+
             this.DialogResult = true;
         }
 

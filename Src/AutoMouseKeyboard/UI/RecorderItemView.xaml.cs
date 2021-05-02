@@ -73,7 +73,7 @@ namespace AMK.UI
 
         private void MenuItem_NewWaitingItem_Click(object sender, RoutedEventArgs e)
         {
-            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem() { Time = GetNewItemTime()+TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem() { Time = GetNewItemTime() + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
             if (newItem == null)
                 return;
 
@@ -126,7 +126,7 @@ namespace AMK.UI
             DateTime dateTime = DateTime.Now;
             if (this.RecorderListView.SelectedItem == null)
             {
-                if(this.RecorderListView.Items.Count <= 0)
+                if (this.RecorderListView.Items.Count <= 0)
                     return dateTime;
 
                 return (this.RecorderListView.Items[0] as IRecorderItem).Time;

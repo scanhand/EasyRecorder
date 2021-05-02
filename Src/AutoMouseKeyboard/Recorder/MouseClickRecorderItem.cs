@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace AMK.Recorder
 {
-    public class MouseClickRecorderItem : AbsRecorderItem
+    public class MouseClickRecorderItem : AbsRecorderItem, IMouseRecorderItem
     {
         public int MouseData { get; set; } = 0;
 
@@ -11,7 +11,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("X: {0,4}, Y: {1,4}, {2,-6}, Count: {3,-4}", this.Point.X, this.Point.Y, this.Button.ToString(), this.ChildItems.Count+1);
+                return string.Format("X: {0,4}, Y: {1,4}, {2,-6}, Count: {3,-4}", this.Point.X, this.Point.Y, this.Button.ToString(), this.ChildItems.Count + 1);
             }
         }
 

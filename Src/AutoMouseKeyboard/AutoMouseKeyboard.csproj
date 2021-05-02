@@ -136,6 +136,7 @@
     <Compile Include="Recorder\AMKPlayer.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IKeyRecorderItem.cs" />
+    <Compile Include="Recorder\IMouseRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
     <Compile Include="Recorder\AMKKeyRecorder.cs" />
     <Compile Include="Recorder\IWaitRecorderItem.cs" />

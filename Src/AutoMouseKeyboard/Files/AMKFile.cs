@@ -1,6 +1,10 @@
-﻿using System;
+﻿using AMK.Recorder;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace AMK.Files
 {
@@ -13,6 +17,30 @@ namespace AMK.Files
         public AMKFileBody FileBody = new AMKFileBody();
 
         public string FileName = string.Empty;
+
+        public static bool SaveFileDialog(List<IRecorderItem> items)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 0;
+            saveFileDialog.RestoreDirectory = true;
+
+            if (saveFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return false;
+
+            //Get the path of specified file
+            string filePath = saveFileDialog.FileName;
+
+            AMKFile file = new AMKFile();
+            file.FileName = filePath;
+            file.FileBody.Items = items.Copy<List<IRecorderItem>>();
+            if (!file.SaveFile())
+            {
+                System.Windows.MessageBox.Show("File Save Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return false;
+            }
+            return true;
+        }
 
         public bool SaveFile()
         {
@@ -72,6 +100,29 @@ namespace AMK.Files
             }
 
             return true;
+        }
+
+        public static AMKFile LoadFileDialog()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 0;
+            openFileDialog.RestoreDirectory = true;
+
+            if (openFileDialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+                return null;
+
+            //Get the path of specified file
+            string filePath = openFileDialog.FileName;
+
+            AMKFile file = new AMKFile();
+            file.FileName = filePath;
+            if (!file.LoadFile())
+            {
+                System.Windows.MessageBox.Show("File Load Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
+            }
+            return file;
         }
 
         public bool LoadFile()
