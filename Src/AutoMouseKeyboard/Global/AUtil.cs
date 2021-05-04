@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System.Diagnostics;
+using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Interop;
 
 namespace AMK.Global
 {
@@ -10,10 +13,15 @@ namespace AMK.Global
 
         public static Point ToMouseSimulatorPoint(Point pt)
         {
-            //Temp
             double screenWidth = 1920;
             double screenHeight = 1080;
-            return new Point(MouseSimulatorMaxValue * (pt.X / screenWidth), MouseSimulatorMaxValue * (pt.Y / screenHeight));
+            Screen mainScreen = Screen.FromHandle(Process.GetCurrentProcess().MainWindowHandle);
+            if (mainScreen != null)
+            {
+                screenWidth = mainScreen.Bounds.Width;
+                screenHeight = mainScreen.Bounds.Height;
+            }
+            return new Point(AUtil.MouseSimulatorMaxValue * (pt.X / screenWidth), AUtil.MouseSimulatorMaxValue * (pt.Y / screenHeight));
         }
 
         public static void MoveToRightBottom(Window window)

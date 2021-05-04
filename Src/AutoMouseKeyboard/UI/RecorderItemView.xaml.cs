@@ -46,19 +46,20 @@ namespace AMK.UI
             this.Recorder.DeleteItem(deleteItems);
         }
 
+        #region Menu
+
         private void MenuItem_PlayItems_Click(object sender, RoutedEventArgs e)
         {
             if (this.RecorderListView.SelectedItems == null || this.RecorderListView.SelectedItems.Count <= 0)
                 return;
 
             this.Recorder.Player.ResetLastItem();
-            foreach (var i in this.RecorderListView.SelectedItems)
-            {
-                IRecorderItem item = i as IRecorderItem;
-                item.Play(this.Recorder.Player);
 
-                Thread.Sleep(1);
-            }
+            List<IRecorderItem> items = new List<IRecorderItem>();
+            foreach (var i in this.RecorderListView.SelectedItems)
+                items.Add(i as IRecorderItem);
+
+            this.Recorder.StartPlaying(items);
         }
 
         private void MenuItem_DeleteItems_Click(object sender, RoutedEventArgs e)
@@ -115,6 +116,8 @@ namespace AMK.UI
 
             this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
         }
+
+        #endregion
 
         private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

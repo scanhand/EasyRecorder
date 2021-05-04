@@ -350,12 +350,6 @@ namespace AMK
             this.LogWindow.WindowState = WindowState.Normal;
         }
 
-        private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
-        {
-            ALog.Debug("TaskbarIcon_TrayMouseDoubleClick");
-            this.WindowState = WindowState.Normal;
-        }
-
         private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("MenuItem_StartPlaying_Click");
@@ -376,6 +370,7 @@ namespace AMK
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_FileLoad_Click");
             AMKFile file = AMKFile.LoadFileDialog();
             if (file == null)
                 return;
@@ -389,16 +384,19 @@ namespace AMK
 
         private void MenuItem_FileSave_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_FileSave_Click");
             AMKFile.SaveFileDialog(this.Recorder.Items);
         }
 
         private void MenuItem_AlwaysTopMost_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_AlwaysTopMost_Click");
             this.Topmost = this.MenuAlwaysTopMostItem.IsChecked;
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_Exit_Click");
             MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to exit the program?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result != MessageBoxResult.Yes)
                 return;
@@ -408,6 +406,7 @@ namespace AMK
 
         private void MenuItem_About_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_About_Click");
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Owner = this;
             aboutWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -416,10 +415,17 @@ namespace AMK
 
         private void MenuItem_ResetToStart_Click(object sender, RoutedEventArgs e)
         {
+            ALog.Debug("MenuItem_ResetToStart_Click");
             this.Recorder.ResetToStart();
         }
 
         #endregion
+
+        private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("TaskbarIcon_TrayMouseDoubleClick");
+            this.WindowState = WindowState.Normal;
+        }
 
         private void UpdateMousePosition(EventHook.MouseEventArgs e)
         {

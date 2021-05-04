@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:AMK.UI"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="Mouse Wheel Configuration" Height="220" Width="400">
+        IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False"
+        Title="Mouse Wheel Configuration" Height="220" Width="400" >
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>

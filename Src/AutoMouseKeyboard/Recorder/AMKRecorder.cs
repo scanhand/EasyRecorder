@@ -408,7 +408,21 @@ namespace AMK.Recorder
 
             ALog.Debug("AMKRecorder::Start Playing");
             this.State = AMKState.Playing;
-            this.Player.Start();
+            this.Player.Start(this.Items);
+            return true;
+        }
+
+        public bool StartPlaying(List<IRecorderItem> items)
+        {
+            if (items.Count <= 0)
+            {
+                ALog.Debug("AMKRecorder::StartPlaying::Item's count is 0.");
+                return false;
+            }
+
+            ALog.Debug("AMKRecorder::Start Playing");
+            this.State = AMKState.Playing;
+            this.Player.Start(items);
             return true;
         }
 

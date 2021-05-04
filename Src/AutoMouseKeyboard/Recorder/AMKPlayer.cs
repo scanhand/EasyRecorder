@@ -1,5 +1,6 @@
 ﻿using AMK.Global;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -40,8 +41,14 @@ namespace AMK.Recorder
             this.AMKRecorder = recorder;
         }
 
-        public bool Start()
+        public bool Start(List<IRecorderItem> items)
         {
+            if(items.Count <= 0)
+            {
+                ALog.Debug("Plying item is 0.");
+                return false;
+            }
+
             Stop();
 
             this.ThreadPlayer = new Thread(() =>
@@ -50,24 +57,19 @@ namespace AMK.Recorder
                 if (OnStartPlaying != null)
                     OnStartPlaying();
 
+                this.CurrentRecorder = items.First();
                 while (IsThreadEnable)
                 {
                     if (!this.CurrentRecorder.Play(this))
                         break;
 
-                    if (IsLastStep())
+                    if (IsLastStep(items))
                     {
-                        if (IsInfinitePlaying)
-                        {
-                            ResetToStart();
-                            continue;
-                        }
-
                         isLastStep = true;
                         break;
                     }
 
-                    if (!NextStep())
+                    if (!NextStep(items))
                         break;
                 }
 
@@ -79,6 +81,7 @@ namespace AMK.Recorder
             this.IsThreadEnable = true;
             ResetLastItem();
             this.ThreadPlayer.Start();
+
             return true;
         }
 
@@ -90,6 +93,11 @@ namespace AMK.Recorder
         private bool IsLastStep()
         {
             return this.CurrentRecorder.Equals(this.AMKRecorder.Items.Last());
+        }
+
+        private bool IsLastStep(List<IRecorderItem> items)
+        {
+            return this.CurrentRecorder.Equals(items.Last());
         }
 
         private bool NextStep()
@@ -110,6 +118,27 @@ namespace AMK.Recorder
             index++;
             ALog.Debug($"AMKPlayer::Current index is {index}");
             this.CurrentRecorder = this.AMKRecorder.Items[index];
+            return true;
+        }
+
+        private bool NextStep(List<IRecorderItem> items)
+        {
+            int index = items.IndexOf(this.CurrentRecorder);
+            if (index == -1)
+            {
+                ALog.Debug("AMKPlayer::index not found.");
+                return false;
+            }
+
+            if (index >= items.Count - 1)
+            {
+                ALog.Debug("AMKPlayer::Current index is last index");
+                return false;
+            }
+
+            index++;
+            ALog.Debug($"AMKPlayer::Current index is {index}");
+            this.CurrentRecorder = items[index];
             return true;
         }
 
