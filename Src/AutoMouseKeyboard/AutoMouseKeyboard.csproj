@@ -152,12 +152,18 @@
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
     <Compile Include="UI\AMKCommander.cs" />
-    <Compile Include="Recorder\AMKRecorderItemConfigManager.cs" />
+    <Compile Include="UI\AMKRecorderItemConfigManager.cs" />
     <Compile Include="UI\AMKStatusBar.xaml.cs">
       <DependentUpon>AMKStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\AMKStatusBarItem.cs" />
     <Compile Include="UI\IRecorderItemConfig.cs" />
+    <Compile Include="UI\MouseMoveRecorderItemConfig.xaml.cs">
+      <DependentUpon>MouseMoveRecorderItemConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\KeyPressRecorderItemConfig.xaml.cs">
+      <DependentUpon>KeyPressRecorderItemConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\KeyUpDownRecorderItemConfig.xaml.cs">
       <DependentUpon>KeyUpDownRecorderItemConfig.xaml</DependentUpon>
     </Compile>
@@ -222,6 +228,14 @@
     <Page Include="UI\AMKStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MouseMoveRecorderItemConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\KeyPressRecorderItemConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UI\KeyUpDownRecorderItemConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
