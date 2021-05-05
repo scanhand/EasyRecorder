@@ -123,27 +123,25 @@ namespace AMK.Recorder
                         return;
                     }
 
-                    //Remove KeyDown item
-                    if (!IsCtrlAltShift(this.CurrentKeyRecorder))
+                    //Remove items
+                    List<IRecorderItem> deleteItems = new List<IRecorderItem>();
+                    List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+                    foreach (var item in keyDownItems)
                     {
-                        List<IRecorderItem> deleteItems = new List<IRecorderItem>();
-                        List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
-                        foreach (var item in keyDownItems)
-                        {
-                            if (IsCtrlAltShift(item))
-                                continue;
+                        if (IsCtrlAltShift(item))
+                            continue;
 
-                            if((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
-                                deleteItems.Add(item);
-                        }
-
-                        foreach(var item in deleteItems)
-                        {
-                            this.AMKRecorder.DeleteItem(item);
-                        }
-                        this.AMKRecorder.ResetCurrentRecorderbyLast();
+                        if((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
+                            deleteItems.Add(item);
                     }
 
+                    foreach(var item in deleteItems)
+                    {
+                        this.AMKRecorder.DeleteItem(item);
+                    }
+                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+
+                    //New Key Press
                     newRecorder = new KeyPressRecorderItem()
                     {
                         Dir = Dir.Press,

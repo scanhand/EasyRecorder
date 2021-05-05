@@ -99,9 +99,9 @@ namespace AMK.Global
                     case VirtualKeyCode.OEM_PERIOD: return string.Format(".");
                     case VirtualKeyCode.OEM_2: return string.Format("/");
                     case VirtualKeyCode.OEM_3: return string.Format("`");
-                    case VirtualKeyCode.OEM_4: return string.Format("[");
+                    case VirtualKeyCode.OEM_4: return string.Format("LBRACKET");
                     case VirtualKeyCode.OEM_5: return string.Format("\\");
-                    case VirtualKeyCode.OEM_6: return string.Format("]");
+                    case VirtualKeyCode.OEM_6: return string.Format("RBRACKET");
                     case VirtualKeyCode.OEM_7: return string.Format("'");
                     case VirtualKeyCode.OEM_8: return string.Format(" ");
                     case VirtualKeyCode.OEM_102: return string.Format("\\");

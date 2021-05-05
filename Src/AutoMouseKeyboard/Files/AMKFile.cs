@@ -1,8 +1,10 @@
-﻿using AMK.Recorder;
+﻿using AMK.Global;
+using AMK.Recorder;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 
@@ -34,10 +36,14 @@ namespace AMK.Files
             AMKFile file = new AMKFile();
             file.FileName = filePath;
             file.FileBody.Items = items.Copy<List<IRecorderItem>>();
-            if (!file.SaveFile())
+
+            using (new WaitCursor())
             {
-                System.Windows.MessageBox.Show("File Save Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return false;
+                if (!file.SaveFile())
+                {
+                    System.Windows.MessageBox.Show("File Save Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return false;
+                }
             }
             return true;
         }
@@ -114,13 +120,16 @@ namespace AMK.Files
 
             //Get the path of specified file
             string filePath = openFileDialog.FileName;
-
             AMKFile file = new AMKFile();
             file.FileName = filePath;
-            if (!file.LoadFile())
+
+            using (new WaitCursor())
             {
-                System.Windows.MessageBox.Show("File Load Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return null;
+                if (!file.LoadFile())
+                {
+                    System.Windows.MessageBox.Show("File Load Error!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return null;
+                }
             }
             return file;
         }

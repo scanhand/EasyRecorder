@@ -120,6 +120,7 @@
     <Compile Include="Global\ObjectExtensions.cs" />
     <Compile Include="Global\SingletonBase.cs" />
     <Compile Include="Global\TaskEx.cs" />
+    <Compile Include="Global\WaitCursor.cs" />
     <Compile Include="Group\AMKGroupControl.xaml.cs">
       <DependentUpon>AMKGroupControl.xaml</DependentUpon>
     </Compile>
