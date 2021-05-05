@@ -117,6 +117,15 @@ namespace AMK.UI
             this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
         }
 
+        private void MenuItem_NewKeyPressItem_Click(object sender, RoutedEventArgs e)
+        {
+            IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new KeyPressRecorderItem() { Time = GetNewItemTime() + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });
+            if (newItem == null)
+                return;
+
+            this.Recorder.InsertItem(this.RecorderListView.SelectedItem as IRecorderItem, newItem);
+        }
+
         #endregion
 
         private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

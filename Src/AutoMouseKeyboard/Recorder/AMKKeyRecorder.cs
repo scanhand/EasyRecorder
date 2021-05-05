@@ -99,6 +99,38 @@ namespace AMK.Recorder
             return IsCtrlAltShift(keyItem.VkCode);
         }
 
+        private IRecorderItem CreateKeyPressRecorderItem(KeyInputEventArgs e)
+        {
+            return new KeyPressRecorderItem()
+            {
+                Dir = Dir.Press,
+                VkCode = e.KeyData.VkCode,
+                Keyname = e.KeyData.Keyname,
+                UnicodeCharacter = e.KeyData.UnicodeCharacter,
+            };
+        }
+
+        private void DeletePrviousKeyDownItems()
+        {
+            List<IRecorderItem> deleteItems = new List<IRecorderItem>();
+            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+            foreach (var item in keyDownItems)
+            {
+                if (IsCtrlAltShift(item))
+                    continue;
+
+                if ((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
+                {
+                    deleteItems.Add(item);
+                }
+            }
+
+            foreach (var item in deleteItems)
+            {
+                this.AMKRecorder.DeleteItem(item);
+            }
+        }
+
         public void Add(KeyInputEventArgs e)
         {
             IRecorderItem newRecorder = null;
@@ -109,13 +141,7 @@ namespace AMK.Recorder
                     ALog.Debug("KeyEvent.Up, IsKeyPress: True");
                     if (IsCurrentKeyPress())
                     {
-                        newRecorder = new KeyPressRecorderItem()
-                        {
-                            Dir = Dir.Press,
-                            VkCode = e.KeyData.VkCode,
-                            Keyname = e.KeyData.Keyname,
-                            UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                        };
+                        newRecorder = CreateKeyPressRecorderItem(e);
 
                         this.AMKRecorder.ResetWaitingTime();
                         this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
@@ -124,31 +150,12 @@ namespace AMK.Recorder
                     }
 
                     //Remove items
-                    List<IRecorderItem> deleteItems = new List<IRecorderItem>();
-                    List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
-                    foreach (var item in keyDownItems)
-                    {
-                        if (IsCtrlAltShift(item))
-                            continue;
-
-                        if((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
-                            deleteItems.Add(item);
-                    }
-
-                    foreach(var item in deleteItems)
-                    {
-                        this.AMKRecorder.DeleteItem(item);
-                    }
+                    DeletePrviousKeyDownItems();
+                    
                     this.AMKRecorder.ResetCurrentRecorderbyLast();
 
                     //New Key Press
-                    newRecorder = new KeyPressRecorderItem()
-                    {
-                        Dir = Dir.Press,
-                        VkCode = e.KeyData.VkCode,
-                        Keyname = e.KeyData.Keyname,
-                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                    };
+                    newRecorder = CreateKeyPressRecorderItem(e);
                 }
                 else
                 {
