@@ -395,5 +395,11 @@
   <ItemGroup>
     <Resource Include="Resources\icons8-waitclock-64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-plus-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-subtract-64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

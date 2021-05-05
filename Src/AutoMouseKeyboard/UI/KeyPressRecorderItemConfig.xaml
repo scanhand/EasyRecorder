@@ -10,12 +10,12 @@
         Title="Key Configuration" Height="450" Width="400">
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="32"></ColumnDefinition>
+            <ColumnDefinition Width="40"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="32"></ColumnDefinition>
+            <ColumnDefinition Width="40"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="32"></RowDefinition>
@@ -29,12 +29,32 @@
         <!-- Icon -->
         <Image Source="/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png" HorizontalAlignment="Left" Width="32"/>
 
-        <DataGrid x:Name="dataKeys" Grid.Row="1" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="4" AutoGenerateColumns = "False">
+        <DataGrid x:Name="dataGridKeys" Grid.Row="1" Grid.RowSpan="4" Grid.Column="1" Grid.ColumnSpan="4" 
+                  AutoGenerateColumns = "False" ItemsSource="{Binding KeyPressRecorders}"
+                  CanUserSortColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Index" Binding="{Binding Index}" Width="Auto"/>
                 <DataGridComboBoxColumn x:Name="comboBoxDataGridKey" Header="Key" SelectedItemBinding="{Binding Key}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Grid Grid.Row="1" Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:Name="buttonPlus" Grid.Row="0" Margin="5,5,5,5" Click="buttonPlus_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-plus-64.png" ></Image>
+                </StackPanel>
+            </Button>
+            <Button x:Name="buttonMinus" Grid.Row="1" Margin="5,5,5,5" Click="buttonMinus_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-subtract-64.png" ></Image>
+                </StackPanel>
+            </Button>
+        </Grid>
+        
 
         <!-- Ok & Cancel Button -->
         <Button x:Name="buttonOK" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" Click="ButtonOK_Click">
