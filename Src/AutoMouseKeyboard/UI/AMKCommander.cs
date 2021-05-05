@@ -8,9 +8,9 @@ namespace AMK.UI
 {
     public class AMKCommander
     {
-        public VirtualKeyCode RecordingVKeyCode = VirtualKeyCode.F4;
+        public VirtualKeyCode RecordingVKeyCode = VirtualKeyCode.F9;
 
-        public VirtualKeyCode PlayingVKeyCode = VirtualKeyCode.F3;
+        public VirtualKeyCode PlayingVKeyCode = VirtualKeyCode.F10;
 
         public MainWindow MainWindow
         {

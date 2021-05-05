@@ -55,12 +55,7 @@ namespace AMK.Recorder
 
         private void ActionVkCode(KeyPressRecorderItem item)
         {
-            if (this.Dir == Dir.Up)
-                GM.Instance.InputSimulator.Keyboard.KeyUp((VirtualKeyCode)item.VkCode);
-            else if (this.Dir == Dir.Down)
-                GM.Instance.InputSimulator.Keyboard.KeyDown((VirtualKeyCode)item.VkCode);
-            else if (this.Dir == Dir.Press)
-                GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)item.VkCode);
+           GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)item.VkCode);
         }
     }
 }

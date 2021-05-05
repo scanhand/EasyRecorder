@@ -88,10 +88,30 @@ namespace AMK.Global
             {
                 return string.Format("{0}", (char)('A' + (vkCode - VirtualKeyCode.VK_A)));
             }
+            else if(vkCode >= VirtualKeyCode.OEM_1 && vkCode <= VirtualKeyCode.OEM_102)
+            {
+                switch(vkCode)
+                {
+                    case VirtualKeyCode.OEM_1:   return string.Format(";");
+                    case VirtualKeyCode.OEM_PLUS: return string.Format("+");
+                    case VirtualKeyCode.OEM_COMMA: return string.Format(",");
+                    case VirtualKeyCode.OEM_MINUS: return string.Format("-");
+                    case VirtualKeyCode.OEM_PERIOD: return string.Format(".");
+                    case VirtualKeyCode.OEM_2: return string.Format("/");
+                    case VirtualKeyCode.OEM_3: return string.Format("`");
+                    case VirtualKeyCode.OEM_4: return string.Format("[");
+                    case VirtualKeyCode.OEM_5: return string.Format("\\");
+                    case VirtualKeyCode.OEM_6: return string.Format("]");
+                    case VirtualKeyCode.OEM_7: return string.Format("'");
+                    case VirtualKeyCode.OEM_8: return string.Format(" ");
+                    case VirtualKeyCode.OEM_102: return string.Format("\\");
+                }
+                return vkCode.ToString();
+            }    
             else
             {
                 return vkCode.ToString();
-            }    
+            }
         }
 
         public static List<VirtualKeyCode> GetVirtualKeyCodes()

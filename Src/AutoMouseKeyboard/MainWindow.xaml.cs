@@ -8,6 +8,7 @@ using MahApps.Metro.Controls;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using WindowsInput.Native;
 
 namespace AMK
 {
@@ -288,6 +289,7 @@ namespace AMK
 
         private void KeyboardWatcher_OnKeyInput(object sender, KeyInputEventArgs e)
         {
+            ALog.Debug("KeyboardWatcher::EventType={0}, VKCode={1}", e.KeyData.EventType.ToString(), ((VirtualKeyCode)e.KeyData.VkCode).ToString());
             if (this.Commander.ProcessKey(e))
                 return;
 

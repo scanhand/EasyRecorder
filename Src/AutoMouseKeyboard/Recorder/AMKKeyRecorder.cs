@@ -2,6 +2,7 @@
 using EventHook;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WindowsInput.Native;
 
 namespace AMK.Recorder
@@ -75,11 +76,14 @@ namespace AMK.Recorder
             return false;
         }
 
-        private bool IsLastKeyDown()
+        private bool IsLastSameKeyDown(int vkCode)
         {
-            if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown &&
-                    this.AMKRecorder.GetLastItem()?.Dir == Dir.Down)
+            if ((this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown) &&
+                this.AMKRecorder.GetLastItem()?.Dir == Dir.Down &&
+                (this.AMKRecorder.GetLastItem() as IKeyRecorderItem)?.VkCode == vkCode)
+            {
                 return true;
+            }
 
             return false;
         }
@@ -122,7 +126,21 @@ namespace AMK.Recorder
                     //Remove KeyDown item
                     if (!IsCtrlAltShift(this.CurrentKeyRecorder))
                     {
-                        this.AMKRecorder.DeleteItem(this.CurrentKeyRecorder);
+                        List<IRecorderItem> deleteItems = new List<IRecorderItem>();
+                        List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+                        foreach (var item in keyDownItems)
+                        {
+                            if (IsCtrlAltShift(item))
+                                continue;
+
+                            if((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
+                                deleteItems.Add(item);
+                        }
+
+                        foreach(var item in deleteItems)
+                        {
+                            this.AMKRecorder.DeleteItem(item);
+                        }
                         this.AMKRecorder.ResetCurrentRecorderbyLast();
                     }
 
@@ -149,7 +167,7 @@ namespace AMK.Recorder
             else
             {
                 //it's state on pressing key
-                if (IsLastKeyDown())
+                if (IsLastSameKeyDown(e.KeyData.VkCode))
                 {
                     ALog.Debug("KeyEvent.Down, IsLastKeyDown: True");
                     return;
