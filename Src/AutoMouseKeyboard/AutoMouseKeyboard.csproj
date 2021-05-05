@@ -158,6 +158,8 @@
     </Compile>
     <Compile Include="UI\AMKStatusBarItem.cs" />
     <Compile Include="UI\IRecorderItemConfig.cs" />
+    <Compile Include="UI\KeyItem.cs" />
+    <Compile Include="UI\KeyPressData.cs" />
     <Compile Include="UI\MouseMoveRecorderItemConfig.xaml.cs">
       <DependentUpon>MouseMoveRecorderItemConfig.xaml</DependentUpon>
     </Compile>

@@ -31,20 +31,6 @@ namespace AMK.UI
             }
         }
 
-        class KeyItem
-        {
-            public VirtualKeyCode VKKeyCode { get; set; }
-            public KeyItem(VirtualKeyCode code)
-            {
-                this.VKKeyCode = code;
-            }
-
-            public override string ToString()
-            {
-                return this.VKKeyCode.ToString();
-            }
-        }
-
         #endregion
 
         public IRecorderItem RecorderItem { get; set; }
@@ -64,8 +50,8 @@ namespace AMK.UI
             this.comboUpDownButton.Items.Add(new UpDownItem(Dir.Up));
             this.comboUpDownButton.Items.Add(new UpDownItem(Dir.Down));
 
-            foreach (var key in Enum.GetValues(typeof(VirtualKeyCode)))
-                this.comboKey.Items.Add(new KeyItem((VirtualKeyCode)key));
+            foreach (var key in AUtil.GetVirtualKeyCodes())
+                this.comboKey.Items.Add(new KeyItem(key));
 
             this.KeyDown += (e, k) =>
             {
@@ -91,16 +77,16 @@ namespace AMK.UI
 
         private void SetKeyButtonCombobox(VirtualKeyCode vkCode)
         {
-            this.comboKey.SelectedItem = this.comboKey.Items.OfType<KeyItem>().First(p => p.VKKeyCode == vkCode);
+            this.comboKey.SelectedItem = this.comboKey.Items.OfType<KeyItem>().FirstOrDefault(p => p.VKKeyCode == vkCode);
         }
 
         private void ButtonOK_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             this.RecorderItem.Dir = (this.comboUpDownButton.SelectedItem as UpDownItem).Dir;
             IKeyRecorderItem keyItem = this.RecorderItem as IKeyRecorderItem;
             VirtualKeyCode vkCode = (this.comboKey.SelectedItem as KeyItem).VKKeyCode;
             keyItem.VkCode = (int)vkCode;
-            keyItem.Keyname = vkCode.ToString();
+            keyItem.Keyname = AUtil.ConvertVKeyToString(vkCode);
 
             this.DialogResult = true;
         }

@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <!-- Icon -->
-        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png" HorizontalAlignment="Left" Width="32"/>
+        <Image Source="/AutoMouseKeyboard;component/Resources/icons8-mouse-64.png" HorizontalAlignment="Left" Width="32"/>
 
         <!-- Ok & Cancel Button -->
         <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">

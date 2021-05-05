@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using WindowsInput.Native;
 
 namespace AMK.Global
 {
@@ -68,6 +71,43 @@ namespace AMK.Global
         public static bool IsStopPause(AMKState state)
         {
             return (state == AMKState.Stop || state == AMKState.PlayDone || state == AMKState.PlayingPause || state == AMKState.RecordingPause);
+        }
+
+        public static string ConvertVKeyToString(VirtualKeyCode vkCode)
+        {
+            if(vkCode >= VirtualKeyCode.VK_0 && vkCode <= VirtualKeyCode.VK_9)
+            {
+                return string.Format("{0}", (char)('0' + (vkCode - VirtualKeyCode.VK_0)));
+            } 
+            else if (vkCode >= VirtualKeyCode.VK_A && vkCode <= VirtualKeyCode.VK_Z)
+            {
+                return string.Format("{0}", (char)('A' + (vkCode - VirtualKeyCode.VK_A)));
+            }
+            else
+            {
+                return vkCode.ToString();
+            }    
+        }
+
+        public static List<VirtualKeyCode> GetVirtualKeyCodes()
+        {
+            List<VirtualKeyCode> keyCodes = new List<VirtualKeyCode>();
+
+            List<VirtualKeyCode> notSupports = new List<VirtualKeyCode>()
+            {
+                VirtualKeyCode.LBUTTON, VirtualKeyCode.RBUTTON, VirtualKeyCode.MBUTTON,
+                VirtualKeyCode.XBUTTON1, VirtualKeyCode.XBUTTON2,
+            };
+
+            foreach (var key in Enum.GetValues(typeof(VirtualKeyCode)))
+            {
+                VirtualKeyCode vkCode = (VirtualKeyCode)key;
+                if (notSupports.IndexOf(vkCode) >= 0)
+                    continue;
+
+                keyCodes.Add(vkCode);
+            }
+            return keyCodes;
         }
 
     }

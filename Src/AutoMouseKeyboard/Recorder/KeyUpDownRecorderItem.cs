@@ -43,9 +43,6 @@ namespace AMK.Recorder
             player.WaitingPlaying(this);
 
             //Action
-            Point pt = AUtil.ToMouseSimulatorPoint(this.Point);
-            GM.Instance.InputSimulator.Mouse.MoveMouseTo(pt.X, pt.Y);
-
             if (this.Dir == Dir.Up)
                 GM.Instance.InputSimulator.Keyboard.KeyUp((VirtualKeyCode)this.VkCode);
             else if (this.Dir == Dir.Down)
