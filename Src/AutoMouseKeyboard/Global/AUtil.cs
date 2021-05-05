@@ -73,7 +73,12 @@ namespace AMK.Global
             return (state == AMKState.Stop || state == AMKState.PlayDone || state == AMKState.PlayingPause || state == AMKState.RecordingPause);
         }
 
-        public static string ConvertVKeyToString(VirtualKeyCode vkCode)
+        public static string ToVKeyToString(int vkCode)
+        {
+            return ToVKeyToString((VirtualKeyCode)vkCode);
+        }
+
+        public static string ToVKeyToString(VirtualKeyCode vkCode)
         {
             if(vkCode >= VirtualKeyCode.VK_0 && vkCode <= VirtualKeyCode.VK_9)
             {

@@ -86,7 +86,7 @@ namespace AMK.UI
             IKeyRecorderItem keyItem = this.RecorderItem as IKeyRecorderItem;
             VirtualKeyCode vkCode = (this.comboKey.SelectedItem as KeyItem).VKKeyCode;
             keyItem.VkCode = (int)vkCode;
-            keyItem.Keyname = AUtil.ConvertVKeyToString(vkCode);
+            keyItem.Keyname = AUtil.ToVKeyToString(vkCode);
 
             this.DialogResult = true;
         }

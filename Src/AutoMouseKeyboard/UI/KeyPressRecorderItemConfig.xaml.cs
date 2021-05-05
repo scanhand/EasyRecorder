@@ -24,6 +24,8 @@ namespace AMK.UI
 
         public List<KeyPressData> KeyPressRecorders { get; set; } = new List<KeyPressData>();
 
+        private VirtualKeyCode LastVkCode { get; set; } = VirtualKeyCode.SPACE;
+
         private IKeyRecorderItem RecorderKeyItem
         {
             get
@@ -72,9 +74,9 @@ namespace AMK.UI
             KeyPressRecorderItem rootItem = this.RecorderItem as KeyPressRecorderItem;
             List<KeyPressData> gridItems = this.dataGridKeys.ItemsSource as List<KeyPressData>;
 
-            KeyPressData keyData = gridItems[0];
+            var keyData = gridItems[0];
             rootItem.VkCode = (int)keyData.Key.VKKeyCode;
-            rootItem.Keyname = AUtil.ConvertVKeyToString(keyData.Key.VKKeyCode);
+            rootItem.Keyname = AUtil.ToVKeyToString(keyData.Key.VKKeyCode);
 
             rootItem.ChildItems.Clear();
             for (int i=1; i<gridItems.Count; i++)
@@ -83,7 +85,7 @@ namespace AMK.UI
                 rootItem.ChildItems.Add(new KeyPressRecorderItem() { 
                     Time = rootItem.Time + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan * i),
                     VkCode = (int)keyData.Key.VKKeyCode,
-                    Keyname = AUtil.ConvertVKeyToString(keyData.Key.VKKeyCode),
+                    Keyname = AUtil.ToVKeyToString(keyData.Key.VKKeyCode),
                 });
             }
 
@@ -98,18 +100,17 @@ namespace AMK.UI
         private void buttonPlus_Click(object sender, RoutedEventArgs e)
         {
             int newIndex = 0;
-            VirtualKeyCode newVkCode = VirtualKeyCode.SPACE;
             if (this.dataGridKeys.SelectedItem != null && 
                 this.dataGridKeys.SelectedItem as KeyPressData != null)
             {
                 KeyPressData keyPress = this.dataGridKeys.SelectedItem as KeyPressData;
-                newVkCode = keyPress.Key.VKKeyCode;
+                this.LastVkCode = keyPress.Key.VKKeyCode;
                 newIndex = this.KeyPressRecorders.IndexOf(keyPress);
             }
 
             this.KeyPressRecorders.Insert(newIndex, new KeyPressData()
             {
-                Key = new KeyItem(newVkCode),
+                Key = new KeyItem(this.LastVkCode),
             });
 
             UpdateKeyPressRecorderDataGrid();
@@ -117,16 +118,24 @@ namespace AMK.UI
 
         private void buttonMinus_Click(object sender, RoutedEventArgs e)
         {
+            int selectedIndex = -1;
+            if (this.dataGridKeys.SelectedItem != null)
+                selectedIndex = this.KeyPressRecorders.IndexOf(this.dataGridKeys.SelectedItem as KeyPressData);
+
             foreach (var item in this.dataGridKeys.SelectedItems)
             {
                 this.KeyPressRecorders.Remove(item as KeyPressData);
             }
 
             UpdateKeyPressRecorderDataGrid();
+
+            this.dataGridKeys.SelectedIndex = selectedIndex;
         }
 
         private void UpdateKeyPressRecorderDataGrid()
         {
+            var selectedItem = this.dataGridKeys.SelectedItem;
+
             int index = 1;
             foreach (var item in this.KeyPressRecorders)
             {
@@ -135,6 +144,8 @@ namespace AMK.UI
 
             this.DataContext = null;
             this.DataContext = this;
+
+            this.dataGridKeys.SelectedItem = selectedItem;
         }
     }
 }

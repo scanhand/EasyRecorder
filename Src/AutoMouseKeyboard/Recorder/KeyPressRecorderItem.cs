@@ -15,15 +15,13 @@ namespace AMK.Recorder
             get
             {
                 StringBuilder sb = new StringBuilder();
-                if (!string.IsNullOrEmpty(this.Keyname))
-                    sb.AppendFormat("[{0}]", this.Keyname);
+                sb.AppendFormat("[{0}]", AUtil.ToVKeyToString(this.VkCode));
                 foreach (var i in this.ChildItems)
                 {
                     KeyPressRecorderItem item = i as KeyPressRecorderItem;
                     if (item == null)
                         continue;
-                    if (!string.IsNullOrEmpty(this.Keyname))
-                        sb.AppendFormat("[{0}]", item.Keyname);
+                    sb.AppendFormat("[{0}]", AUtil.ToVKeyToString(item.VkCode));
                 }
                 return sb.ToString();
             }
@@ -38,8 +36,9 @@ namespace AMK.Recorder
         {
             //Waiting
             player.WaitingPlaying(this);
+
             //Action
-            GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)this.VkCode);
+            ActionVkCode(this);
             foreach (var i in this.ChildItems)
             {
                 if (!player.IsThreadEnable)
@@ -49,9 +48,19 @@ namespace AMK.Recorder
                 //Waiting
                 player.WaitingPlaying(item);
                 //Action
-                GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)item.VkCode);
+                ActionVkCode(item);
             }
             return true;
+        }
+
+        private void ActionVkCode(KeyPressRecorderItem item)
+        {
+            if (this.Dir == Dir.Up)
+                GM.Instance.InputSimulator.Keyboard.KeyUp((VirtualKeyCode)item.VkCode);
+            else if (this.Dir == Dir.Down)
+                GM.Instance.InputSimulator.Keyboard.KeyDown((VirtualKeyCode)item.VkCode);
+            else if (this.Dir == Dir.Press)
+                GM.Instance.InputSimulator.Keyboard.KeyPress((VirtualKeyCode)item.VkCode);
         }
     }
 }

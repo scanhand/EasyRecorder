@@ -1,6 +1,8 @@
 ﻿using AMK.Global;
 using EventHook;
 using System;
+using System.Collections.Generic;
+using WindowsInput.Native;
 
 namespace AMK.Recorder
 {
@@ -34,9 +36,24 @@ namespace AMK.Recorder
             }
         }
 
+        private readonly List<VirtualKeyCode> NeedtoUpDownList = null;
+
         public AMKKeyRecorder(AMKRecorder recorder)
         {
             this.AMKRecorder = recorder;
+
+            this.NeedtoUpDownList = new List<VirtualKeyCode>()
+            {
+                VirtualKeyCode.CONTROL,
+                VirtualKeyCode.LCONTROL,
+                VirtualKeyCode.RCONTROL,
+                VirtualKeyCode.SHIFT,
+                VirtualKeyCode.LSHIFT,
+                VirtualKeyCode.RSHIFT,
+                VirtualKeyCode.MENU,
+                VirtualKeyCode.LMENU,
+                VirtualKeyCode.RMENU,
+            };
         }
 
         private bool IsKeyPress()
@@ -67,23 +84,51 @@ namespace AMK.Recorder
             return false;
         }
 
+        private bool IsCtrlAltShift(int vkCode)
+        {
+            return this.NeedtoUpDownList.Exists(p => p == (VirtualKeyCode)vkCode);
+        }
+
+        private bool IsCtrlAltShift(IRecorderItem item)
+        {
+            IKeyRecorderItem keyItem = item as IKeyRecorderItem;
+            return IsCtrlAltShift(keyItem.VkCode);
+        }
+
         public void Add(KeyInputEventArgs e)
         {
             IRecorderItem newRecorder = null;
             if (e.KeyData.EventType == KeyEvent.up)
             {
-                if (IsKeyPress())
+                if (IsKeyPress() && !IsCtrlAltShift(e.KeyData.VkCode))
                 {
                     ALog.Debug("KeyEvent.Up, IsKeyPress: True");
                     if (IsCurrentKeyPress())
+                    {
+                        newRecorder = new KeyPressRecorderItem()
+                        {
+                            Dir = Dir.Press,
+                            VkCode = e.KeyData.VkCode,
+                            Keyname = e.KeyData.Keyname,
+                            UnicodeCharacter = e.KeyData.UnicodeCharacter,
+                        };
+
+                        this.AMKRecorder.ResetWaitingTime();
+                        this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
+                        this.AMKRecorder.UpdateItem(this.CurrentKeyRecorder);
                         return;
+                    }
 
                     //Remove KeyDown item
-                    this.AMKRecorder.DeleteItem(this.CurrentKeyRecorder);
-                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    if (!IsCtrlAltShift(this.CurrentKeyRecorder))
+                    {
+                        this.AMKRecorder.DeleteItem(this.CurrentKeyRecorder);
+                        this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    }
 
                     newRecorder = new KeyPressRecorderItem()
                     {
+                        Dir = Dir.Press,
                         VkCode = e.KeyData.VkCode,
                         Keyname = e.KeyData.Keyname,
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
@@ -94,6 +139,7 @@ namespace AMK.Recorder
                     ALog.Debug("KeyEvent.Up, IsKeyPress: False");
                     newRecorder = new KeyUpDownRecorderItem()
                     {
+                        Dir = Dir.Up,
                         VkCode = e.KeyData.VkCode,
                         Keyname = e.KeyData.Keyname,
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
@@ -104,20 +150,14 @@ namespace AMK.Recorder
             {
                 //it's state on pressing key
                 if (IsLastKeyDown())
-                    return;
-
-                if (IsCurrentKeyPress())
                 {
-                    newRecorder = new KeyPressRecorderItem()
-                    {
-                        VkCode = e.KeyData.VkCode,
-                        Keyname = e.KeyData.Keyname,
-                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                    };
+                    ALog.Debug("KeyEvent.Down, IsLastKeyDown: True");
+                    return;
+                }
 
-                    this.AMKRecorder.ResetWaitingTime();
-                    this.CurrentKeyRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(this.CurrentKeyRecorder);
+                if (IsCurrentKeyPress() && !IsCtrlAltShift(e.KeyData.VkCode))
+                {
+                    ALog.Debug("KeyEvent.Down, IsCurrentKeyPress: True, IsCtrlAltShift: False");
                     return;
                 }
 

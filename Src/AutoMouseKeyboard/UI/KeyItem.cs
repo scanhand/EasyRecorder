@@ -18,7 +18,7 @@ namespace AMK.UI
 
         public override string ToString()
         {
-            return AUtil.ConvertVKeyToString(VKKeyCode);
+            return AUtil.ToVKeyToString(VKKeyCode);
         }
 
         public override bool Equals(object obj) => obj is KeyItem other && this.Equals(other);

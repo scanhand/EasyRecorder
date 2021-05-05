@@ -33,6 +33,7 @@ namespace AMK.Global
     {
         Up,
         Down,
+        Press,
     }
 
     public enum ButtonType
