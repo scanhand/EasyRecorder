@@ -15,13 +15,13 @@ namespace AMK.Recorder
             get
             {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("[{0}]", AUtil.ToVKeyToString(this.VkCode));
+                sb.AppendFormat("{0}", AUtil.ToVKeyToString(this.VkCode));
                 foreach (var i in this.ChildItems)
                 {
                     KeyPressRecorderItem item = i as KeyPressRecorderItem;
                     if (item == null)
                         continue;
-                    sb.AppendFormat("[{0}]", AUtil.ToVKeyToString(item.VkCode));
+                    sb.AppendFormat("{0}", AUtil.ToVKeyToString(item.VkCode));
                 }
                 return sb.ToString();
             }

@@ -113,14 +113,26 @@ namespace AMK
 
             this.Recorder.OnAddItem += (item) =>
             {
-                this.TaskQueue.QueueTask(() =>
+                IRecorderItem recorderItem = item;
+                if (recorderItem.Recorder == RecorderType.MouseMove)
+                {
+                    this.TaskQueue.QueueTask(() =>
+                    {
+                        this.InvokeIfRequired(() =>
+                        {
+                            this.RecorderListView.Items.Add(item);
+                            this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
+                        });
+                    });
+                }
+                else
                 {
                     this.InvokeIfRequired(() =>
                     {
                         this.RecorderListView.Items.Add(item);
                         this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
                     });
-                });
+                }
             };
 
             this.Recorder.OnInsertItem += (prevItem, newItem) =>

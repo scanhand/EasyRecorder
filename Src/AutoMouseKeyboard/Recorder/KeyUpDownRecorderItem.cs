@@ -14,7 +14,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return string.Format("[{0}]", AUtil.ToVKeyToString(this.VkCode));
+                return string.Format("{0}", AUtil.ToVKeyToString(this.VkCode));
             }
         }
 

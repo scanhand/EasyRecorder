@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Interop;
@@ -99,9 +100,9 @@ namespace AMK.Global
                     case VirtualKeyCode.OEM_PERIOD: return string.Format(".");
                     case VirtualKeyCode.OEM_2: return string.Format("/");
                     case VirtualKeyCode.OEM_3: return string.Format("`");
-                    case VirtualKeyCode.OEM_4: return string.Format("LBRACKET");
+                    case VirtualKeyCode.OEM_4: return string.Format("[LBRACKET]");
                     case VirtualKeyCode.OEM_5: return string.Format("\\");
-                    case VirtualKeyCode.OEM_6: return string.Format("RBRACKET");
+                    case VirtualKeyCode.OEM_6: return string.Format("[RBRACKET]");
                     case VirtualKeyCode.OEM_7: return string.Format("'");
                     case VirtualKeyCode.OEM_8: return string.Format(" ");
                     case VirtualKeyCode.OEM_102: return string.Format("\\");
@@ -110,7 +111,7 @@ namespace AMK.Global
             }    
             else
             {
-                return vkCode.ToString();
+                return string.Format("[{0}]", vkCode.ToString());
             }
         }
 
@@ -133,6 +134,11 @@ namespace AMK.Global
                 keyCodes.Add(vkCode);
             }
             return keyCodes;
+        }
+
+        public static string ToOSAbsolutePath(string path)
+        {
+            return Path.GetFullPath(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
         }
 
     }

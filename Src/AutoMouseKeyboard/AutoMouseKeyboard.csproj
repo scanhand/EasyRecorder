@@ -113,6 +113,7 @@
     <Compile Include="Files\AMKFile.cs" />
     <Compile Include="Files\AMKFileBody.cs" />
     <Compile Include="Files\AMKFileHeader.cs" />
+    <Compile Include="Global\AConst.cs" />
     <Compile Include="Global\AUtil.cs" />
     <Compile Include="Global\BackgroundQueue.cs" />
     <Compile Include="Global\EnumExtension.cs" />

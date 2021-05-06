@@ -1,5 +1,7 @@
-﻿using System;
+﻿using AMK.Global;
+using System;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace AMK
@@ -8,21 +10,43 @@ namespace AMK
     {
         public static bool IsOutputConsole { get; set; } = true;
         public static bool IsAppendTime { get; set; } = true;
+        public static bool IsWriteFile { get; set; } = true;
 
         public delegate void DebugCallback(string message);
 
         public static DebugCallback OnDebug;
 
+        private static string LogFileName { get; set; }
+        private static BackgroundQueue TaskQueue = new BackgroundQueue();
+
         public static void Initialize()
         {
-            OnDebug += (message) => { };
+            //Initialize File
+            if(IsWriteFile)
+            {
+                if (!Directory.Exists(AUtil.ToOSAbsolutePath(AConst.LogPath)))
+                    Directory.CreateDirectory(AUtil.ToOSAbsolutePath(AConst.LogPath));
+                ALog.LogFileName = Path.Combine(AUtil.ToOSAbsolutePath(AConst.LogPath), string.Format("AMK_{0}.log", DateTime.Now.ToString("yyyyMMdd")));
+            }
+
+            //Write to File 
+            OnDebug += (message) => { 
+                if(IsWriteFile)
+                {
+                    ALog.TaskQueue.QueueTask(() =>
+                    {
+                        string logMessage = message + Environment.NewLine;
+                        File.AppendAllText(ALog.LogFileName, logMessage);
+                    });
+                }
+            };
         }
 
         public static string Debug(string format, params object[] args)
         {
             var sb = new StringBuilder();
             if (IsAppendTime)
-                sb.Append($"[{DateTime.Now.ToLongTimeString()}] ");
+                sb.Append(string.Format("[{0}]", DateTime.Now.ToString("HH:mm:ss.ff")));
 
             sb.Append(string.Format(format, args));
 
@@ -33,6 +57,5 @@ namespace AMK
             OnDebug(log);
             return log;
         }
-
     }
 }
