@@ -136,7 +136,7 @@ namespace AMK.Recorder
             IRecorderItem newRecorder = null;
             if (e.KeyData.EventType == KeyEvent.up)
             {
-                if (IsKeyPress() && !IsCtrlAltShift(e.KeyData.VkCode))
+                if (IsKeyPress() && !IsCtrlAltShift(e.KeyData.VkCode) && !IsCtrlAltShift(this.CurrentKeyRecorder))
                 {
                     ALog.Debug("KeyEvent.Up, IsKeyPress: True");
                     if (IsCurrentKeyPress())
