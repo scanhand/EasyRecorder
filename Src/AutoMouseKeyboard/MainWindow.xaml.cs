@@ -325,7 +325,21 @@ namespace AMK
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            this.Recorder.StartRecording(true);
+
+            bool isReset = true;
+            if(this.Recorder.Items.Count > 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Do you want to reset all of recorder items?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Cancel)
+                    return;
+
+                if (result == MessageBoxResult.Yes)
+                    isReset = true;
+                else if (result == MessageBoxResult.No)
+                    isReset = false;
+            }
+
+            this.Recorder.StartRecording(isReset);
         }
 
         private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
@@ -356,6 +370,10 @@ namespace AMK
         private void MenuItem_ResetItems_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
+
+            if (MessageBox.Show("Do you want to reset all of recorder items?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+                return;
+
             this.Recorder.ResetItems();
         }
 
