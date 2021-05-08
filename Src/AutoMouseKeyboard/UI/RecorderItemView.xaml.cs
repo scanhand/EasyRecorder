@@ -168,7 +168,10 @@ namespace AMK.UI
 
         private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+            if(Preference.Instance.DoubleClickAction == Global.DoubleClickActionType.EditItem)
+                this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+            else if (Preference.Instance.DoubleClickAction == Global.DoubleClickActionType.Memo)
+                this.RecorderItemConfigManager.ShowModifyMemoWindow(this.RecorderListView.SelectedItem as IRecorderItem);
         }
 
         private DateTime GetNewItemTime()

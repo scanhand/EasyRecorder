@@ -59,4 +59,10 @@ namespace AMK.Global
         None,
         Activated,
     }
+
+    public enum DoubleClickActionType
+    {
+        EditItem,
+        Memo,
+    }
 }

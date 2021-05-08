@@ -11,6 +11,8 @@ namespace AMK.UI
 
         public bool IsShowToastMessage { get; set; } = true;
 
+        public DoubleClickActionType DoubleClickAction { get; set; } = DoubleClickActionType.Memo;
+
         [JsonIgnore]
         public Window MainWindow { get; set; } = null;
 

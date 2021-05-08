@@ -27,7 +27,7 @@
 
         <!-- Waiting Time-->
         <Label Content="Memo:" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        <TextBox x:Name="textBoxMemo" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5,0,0,5" />
+        <TextBox x:Name="textBoxMemo" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="5,0,10,5" />
 
         <!-- Ok & Cancel Button -->
         <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
