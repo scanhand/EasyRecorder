@@ -1,5 +1,6 @@
 ﻿using AMK.Global;
 using System.Text;
+using System.Windows.Forms;
 using WindowsInput.Native;
 
 namespace AMK.Recorder
@@ -9,6 +10,7 @@ namespace AMK.Recorder
         public int VkCode { get; set; } = (int)VirtualKeyCode.SPACE;
         public string Keyname { get; set; }
         public string UnicodeCharacter { get; set; }
+        public Keys ModifierKeys { get; set; }
 
         public override string Description
         {

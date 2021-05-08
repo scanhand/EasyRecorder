@@ -44,7 +44,8 @@ namespace AMK
 
         public static string Debug(string format, params object[] args)
         {
-            string callingMethodName = new StackFrame(1, true).GetMethod().Name;
+            StackFrame stackFrame = new StackFrame(1, true);
+            string callingMethodName = string.Format("{0}.{1}", Path.GetFileNameWithoutExtension(stackFrame.GetFileName()),  stackFrame.GetMethod().Name);
 
             var sb = new StringBuilder();
             if (IsAppendTime)
