@@ -174,6 +174,27 @@ namespace AMK.Recorder
             return deleteItems;
         }
 
+        private IRecorderItem GetPrviousKeyDownItem(KeyInputEventArgs e)
+        {
+            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+            foreach (var item in keyDownItems)
+            {
+                if (IsCtrlAltShift(item))
+                    continue;
+
+                IKeyRecorderItem keyItem = item as IKeyRecorderItem;
+                if (keyItem.VkCode != e.KeyData.VkCode)
+                    continue;
+
+                if ((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < this.KeyPressIntervalTimeSec)
+                {
+                    if (!IsCtrlAltShift(keyItem.ModifierKeys))
+                        return item;
+                }
+            }
+            return null;
+        }
+
         private bool IsSameKeyCodeAndWithInIntervalTime(IRecorderItem item, KeyInputEventArgs e)
         {
             IKeyRecorderItem keyItem = item as IKeyRecorderItem;
@@ -185,18 +206,33 @@ namespace AMK.Recorder
 
         private bool IsIncludedKeyItem(KeyInputEventArgs e)
         {
-            if (this.CurrentKeyRecorder?.Recorder != RecorderType.KeyPress)
-                return false;
-
-            if (IsSameKeyCodeAndWithInIntervalTime(this.CurrentKeyRecorder, e))
-                return true;
-
-            foreach (var item in this.CurrentKeyRecorder.ChildItems)
+            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyPress);
+            foreach (var item in keyDownItems)
             {
                 if (IsSameKeyCodeAndWithInIntervalTime(item, e))
                     return true;
+
+                foreach (var childItem in this.CurrentKeyRecorder.ChildItems)
+                {
+                    if (IsSameKeyCodeAndWithInIntervalTime(childItem, e))
+                        return true;
+                }
             }
             return false;
+        }
+
+        private void ReplaceKeyDownToKeyPress(IRecorderItem item)
+        {
+            IKeyRecorderItem keyItem = item as IKeyRecorderItem;
+            IRecorderItem newItem = new KeyPressRecorderItem()
+            {
+                Dir = Dir.Press,
+                VkCode = keyItem.VkCode,
+                Keyname = keyItem.Keyname,
+                UnicodeCharacter = keyItem.UnicodeCharacter,
+                ModifierKeys = keyItem.ModifierKeys
+            };
+            this.AMKRecorder.ReplaceItem(item, newItem);
         }
 
         public void Add(KeyInputEventArgs e)
@@ -209,17 +245,13 @@ namespace AMK.Recorder
                     ALog.Debug("KeyEvent.Up.IsIncludedKeyItem == true");
                     return;
                 }
-                
-                List<IRecorderItem> prevItems = GetPrviousKeyDownItems(e);
-                if(prevItems.Count > 0)
+
+                IRecorderItem prevRecorder = GetPrviousKeyDownItem(e);
+                if(prevRecorder != null)
                 {
                     //Delete Previous Key up Items
-                    foreach (var item in prevItems)
-                    {
-                        IKeyRecorderItem keyItem = item as IKeyRecorderItem;
-                        ALog.Debug("Delete Items::Recorder={0}, VkCode={1}", item.Recorder, keyItem.VkCode);
-                        this.AMKRecorder.DeleteItem(item);
-                    }
+                    ALog.Debug("Delete Items::Recorder={0}, VkCode={1}", prevRecorder.Recorder, AUtil.ToVKeyToString((prevRecorder as IKeyRecorderItem).VkCode));
+                    this.AMKRecorder.DeleteItem(prevRecorder);
 
                     //New Key Press
                     this.AMKRecorder.ResetCurrentRecorderbyLast();
@@ -232,6 +264,7 @@ namespace AMK.Recorder
                         ModifierKeys = Control.ModifierKeys
                     };
 
+                    //If Current Is KeyPress, this KeyPress add into ChildItem
                     if(this.CurrentRecorder?.Recorder == RecorderType.KeyPress)
                     {
                         ALog.Debug("Add KeyPress into KeyPress.ChildItem");
@@ -263,6 +296,7 @@ namespace AMK.Recorder
                     return;
                 }
 
+                //If current is KeyPress, Add a item into ChildItem
                 if (IsCurrentKeyPress() && !IsCtrlAltShift(e.KeyData.VkCode) && !IsCtrlAltShift(Control.ModifierKeys))
                 {
                     //New Key Press
@@ -281,7 +315,32 @@ namespace AMK.Recorder
                     this.AMKRecorder.UpdateItem(this.CurrentRecorder);
                     return;
                 }
+
+                //If Current is Key Down, It means continuosly 2 item's Type is KeyDown.
+                //So that, 1) Replace Previous KeyDown item to KeyPress
+                //         2) Add a this time KeyDown item into Child Item
+                if(IsCurrentKeyDown() && !IsCtrlAltShift(e.KeyData.VkCode) && !IsCtrlAltShift(Control.ModifierKeys))
+                {
+                    ReplaceKeyDownToKeyPress(this.CurrentRecorder);
+
+                    //New Key Press
+                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    newRecorder = new KeyPressRecorderItem()
+                    {
+                        Dir = Dir.Press,
+                        VkCode = e.KeyData.VkCode,
+                        Keyname = e.KeyData.Keyname,
+                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
+                        ModifierKeys = Control.ModifierKeys
+                    };
+
+                    this.AMKRecorder.ResetWaitingTime();
+                    this.CurrentRecorder.ChildItems.Add(newRecorder);
+                    this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                    return;
+                }
                 
+                //New Key Down
                 newRecorder = new KeyUpDownRecorderItem()
                 {
                     Dir = Dir.Down,
@@ -292,8 +351,7 @@ namespace AMK.Recorder
                 };
             }
 
-            if(newRecorder != null)
-                this.AMKRecorder.AddKeyItem(newRecorder);
+            this.AMKRecorder.AddKeyItem(newRecorder);
         }
     }
 }

@@ -227,7 +227,24 @@ namespace AMK.Recorder
                     continue;
 
                 if (this.Items[i].Recorder == RecorderType.KeyUpDown ||
-                     this.Items[i].Recorder == RecorderType.KeyPress)
+                     this.Items[i].Recorder == RecorderType.KeyPress ||
+                      this.Items[i].Recorder == RecorderType.KeyHotkey)
+                    return this.Items[i];
+            }
+            return null;
+        }
+
+        public IRecorderItem GetLastMouseItem(bool isIgnoreWaitItem = true)
+        {
+            for (int i = this.Items.Count - 1; i >= 0; i--)
+            {
+                if (isIgnoreWaitItem && this.Items[i].Recorder == RecorderType.WaitTime)
+                    continue;
+
+                if (this.Items[i].Recorder == RecorderType.MouseWheel ||
+                     this.Items[i].Recorder == RecorderType.MouseClick ||
+                      this.Items[i].Recorder == RecorderType.MouseMove ||
+                       this.Items[i].Recorder == RecorderType.MouseUpDown)
                     return this.Items[i];
             }
             return null;
@@ -322,6 +339,8 @@ namespace AMK.Recorder
             }
 
             this.Items.Remove(item);
+            ResetCurrentRecorderbyLast();
+
             if (OnDeleteItem != null)
                 OnDeleteItem(item);
 
@@ -390,6 +409,7 @@ namespace AMK.Recorder
         {
             this.CurrentRecorder = GetLastItem();
             this.CurrentKeyRecorder = GetLastKeyItem();
+            this.CurrentMouseRecorder = GetLastMouseItem();
         }
 
         public void UpdateItem(IRecorderItem item)
