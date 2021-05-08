@@ -165,7 +165,7 @@ namespace AMK.Recorder
                 if (keyItem.VkCode != e.KeyData.VkCode)
                     continue;
 
-                if ((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
+                if ((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < this.KeyPressIntervalTimeSec)
                 {
                     if (!IsCtrlAltShift(keyItem.ModifierKeys))
                         deleteItems.Add(item);
@@ -174,18 +174,26 @@ namespace AMK.Recorder
             return deleteItems;
         }
 
+        private bool IsSameKeyCodeAndWithInIntervalTime(IRecorderItem item, KeyInputEventArgs e)
+        {
+            IKeyRecorderItem keyItem = item as IKeyRecorderItem;
+            if (keyItem.VkCode == e.KeyData.VkCode &&
+                (DateTime.Now - item.Time).TotalSeconds < this.KeyPressIntervalTimeSec)
+                return true;
+            return false;
+        }
+
         private bool IsIncludedKeyItem(KeyInputEventArgs e)
         {
             if (this.CurrentKeyRecorder?.Recorder != RecorderType.KeyPress)
                 return false;
 
-            foreach(var item in this.CurrentKeyRecorder.ChildItems)
-            {
-                IKeyRecorderItem keyItem = item as IKeyRecorderItem;
-                if (keyItem.VkCode != e.KeyData.VkCode)
-                    continue;
+            if (IsSameKeyCodeAndWithInIntervalTime(this.CurrentKeyRecorder, e))
+                return true;
 
-                if ((DateTime.Now - item.GetVeryLastTime()).TotalSeconds < KeyPressIntervalTimeSec)
+            foreach (var item in this.CurrentKeyRecorder.ChildItems)
+            {
+                if (IsSameKeyCodeAndWithInIntervalTime(item, e))
                     return true;
             }
             return false;
@@ -201,8 +209,7 @@ namespace AMK.Recorder
                     ALog.Debug("KeyEvent.Up.IsIncludedKeyItem == true");
                     return;
                 }
-
-                ALog.Debug("KeyEvent.Up");
+                
                 List<IRecorderItem> prevItems = GetPrviousKeyDownItems(e);
                 if(prevItems.Count > 0)
                 {
@@ -224,9 +231,19 @@ namespace AMK.Recorder
                         UnicodeCharacter = e.KeyData.UnicodeCharacter,
                         ModifierKeys = Control.ModifierKeys
                     };
+
+                    if(this.CurrentRecorder?.Recorder == RecorderType.KeyPress)
+                    {
+                        ALog.Debug("Add KeyPress into KeyPress.ChildItem");
+                        this.AMKRecorder.ResetWaitingTime();
+                        this.CurrentRecorder.ChildItems.Add(newRecorder);
+                        this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                        return;
+                    }
                 }
                 else
                 {
+                    ALog.Debug("KeyUp Item");
                     newRecorder = new KeyUpDownRecorderItem()
                     {
                         Dir = Dir.Up,
@@ -262,19 +279,17 @@ namespace AMK.Recorder
                     this.AMKRecorder.ResetWaitingTime();
                     this.CurrentRecorder.ChildItems.Add(newRecorder);
                     this.AMKRecorder.UpdateItem(this.CurrentRecorder);
-                    newRecorder = null;
+                    return;
                 }
-                else
+                
+                newRecorder = new KeyUpDownRecorderItem()
                 {
-                    newRecorder = new KeyUpDownRecorderItem()
-                    {
-                        Dir = Dir.Down,
-                        VkCode = e.KeyData.VkCode,
-                        Keyname = e.KeyData.Keyname,
-                        UnicodeCharacter = e.KeyData.UnicodeCharacter,
-                        ModifierKeys = Control.ModifierKeys
-                    };
-                }
+                    Dir = Dir.Down,
+                    VkCode = e.KeyData.VkCode,
+                    Keyname = e.KeyData.Keyname,
+                    UnicodeCharacter = e.KeyData.UnicodeCharacter,
+                    ModifierKeys = Control.ModifierKeys
+                };
             }
 
             if(newRecorder != null)
