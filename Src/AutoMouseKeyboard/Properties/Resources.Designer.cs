@@ -253,6 +253,26 @@ namespace AMK.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_playfrom_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_playfrom_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_playuntil_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_playuntil_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_plus_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8_plus_64", resourceCulture);

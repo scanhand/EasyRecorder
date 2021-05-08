@@ -81,16 +81,46 @@ namespace AMK.UI
 
         #region Menu
 
-        private void MenuItem_PlayItems_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_PlaySelectedItems_Click(object sender, RoutedEventArgs e)
         {
             if (this.RecorderListView.SelectedItems == null || this.RecorderListView.SelectedItems.Count <= 0)
                 return;
-
+            
             this.Recorder.Player.ResetLastItem();
 
             List<IRecorderItem> items = new List<IRecorderItem>();
             foreach (var i in this.RecorderListView.SelectedItems)
                 items.Add(i as IRecorderItem);
+
+            this.Recorder.StartPlaying(items);
+        }
+
+        private void MenuItem_PlayFromSelectedItems_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.RecorderListView.SelectedItem == null)
+                return;
+
+            this.Recorder.Player.ResetLastItem();
+
+            int startIndex = this.RecorderListView.Items.IndexOf(this.RecorderListView.SelectedItem);
+            List<IRecorderItem> items = new List<IRecorderItem>();
+            for(int i=startIndex; i< this.RecorderListView.Items.Count; i++)
+                items.Add(this.RecorderListView.Items[i] as IRecorderItem);
+
+            this.Recorder.StartPlaying(items);
+        }
+
+        private void MenuItem_PlayUntilSelectedItems_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.RecorderListView.SelectedItem == null)
+                return;
+
+            this.Recorder.Player.ResetLastItem();
+
+            int endIndex = this.RecorderListView.Items.IndexOf(this.RecorderListView.SelectedItem);
+            List<IRecorderItem> items = new List<IRecorderItem>();
+            for (int i = 0; i <= endIndex; i++)
+                items.Add(this.RecorderListView.Items[i] as IRecorderItem);
 
             this.Recorder.StartPlaying(items);
         }
@@ -168,10 +198,10 @@ namespace AMK.UI
 
         private void RecorderListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if(Preference.Instance.DoubleClickAction == Global.DoubleClickActionType.EditItem)
-                this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+            if (Preference.Instance.DoubleClickAction == Global.DoubleClickActionType.EditItem)
+                this.menuModifyItem.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
             else if (Preference.Instance.DoubleClickAction == Global.DoubleClickActionType.Memo)
-                this.RecorderItemConfigManager.ShowModifyMemoWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+                this.menuMemo.RaiseEvent(new RoutedEventArgs(MenuItem.ClickEvent));
         }
 
         private DateTime GetNewItemTime()
