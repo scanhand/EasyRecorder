@@ -135,6 +135,11 @@ namespace AMK.Recorder
                 //Adjust a timestamp in remained items
                 AdjustTimeSpanbyItem(newItem, decreaseTime);
             };
+
+            this.RecorderItemConfigManager.OnUpdateItem += (item) =>
+            {
+                UpdateItem(item);
+            };
         }
 
         public void Reset()

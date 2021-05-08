@@ -105,6 +105,11 @@ namespace AMK.UI
             this.RecorderItemConfigManager.ShowModifyConfigWindow(this.RecorderListView.SelectedItem as IRecorderItem);
         }
 
+        private void MenuItem_ModifyMemo_Click(object sender, RoutedEventArgs e)
+        {
+            this.RecorderItemConfigManager.ShowModifyMemoWindow(this.RecorderListView.SelectedItem as IRecorderItem);
+        }
+
         private void MenuItem_NewWaitingItem_Click(object sender, RoutedEventArgs e)
         {
             IRecorderItem newItem = this.RecorderItemConfigManager.ShowNewConfigWindow(new WaitTimeRecorderItem() { Time = GetNewItemTime() + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan) });

@@ -67,6 +67,11 @@
                             <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-pencil-64.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                    <MenuItem Header="Memo..." Click="MenuItem_ModifyMemo_Click" >
+                        <MenuItem.Icon>
+                            <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-note-64.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                     <MenuItem Header="Delete Items" Click="MenuItem_DeleteItems_Click" >
                         <MenuItem.Icon>
                             <Image Width="16" Source="/AutoMouseKeyboard;component/Resources/icons8-delete-bin-64.png"/>
@@ -115,7 +120,7 @@
                     </GridViewColumn>
 
                     <!-- Memo -->
-                    <GridViewColumn Width="50">
+                    <GridViewColumn Width="100">
                         <GridViewColumnHeader>Memo</GridViewColumnHeader>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

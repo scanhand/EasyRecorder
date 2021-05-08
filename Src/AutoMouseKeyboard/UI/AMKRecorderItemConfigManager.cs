@@ -11,6 +11,8 @@ namespace AMK.Recorder
 
         public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 
+        public Action<IRecorderItem> OnUpdateItem = null;
+
         public AMKRecorderItemConfigManager(AMKRecorder recorder)
         {
             this.AMKRecorder = recorder;
@@ -47,6 +49,24 @@ namespace AMK.Recorder
                 return null;
 
             return config.RecorderItem.Copy();
+        }
+
+        public void ShowModifyMemoWindow(IRecorderItem prevItem)
+        {
+            if (prevItem == null)
+                return;
+
+            IRecorderItemConfig config = new RecorderItemMemoConfig();
+            config.RecorderItem = prevItem.Copy();
+            Window window = config as Window;
+            window.Owner = GM.Instance.MainWindow;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            if (window.ShowDialog() == false)
+                return;
+
+            IRecorderItem modifiedItem = config.RecorderItem.Copy();
+            if (OnReplaceItem != null)
+                OnReplaceItem(prevItem, modifiedItem);
         }
 
         private IRecorderItemConfig CreateRecorderItemConfig(IRecorderItem item)

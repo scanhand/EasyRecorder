@@ -153,6 +153,7 @@ namespace AMK.Recorder
             this.NotifyPropertyChanged("Recorder");
             this.NotifyPropertyChanged("Description");
             this.NotifyPropertyChanged("IsSelected");
+            this.NotifyPropertyChanged("Memo");
         }
 
         public DateTime GetVeryLastTime()

@@ -188,6 +188,9 @@
     <Compile Include="UI\MouseUpDownRecorderItemConfig.xaml.cs">
       <DependentUpon>MouseUpDownRecorderItemConfig.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\RecorderItemMemoConfig.xaml.cs">
+      <DependentUpon>RecorderItemMemoConfig.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\WaitingTimeRecorderItemConfig.xaml.cs">
       <DependentUpon>WaitingTimeRecorderItemConfig.xaml</DependentUpon>
     </Compile>
@@ -262,6 +265,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\MouseUpDownRecorderItemConfig.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UI\RecorderItemMemoConfig.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -402,6 +409,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-subtract-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-note-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
