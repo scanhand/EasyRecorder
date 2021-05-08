@@ -407,7 +407,7 @@ namespace AMK.Recorder
                 return false;
             }
 
-            ALog.Debug("AMKRecorder::Start Playing");
+            ALog.Debug("");
             this.State = AMKState.Playing;
             this.Player.Start(this.Items);
             return true;
@@ -421,7 +421,7 @@ namespace AMK.Recorder
                 return false;
             }
 
-            ALog.Debug("AMKRecorder::Start Playing");
+            ALog.Debug("");
             this.State = AMKState.Playing;
             this.Player.Start(items);
             return true;
@@ -429,14 +429,14 @@ namespace AMK.Recorder
 
         public void StopPlaying()
         {
-            ALog.Debug("AMKRecorder::Stop Playing");
+            ALog.Debug("");
             this.Player.Stop();
             this.State = AMKState.Stop;
         }
 
         public void ResetToStart()
         {
-            ALog.Debug("AMKRecorder::ResetToStart");
+            ALog.Debug("");
             if (!AUtil.IsStopPause(this.State))
                 return;
 

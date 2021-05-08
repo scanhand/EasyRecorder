@@ -44,11 +44,15 @@ namespace AMK
 
         public static string Debug(string format, params object[] args)
         {
+            string callingMethodName = new StackFrame(1, true).GetMethod().Name;
+
             var sb = new StringBuilder();
             if (IsAppendTime)
                 sb.Append(string.Format("[{0}]", DateTime.Now.ToString("HH:mm:ss.ff")));
 
-            sb.Append(string.Format(format, args));
+            sb.Append(callingMethodName);
+            if(!string.IsNullOrEmpty(format))
+                sb.Append("::" + string.Format(format, args));
 
             var log = sb.ToString();
             if (IsOutputConsole)

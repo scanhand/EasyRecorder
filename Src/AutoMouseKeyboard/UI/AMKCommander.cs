@@ -61,7 +61,7 @@ namespace AMK.UI
 
         private void OnRecording()
         {
-            ALog.Debug("AMKCommander::OnRecording::State={0}", this.Recorder.State);
+            ALog.Debug("State={0}", this.Recorder.State);
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.RecordingPause;
@@ -75,7 +75,7 @@ namespace AMK.UI
 
         private void OnPlaying()
         {
-            ALog.Debug("AMKCommander::OnPlaying::State={0}", this.Recorder.State);
+            ALog.Debug("State={0}", this.Recorder.State);
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.PlayingPause;
@@ -101,7 +101,7 @@ namespace AMK.UI
 
         private void OnPushKey(VirtualKeyCode key)
         {
-            ALog.Debug("AMKCommander::OnPushKey::VirtualKeyCode={0}", key.ToString());
+            ALog.Debug("VirtualKeyCode={0}", key.ToString());
             if (key == VirtualKeyCode.DELETE && AUtil.IsStop(this.Recorder.State))
             {
                 DeleteKey();

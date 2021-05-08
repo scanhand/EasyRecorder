@@ -114,25 +114,14 @@ namespace AMK
             this.Recorder.OnAddItem += (item) =>
             {
                 IRecorderItem recorderItem = item;
-                if (recorderItem.Recorder == RecorderType.MouseMove)
-                {
-                    this.TaskQueue.QueueTask(() =>
-                    {
-                        this.InvokeIfRequired(() =>
-                        {
-                            this.RecorderListView.Items.Add(item);
-                            this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
-                        });
-                    });
-                }
-                else
+                this.TaskQueue.QueueTask(() =>
                 {
                     this.InvokeIfRequired(() =>
                     {
                         this.RecorderListView.Items.Add(item);
                         this.RecorderListView.ScrollIntoView(this.RecorderListView.Items[this.RecorderListView.Items.Count - 1]);
                     });
-                }
+                });
             };
 
             this.Recorder.OnInsertItem += (prevItem, newItem) =>
@@ -252,16 +241,18 @@ namespace AMK
 
         private void LayoutRoot_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-
+            ALog.Debug("");
         }
 
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+            ALog.Debug("");
             ResizeRecorderListViewColumn();
         }
 
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
+            ALog.Debug("");
             ResizeRecorderListViewColumn();
         }
 
@@ -325,13 +316,13 @@ namespace AMK
 
         public void StopRecording()
         {
-            ALog.Debug("StopRecording");
+            ALog.Debug("");
             this.Recorder.StopRecording();
         }
 
         public void StartPlaying(bool isReset)
         {
-            ALog.Debug("StartPlaying::IsReset={0}", isReset);
+            ALog.Debug("IsReset={0}", isReset);
             if (isReset)
                 this.Recorder.ResetToStart();
             this.Recorder.StartPlaying();
@@ -339,7 +330,7 @@ namespace AMK
 
         public void StopPlaying()
         {
-            ALog.Debug("StopPlaying");
+            ALog.Debug("");
             this.Recorder.StopPlaying();
         }
 
@@ -347,44 +338,44 @@ namespace AMK
 
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_StartRecording_Click");
+            ALog.Debug("");
             this.Recorder.StartRecording(true);
         }
 
         private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_StopRecording_Click");
+            ALog.Debug("");
             this.Recorder.StopRecording();
         }
 
         private void MenuItem_ShowLog_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_ShowLog_Click");
+            ALog.Debug("");
             this.LogWindow.Visibility = Visibility.Visible;
             this.LogWindow.WindowState = WindowState.Normal;
         }
 
         private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_StartPlaying_Click");
+            ALog.Debug("");
             StartPlaying(true);
         }
 
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_StopPlaying_Click");
+            ALog.Debug("");
             this.Recorder.StopPlaying();
         }
 
         private void MenuItem_ResetItems_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_ResetItems_Click");
+            ALog.Debug("");
             this.Recorder.ResetItems();
         }
 
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_FileLoad_Click");
+            ALog.Debug("");
             AMKFile file = AMKFile.LoadFileDialog();
             if (file == null)
                 return;
@@ -398,19 +389,19 @@ namespace AMK
 
         private void MenuItem_FileSave_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_FileSave_Click");
+            ALog.Debug("");
             AMKFile.SaveFileDialog(this.Recorder.Items);
         }
 
         private void MenuItem_AlwaysTopMost_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_AlwaysTopMost_Click");
+            ALog.Debug("");
             this.Topmost = this.MenuAlwaysTopMostItem.IsChecked;
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_Exit_Click");
+            ALog.Debug("");
             MessageBoxResult result = System.Windows.MessageBox.Show("Do you want to exit the program?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result != MessageBoxResult.Yes)
                 return;
@@ -420,7 +411,7 @@ namespace AMK
 
         private void MenuItem_About_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_About_Click");
+            ALog.Debug("");
             AboutWindow aboutWindow = new AboutWindow();
             aboutWindow.Owner = this;
             aboutWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
@@ -429,7 +420,7 @@ namespace AMK
 
         private void MenuItem_ResetToStart_Click(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("MenuItem_ResetToStart_Click");
+            ALog.Debug("");
             this.Recorder.ResetToStart();
         }
 
@@ -437,7 +428,7 @@ namespace AMK
 
         private void TaskbarIcon_TrayMouseDoubleClick(object sender, RoutedEventArgs e)
         {
-            ALog.Debug("TaskbarIcon_TrayMouseDoubleClick");
+            ALog.Debug("");
             this.WindowState = WindowState.Normal;
         }
 

@@ -45,7 +45,7 @@ namespace AMK.Recorder
         {
             if(items.Count <= 0)
             {
-                ALog.Debug("Plying item is 0.");
+                ALog.Debug("Playing item is 0.");
                 return false;
             }
 
