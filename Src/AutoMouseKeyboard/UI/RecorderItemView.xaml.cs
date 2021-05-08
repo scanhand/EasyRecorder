@@ -28,6 +28,39 @@ namespace AMK.UI
             InitializeComponent();
 
             this.MouseDoubleClick += RecorderListView_MouseDoubleClick;
+            this.SizeChanged += RecorderItemView_SizeChanged;
+        }
+
+        private void RecorderItemView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ResizeRecorderListViewColumn();
+        }
+
+        private void RecorderItemView_StateChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ResizeRecorderListViewColumn()
+        {
+            if (this.RecorderListView == null)
+                return;
+
+            const int statusColumnWidth = 30;
+            const int columnCount = 4;
+            double totalWidth = 0;
+            for (int i = 1; i < columnCount; i++)
+                totalWidth += ((GridView)this.RecorderListView.View).Columns[i].Width;
+
+            double[] totalWidthFactor = new double[columnCount];
+            for (int i = 1; i < columnCount; i++)
+                totalWidthFactor[i] = ((GridView)this.RecorderListView.View).Columns[i].Width / totalWidth;
+
+            this.RecorderListView.Width = this.ActualWidth;
+            double width = this.ActualWidth - statusColumnWidth - this.BorderThickness.Left - this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
+            ((GridView)this.RecorderListView.View).Columns[0].Width = statusColumnWidth;
+            for (int i = 1; i < columnCount; i++)
+                ((GridView)this.RecorderListView.View).Columns[i].Width = width * totalWidthFactor[i];
         }
 
         public void DeleteSelectedItems()

@@ -9,6 +9,8 @@ namespace AMK.UI
     {
         public bool IsTopMost { get; set; } = true;
 
+        public bool IsShowToastMessage { get; set; } = true;
+
         [JsonIgnore]
         public Window MainWindow { get; set; } = null;
 

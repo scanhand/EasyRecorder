@@ -60,6 +60,7 @@ namespace AMK.UI
             {
                 default:
                 case AMKState.Recording: return "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
+                case AMKState.Playing: return "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
             }
         }
 
@@ -69,6 +70,7 @@ namespace AMK.UI
             {
                 default:
                 case AMKState.Recording: return Colors.LightGray.ToString();
+                case AMKState.Playing: return Colors.LightGray.ToString();
             }
         }
 

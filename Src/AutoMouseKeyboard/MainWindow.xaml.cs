@@ -192,8 +192,11 @@ namespace AMK
             {
                 this.InvokeIfRequired(() =>
                 {
-                    this.ToastWindow.SetState(AMKState.Recording);
-                    this.ToastWindow.Show();
+                    if (Preference.Instance.IsShowToastMessage)
+                    {
+                        this.ToastWindow.SetState(AMKState.Recording);
+                        this.ToastWindow.Show();
+                    }
                 });
             };
 
@@ -209,6 +212,12 @@ namespace AMK
             {
                 this.InvokeIfRequired(() =>
                 {
+                    if (Preference.Instance.IsShowToastMessage)
+                    {
+                        this.ToastWindow.SetState(AMKState.Playing);
+                        this.ToastWindow.Show();
+                    }
+
                     this.RecorderListView.UnselectAll();
                 });
             };
@@ -225,6 +234,7 @@ namespace AMK
                     {
                         this.Recorder.State = AMKState.Stop;
                     }
+                    this.ToastWindow.Hide();
                 });
             };
 
@@ -247,35 +257,11 @@ namespace AMK
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             ALog.Debug("");
-            ResizeRecorderListViewColumn();
         }
 
         private void MainWindow_StateChanged(object sender, EventArgs e)
         {
             ALog.Debug("");
-            ResizeRecorderListViewColumn();
-        }
-
-        private void ResizeRecorderListViewColumn()
-        {
-            if (this.RecorderListView == null)
-                return;
-
-            const int statusColumnWidth = 30;
-            const int columnCount = 4;
-            double totalWidth = 0;
-            for (int i = 1; i < columnCount; i++)
-                totalWidth += ((GridView)this.RecorderListView.View).Columns[i].Width;
-
-            double[] totalWidthFactor = new double[columnCount];
-            for (int i = 1; i < columnCount; i++)
-                totalWidthFactor[i] = ((GridView)this.RecorderListView.View).Columns[i].Width / totalWidth;
-
-            this.RecorderListView.Width = this.ActualWidth;
-            double width = this.ActualWidth - statusColumnWidth - this.BorderThickness.Left - this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
-            ((GridView)this.RecorderListView.View).Columns[0].Width = statusColumnWidth;
-            for (int i = 1; i < columnCount; i++)
-                ((GridView)this.RecorderListView.View).Columns[i].Width = width * totalWidthFactor[i];
         }
 
         private void ApplicationWatcher_OnApplicationWindowChange(object sender, ApplicationEventArgs e)

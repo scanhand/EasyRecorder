@@ -9,8 +9,9 @@
         xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
         xmlns:avaMetro="clr-namespace:AvalonDock.Themes;assembly=AvalonDock.Themes.Metro"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification" xmlns:ad="https://github.com/Dirkster99/AvalonDock"
-                 mc:Ignorable="d"
+        xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification" 
+        xmlns:ad="https://github.com/Dirkster99/AvalonDock"
+        mc:Ignorable="d"
         Title="Auto Mouse &amp; Keyboard" Width="900" Height="600" MinWidth="200" MinHeight="200">
 
     <Window.Resources>
@@ -26,8 +27,12 @@
             </DockPanel>
         </DataTemplate>-->
     </Window.Resources>
-
-    <DockPanel LastChildFill="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <!-- Tray Icon -->
         <tb:TaskbarIcon IconSource="icons8-record-64.ico"
@@ -35,7 +40,7 @@
                         TrayMouseDoubleClick="TaskbarIcon_TrayMouseDoubleClick"/>
 
         <!-- Menu -->
-        <Menu DockPanel.Dock="Top" FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
+        <Menu Grid.Row="0" FontSize="{Binding RelativeSource={RelativeSource Self}, Path=Parent.Parent.FontSize}">
             <MenuItem Header="_File">
 
                 <MenuItem Header="File Save..." Click="MenuItem_FileSave_Click">
@@ -94,16 +99,19 @@
         </Menu>
 
         <!-- Status -->
-        <localui:AMKStatusBar DockPanel.Dock="Bottom" x:Name="MainStatusBar"/>
+        <localui:AMKStatusBar Grid.Row="2" x:Name="MainStatusBar"/>
 
         <!-- Main DockPanel -->
-        <DockingManager x:Name="dockManager">
+        <DockingManager x:Name="dockManager" 
+                        Grid.Row="1"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch">
             <!--<avalonDock:DockingManager.Theme>
                 <avaMetro:MetroTheme/>
             </avalonDock:DockingManager.Theme>-->
-            <LayoutRoot>
-                <LayoutPanel Orientation="Horizontal">
-                    <LayoutAnchorablePane DockWidth="350">
+            <ad:LayoutRoot>
+                <ad:LayoutPanel Orientation="Horizontal">
+                    <ad:LayoutAnchorablePane DockWidth="350">
                         <ad:LayoutAnchorable x:Name="dockSequenceDiagram"
                                                 Title="Auto Mouse &amp; Keyboard Group" 
                                                 CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False" CanMove="False" >
@@ -112,20 +120,21 @@
                                 </localgroup:AMKGroupControl>
                             </Border>
                         </ad:LayoutAnchorable>
-                    </LayoutAnchorablePane>
-                    <LayoutDocumentPane DockHeight="*">
-                        <ad:LayoutDocument Title="Recorder Item" 
-                                            ContentId="recorderItem"
-                                            CanClose="False"
-                                            CanFloat="False"
-                                            CanMove="False">
-                            <localui:RecorderItemView x:Name="RecorderView">
-                            </localui:RecorderItemView>
-                        </ad:LayoutDocument>
-                    </LayoutDocumentPane>
-                </LayoutPanel>
-            </LayoutRoot>
+                    </ad:LayoutAnchorablePane>
+                    <ad:LayoutDocumentPaneGroup>
+                        <ad:LayoutDocumentPane>
+                            <ad:LayoutDocument Title="Recorder Item" 
+                                                ContentId="recorderItem"
+                                                CanClose="False"
+                                                CanFloat="False"
+                                                CanMove="False">
+                                <localui:RecorderItemView x:Name="RecorderView">
+                                </localui:RecorderItemView>
+                            </ad:LayoutDocument>
+                        </ad:LayoutDocumentPane>
+                    </ad:LayoutDocumentPaneGroup>
+                </ad:LayoutPanel>
+            </ad:LayoutRoot>
         </DockingManager>
-    </DockPanel>
-
+    </Grid>
 </mah:MetroWindow>
