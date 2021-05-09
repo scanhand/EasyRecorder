@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AMK.UI
+namespace AMK.Global
 {
     public class Preference : SingletonBase<Preference>
     {
@@ -12,6 +12,8 @@ namespace AMK.UI
         public bool IsShowToastMessage { get; set; } = true;
 
         public DoubleClickActionType DoubleClickAction { get; set; } = DoubleClickActionType.Memo;
+
+        public string CommandKeyTextColor = "#3393DF";
 
         [JsonIgnore]
         public Window MainWindow { get; set; } = null;

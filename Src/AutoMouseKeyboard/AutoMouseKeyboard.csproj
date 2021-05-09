@@ -110,6 +110,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\perEnumHelper.cs" />
+    <Compile Include="Controls\perFormattedTextBlock.cs" />
+    <Compile Include="Controls\perStringHelper.cs" />
+    <Compile Include="Controls\perValueDisplayPair.cs" />
     <Compile Include="Files\AMKFile.cs" />
     <Compile Include="Files\AMKFileBody.cs" />
     <Compile Include="Files\AMKFileHeader.cs" />
@@ -177,7 +181,7 @@
     <Compile Include="UI\MouseWheelRecorderItemConfig.xaml.cs">
       <DependentUpon>MouseWheelRecorderItemConfig.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\Preference.cs" />
+    <Compile Include="Global\Preference.cs" />
     <Compile Include="UI\RecorderItemView.xaml.cs">
       <DependentUpon>RecorderItemView.xaml</DependentUpon>
     </Compile>

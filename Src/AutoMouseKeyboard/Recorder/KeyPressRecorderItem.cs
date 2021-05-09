@@ -1,5 +1,6 @@
 ﻿using AMK.Global;
 using System.Text;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using WindowsInput.Native;
 

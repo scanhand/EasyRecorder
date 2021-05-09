@@ -1,4 +1,5 @@
-﻿using AMK.Recorder;
+﻿using AMK.Global;
+using AMK.Recorder;
 using System;
 using System.Collections.Generic;
 using System.Threading;

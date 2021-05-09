@@ -100,9 +100,9 @@ namespace AMK.Global
                     case VirtualKeyCode.OEM_PERIOD: return string.Format(".");
                     case VirtualKeyCode.OEM_2: return string.Format("/");
                     case VirtualKeyCode.OEM_3: return string.Format("`");
-                    case VirtualKeyCode.OEM_4: return string.Format("[LBRACKET]");
+                    case VirtualKeyCode.OEM_4: return string.Format("<fg {0}>[LBRACKET]</fg>", Preference.Instance.CommandKeyTextColor);
                     case VirtualKeyCode.OEM_5: return string.Format("\\");
-                    case VirtualKeyCode.OEM_6: return string.Format("[RBRACKET]");
+                    case VirtualKeyCode.OEM_6: return string.Format("<fg {0}>[RBRACKET]</fg>", Preference.Instance.CommandKeyTextColor);
                     case VirtualKeyCode.OEM_7: return string.Format("'");
                     case VirtualKeyCode.OEM_8: return string.Format(" ");
                     case VirtualKeyCode.OEM_102: return string.Format("\\");
@@ -111,7 +111,7 @@ namespace AMK.Global
             }    
             else
             {
-                return string.Format("[{0}]", vkCode.ToString());
+                return string.Format("<fg {1}>[{0}]</fg>", vkCode.ToString(), Preference.Instance.CommandKeyTextColor);
             }
         }
 

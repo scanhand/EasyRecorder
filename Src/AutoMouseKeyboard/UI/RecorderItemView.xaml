@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:amk="clr-namespace:AMK"
-             xmlns:local="clr-namespace:AMK.UI"
+             xmlns:local="clr-namespace:AMK.UI" 
+             xmlns:controls="clr-namespace:AMK.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -18,8 +19,8 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-    </UserControl.Resources>
-    
+    </UserControl.Resources> 
+
     <Grid>
         <ListView Name="RecorderListView" ItemContainerStyle="{StaticResource RecorderListStyle}">
             <!-- Context Menu -->
@@ -128,7 +129,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <DockPanel>
-                                    <TextBlock Text="{Binding Description}"/>
+                                    <controls:perFormattedTextBlock Text="{Binding Description}"/>
                                 </DockPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
