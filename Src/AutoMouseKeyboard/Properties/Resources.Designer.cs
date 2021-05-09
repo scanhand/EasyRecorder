@@ -103,6 +103,16 @@ namespace AMK.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_downarrow_64 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_downarrow_64", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_event_log_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8_event_log_48", resourceCulture);

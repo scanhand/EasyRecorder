@@ -16,21 +16,11 @@
 
     <Window.Resources>
         <ImageSource x:Key="LeftMouseClick">Resources/icons8-mouse-leftclick-64.png</ImageSource>
-        <!--<DataTemplate x:Key="RecorderItemTemplate">
-            <DockPanel>
-                <Image Source=""/>
-                <TextBlock>
-                    <TextBlock.Text>
-                        <Binding />
-                    </TextBlock.Text>
-                </TextBlock>
-            </DockPanel>
-        </DataTemplate>-->
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -100,7 +90,7 @@
         </Menu>
 
         <!-- Main Toolbar -->
-        <localui:MainToolbar x:Name="MainToolbar" Grid.Row="1"  Margin="5,5,5,5" HorizontalAlignment="Left">
+        <localui:MainToolbar x:Name="MainToolbar" Grid.Row="1"  Margin="5,0,5,0" HorizontalAlignment="Left">
         </localui:MainToolbar>
         <!--<Expander Grid.Row="1" ExpandDirection="Down" IsExpanded="True">
             <Expander.Header>

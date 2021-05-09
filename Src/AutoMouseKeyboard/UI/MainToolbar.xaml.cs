@@ -24,5 +24,10 @@ namespace AMK.UI
         {
             InitializeComponent();
         }
+
+        private void ButtonDropDownPlay_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+        }
     }
 }

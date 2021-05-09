@@ -4,46 +4,78 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AMK.UI"
-             mc:Ignorable="d" 
-             Height="50"
-             Width="500">
+             mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <Style TargetType="Button" x:Key="RectButton">
+            <Setter Property="Background" Value="White" />
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,0,0,0" />
+                </Style>
+            </Style.Resources>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="16"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button x:Name="buttonPlaying" Grid.Row="0" Grid.Column="0" Margin="5,5,5,5">
+        <Button Grid.Row="0" Grid.Column="0" BorderThickness="0" Margin="5,0,5,0">
+            <DockPanel Margin="-5, -5, -5, -5">
+                <Image Width="40" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
+                <Label VerticalAlignment="Center">Play</Label>
+            </DockPanel>
+        </Button>
+        <Button x:Name="ButtonDropDownPlay" Click="ButtonDropDownPlay_Click" Grid.Row="1" Grid.Column="0" BorderThickness="0" Margin="5,0,5,0" Style="{StaticResource RectButton}">
+            <DockPanel Margin="0,-5,0,0">
+                <Path Width="12" VerticalAlignment="Top" Fill="Black" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+            </DockPanel>
+        </Button>
+       
+
+        <Button Grid.Row="0" Grid.Column="1" BorderThickness="0" Margin="5,0,5,0">
             <StackPanel Orientation="Horizontal">
-                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
+                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
                 <Label VerticalAlignment="Center">Play</Label>
             </StackPanel>
         </Button>
+        <Button Grid.Row="1" Grid.Column="1" BorderThickness="0" Margin="5,0,5,0" Style="{StaticResource RectButton}">
+            <DockPanel Margin="0,-5,0,0">
+                <Path Width="12" VerticalAlignment="Top" Fill="Black" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+            </DockPanel>
+        </Button>
 
-        <Button Grid.Row="0" Grid.Column="1" Margin="5,5,5,5">
+        <Button Grid.Row="0" Grid.Column="2" BorderThickness="0" Margin="5,0,5,0">
             <StackPanel Orientation="Horizontal">
-                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
+                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
                 <Label VerticalAlignment="Center">Play</Label>
             </StackPanel>
         </Button>
+        <Button Grid.Row="1" Grid.Column="2" BorderThickness="0" Margin="5,0,5,0" Style="{StaticResource RectButton}">
+            <DockPanel Margin="0,-5,0,0">
+                <Path Width="12" VerticalAlignment="Top" Fill="Black" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+            </DockPanel>
+        </Button>
 
-        <Button Grid.Row="0" Grid.Column="2" Margin="5,5,5,5">
+        <Button Grid.Row="0" Grid.Column="3" BorderThickness="0" Margin="5,0,5,0">
             <StackPanel Orientation="Horizontal">
-                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
+                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
                 <Label VerticalAlignment="Center">Play</Label>
             </StackPanel>
         </Button>
-
-        <Button Grid.Row="0" Grid.Column="3" Margin="5,5,5,5">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="Auto" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
-                <Label VerticalAlignment="Center">Play</Label>
-            </StackPanel>
+        <Button Grid.Row="1" Grid.Column="3" BorderThickness="0" Margin="5,0,5,0" Style="{StaticResource RectButton}">
+            <DockPanel Margin="0,-5,0,0">
+                <Path Width="12" VerticalAlignment="Top" Fill="Black" Stretch="Uniform" HorizontalAlignment="Right" Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z "/>
+            </DockPanel>
         </Button>
     </Grid>
 </UserControl>
