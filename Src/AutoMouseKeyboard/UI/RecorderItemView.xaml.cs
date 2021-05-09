@@ -59,6 +59,10 @@ namespace AMK.UI
 
             this.RecorderListView.Width = this.ActualWidth;
             double width = this.ActualWidth - statusColumnWidth - this.BorderThickness.Left - this.BorderThickness.Right - this.Margin.Left - this.Margin.Right - 2;
+            //Prevent Exception
+            if (width < 100)
+                return;
+
             ((GridView)this.RecorderListView.View).Columns[0].Width = statusColumnWidth;
             for (int i = 1; i < columnCount; i++)
                 ((GridView)this.RecorderListView.View).Columns[i].Width = width * totalWidthFactor[i];

@@ -30,6 +30,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -98,12 +99,19 @@
             </MenuItem>
         </Menu>
 
-        <!-- Status -->
-        <localui:AMKStatusBar Grid.Row="2" x:Name="MainStatusBar"/>
+        <!-- Main Toolbar -->
+        <localui:MainToolbar x:Name="MainToolbar" Grid.Row="1"  Margin="5,5,5,5" HorizontalAlignment="Left">
+        </localui:MainToolbar>
+        <!--<Expander Grid.Row="1" ExpandDirection="Down" IsExpanded="True">
+            <Expander.Header>
+                <TextBlock></TextBlock>
+            </Expander.Header>
+            
+        </Expander>-->
 
         <!-- Main DockPanel -->
         <DockingManager x:Name="dockManager" 
-                        Grid.Row="1"
+                        Grid.Row="2"
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch">
             <!--<avalonDock:DockingManager.Theme>
@@ -136,5 +144,9 @@
                 </ad:LayoutPanel>
             </ad:LayoutRoot>
         </DockingManager>
+
+        <!-- Status -->
+        <localui:AMKStatusBar Grid.Row="3" x:Name="MainStatusBar"/>
+
     </Grid>
 </mah:MetroWindow>

@@ -166,6 +166,9 @@
     <Compile Include="UI\IRecorderItemConfig.cs" />
     <Compile Include="UI\KeyItem.cs" />
     <Compile Include="UI\KeyPressData.cs" />
+    <Compile Include="UI\MainToolbar.xaml.cs">
+      <DependentUpon>MainToolbar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\MouseMoveRecorderItemConfig.xaml.cs">
       <DependentUpon>MouseMoveRecorderItemConfig.xaml</DependentUpon>
     </Compile>
@@ -237,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\AMKStatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\MainToolbar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
