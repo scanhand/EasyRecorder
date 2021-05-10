@@ -65,11 +65,11 @@ namespace AMK.UI
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.RecordingPause;
-                this.Recorder.StartRecording(isReset);
+                this.Recorder.StartRecording();
             }
             else
             {
-                Stop();
+                this.Recorder.PauseAll();
             }
         }
 
@@ -79,24 +79,12 @@ namespace AMK.UI
             if (AUtil.IsStopPause(this.Recorder.State))
             {
                 bool isReset = this.Recorder.State != AMKState.PlayingPause;
-                this.MainWindow.StartPlaying(isReset);
+                this.Recorder.StartPlaying(isReset);
             }
             else
             {
-                Stop();
+                this.Recorder.PauseAll();
             }
-        }
-
-        private void Stop()
-        {
-            AMKState state = AMKState.RecordingPause;
-            if (this.Recorder.State == AMKState.Playing)
-                state = AMKState.PlayingPause;
-            else if (this.Recorder.State == AMKState.Recording)
-                state = AMKState.RecordingPause;
-
-            this.Recorder.StopAll();
-            this.Recorder.State = state;
         }
 
         private void OnPushKey(VirtualKeyCode key)

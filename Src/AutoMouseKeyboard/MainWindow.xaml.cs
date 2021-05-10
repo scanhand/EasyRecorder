@@ -8,6 +8,7 @@ using MahApps.Metro.Controls;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using WindowsInput.Native;
 
 namespace AMK
@@ -96,6 +97,9 @@ namespace AMK
             //RecorderView
             this.RecorderView.Recorder = this.Recorder;
 
+            //MainToolbar
+            this.MainToolbar.Recorder = this.Recorder;
+
             //Status
             this.Recorder.OnChangedState += (s) =>
             {
@@ -105,6 +109,12 @@ namespace AMK
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            //Child controls are loaded!
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() => {
+                //Initialize AMKRecorder
+                this.Recorder.Initialize();
+            }));
+
             //Initialize Preference
             Preference.Instance.MainWindow = this;
             Preference.Instance.LogWindow = this.LogWindow;
@@ -306,14 +316,6 @@ namespace AMK
             this.Recorder.StopRecording();
         }
 
-        public void StartPlaying(bool isReset)
-        {
-            ALog.Debug("IsReset={0}", isReset);
-            if (isReset)
-                this.Recorder.ResetToStart();
-            this.Recorder.StartPlaying();
-        }
-
         public void StopPlaying()
         {
             ALog.Debug("");
@@ -325,21 +327,7 @@ namespace AMK
         private void MenuItem_StartRecording_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-
-            bool isReset = true;
-            if(this.Recorder.Items.Count > 0)
-            {
-                MessageBoxResult result = MessageBox.Show("Do you want to reset all of recorder items?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
-                if (result == MessageBoxResult.Cancel)
-                    return;
-
-                if (result == MessageBoxResult.Yes)
-                    isReset = true;
-                else if (result == MessageBoxResult.No)
-                    isReset = false;
-            }
-
-            this.Recorder.StartRecording(isReset);
+            this.Recorder.StartRecordingWithConfirm();
         }
 
         private void MenuItem_StopRecording_Click(object sender, RoutedEventArgs e)
@@ -358,7 +346,7 @@ namespace AMK
         private void MenuItem_StartPlaying_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            StartPlaying(true);
+            this.Recorder.StartPlaying(true);
         }
 
         private void MenuItem_StopPlaying_Click(object sender, RoutedEventArgs e)

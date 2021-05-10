@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AMK.Global;
+using AMK.Recorder;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +22,89 @@ namespace AMK.UI
     /// </summary>
     public partial class MainToolbar : UserControl
     {
+        public AMKRecorder Recorder { get; set; } = null;
+
         public MainToolbar()
         {
             InitializeComponent();
+
+            this.Loaded += MainToolbar_Loaded;
         }
 
-        private void ButtonDropDownPlay_Click(object sender, RoutedEventArgs e)
+        private void MainToolbar_Loaded(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
+            this.Recorder.OnChangedState += (state) =>
+            {
+                this.InvokeIfRequired(() =>
+                {
+                    EnableToolbarButton(state);
+                });
+            };
+        }
+
+        private void buttonPlay_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+            bool isReset = this.Recorder.State != AMKState.PlayingPause;
+            this.Recorder.StartPlaying(isReset);
+        }
+
+        private void buttonPause_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+            this.Recorder.PauseAll();
+        }
+
+        private void buttonStop_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+            this.Recorder.StopAll();
+        }
+
+        private void buttonRecord_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+            this.Recorder.StartRecordingWithConfirm();
+        }
+
+        private void EnableToolbarButton(AMKState state)
+        {
+            if (state == AMKState.Playing)
+            {
+                buttonPlay.IsEnabled = false;
+                buttonPause.IsEnabled = true;
+                buttonStop.IsEnabled = true;
+                buttonRecord.IsEnabled = false;
+            }
+            else if (state == AMKState.Recording)
+            {
+                buttonPlay.IsEnabled = false;
+                buttonPause.IsEnabled = true;
+                buttonStop.IsEnabled = true;
+                buttonRecord.IsEnabled = false;
+            }
+            else if(state == AMKState.Stop || state == AMKState.PlayDone)
+            {
+                buttonPlay.IsEnabled = true;
+                buttonPause.IsEnabled = false;
+                buttonStop.IsEnabled = false;
+                buttonRecord.IsEnabled = true;
+            }
+            else if (state == AMKState.PlayingPause)
+            {
+                buttonPlay.IsEnabled = true;
+                buttonPause.IsEnabled = false;
+                buttonStop.IsEnabled = true;
+                buttonRecord.IsEnabled = false;
+            }
+            else if (state == AMKState.RecordingPause)
+            {
+                buttonPlay.IsEnabled = false;
+                buttonPause.IsEnabled = false;
+                buttonStop.IsEnabled = true;
+                buttonRecord.IsEnabled = true;
+            }
         }
     }
 }

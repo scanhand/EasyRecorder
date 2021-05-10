@@ -142,6 +142,11 @@ namespace AMK.Recorder
             };
         }
 
+        public void Initialize()
+        {
+            this.State = AMKState.Stop;
+        }
+
         public void Reset()
         {
             this.Items.Clear();
@@ -149,15 +154,42 @@ namespace AMK.Recorder
                 OnResetItem();
         }
 
-        public void StartRecording(bool isReset)
+        public void PauseAll()
         {
-            ALog.Debug("StartRecording");
+            if (this.State == AMKState.Playing)
+            {
+                this.PausePlaying();
+            }
+            else if (this.State == AMKState.Recording)
+            {
+                this.PauseRecording();
+            }
+        }
+
+        public void StartRecordingWithConfirm()
+        {
+            ALog.Debug("");
+
+            bool isReset = true;
+            if (this.Items.Count > 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Do you want to reset all of recorder items?", "Question", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Cancel)
+                    return;
+
+                if (result == MessageBoxResult.Yes)
+                    isReset = true;
+                else if (result == MessageBoxResult.No)
+                    isReset = false;
+            }
+
             if (isReset)
                 this.Reset();
+
             StartRecording();
         }
 
-        private void StartRecording()
+        public void StartRecording()
         {
             OnStartRecording();
             this.ResetCurrentRecorder();
@@ -167,22 +199,30 @@ namespace AMK.Recorder
 
         public void StopRecording()
         {
-            ALog.Debug("StopRecording");
+            ALog.Debug("");
             this.State = AMKState.Stop;
+            this.WaitingRecorder.Stop();
+            OnStopRecording();
+        }
+
+        public void PauseRecording()
+        {
+            ALog.Debug("");
+            this.State = AMKState.RecordingPause;
             this.WaitingRecorder.Stop();
             OnStopRecording();
         }
 
         public void StopAll()
         {
-            ALog.Debug("StopAll");
+            ALog.Debug("");
             this.StopRecording();
             this.StopPlaying();
         }
 
         public void ResetItems()
         {
-            ALog.Debug("ResetItems");
+            ALog.Debug("");
             this.StopPlaying();
             this.StopRecording();
             this.Reset();
@@ -424,6 +464,14 @@ namespace AMK.Recorder
                 OnUpdateItem(item);
         }
 
+        public void StartPlaying(bool isReset)
+        {
+            ALog.Debug("IsReset={0}", isReset);
+            if (isReset)
+                ResetToStart();
+            StartPlaying();
+        }
+
         public bool StartPlaying()
         {
             if (this.Items.Count <= 0)
@@ -457,6 +505,13 @@ namespace AMK.Recorder
             ALog.Debug("");
             this.Player.Stop();
             this.State = AMKState.Stop;
+        }
+
+        public void PausePlaying()
+        {
+            ALog.Debug("");
+            this.Player.Stop();
+            this.State = AMKState.PlayingPause;
         }
 
         public void ResetToStart()
