@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:AMK"
         xmlns:localui="clr-namespace:AMK.UI"
         xmlns:localgroup="clr-namespace:AMK.Group"
-        xmlns:avalonDock="clr-namespace:AvalonDock;assembly=AvalonDock"
+        xmlns:ad="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
         xmlns:avaMetro="clr-namespace:AvalonDock.Themes;assembly=AvalonDock.Themes.Metro"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification" 
-        xmlns:ad="https://github.com/Dirkster99/AvalonDock"
         mc:Ignorable="d"
         Title="Auto Mouse &amp; Keyboard" Width="900" Height="600" MinWidth="200" MinHeight="200">
 

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace AMK.Recorder
 {
@@ -23,14 +24,14 @@ namespace AMK.Recorder
             }
         }
 
-        private Thread ThreadRecording = null;
-
-        private bool IsThreadRecording = false;
-
         //500 msec
         public double WaitingTimeSec = 0.500;
 
         private double CurrentWaitingTimeSec = 0;
+
+        private bool IsThreadEnable = false;
+
+        private CancellationTokenSource CancelToken = null;
 
         public AMKWaitingRecorder(AMKRecorder recorder)
         {
@@ -39,14 +40,17 @@ namespace AMK.Recorder
 
         public bool Start()
         {
-            if (this.ThreadRecording != null)
+            if (this.IsThreadEnable)
                 return false;
 
-            this.ThreadRecording = new Thread(() =>
+            this.CancelToken = new CancellationTokenSource();
+            ThreadPool.QueueUserWorkItem(new WaitCallback((obj)=>
             {
-                const double waitTime = 0.02f; // 20 mesc
+                CancellationToken token = (CancellationToken)obj;
 
-                while (this.IsThreadRecording)
+                this.IsThreadEnable = true;
+                const double waitTime = 0.02f; // 20 mesc
+                while (!token.IsCancellationRequested)
                 {
                     double startTime = Stopwatch.GetTimestamp();
                     if (this.CurrentWaitingTimeSec >= this.WaitingTimeSec)
@@ -57,39 +61,20 @@ namespace AMK.Recorder
                 }
 
                 AddWaitingRecorderItem(this.CurrentWaitingTimeSec);
-            });
-
-            this.IsThreadRecording = true;
-            this.ThreadRecording.Start();
-
-            ALog.Debug("WaitingRecorder.Start()");
+            }), this.CancelToken.Token);
+            ALog.Debug("Start WaitingRecorder ThreadPool");
             return true;
         }
 
         public void Stop()
         {
-            if (this.ThreadRecording == null || !this.ThreadRecording.IsAlive)
+            if (!this.IsThreadEnable)
                 return;
 
-            int tryCount = 0;
-            const int timeInterval = 20;
-            const int timeOutCount = 1000 / timeInterval;
-            this.IsThreadRecording = false;
-            while (true)
-            {
-                if (!this.ThreadRecording.IsAlive)
-                    break;
-
-                if (tryCount++ >= timeOutCount)
-                {
-                    this.ThreadRecording.Abort();
-                    break;
-                }
-
-                Thread.Sleep(timeInterval);
-            }
-            this.ThreadRecording = null;
-            ALog.Debug("WaitingRecorder.Stop()");
+            this.CancelToken.Cancel();
+            this.CancelToken.Dispose();
+            this.CancelToken = null;
+            this.IsThreadEnable = false;
         }
 
         private void AddWaitingRecorderItem(double waitingTimeSec)

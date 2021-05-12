@@ -22,18 +22,18 @@ namespace AMK.UI
     /// </summary>
     public partial class MainToolbar : UserControl
     {
-        public AMKRecorder Recorder { get; set; } = null;
+        private AMKRecorder Recorder { get; set; } = null;
 
         public MainToolbar()
         {
             InitializeComponent();
-
-            this.Loaded += MainToolbar_Loaded;
         }
 
-        private void MainToolbar_Loaded(object sender, RoutedEventArgs e)
+        public void Initialize(AMKRecorder recorder)
         {
             ALog.Debug("");
+            this.Recorder = recorder;
+
             this.Recorder.OnChangedState += (state) =>
             {
                 this.InvokeIfRequired(() =>

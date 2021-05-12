@@ -14,7 +14,7 @@ namespace AMK.UI
     /// </summary>
     public partial class RecorderItemView : UserControl
     {
-        public AMKRecorder Recorder { get; set; } = null;
+        private AMKRecorder Recorder { get; set; } = null;
 
         public AMKRecorderItemConfigManager RecorderItemConfigManager
         {
@@ -30,6 +30,12 @@ namespace AMK.UI
 
             this.MouseDoubleClick += RecorderListView_MouseDoubleClick;
             this.SizeChanged += RecorderItemView_SizeChanged;
+        }
+
+        public void Initialize(AMKRecorder recorder)
+        {
+            ALog.Debug("");
+            this.Recorder = recorder;
         }
 
         private void RecorderItemView_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -95,10 +95,10 @@ namespace AMK
             this.ApplicationWatcher.Start();
 
             //RecorderView
-            this.RecorderView.Recorder = this.Recorder;
+            this.RecorderView.Initialize(this.Recorder);
 
             //MainToolbar
-            this.MainToolbar.Recorder = this.Recorder;
+            this.MainToolbar.Initialize(this.Recorder);
 
             //Status
             this.Recorder.OnChangedState += (s) =>

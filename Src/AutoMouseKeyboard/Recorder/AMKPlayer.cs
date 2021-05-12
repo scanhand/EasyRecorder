@@ -15,8 +15,6 @@ namespace AMK.Recorder
 
         private AMKRecorder AMKRecorder { get; set; } = null;
 
-        private Thread ThreadPlayer = null;
-
         private IRecorderItem LastItem { get; set; } = null;
 
         private IRecorderItem CurrentRecorder
@@ -36,6 +34,8 @@ namespace AMK.Recorder
 
         public Action<bool> OnStopPlaying = null;
 
+        private CancellationTokenSource CancelToken = null;
+
         public AMKPlayer(AMKRecorder recorder)
         {
             this.AMKRecorder = recorder;
@@ -51,14 +51,20 @@ namespace AMK.Recorder
 
             Stop();
 
-            this.ThreadPlayer = new Thread(() =>
+            ResetLastItem();
+
+            this.CancelToken = new CancellationTokenSource();
+            ThreadPool.QueueUserWorkItem(new WaitCallback((obj) =>
             {
+                CancellationToken token = (CancellationToken)obj;
+
+                this.IsThreadEnable = true;
                 bool isLastStep = false;
                 if (OnStartPlaying != null)
                     OnStartPlaying();
 
                 this.CurrentRecorder = items.First();
-                while (IsThreadEnable)
+                while (!token.IsCancellationRequested)
                 {
                     if (!this.CurrentRecorder.Play(this))
                         break;
@@ -75,14 +81,22 @@ namespace AMK.Recorder
 
                 if (OnStopPlaying != null)
                     OnStopPlaying(isLastStep);
-            });
-            this.ThreadPlayer.Priority = ThreadPriority.Highest;
 
-            this.IsThreadEnable = true;
-            ResetLastItem();
-            this.ThreadPlayer.Start();
-
+            }), this.CancelToken.Token);
+            ALog.Debug("Start Playing ThreadPool");
             return true;
+        }
+
+        public void Stop()
+        {
+            if (!this.IsThreadEnable)
+                return;
+
+            this.CancelToken.Cancel();
+            this.CancelToken.Dispose();
+            this.CancelToken = null;
+            this.IsThreadEnable = false;
+            return;
         }
 
         public void ResetToStart()
@@ -139,31 +153,6 @@ namespace AMK.Recorder
             index++;
             ALog.Debug($"AMKPlayer::Current index is {index}");
             this.CurrentRecorder = items[index];
-            return true;
-        }
-
-        public bool Stop()
-        {
-            if (this.ThreadPlayer == null || !this.ThreadPlayer.IsAlive)
-                return true;
-
-            this.IsThreadEnable = false;
-            int tryCount = 0;
-            const int timeInterval = 20;
-            const int timeOutCount = 1000 / timeInterval; // 1000mesc / 20msec
-            while (true)
-            {
-                if (!this.ThreadPlayer.IsAlive)
-                    break;
-
-                if (tryCount++ > timeOutCount)
-                {
-                    this.ThreadPlayer.Abort();
-                    break;
-                }
-                Thread.Sleep(timeInterval);
-            }
-            this.ThreadPlayer = null;
             return true;
         }
 
