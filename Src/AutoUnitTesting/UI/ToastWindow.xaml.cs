@@ -59,8 +59,8 @@ namespace AUT.UI
             switch (state)
             {
                 default:
-                case AUTState.Recording: return "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
-                case AUTState.Playing: return "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
+                case AUTState.Recording: return "/AutoUnitTesting;component/Resources/icons8-video-record-64.png";
+                case AUTState.Playing: return "/AutoUnitTesting;component/Resources/icons8-play-64.png";
             }
         }
 

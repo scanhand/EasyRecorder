@@ -38,31 +38,31 @@ namespace AUT.UI
                 if (state == AUTState.Playing)
                 {
                     this.StatusBarItem.StatusText = "Playing...";
-                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
+                    this.StatusBarItem.StatusImageSource = "/AutoUnitTesting;component/Resources/icons8-play-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, this.FadeInOutAnimation);
                 }
                 else if (state == AUTState.PlayingPause)
                 {
                     this.StatusBarItem.StatusText = "Pause playing";
-                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-pause-64.png";
+                    this.StatusBarItem.StatusImageSource = "/AutoUnitTesting;component/Resources/icons8-pause-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
                 else if (state == AUTState.PlayDone)
                 {
                     this.StatusBarItem.StatusText = "Done";
-                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-simplestop-64.png";
+                    this.StatusBarItem.StatusImageSource = "/AutoUnitTesting;component/Resources/icons8-simplestop-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
                 else if (state == AUTState.Recording)
                 {
                     this.StatusBarItem.StatusText = "Recording...";
-                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
+                    this.StatusBarItem.StatusImageSource = "/AutoUnitTesting;component/Resources/icons8-video-record-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, this.FadeInOutAnimation);
                 }
                 else if (state == AUTState.RecordingPause)
                 {
                     this.StatusBarItem.StatusText = "Pause recording";
-                    this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-pause-64.png";
+                    this.StatusBarItem.StatusImageSource = "/AutoUnitTesting;component/Resources/icons8-pause-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
                 else if (state == AUTState.Stop)

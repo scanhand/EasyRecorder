@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace AutoMouseKeyboard
+namespace AutoUnitTesting
 {
     /// <summary>
     /// Interaction logic for App.xaml

@@ -34,7 +34,7 @@
         </Grid.ColumnDefinitions>
         <Button x:Name="buttonPlay" Click="buttonPlay_Click" Grid.Column="0" BorderThickness="0" Margin="5,0,5,0">
             <DockPanel Margin="-5, -5, -5, -5">
-                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-play-64.png" ></Image>
+                <Image Width="32" Source="/AutoUnitTesting;component/Resources/icons8-play-64.png" ></Image>
                 <Label VerticalAlignment="Center">Play</Label>
             </DockPanel>
         </Button>
@@ -45,19 +45,19 @@
         </Button>-->
         <Button x:Name="buttonPause" Click="buttonPause_Click" Grid.Column="1" BorderThickness="0" Margin="5,0,5,0">
             <StackPanel Orientation="Horizontal">
-                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-Pause-64.png" ></Image>
+                <Image Width="32" Source="/AutoUnitTesting;component/Resources/icons8-Pause-64.png" ></Image>
                 <Label VerticalAlignment="Center">Pause</Label>
             </StackPanel>
         </Button>
         <Button x:Name="buttonStop" Click="buttonStop_Click" Grid.Column="2" BorderThickness="0" Margin="5,0,5,0">
             <StackPanel Orientation="Horizontal">
-                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-stop-64.png" ></Image>
+                <Image Width="32" Source="/AutoUnitTesting;component/Resources/icons8-stop-64.png" ></Image>
                 <Label VerticalAlignment="Center">Stop</Label>
             </StackPanel>
         </Button>
         <Button x:Name="buttonRecord" Click="buttonRecord_Click" Grid.Column="3" BorderThickness="0" Margin="5,0,5,0">
             <StackPanel Orientation="Horizontal">
-                <Image Width="32" Source="/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png" ></Image>
+                <Image Width="32" Source="/AutoUnitTesting;component/Resources/icons8-video-record-64.png" ></Image>
                 <Label VerticalAlignment="Center">Record</Label>
             </StackPanel>
         </Button>

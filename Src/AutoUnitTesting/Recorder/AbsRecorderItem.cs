@@ -69,7 +69,7 @@ namespace AUT.Recorder
             {
                 switch (this.State)
                 {
-                    case RecorderItemState.Activated: return "/AutoMouseKeyboard;component/Resources/icons8-triangle-64.png";
+                    case RecorderItemState.Activated: return "/AutoUnitTesting;component/Resources/icons8-triangle-64.png";
                 }
                 return string.Empty;
             }
@@ -85,28 +85,28 @@ namespace AUT.Recorder
                     case RecorderType.KeyUpDown:
                         {
                             if (this.Dir == Dir.Up)
-                                return "/AutoMouseKeyboard;component/Resources/icons8-keyup-64.png";
+                                return "/AutoUnitTesting;component/Resources/icons8-keyup-64.png";
                             else if (this.Dir == Dir.Down)
-                                return "/AutoMouseKeyboard;component/Resources/icons8-keydown-64.png";
+                                return "/AutoUnitTesting;component/Resources/icons8-keydown-64.png";
                         }
                         break;
                     case RecorderType.MouseUpDown:
                     case RecorderType.MouseClick:
                         {
                             if (this.Button == ButtonType.Left)
-                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse-leftclick-64.png";
+                                return "/AutoUnitTesting;component/Resources/icons8-mouse-leftclick-64.png";
                             else if (this.Button == ButtonType.Wheel)
-                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
+                                return "/AutoUnitTesting;component/Resources/icons8-mouse-wheel-64.png";
                             else if (this.Button == ButtonType.Right)
-                                return "/AutoMouseKeyboard;component/Resources/icons8-mouse-rightclick-64.png";
+                                return "/AutoUnitTesting;component/Resources/icons8-mouse-rightclick-64.png";
                         }
                         break;
-                    case RecorderType.MouseSmartClick: return "/AutoMouseKeyboard;component/Resources/icons8-smartmouseclick-64.png";
-                    case RecorderType.MouseMove: return "/AutoMouseKeyboard;component/Resources/icons8-cursor-64.png";
-                    case RecorderType.MouseWheel: return "/AutoMouseKeyboard;component/Resources/icons8-mouse-wheel-64.png";
-                    case RecorderType.KeyPress: return "/AutoMouseKeyboard;component/Resources/icons8-keyboard-64.png";
-                    case RecorderType.WaitTime: return "/AutoMouseKeyboard;component/Resources/icons8-timer-64.png";
-                    case RecorderType.WaitSmart: return "/AutoMouseKeyboard;component/Resources/icons8-smarttimer-64.png";
+                    case RecorderType.MouseSmartClick: return "/AutoUnitTesting;component/Resources/icons8-smartmouseclick-64.png";
+                    case RecorderType.MouseMove: return "/AutoUnitTesting;component/Resources/icons8-cursor-64.png";
+                    case RecorderType.MouseWheel: return "/AutoUnitTesting;component/Resources/icons8-mouse-wheel-64.png";
+                    case RecorderType.KeyPress: return "/AutoUnitTesting;component/Resources/icons8-keyboard-64.png";
+                    case RecorderType.WaitTime: return "/AutoUnitTesting;component/Resources/icons8-timer-64.png";
+                    case RecorderType.WaitSmart: return "/AutoUnitTesting;component/Resources/icons8-smarttimer-64.png";
                 }
                 return string.Empty;
             }
