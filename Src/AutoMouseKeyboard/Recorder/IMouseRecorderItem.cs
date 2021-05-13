@@ -1,4 +1,4 @@
-﻿namespace AMK.Recorder
+﻿namespace AUT.Recorder
 {
     interface IMouseRecorderItem
     {

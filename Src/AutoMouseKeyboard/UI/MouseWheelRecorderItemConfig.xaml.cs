@@ -1,5 +1,5 @@
-﻿using AMK.Global;
-using AMK.Recorder;
+﻿using AUT.Global;
+using AUT.Recorder;
 using MahApps.Metro.Controls;
 using System;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     /// <summary>
     /// Interaction logic for MouseWheelRecorderItemConfig.xaml
@@ -96,7 +96,7 @@ namespace AMK.UI
                 {
                     Dir = dir,
                     MouseData = mouseData,
-                    Time = this.RecorderItem.Time + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan * i),
+                    Time = this.RecorderItem.Time + TimeSpan.FromSeconds(AUTRecorder.MinimumTimeSpan * i),
                 });
             }
 

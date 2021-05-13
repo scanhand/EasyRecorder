@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace AMK.Files
+namespace AUT.Files
 {
-    public class AMKFileHeader
+    public class AUTFileHeader
     {
         public const int HearderSize = 64 * 1024; // 64KB
 
-        public const string AMKFileKeyword = "AMK";
+        public const string AUTFileKeyword = "AUT";
 
         public int MajorVersion = 0;
 
@@ -20,11 +20,11 @@ namespace AMK.Files
             });
         }
 
-        public static AMKFileHeader FromJsonString(string json)
+        public static AUTFileHeader FromJsonString(string json)
         {
-            AMKFileHeader fileHeader = null;
+            AUTFileHeader fileHeader = null;
 
-            fileHeader = JsonConvert.DeserializeObject<AMKFileHeader>(json, new JsonSerializerSettings()
+            fileHeader = JsonConvert.DeserializeObject<AUTFileHeader>(json, new JsonSerializerSettings()
             {
                 NullValueHandling = NullValueHandling.Ignore,
                 MissingMemberHandling = MissingMemberHandling.Ignore,

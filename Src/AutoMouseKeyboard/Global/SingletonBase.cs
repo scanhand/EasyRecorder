@@ -1,4 +1,4 @@
-﻿namespace AMK.Global
+﻿namespace AUT.Global
 {
     public abstract class SingletonBase<T> where T : SingletonBase<T>, new()
     {

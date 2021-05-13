@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public static class TaskEx
     {

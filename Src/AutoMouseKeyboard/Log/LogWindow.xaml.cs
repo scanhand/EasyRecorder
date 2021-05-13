@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 
-namespace AMK
+namespace AUT
 {
     /// <summary>
     /// Interaction logic for LogWindow.xaml

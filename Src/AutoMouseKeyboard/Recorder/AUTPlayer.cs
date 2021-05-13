@@ -1,19 +1,19 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKPlayer
+    public class AUTPlayer
     {
         public bool IsThreadEnable = false;
 
         public bool IsInfinitePlaying { get; set; } = true;
 
-        private AMKRecorder AMKRecorder { get; set; } = null;
+        private AUTRecorder AUTRecorder { get; set; } = null;
 
         private IRecorderItem LastItem { get; set; } = null;
 
@@ -21,12 +21,12 @@ namespace AMK.Recorder
         {
             get
             {
-                return this.AMKRecorder.CurrentRecorder;
+                return this.AUTRecorder.CurrentRecorder;
             }
 
             set
             {
-                this.AMKRecorder.CurrentRecorder = value;
+                this.AUTRecorder.CurrentRecorder = value;
             }
         }
 
@@ -36,9 +36,9 @@ namespace AMK.Recorder
 
         private CancellationTokenSource CancelToken = null;
 
-        public AMKPlayer(AMKRecorder recorder)
+        public AUTPlayer(AUTRecorder recorder)
         {
-            this.AMKRecorder = recorder;
+            this.AUTRecorder = recorder;
         }
 
         public bool Start(List<IRecorderItem> items)
@@ -101,12 +101,12 @@ namespace AMK.Recorder
 
         public void ResetToStart()
         {
-            this.CurrentRecorder = this.AMKRecorder.Items.First();
+            this.CurrentRecorder = this.AUTRecorder.Items.First();
         }
 
         private bool IsLastStep()
         {
-            return this.CurrentRecorder.Equals(this.AMKRecorder.Items.Last());
+            return this.CurrentRecorder.Equals(this.AUTRecorder.Items.Last());
         }
 
         private bool IsLastStep(List<IRecorderItem> items)
@@ -116,22 +116,22 @@ namespace AMK.Recorder
 
         private bool NextStep()
         {
-            int index = this.AMKRecorder.Items.IndexOf(this.CurrentRecorder);
+            int index = this.AUTRecorder.Items.IndexOf(this.CurrentRecorder);
             if (index == -1)
             {
-                ALog.Debug("AMKPlayer::index not found.");
+                ALog.Debug("AUTPlayer::index not found.");
                 return false;
             }
 
-            if (index >= this.AMKRecorder.Items.Count - 1)
+            if (index >= this.AUTRecorder.Items.Count - 1)
             {
-                ALog.Debug("AMKPlayer::Current index is last index");
+                ALog.Debug("AUTPlayer::Current index is last index");
                 return false;
             }
 
             index++;
-            ALog.Debug($"AMKPlayer::Current index is {index}");
-            this.CurrentRecorder = this.AMKRecorder.Items[index];
+            ALog.Debug($"AUTPlayer::Current index is {index}");
+            this.CurrentRecorder = this.AUTRecorder.Items[index];
             return true;
         }
 
@@ -140,18 +140,18 @@ namespace AMK.Recorder
             int index = items.IndexOf(this.CurrentRecorder);
             if (index == -1)
             {
-                ALog.Debug("AMKPlayer::index not found.");
+                ALog.Debug("AUTPlayer::index not found.");
                 return false;
             }
 
             if (index >= items.Count - 1)
             {
-                ALog.Debug("AMKPlayer::Current index is last index");
+                ALog.Debug("AUTPlayer::Current index is last index");
                 return false;
             }
 
             index++;
-            ALog.Debug($"AMKPlayer::Current index is {index}");
+            ALog.Debug($"AUTPlayer::Current index is {index}");
             this.CurrentRecorder = items[index];
             return true;
         }

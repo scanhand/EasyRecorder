@@ -1,9 +1,9 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System.Windows;
 using System.Windows.Forms;
 using WindowsInput.Native;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public class KeyUpDownRecorderItem : AbsRecorderItem, IKeyRecorderItem
     {
@@ -39,7 +39,7 @@ namespace AMK.Recorder
             this.Dir = Dir.Up;
         }
 
-        public override bool Play(AMKPlayer player)
+        public override bool Play(AUTPlayer player)
         {
             //Waiting
             player.WaitingPlaying(this);

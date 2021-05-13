@@ -2,17 +2,17 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKWaitingRecorder
+    public class AUTWaitingRecorder
     {
-        public AMKRecorder AMKRecorder { get; set; } = null;
+        public AUTRecorder AUTRecorder { get; set; } = null;
 
         private IRecorderItem CurrentRecorder
         {
             get
             {
-                return AMKRecorder.CurrentRecorder;
+                return AUTRecorder.CurrentRecorder;
             }
         }
 
@@ -20,7 +20,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return AMKRecorder.CurrentMouseRecorder;
+                return AUTRecorder.CurrentMouseRecorder;
             }
         }
 
@@ -33,9 +33,9 @@ namespace AMK.Recorder
 
         private CancellationTokenSource CancelToken = null;
 
-        public AMKWaitingRecorder(AMKRecorder recorder)
+        public AUTWaitingRecorder(AUTRecorder recorder)
         {
-            this.AMKRecorder = recorder;
+            this.AUTRecorder = recorder;
         }
 
         public bool Start()
@@ -89,11 +89,11 @@ namespace AMK.Recorder
             if (this.CurrentRecorder?.IsEqualType(newRecorder) == true)
             {
                 this.CurrentRecorder.ChildItems.Add(newRecorder);
-                this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                this.AUTRecorder.UpdateItem(this.CurrentRecorder);
                 return;
             }
 
-            this.AMKRecorder.AddItem(newRecorder);
+            this.AUTRecorder.AddItem(newRecorder);
             ALog.Debug("Add Waiting Event!");
         }
 

@@ -1,11 +1,11 @@
-﻿<mah:MetroWindow x:Class="AMK.MainWindow"
+﻿<mah:MetroWindow x:Class="AUT.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AMK"
-        xmlns:localui="clr-namespace:AMK.UI"
-        xmlns:localgroup="clr-namespace:AMK.Group"
+        xmlns:local="clr-namespace:AUT"
+        xmlns:localui="clr-namespace:AUT.UI"
+        xmlns:localgroup="clr-namespace:AUT.Group"
         xmlns:ad="clr-namespace:AvalonDock.Layout;assembly=AvalonDock"
         xmlns:avaMetro="clr-namespace:AvalonDock.Themes;assembly=AvalonDock.Themes.Metro"
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
@@ -113,8 +113,8 @@
                                                 Title="Auto Mouse &amp; Keyboard Group" 
                                                 CanClose="False" CanHide="False" CanAutoHide="False" CanFloat="False" CanDockAsTabbedDocument="False" CanMove="False" >
                             <Border>
-                                <localgroup:AMKGroupControl x:Name="MainGroup">
-                                </localgroup:AMKGroupControl>
+                                <localgroup:AUTGroupControl x:Name="MainGroup">
+                                </localgroup:AUTGroupControl>
                             </Border>
                         </ad:LayoutAnchorable>
                     </ad:LayoutAnchorablePane>
@@ -135,7 +135,7 @@
         </DockingManager>
 
         <!-- Status -->
-        <localui:AMKStatusBar Grid.Row="3" x:Name="MainStatusBar"/>
+        <localui:AUTStatusBar Grid.Row="3" x:Name="MainStatusBar"/>
 
     </Grid>
 </mah:MetroWindow>

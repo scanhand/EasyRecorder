@@ -1,5 +1,5 @@
-﻿using AMK.Global;
-using AMK.Recorder;
+﻿using AUT.Global;
+using AUT.Recorder;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using WindowsInput.Native;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     /// <summary>
     /// Interaction logic for KeyPressRecorderItemConfig.xaml
@@ -83,7 +83,7 @@ namespace AMK.UI
             {
                 keyData = gridItems[i];
                 rootItem.ChildItems.Add(new KeyPressRecorderItem() { 
-                    Time = rootItem.Time + TimeSpan.FromSeconds(AMKRecorder.MinimumTimeSpan * i),
+                    Time = rootItem.Time + TimeSpan.FromSeconds(AUTRecorder.MinimumTimeSpan * i),
                     VkCode = (int)keyData.Key.VKKeyCode,
                     Keyname = AUtil.ToVKeyToString(keyData.Key.VKKeyCode),
                 });

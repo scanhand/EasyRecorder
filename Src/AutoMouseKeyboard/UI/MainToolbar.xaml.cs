@@ -1,5 +1,5 @@
-﻿using AMK.Global;
-using AMK.Recorder;
+﻿using AUT.Global;
+using AUT.Recorder;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +15,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     /// <summary>
     /// Interaction logic for MainToolbar.xaml
     /// </summary>
     public partial class MainToolbar : UserControl
     {
-        private AMKRecorder Recorder { get; set; } = null;
+        private AUTRecorder Recorder { get; set; } = null;
 
         public MainToolbar()
         {
             InitializeComponent();
         }
 
-        public void Initialize(AMKRecorder recorder)
+        public void Initialize(AUTRecorder recorder)
         {
             ALog.Debug("");
             this.Recorder = recorder;
@@ -46,7 +46,7 @@ namespace AMK.UI
         private void buttonPlay_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            bool isReset = this.Recorder.State != AMKState.PlayingPause;
+            bool isReset = this.Recorder.State != AUTState.PlayingPause;
             this.Recorder.StartPlaying(isReset);
         }
 
@@ -68,37 +68,37 @@ namespace AMK.UI
             this.Recorder.StartRecordingWithConfirm();
         }
 
-        private void EnableToolbarButton(AMKState state)
+        private void EnableToolbarButton(AUTState state)
         {
-            if (state == AMKState.Playing)
+            if (state == AUTState.Playing)
             {
                 buttonPlay.IsEnabled = false;
                 buttonPause.IsEnabled = true;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = false;
             }
-            else if (state == AMKState.Recording)
+            else if (state == AUTState.Recording)
             {
                 buttonPlay.IsEnabled = false;
                 buttonPause.IsEnabled = true;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = false;
             }
-            else if(state == AMKState.Stop || state == AMKState.PlayDone)
+            else if(state == AUTState.Stop || state == AUTState.PlayDone)
             {
                 buttonPlay.IsEnabled = true;
                 buttonPause.IsEnabled = false;
                 buttonStop.IsEnabled = false;
                 buttonRecord.IsEnabled = true;
             }
-            else if (state == AMKState.PlayingPause)
+            else if (state == AUTState.PlayingPause)
             {
                 buttonPlay.IsEnabled = true;
                 buttonPause.IsEnabled = false;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = false;
             }
-            else if (state == AMKState.RecordingPause)
+            else if (state == AUTState.RecordingPause)
             {
                 buttonPlay.IsEnabled = false;
                 buttonPause.IsEnabled = false;

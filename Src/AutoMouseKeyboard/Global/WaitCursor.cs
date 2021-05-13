@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public class WaitCursor : IDisposable
     {

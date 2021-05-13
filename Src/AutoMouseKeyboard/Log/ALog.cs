@@ -1,10 +1,10 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace AMK
+namespace AUT
 {
     public static class ALog
     {
@@ -26,7 +26,7 @@ namespace AMK
             {
                 if (!Directory.Exists(AUtil.ToOSAbsolutePath(AConst.LogPath)))
                     Directory.CreateDirectory(AUtil.ToOSAbsolutePath(AConst.LogPath));
-                ALog.LogFileName = Path.Combine(AUtil.ToOSAbsolutePath(AConst.LogPath), string.Format("AMK_{0}.log", DateTime.Now.ToString("yyyyMMdd")));
+                ALog.LogFileName = Path.Combine(AUtil.ToOSAbsolutePath(AConst.LogPath), string.Format("AUT_{0}.log", DateTime.Now.ToString("yyyyMMdd")));
             }
 
             //Write to File 

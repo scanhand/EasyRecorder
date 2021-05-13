@@ -1,6 +1,6 @@
 ﻿using WindowsInput;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public class GM : SingletonBase<GM>
     {

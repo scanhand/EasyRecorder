@@ -10,7 +10,7 @@ using System.Windows.Media;
 // unclosed Xml tags (in comments)
 #pragma warning disable 1570
 
-namespace AMK.Controls
+namespace AUT.Controls
 {
     /// <summary>
     /// An extended TextBlock class, that will take account of formatting tags (similar to Html tags) within the text. 

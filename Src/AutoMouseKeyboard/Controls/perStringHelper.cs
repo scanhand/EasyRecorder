@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace AMK.Controls
+namespace AUT.Controls
 {
     using System.Globalization;
     using System.Text;

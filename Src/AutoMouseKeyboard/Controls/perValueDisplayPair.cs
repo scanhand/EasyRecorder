@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace AMK.Controls
+namespace AUT.Controls
 {
     /// <summary>
     /// Equivalent to KeyValuePair<object, string> but with more memorable property names for use with ComboBox controls. 

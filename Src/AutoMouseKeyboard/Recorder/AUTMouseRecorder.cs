@@ -1,20 +1,20 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using EventHook;
 using EventHook.Hooks;
 using System;
 using System.Diagnostics;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKMouseRecorder
+    public class AUTMouseRecorder
     {
-        private AMKRecorder AMKRecorder { get; set; } = null;
+        private AUTRecorder AUTRecorder { get; set; } = null;
 
-        private AMKWaitingRecorder WaitingRecorder
+        private AUTWaitingRecorder WaitingRecorder
         {
             get
             {
-                return AMKRecorder.WaitingRecorder;
+                return AUTRecorder.WaitingRecorder;
             }
         }
 
@@ -22,7 +22,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return AMKRecorder.CurrentRecorder;
+                return AUTRecorder.CurrentRecorder;
             }
         }
 
@@ -30,15 +30,15 @@ namespace AMK.Recorder
         {
             get
             {
-                return AMKRecorder.CurrentMouseRecorder;
+                return AUTRecorder.CurrentMouseRecorder;
             }
         }
 
         private float MouseClickIntervalTimeSec = 0.5f;
 
-        public AMKMouseRecorder(AMKRecorder recorder)
+        public AUTMouseRecorder(AUTRecorder recorder)
         {
-            this.AMKRecorder = recorder;
+            this.AUTRecorder = recorder;
         }
 
         private bool IsCurrentMouseWheelDir(IRecorderItem newRecorderItem)
@@ -74,8 +74,8 @@ namespace AMK.Recorder
 
         private bool IsLastMouseDown()
         {
-            if (this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.MouseUpDown &&
-                     this.AMKRecorder.GetLastItem()?.Dir == Dir.Down)
+            if (this.AUTRecorder.GetLastItem()?.Recorder == RecorderType.MouseUpDown &&
+                     this.AUTRecorder.GetLastItem()?.Dir == Dir.Down)
                 return true;
             return false;
         }
@@ -144,7 +144,7 @@ namespace AMK.Recorder
                 {
                     this.WaitingRecorder.ResetWaitingTime();
                     this.CurrentRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                    this.AUTRecorder.UpdateItem(this.CurrentRecorder);
                     return;
                 }
             }
@@ -164,9 +164,9 @@ namespace AMK.Recorder
                         MouseData = (int)e.MouseData,
                     };
 
-                    this.AMKRecorder.ResetWaitingTime();
+                    this.AUTRecorder.ResetWaitingTime();
                     this.CurrentMouseRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(this.CurrentMouseRecorder);
+                    this.AUTRecorder.UpdateItem(this.CurrentMouseRecorder);
                     return;
                 }
 
@@ -189,8 +189,8 @@ namespace AMK.Recorder
                         return;
 
                     //Remove MouseDown item
-                    this.AMKRecorder.DeleteItem(this.CurrentMouseRecorder);
-                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    this.AUTRecorder.DeleteItem(this.CurrentMouseRecorder);
+                    this.AUTRecorder.ResetCurrentRecorderbyLast();
 
                     newRecorder = new MouseClickRecorderItem()
                     {
@@ -220,7 +220,7 @@ namespace AMK.Recorder
 
                 if (IsIgnoreMouseMove(newRecorder))
                 {
-                    ALog.Debug("AMKMouseRecorder::Add(MouseEvent)::IsIgnoreMouseMove");
+                    ALog.Debug("AUTMouseRecorder::Add(MouseEvent)::IsIgnoreMouseMove");
                     return;
                 }
 
@@ -228,16 +228,16 @@ namespace AMK.Recorder
                 {
                     this.WaitingRecorder.ResetWaitingTime();
                     this.CurrentMouseRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(this.CurrentMouseRecorder);
+                    this.AUTRecorder.UpdateItem(this.CurrentMouseRecorder);
                     return;
                 }
             }
 
             //Need to delete Unnecessary a mouse move item
             if (IsCurrentSingleMouseMove(newRecorder))
-                this.AMKRecorder.DeleteItem(this.CurrentRecorder);
+                this.AUTRecorder.DeleteItem(this.CurrentRecorder);
 
-            this.AMKRecorder.AddMouseItem(newRecorder);
+            this.AUTRecorder.AddMouseItem(newRecorder);
         }
     }
 }

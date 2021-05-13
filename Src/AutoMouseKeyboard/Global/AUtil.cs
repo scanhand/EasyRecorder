@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Windows.Interop;
 using WindowsInput.Native;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public static class AUtil
     {
@@ -64,14 +64,14 @@ namespace AMK.Global
             window.Top = posY;
         }
 
-        public static bool IsStop(AMKState state)
+        public static bool IsStop(AUTState state)
         {
-            return (state == AMKState.Stop || state == AMKState.PlayDone);
+            return (state == AUTState.Stop || state == AUTState.PlayDone);
         }
 
-        public static bool IsStopPause(AMKState state)
+        public static bool IsStopPause(AUTState state)
         {
-            return (state == AMKState.Stop || state == AMKState.PlayDone || state == AMKState.PlayingPause || state == AMKState.RecordingPause);
+            return (state == AUTState.Stop || state == AUTState.PlayDone || state == AUTState.PlayingPause || state == AUTState.RecordingPause);
         }
 
         public static string ToVKeyToString(int vkCode)

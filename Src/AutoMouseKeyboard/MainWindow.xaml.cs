@@ -1,7 +1,7 @@
-﻿using AMK.Files;
-using AMK.Global;
-using AMK.Recorder;
-using AMK.UI;
+﻿using AUT.Files;
+using AUT.Global;
+using AUT.Recorder;
+using AUT.UI;
 using AvalonDock.Themes;
 using EventHook;
 using MahApps.Metro.Controls;
@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Threading;
 using WindowsInput.Native;
 
-namespace AMK
+namespace AUT
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -36,13 +36,13 @@ namespace AMK
 
         #region Commander
 
-        public AMKCommander Commander = new AMKCommander();
+        public AUTCommander Commander = new AUTCommander();
 
         #endregion
 
         #region Recorder
 
-        public AMKRecorder Recorder = new AMKRecorder();
+        public AUTRecorder Recorder = new AUTRecorder();
 
         private System.Windows.Controls.ListView RecorderListView
         {
@@ -111,7 +111,7 @@ namespace AMK
         {
             //Child controls are loaded!
             Dispatcher.BeginInvoke(DispatcherPriority.Loaded, new Action(() => {
-                //Initialize AMKRecorder
+                //Initialize AUTRecorder
                 this.Recorder.Initialize();
             }));
 
@@ -204,7 +204,7 @@ namespace AMK
                 {
                     if (Preference.Instance.IsShowToastMessage)
                     {
-                        this.ToastWindow.SetState(AMKState.Recording);
+                        this.ToastWindow.SetState(AUTState.Recording);
                         this.ToastWindow.Show();
                     }
                 });
@@ -224,7 +224,7 @@ namespace AMK
                 {
                     if (Preference.Instance.IsShowToastMessage)
                     {
-                        this.ToastWindow.SetState(AMKState.Playing);
+                        this.ToastWindow.SetState(AUTState.Playing);
                         this.ToastWindow.Show();
                     }
 
@@ -238,11 +238,11 @@ namespace AMK
                 {
                     if (isLastStep)
                     {
-                        this.Recorder.State = AMKState.PlayDone;
+                        this.Recorder.State = AUTState.PlayDone;
                     }
                     else
                     {
-                        this.Recorder.State = AMKState.Stop;
+                        this.Recorder.State = AUTState.Stop;
                     }
                     this.ToastWindow.Hide();
                 });
@@ -368,7 +368,7 @@ namespace AMK
         private void MenuItem_FileLoad_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            AMKFile file = AMKFile.LoadFileDialog();
+            AUTFile file = AUTFile.LoadFileDialog();
             if (file == null)
                 return;
 
@@ -382,7 +382,7 @@ namespace AMK
         private void MenuItem_FileSave_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            AMKFile.SaveFileDialog(this.Recorder.Items);
+            AUTFile.SaveFileDialog(this.Recorder.Items);
         }
 
         private void MenuItem_AlwaysTopMost_Click(object sender, RoutedEventArgs e)

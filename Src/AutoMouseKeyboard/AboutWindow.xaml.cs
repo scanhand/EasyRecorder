@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace AMK
+namespace AUT
 {
     /// <summary>
     /// Interaction logic for AboutWindow.xaml

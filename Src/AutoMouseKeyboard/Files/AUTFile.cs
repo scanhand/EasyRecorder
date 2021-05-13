@@ -1,5 +1,5 @@
-﻿using AMK.Global;
-using AMK.Recorder;
+﻿using AUT.Global;
+using AUT.Recorder;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,22 +8,22 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace AMK.Files
+namespace AUT.Files
 {
-    public class AMKFile
+    public class AUTFile
     {
-        public AMKFileHeader FileHeader = new AMKFileHeader();
+        public AUTFileHeader FileHeader = new AUTFileHeader();
 
-        private byte[] FileHeaderRaw = new byte[AMKFileHeader.HearderSize];
+        private byte[] FileHeaderRaw = new byte[AUTFileHeader.HearderSize];
 
-        public AMKFileBody FileBody = new AMKFileBody();
+        public AUTFileBody FileBody = new AUTFileBody();
 
         public string FileName = string.Empty;
 
         public static bool SaveFileDialog(List<IRecorderItem> items)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+            saveFileDialog.Filter = "AUT files (*.AUT)|*.AUT|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 0;
             saveFileDialog.RestoreDirectory = true;
 
@@ -33,7 +33,7 @@ namespace AMK.Files
             //Get the path of specified file
             string filePath = saveFileDialog.FileName;
 
-            AMKFile file = new AMKFile();
+            AUTFile file = new AUTFile();
             file.FileName = filePath;
             file.FileBody.Items = items.Copy<List<IRecorderItem>>();
 
@@ -60,7 +60,7 @@ namespace AMK.Files
             }
             catch (Exception ex)
             {
-                ALog.Debug($"AMKFile SaveFile Error - Header! ({ex.Message})");
+                ALog.Debug($"AUTFile SaveFile Error - Header! ({ex.Message})");
                 return false;
             }
 
@@ -76,7 +76,7 @@ namespace AMK.Files
             }
             catch (Exception ex)
             {
-                ALog.Debug($"AMKFile SaveFile Error - Body! ({ex.Message})");
+                ALog.Debug($"AUTFile SaveFile Error - Body! ({ex.Message})");
                 return false;
             }
 
@@ -89,8 +89,8 @@ namespace AMK.Files
 
                 using (FileStream fs = File.Open(this.FileName, FileMode.CreateNew))
                 {
-                    //AMK File Keyword
-                    fs.Write(Encoding.ASCII.GetBytes(AMKFileHeader.AMKFileKeyword), 0, AMKFileHeader.AMKFileKeyword.Length);
+                    //AUT File Keyword
+                    fs.Write(Encoding.ASCII.GetBytes(AUTFileHeader.AUTFileKeyword), 0, AUTFileHeader.AUTFileKeyword.Length);
 
                     //Header
                     fs.Write(this.FileHeaderRaw, 0, this.FileHeaderRaw.Length);
@@ -101,17 +101,17 @@ namespace AMK.Files
             }
             catch (Exception ex)
             {
-                ALog.Debug($"AMKFile SaveFile Error - FileSteram! ({ex.Message})");
+                ALog.Debug($"AUTFile SaveFile Error - FileSteram! ({ex.Message})");
                 return false;
             }
 
             return true;
         }
 
-        public static AMKFile LoadFileDialog()
+        public static AUTFile LoadFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "AMK files (*.amk)|*.amk|All files (*.*)|*.*";
+            openFileDialog.Filter = "AUT files (*.AUT)|*.AUT|All files (*.*)|*.*";
             openFileDialog.FilterIndex = 0;
             openFileDialog.RestoreDirectory = true;
 
@@ -120,7 +120,7 @@ namespace AMK.Files
 
             //Get the path of specified file
             string filePath = openFileDialog.FileName;
-            AMKFile file = new AMKFile();
+            AUTFile file = new AUTFile();
             file.FileName = filePath;
 
             using (new WaitCursor())
@@ -140,12 +140,12 @@ namespace AMK.Files
             using (FileStream fs = File.OpenRead(this.FileName))
             {
                 //File Keyword
-                byte[] fileKeyword = new byte[AMKFileHeader.AMKFileKeyword.Length];
+                byte[] fileKeyword = new byte[AUTFileHeader.AUTFileKeyword.Length];
 
                 ret = fs.Read(fileKeyword, 0, fileKeyword.Length);
-                if (ret <= 0 || ret != fileKeyword.Length || Encoding.ASCII.GetString(fileKeyword) != AMKFileHeader.AMKFileKeyword)
+                if (ret <= 0 || ret != fileKeyword.Length || Encoding.ASCII.GetString(fileKeyword) != AUTFileHeader.AUTFileKeyword)
                 {
-                    ALog.Debug($"AMKFile LoadFile Error - File Keyword");
+                    ALog.Debug($"AUTFile LoadFile Error - File Keyword");
                     return false;
                 }
 
@@ -154,18 +154,18 @@ namespace AMK.Files
                 ret = fs.Read(this.FileHeaderRaw, 0, this.FileHeaderRaw.Length);
                 if (ret <= 0 || ret != this.FileHeaderRaw.Length)
                 {
-                    ALog.Debug($"AMKFile LoadFile Error - Header");
+                    ALog.Debug($"AUTFile LoadFile Error - Header");
                     return false;
                 }
 
                 try
                 {
                     string strHeader = Encoding.UTF8.GetString(this.FileHeaderRaw);
-                    this.FileHeader = AMKFileHeader.FromJsonString(strHeader);
+                    this.FileHeader = AUTFileHeader.FromJsonString(strHeader);
                 }
                 catch (Exception ex)
                 {
-                    ALog.Debug($"AMKFile LoadFile Error - FileHeader! ({ex.Message})");
+                    ALog.Debug($"AUTFile LoadFile Error - FileHeader! ({ex.Message})");
                     return false;
                 }
 
@@ -173,7 +173,7 @@ namespace AMK.Files
                 long remainLength = fs.Length - fs.Position;
                 if (remainLength <= 0)
                 {
-                    ALog.Debug($"AMKFile LoadFile Error - Body");
+                    ALog.Debug($"AUTFile LoadFile Error - Body");
                     return false;
                 }
 
@@ -181,18 +181,18 @@ namespace AMK.Files
                 ret = fs.Read(bodyRaw, 0, bodyRaw.Length);
                 if (ret <= 0 || ret != bodyRaw.Length)
                 {
-                    ALog.Debug($"AMKFile LoadFile Error - Body");
+                    ALog.Debug($"AUTFile LoadFile Error - Body");
                     return false;
                 }
 
                 try
                 {
                     string strBody = Encoding.UTF8.GetString(bodyRaw);
-                    this.FileBody = AMKFileBody.FromJsonString(strBody);
+                    this.FileBody = AUTFileBody.FromJsonString(strBody);
                 }
                 catch (Exception ex)
                 {
-                    ALog.Debug($"AMKFile LoadFile Error - FileBody! ({ex.Message})");
+                    ALog.Debug($"AUTFile LoadFile Error - FileBody! ({ex.Message})");
                     return false;
                 }
             }

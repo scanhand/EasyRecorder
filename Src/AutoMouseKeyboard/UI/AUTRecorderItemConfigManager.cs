@@ -1,21 +1,21 @@
-﻿using AMK.Global;
-using AMK.UI;
+﻿using AUT.Global;
+using AUT.UI;
 using System;
 using System.Windows;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKRecorderItemConfigManager
+    public class AUTRecorderItemConfigManager
     {
-        private AMKRecorder AMKRecorder { get; set; } = null;
+        private AUTRecorder AUTRecorder { get; set; } = null;
 
         public Action<IRecorderItem, IRecorderItem> OnReplaceItem = null;
 
         public Action<IRecorderItem> OnUpdateItem = null;
 
-        public AMKRecorderItemConfigManager(AMKRecorder recorder)
+        public AUTRecorderItemConfigManager(AUTRecorder recorder)
         {
-            this.AMKRecorder = recorder;
+            this.AUTRecorder = recorder;
         }
 
         public bool ShowModifyConfigWindow(IRecorderItem prevItem)

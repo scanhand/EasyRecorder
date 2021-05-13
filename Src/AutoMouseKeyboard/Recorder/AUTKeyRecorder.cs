@@ -1,4 +1,4 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using EventHook;
 using System;
 using System.Collections.Generic;
@@ -6,19 +6,19 @@ using System.Linq;
 using System.Windows.Forms;
 using WindowsInput.Native;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKKeyRecorder
+    public class AUTKeyRecorder
     {
-        private AMKRecorder AMKRecorder { get; set; } = null;
+        private AUTRecorder AUTRecorder { get; set; } = null;
 
         private float KeyPressIntervalTimeSec = 0.5f;
 
-        private AMKWaitingRecorder WaitingRecorder
+        private AUTWaitingRecorder WaitingRecorder
         {
             get
             {
-                return AMKRecorder.WaitingRecorder;
+                return AUTRecorder.WaitingRecorder;
             }
         }
 
@@ -26,7 +26,7 @@ namespace AMK.Recorder
         {
             get
             {
-                return AMKRecorder.CurrentRecorder;
+                return AUTRecorder.CurrentRecorder;
             }
         }
 
@@ -34,15 +34,15 @@ namespace AMK.Recorder
         {
             get
             {
-                return AMKRecorder.CurrentKeyRecorder;
+                return AUTRecorder.CurrentKeyRecorder;
             }
         }
 
         private readonly List<VirtualKeyCode> NeedtoUpDownList = null;
 
-        public AMKKeyRecorder(AMKRecorder recorder)
+        public AUTKeyRecorder(AUTRecorder recorder)
         {
-            this.AMKRecorder = recorder;
+            this.AUTRecorder = recorder;
 
             this.NeedtoUpDownList = new List<VirtualKeyCode>()
             {
@@ -88,9 +88,9 @@ namespace AMK.Recorder
 
         private bool IsLastSameKeyDown(int vkCode)
         {
-            if ((this.AMKRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown) &&
-                this.AMKRecorder.GetLastItem()?.Dir == Dir.Down &&
-                (this.AMKRecorder.GetLastItem() as IKeyRecorderItem)?.VkCode == vkCode)
+            if ((this.AUTRecorder.GetLastItem()?.Recorder == RecorderType.KeyUpDown) &&
+                this.AUTRecorder.GetLastItem()?.Dir == Dir.Down &&
+                (this.AUTRecorder.GetLastItem() as IKeyRecorderItem)?.VkCode == vkCode)
             {
                 return true;
             }
@@ -133,7 +133,7 @@ namespace AMK.Recorder
         private List<IRecorderItem> GetDeletePrviousKeyDownItems(KeyInputEventArgs e)
         {
             List<IRecorderItem> deleteItems = new List<IRecorderItem>();
-            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+            List<IRecorderItem> keyDownItems = this.AUTRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
             foreach (var item in keyDownItems)
             {
                 if (IsCtrlAltShift(item))
@@ -155,7 +155,7 @@ namespace AMK.Recorder
         private List<IRecorderItem> GetPrviousKeyDownItems(KeyInputEventArgs e)
         {
             List<IRecorderItem> deleteItems = new List<IRecorderItem>();
-            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+            List<IRecorderItem> keyDownItems = this.AUTRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
             foreach (var item in keyDownItems)
             {
                 if (IsCtrlAltShift(item))
@@ -176,7 +176,7 @@ namespace AMK.Recorder
 
         private IRecorderItem GetPrviousKeyDownItem(KeyInputEventArgs e)
         {
-            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
+            List<IRecorderItem> keyDownItems = this.AUTRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyUpDown && p.Dir == Dir.Down);
             foreach (var item in keyDownItems)
             {
                 if (IsCtrlAltShift(item))
@@ -206,7 +206,7 @@ namespace AMK.Recorder
 
         private bool IsIncludedKeyItem(KeyInputEventArgs e)
         {
-            List<IRecorderItem> keyDownItems = this.AMKRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyPress);
+            List<IRecorderItem> keyDownItems = this.AUTRecorder.Items.FindAll(p => p.Recorder == RecorderType.KeyPress);
             foreach (var item in keyDownItems)
             {
                 if (IsSameKeyCodeAndWithInIntervalTime(item, e))
@@ -232,7 +232,7 @@ namespace AMK.Recorder
                 UnicodeCharacter = keyItem.UnicodeCharacter,
                 ModifierKeys = keyItem.ModifierKeys
             };
-            this.AMKRecorder.ReplaceItem(item, newItem);
+            this.AUTRecorder.ReplaceItem(item, newItem);
         }
 
         public void Add(KeyInputEventArgs e)
@@ -251,10 +251,10 @@ namespace AMK.Recorder
                 {
                     //Delete Previous Key up Items
                     ALog.Debug("Delete Items::Recorder={0}, VkCode={1}", prevRecorder.Recorder, AUtil.ToVKeyToString((prevRecorder as IKeyRecorderItem).VkCode));
-                    this.AMKRecorder.DeleteItem(prevRecorder);
+                    this.AUTRecorder.DeleteItem(prevRecorder);
 
                     //New Key Press
-                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    this.AUTRecorder.ResetCurrentRecorderbyLast();
                     newRecorder = new KeyPressRecorderItem()
                     {
                         Dir = Dir.Press,
@@ -268,9 +268,9 @@ namespace AMK.Recorder
                     if(this.CurrentRecorder?.Recorder == RecorderType.KeyPress)
                     {
                         ALog.Debug("Add KeyPress into KeyPress.ChildItem");
-                        this.AMKRecorder.ResetWaitingTime();
+                        this.AUTRecorder.ResetWaitingTime();
                         this.CurrentRecorder.ChildItems.Add(newRecorder);
-                        this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                        this.AUTRecorder.UpdateItem(this.CurrentRecorder);
                         return;
                     }
                 }
@@ -300,7 +300,7 @@ namespace AMK.Recorder
                 if (IsCurrentKeyPress() && !IsCtrlAltShift(e.KeyData.VkCode) && !IsCtrlAltShift(Control.ModifierKeys))
                 {
                     //New Key Press
-                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    this.AUTRecorder.ResetCurrentRecorderbyLast();
                     newRecorder = new KeyPressRecorderItem()
                     {
                         Dir = Dir.Press,
@@ -310,9 +310,9 @@ namespace AMK.Recorder
                         ModifierKeys = Control.ModifierKeys
                     };
 
-                    this.AMKRecorder.ResetWaitingTime();
+                    this.AUTRecorder.ResetWaitingTime();
                     this.CurrentRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                    this.AUTRecorder.UpdateItem(this.CurrentRecorder);
                     return;
                 }
 
@@ -324,7 +324,7 @@ namespace AMK.Recorder
                     ReplaceKeyDownToKeyPress(this.CurrentRecorder);
 
                     //New Key Press
-                    this.AMKRecorder.ResetCurrentRecorderbyLast();
+                    this.AUTRecorder.ResetCurrentRecorderbyLast();
                     newRecorder = new KeyPressRecorderItem()
                     {
                         Dir = Dir.Press,
@@ -334,9 +334,9 @@ namespace AMK.Recorder
                         ModifierKeys = Control.ModifierKeys
                     };
 
-                    this.AMKRecorder.ResetWaitingTime();
+                    this.AUTRecorder.ResetWaitingTime();
                     this.CurrentRecorder.ChildItems.Add(newRecorder);
-                    this.AMKRecorder.UpdateItem(this.CurrentRecorder);
+                    this.AUTRecorder.UpdateItem(this.CurrentRecorder);
                     return;
                 }
                 
@@ -351,7 +351,7 @@ namespace AMK.Recorder
                 };
             }
 
-            this.AMKRecorder.AddKeyItem(newRecorder);
+            this.AUTRecorder.AddKeyItem(newRecorder);
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public class Preference : SingletonBase<Preference>
     {

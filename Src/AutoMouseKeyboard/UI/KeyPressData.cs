@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsInput.Native;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     public class KeyPressData : INotifyPropertyChanged
     {

@@ -1,7 +1,7 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using EventHook;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public class ApplicationRecorderItem : AbsRecorderItem
     {
@@ -21,7 +21,7 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.Application;
         }
 
-        public override bool Play(AMKPlayer player)
+        public override bool Play(AUTPlayer player)
         {
             return true;
         }

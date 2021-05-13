@@ -1,10 +1,10 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     /// <summary>
     /// Interaction logic for ToastWindow.xaml
@@ -37,7 +37,7 @@ namespace AMK.UI
             AUtil.MoveToRightBottom(this);
         }
 
-        public void SetState(AMKState state)
+        public void SetState(AUTState state)
         {
             this.InvokeIfRequired(() =>
             {
@@ -49,28 +49,28 @@ namespace AMK.UI
             });
         }
 
-        private string GetMessage(AMKState state)
+        private string GetMessage(AUTState state)
         {
             return state.ToString();
         }
 
-        private string GetImageSource(AMKState state)
+        private string GetImageSource(AUTState state)
         {
             switch (state)
             {
                 default:
-                case AMKState.Recording: return "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
-                case AMKState.Playing: return "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
+                case AUTState.Recording: return "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
+                case AUTState.Playing: return "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
             }
         }
 
-        private string GetBGColor(AMKState state)
+        private string GetBGColor(AUTState state)
         {
             switch (state)
             {
                 default:
-                case AMKState.Recording: return Colors.LightGray.ToString();
-                case AMKState.Playing: return Colors.LightGray.ToString();
+                case AUTState.Recording: return Colors.LightGray.ToString();
+                case AUTState.Playing: return Colors.LightGray.ToString();
             }
         }
 

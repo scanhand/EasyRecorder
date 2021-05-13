@@ -1,6 +1,6 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public class WaitSmartRecorderItem : AbsRecorderItem, IWaitRecorderItem
     {
@@ -19,7 +19,7 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.WaitSmart;
         }
 
-        public override bool Play(AMKPlayer player)
+        public override bool Play(AUTPlayer player)
         {
             //Waiting
             player.WaitingPlaying(this);

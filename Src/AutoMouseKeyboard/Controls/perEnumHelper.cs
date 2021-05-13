@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
-namespace AMK.Controls
+namespace AUT.Controls
 {
     public static class perEnumHelper
     {

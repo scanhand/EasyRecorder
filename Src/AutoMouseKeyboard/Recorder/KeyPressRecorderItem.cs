@@ -1,10 +1,10 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System.Text;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using WindowsInput.Native;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public class KeyPressRecorderItem : AbsRecorderItem, IKeyRecorderItem
     {
@@ -35,7 +35,7 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.KeyPress;
         }
 
-        public override bool Play(AMKPlayer player)
+        public override bool Play(AUTPlayer player)
         {
             //Waiting
             player.WaitingPlaying(this);

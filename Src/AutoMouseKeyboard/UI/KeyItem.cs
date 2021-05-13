@@ -1,4 +1,4 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsInput.Native;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     public class KeyItem
     {

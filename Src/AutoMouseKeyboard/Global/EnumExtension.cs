@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Reflection;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public static class EnumExtension
     {

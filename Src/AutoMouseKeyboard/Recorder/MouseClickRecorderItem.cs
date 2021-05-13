@@ -1,7 +1,7 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System.Windows;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public class MouseClickRecorderItem : AbsRecorderItem, IMouseRecorderItem
     {
@@ -20,7 +20,7 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.MouseClick;
         }
 
-        public override bool Play(AMKPlayer player)
+        public override bool Play(AUTPlayer player)
         {
             //Waiting
             player.WaitingPlaying(this);

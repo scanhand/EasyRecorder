@@ -1,6 +1,6 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public class MouseWheelRecorderItem : AbsRecorderItem, IMouseRecorderItem
     {
@@ -23,7 +23,7 @@ namespace AMK.Recorder
             this.Recorder = RecorderType.MouseWheel;
         }
 
-        public override bool Play(AMKPlayer player)
+        public override bool Play(AUTPlayer player)
         {
             //Waiting
             player.WaitingPlaying(this);

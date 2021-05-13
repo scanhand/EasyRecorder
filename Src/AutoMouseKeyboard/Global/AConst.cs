@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public static class AConst
     {

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace AMK.UI
+namespace AUT.UI
 {
-    public class AMKStatusBarItem : INotifyPropertyChanged
+    public class AUTStatusBarItem : INotifyPropertyChanged
     {
         public string StatusImageSource { get; set; }
 

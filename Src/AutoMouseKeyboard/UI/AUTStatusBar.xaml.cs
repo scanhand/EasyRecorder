@@ -1,21 +1,21 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     /// <summary>
-    /// Interaction logic for AMKStatusBar.xaml
+    /// Interaction logic for AUTStatusBar.xaml
     /// </summary>
-    public partial class AMKStatusBar : UserControl
+    public partial class AUTStatusBar : UserControl
     {
-        public AMKStatusBarItem StatusBarItem { get; set; } = new AMKStatusBarItem();
+        public AUTStatusBarItem StatusBarItem { get; set; } = new AUTStatusBarItem();
 
         private DoubleAnimation FadeInOutAnimation = null;
 
-        public AMKStatusBar()
+        public AUTStatusBar()
         {
             InitializeComponent();
 
@@ -31,41 +31,41 @@ namespace AMK.UI
             };
         }
 
-        public void SetCurrentState(AMKState state)
+        public void SetCurrentState(AUTState state)
         {
             this.InvokeIfRequired(() =>
             {
-                if (state == AMKState.Playing)
+                if (state == AUTState.Playing)
                 {
                     this.StatusBarItem.StatusText = "Playing...";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-play-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, this.FadeInOutAnimation);
                 }
-                else if (state == AMKState.PlayingPause)
+                else if (state == AUTState.PlayingPause)
                 {
                     this.StatusBarItem.StatusText = "Pause playing";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-pause-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
-                else if (state == AMKState.PlayDone)
+                else if (state == AUTState.PlayDone)
                 {
                     this.StatusBarItem.StatusText = "Done";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-simplestop-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
-                else if (state == AMKState.Recording)
+                else if (state == AUTState.Recording)
                 {
                     this.StatusBarItem.StatusText = "Recording...";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-video-record-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, this.FadeInOutAnimation);
                 }
-                else if (state == AMKState.RecordingPause)
+                else if (state == AUTState.RecordingPause)
                 {
                     this.StatusBarItem.StatusText = "Pause recording";
                     this.StatusBarItem.StatusImageSource = "/AutoMouseKeyboard;component/Resources/icons8-pause-64.png";
                     this.imgStatusStatusBar.BeginAnimation(OpacityProperty, new DoubleAnimation());
                 }
-                else if (state == AMKState.Stop)
+                else if (state == AUTState.Stop)
                 {
                     this.StatusBarItem.StatusText = string.Empty;
                     this.StatusBarItem.StatusImageSource = string.Empty;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace AMK.Global
+namespace AUT.Global
 {
     public enum RecorderType
     {
@@ -44,7 +44,7 @@ namespace AMK.Global
         Wheel,
     }
 
-    public enum AMKState
+    public enum AUTState
     {
         Recording,
         RecordingPause,

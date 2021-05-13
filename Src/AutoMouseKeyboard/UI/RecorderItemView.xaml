@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="AMK.UI.RecorderItemView"
+﻿<UserControl x:Class="AUT.UI.RecorderItemView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:amk="clr-namespace:AMK"
-             xmlns:local="clr-namespace:AMK.UI" 
-             xmlns:controls="clr-namespace:AMK.Controls"
+             xmlns:AUT="clr-namespace:AUT"
+             xmlns:local="clr-namespace:AUT.UI" 
+             xmlns:controls="clr-namespace:AUT.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 

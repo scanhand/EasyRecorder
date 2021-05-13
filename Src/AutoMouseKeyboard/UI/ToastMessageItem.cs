@@ -1,11 +1,11 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using System.ComponentModel;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     public class ToastMessageItem : INotifyPropertyChanged
     {
-        public AMKState State { get; set; } = AMKState.Stop;
+        public AUTState State { get; set; } = AUTState.Stop;
 
         public string ToastMessage { get; set; } = string.Empty;
 

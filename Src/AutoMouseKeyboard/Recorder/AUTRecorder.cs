@@ -1,16 +1,16 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using EventHook;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKRecorder
+    public class AUTRecorder
     {
-        private AMKState _State = AMKState.Stop;
-        public AMKState State
+        private AUTState _State = AUTState.Stop;
+        public AUTState State
         {
             get
             {
@@ -26,7 +26,7 @@ namespace AMK.Recorder
 
         }
 
-        public Action<AMKState> OnChangedState = null;
+        public Action<AUTState> OnChangedState = null;
 
         public List<IRecorderItem> Items = new List<IRecorderItem>();
 
@@ -62,17 +62,17 @@ namespace AMK.Recorder
 
         public IRecorderItem CurrentMouseRecorder = null;
 
-        public AMKMouseRecorder MouseRecorder = null;
+        public AUTMouseRecorder MouseRecorder = null;
 
-        public AMKWaitingRecorder WaitingRecorder = null;
+        public AUTWaitingRecorder WaitingRecorder = null;
 
-        public AMKKeyRecorder KeyRecorder = null;
+        public AUTKeyRecorder KeyRecorder = null;
 
-        public AMKApplicationRecorder ApplicationRecorder = null;
+        public AUTApplicationRecorder ApplicationRecorder = null;
 
-        public AMKRecorderItemConfigManager RecorderItemConfigManager = null;
+        public AUTRecorderItemConfigManager RecorderItemConfigManager = null;
 
-        public AMKPlayer Player = null;
+        public AUTPlayer Player = null;
 
         public Action<IRecorderItem> OnAddItem = null;
 
@@ -118,14 +118,14 @@ namespace AMK.Recorder
 
         public const double MinimumTimeSpan = 0.1;
 
-        public AMKRecorder()
+        public AUTRecorder()
         {
-            this.MouseRecorder = new AMKMouseRecorder(this);
-            this.KeyRecorder = new AMKKeyRecorder(this);
-            this.WaitingRecorder = new AMKWaitingRecorder(this);
-            this.ApplicationRecorder = new AMKApplicationRecorder(this);
-            this.Player = new AMKPlayer(this);
-            this.RecorderItemConfigManager = new AMKRecorderItemConfigManager(this);
+            this.MouseRecorder = new AUTMouseRecorder(this);
+            this.KeyRecorder = new AUTKeyRecorder(this);
+            this.WaitingRecorder = new AUTWaitingRecorder(this);
+            this.ApplicationRecorder = new AUTApplicationRecorder(this);
+            this.Player = new AUTPlayer(this);
+            this.RecorderItemConfigManager = new AUTRecorderItemConfigManager(this);
 
             this.RecorderItemConfigManager.OnReplaceItem += (oldItem, newItem) =>
             {
@@ -144,7 +144,7 @@ namespace AMK.Recorder
 
         public void Initialize()
         {
-            this.State = AMKState.Stop;
+            this.State = AUTState.Stop;
         }
 
         public void Reset()
@@ -156,11 +156,11 @@ namespace AMK.Recorder
 
         public void PauseAll()
         {
-            if (this.State == AMKState.Playing)
+            if (this.State == AUTState.Playing)
             {
                 this.PausePlaying();
             }
-            else if (this.State == AMKState.Recording)
+            else if (this.State == AUTState.Recording)
             {
                 this.PauseRecording();
             }
@@ -193,14 +193,14 @@ namespace AMK.Recorder
         {
             OnStartRecording();
             this.ResetCurrentRecorder();
-            this.State = AMKState.Recording;
+            this.State = AUTState.Recording;
             this.WaitingRecorder.Start();
         }
 
         public void StopRecording()
         {
             ALog.Debug("");
-            this.State = AMKState.Stop;
+            this.State = AUTState.Stop;
             this.WaitingRecorder.Stop();
             OnStopRecording();
         }
@@ -208,7 +208,7 @@ namespace AMK.Recorder
         public void PauseRecording()
         {
             ALog.Debug("");
-            this.State = AMKState.RecordingPause;
+            this.State = AUTState.RecordingPause;
             this.WaitingRecorder.Stop();
             OnStopRecording();
         }
@@ -230,7 +230,7 @@ namespace AMK.Recorder
 
         public void Add(ApplicationEventArgs e)
         {
-            if (this.State != AMKState.Recording)
+            if (this.State != AUTState.Recording)
                 return;
 
             this.ApplicationRecorder.Add(e);
@@ -238,7 +238,7 @@ namespace AMK.Recorder
 
         public void Add(MouseEventArgs e)
         {
-            if (this.State != AMKState.Recording)
+            if (this.State != AUTState.Recording)
                 return;
 
             this.MouseRecorder.Add(e);
@@ -246,7 +246,7 @@ namespace AMK.Recorder
 
         public void Add(KeyInputEventArgs e)
         {
-            if (this.State != AMKState.Recording)
+            if (this.State != AUTState.Recording)
                 return;
 
             this.KeyRecorder.Add(e);
@@ -476,12 +476,12 @@ namespace AMK.Recorder
         {
             if (this.Items.Count <= 0)
             {
-                ALog.Debug("AMKRecorder::StartPlaying::Item's count is 0.");
+                ALog.Debug("AUTRecorder::StartPlaying::Item's count is 0.");
                 return false;
             }
 
             ALog.Debug("");
-            this.State = AMKState.Playing;
+            this.State = AUTState.Playing;
             this.Player.Start(this.Items);
             return true;
         }
@@ -490,12 +490,12 @@ namespace AMK.Recorder
         {
             if (items.Count <= 0)
             {
-                ALog.Debug("AMKRecorder::StartPlaying::Item's count is 0.");
+                ALog.Debug("AUTRecorder::StartPlaying::Item's count is 0.");
                 return false;
             }
 
             ALog.Debug("");
-            this.State = AMKState.Playing;
+            this.State = AUTState.Playing;
             this.Player.Start(items);
             return true;
         }
@@ -504,14 +504,14 @@ namespace AMK.Recorder
         {
             ALog.Debug("");
             this.Player.Stop();
-            this.State = AMKState.Stop;
+            this.State = AUTState.Stop;
         }
 
         public void PausePlaying()
         {
             ALog.Debug("");
             this.Player.Stop();
-            this.State = AMKState.PlayingPause;
+            this.State = AUTState.PlayingPause;
         }
 
         public void ResetToStart()

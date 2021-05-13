@@ -1,11 +1,11 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public interface IRecorderItem
     {
@@ -38,7 +38,7 @@ namespace AMK.Recorder
 
         bool IsEqualType(IRecorderItem item);
 
-        bool Play(AMKPlayer player);
+        bool Play(AUTPlayer player);
 
         DateTime GetVeryLastTime();
     }

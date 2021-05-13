@@ -1,6 +1,6 @@
-﻿using AMK.Recorder;
+﻿using AUT.Recorder;
 
-namespace AMK.UI
+namespace AUT.UI
 {
     interface IRecorderItemConfig
     {

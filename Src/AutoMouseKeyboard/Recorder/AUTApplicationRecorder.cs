@@ -1,14 +1,14 @@
 ﻿using EventHook;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
-    public class AMKApplicationRecorder
+    public class AUTApplicationRecorder
     {
-        private AMKRecorder AMKRecorder { get; set; } = null;
+        private AUTRecorder AUTRecorder { get; set; } = null;
 
-        public AMKApplicationRecorder(AMKRecorder recorder)
+        public AUTApplicationRecorder(AUTRecorder recorder)
         {
-            this.AMKRecorder = recorder;
+            this.AUTRecorder = recorder;
         }
 
         public void Add(ApplicationEventArgs e)
@@ -20,8 +20,8 @@ namespace AMK.Recorder
                 Event = e.Event,
             };
 
-            this.AMKRecorder.AddItem(newRecorder);
-            this.AMKRecorder.CurrentRecorder = newRecorder;
+            this.AUTRecorder.AddItem(newRecorder);
+            this.AUTRecorder.CurrentRecorder = newRecorder;
         }
 
     }

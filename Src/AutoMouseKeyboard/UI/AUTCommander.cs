@@ -1,12 +1,12 @@
-﻿using AMK.Global;
-using AMK.Recorder;
+﻿using AUT.Global;
+using AUT.Recorder;
 using EventHook;
 using System;
 using WindowsInput.Native;
 
-namespace AMK.UI
+namespace AUT.UI
 {
-    public class AMKCommander
+    public class AUTCommander
     {
         public VirtualKeyCode RecordingVKeyCode = VirtualKeyCode.F9;
 
@@ -28,7 +28,7 @@ namespace AMK.UI
             }
         }
 
-        private AMKRecorder Recorder
+        private AUTRecorder Recorder
         {
             get
             {
@@ -64,7 +64,7 @@ namespace AMK.UI
             ALog.Debug("State={0}", this.Recorder.State);
             if (AUtil.IsStopPause(this.Recorder.State))
             {
-                bool isReset = this.Recorder.State != AMKState.RecordingPause;
+                bool isReset = this.Recorder.State != AUTState.RecordingPause;
                 this.Recorder.StartRecording();
             }
             else
@@ -78,7 +78,7 @@ namespace AMK.UI
             ALog.Debug("State={0}", this.Recorder.State);
             if (AUtil.IsStopPause(this.Recorder.State))
             {
-                bool isReset = this.Recorder.State != AMKState.PlayingPause;
+                bool isReset = this.Recorder.State != AUTState.PlayingPause;
                 this.Recorder.StartPlaying(isReset);
             }
             else

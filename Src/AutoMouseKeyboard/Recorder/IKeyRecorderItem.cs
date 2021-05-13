@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     interface IKeyRecorderItem
     {

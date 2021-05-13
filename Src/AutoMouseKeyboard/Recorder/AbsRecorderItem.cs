@@ -1,4 +1,4 @@
-﻿using AMK.Global;
+﻿using AUT.Global;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Documents;
 
-namespace AMK.Recorder
+namespace AUT.Recorder
 {
     public abstract class AbsRecorderItem : IRecorderItem, INotifyPropertyChanged
     {
@@ -119,7 +119,7 @@ namespace AMK.Recorder
         [JsonIgnore]
         public abstract string Description { get; }
 
-        public abstract bool Play(AMKPlayer player);
+        public abstract bool Play(AUTPlayer player);
 
         public AbsRecorderItem()
         {

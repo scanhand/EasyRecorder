@@ -1,10 +1,10 @@
-﻿using AMK.Recorder;
+﻿using AUT.Recorder;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace AMK.Files
+namespace AUT.Files
 {
-    public class AMKFileBody
+    public class AUTFileBody
     {
         public List<IRecorderItem> Items = new List<IRecorderItem>();
 
@@ -20,11 +20,11 @@ namespace AMK.Files
             return json;
         }
 
-        public static AMKFileBody FromJsonString(string json)
+        public static AUTFileBody FromJsonString(string json)
         {
-            AMKFileBody fileBody = null;
+            AUTFileBody fileBody = null;
 
-            fileBody = JsonConvert.DeserializeObject<AMKFileBody>(json, new JsonSerializerSettings()
+            fileBody = JsonConvert.DeserializeObject<AUTFileBody>(json, new JsonSerializerSettings()
             {
                 NullValueHandling = NullValueHandling.Ignore,
                 MissingMemberHandling = MissingMemberHandling.Ignore,

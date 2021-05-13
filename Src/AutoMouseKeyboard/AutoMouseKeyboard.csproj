@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{05F4F746-6B68-41F9-BC71-9F751580595D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>AMK</RootNamespace>
+    <RootNamespace>AUT</RootNamespace>
     <AssemblyName>AutoMouseKeyboard</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -114,9 +114,9 @@
     <Compile Include="Controls\perFormattedTextBlock.cs" />
     <Compile Include="Controls\perStringHelper.cs" />
     <Compile Include="Controls\perValueDisplayPair.cs" />
-    <Compile Include="Files\AMKFile.cs" />
-    <Compile Include="Files\AMKFileBody.cs" />
-    <Compile Include="Files\AMKFileHeader.cs" />
+    <Compile Include="Files\AUTFile.cs" />
+    <Compile Include="Files\AUTFileBody.cs" />
+    <Compile Include="Files\AUTFileHeader.cs" />
     <Compile Include="Global\AConst.cs" />
     <Compile Include="Global\AUtil.cs" />
     <Compile Include="Global\BackgroundQueue.cs" />
@@ -126,8 +126,8 @@
     <Compile Include="Global\SingletonBase.cs" />
     <Compile Include="Global\TaskEx.cs" />
     <Compile Include="Global\WaitCursor.cs" />
-    <Compile Include="Group\AMKGroupControl.xaml.cs">
-      <DependentUpon>AMKGroupControl.xaml</DependentUpon>
+    <Compile Include="Group\AUTGroupControl.xaml.cs">
+      <DependentUpon>AUTGroupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="PreferenceWindow.xaml.cs">
       <DependentUpon>PreferenceWindow.xaml</DependentUpon>
@@ -138,31 +138,31 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Recorder\AbsRecorderItem.cs" />
-    <Compile Include="Recorder\AMKApplicationRecorder.cs" />
-    <Compile Include="Recorder\AMKPlayer.cs" />
+    <Compile Include="Recorder\AUTApplicationRecorder.cs" />
+    <Compile Include="Recorder\AUTPlayer.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
     <Compile Include="Recorder\IKeyRecorderItem.cs" />
     <Compile Include="Recorder\IMouseRecorderItem.cs" />
     <Compile Include="Recorder\IRecorderItem.cs" />
-    <Compile Include="Recorder\AMKKeyRecorder.cs" />
+    <Compile Include="Recorder\AUTKeyRecorder.cs" />
     <Compile Include="Recorder\IWaitRecorderItem.cs" />
     <Compile Include="Recorder\KeyUpDownRecorderItem.cs" />
     <Compile Include="Recorder\KeyPressRecorderItem.cs" />
     <Compile Include="Recorder\MouseClickRecorderItem.cs" />
     <Compile Include="Recorder\MouseUpDownRecorderItem.cs" />
     <Compile Include="Recorder\MouseMoveRecorderItem.cs" />
-    <Compile Include="Recorder\AMKMouseRecorder.cs" />
+    <Compile Include="Recorder\AUTMouseRecorder.cs" />
     <Compile Include="Recorder\MouseSmartClickRecorderItem.cs" />
     <Compile Include="Recorder\MouseWheelRecorderItem.cs" />
-    <Compile Include="Recorder\AMKWaitingRecorder.cs" />
+    <Compile Include="Recorder\AUTWaitingRecorder.cs" />
     <Compile Include="Recorder\WaitSmartRecorderItem.cs" />
     <Compile Include="Recorder\WaitTimeRecorderItem.cs" />
-    <Compile Include="UI\AMKCommander.cs" />
-    <Compile Include="UI\AMKRecorderItemConfigManager.cs" />
-    <Compile Include="UI\AMKStatusBar.xaml.cs">
-      <DependentUpon>AMKStatusBar.xaml</DependentUpon>
+    <Compile Include="UI\AUTCommander.cs" />
+    <Compile Include="UI\AUTRecorderItemConfigManager.cs" />
+    <Compile Include="UI\AUTStatusBar.xaml.cs">
+      <DependentUpon>AUTStatusBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\AMKStatusBarItem.cs" />
+    <Compile Include="UI\AUTStatusBarItem.cs" />
     <Compile Include="UI\IRecorderItemConfig.cs" />
     <Compile Include="UI\KeyItem.cs" />
     <Compile Include="UI\KeyPressData.cs" />
@@ -205,7 +205,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Group\AMKGroupControl.xaml">
+    <Page Include="Group\AUTGroupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -220,7 +220,7 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Recorder\AMKRecorder.cs" />
+    <Compile Include="Recorder\AUTRecorder.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -239,7 +239,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\AMKStatusBar.xaml">
+    <Page Include="UI\AUTStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

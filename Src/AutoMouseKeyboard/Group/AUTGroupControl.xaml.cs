@@ -1,14 +1,14 @@
 ﻿using Aga.Diagrams.FlowChart;
 using System.Windows.Controls;
 
-namespace AMK.Group
+namespace AUT.Group
 {
     /// <summary>
-    /// Interaction logic for AMKGroupControl.xaml
+    /// Interaction logic for AUTGroupControl.xaml
     /// </summary>
-    public partial class AMKGroupControl : UserControl
+    public partial class AUTGroupControl : UserControl
     {
-        public AMKGroupControl()
+        public AUTGroupControl()
         {
             InitializeComponent();
 
