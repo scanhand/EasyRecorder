@@ -10,7 +10,7 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:tb="clr-namespace:Hardcodet.Wpf.TaskbarNotification;assembly=Hardcodet.Wpf.TaskbarNotification" 
         mc:Ignorable="d"
-        Title="Automated Unit Testing" Width="900" Height="600" MinWidth="200" MinHeight="200">
+        Title="Automated Unit Testing" Width="600" Height="500" MinWidth="200" MinHeight="200">
 
     <Window.Resources>
         <ImageSource x:Key="LeftMouseClick">Resources/icons8-mouse-leftclick-64.png</ImageSource>
