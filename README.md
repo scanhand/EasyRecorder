@@ -1,4 +1,4 @@
-# Easy Recorder
+# Easy Recorder ![Icon](./Doc/icons8-record-64.ico)
 
 ## Easy to use a recorder for Keyboard & Mouse
 
