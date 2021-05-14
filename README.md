@@ -4,7 +4,7 @@
 
  - Coding Demo
 
-![Image of Demo](./EasyRecorderDemoCoding.gif)
+![Image of Demo](./Doc/EasyRecorderDemoCoding.gif)
 
 ## Supported Major Functions
 
