@@ -9,8 +9,10 @@
     <Grid>
         <DockPanel>
             <StackPanel>
-                <TextBlock>Copyright(r) 2021</TextBlock>
-                <TextBlock>
+                <TextBlock Foreground="#3393DF" FontSize="14" FontWeight="Black" HorizontalAlignment="Center">Easy Recorder</TextBlock>
+                <Image Source="icons8-record-64.ico" Width="48" Margin="10, 10, 10, 10"></Image>
+                <TextBlock Margin="10, 10, 10, 0">Copyright(r) 2021 Easy Recorder</TextBlock>
+                <TextBlock Margin="10, 0, 10, 0">
                     <Hyperlink NavigateUri="https://icons8.com/" Click="Hyperlink_icons8_Click">
                         https://icons8.com/
                     </Hyperlink>
