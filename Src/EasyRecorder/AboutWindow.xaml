@@ -1,0 +1,21 @@
+﻿<Window x:Class="ESR.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EasyRecorder"
+        mc:Ignorable="d"
+        Title="About" Height="200" Width="250" FontSize="10">
+    <Grid>
+        <DockPanel>
+            <StackPanel>
+                <TextBlock>Copyright(r) 2021</TextBlock>
+                <TextBlock>
+                    <Hyperlink NavigateUri="https://icons8.com/" Click="Hyperlink_icons8_Click">
+                        https://icons8.com/
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

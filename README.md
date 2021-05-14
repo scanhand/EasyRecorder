@@ -1,1 +1,1 @@
-# Auto Mouse Keyboard
+# Easy Recorder
