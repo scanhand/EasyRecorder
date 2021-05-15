@@ -420,5 +420,8 @@
   <ItemGroup>
     <Resource Include="Resources\icons8-downarrow-64.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-refresh-64.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

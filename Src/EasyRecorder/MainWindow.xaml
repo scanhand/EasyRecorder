@@ -59,7 +59,7 @@
             <MenuItem Header="_Recorder">
                 <MenuItem Header="Start _Recording" Click="MenuItem_StartRecording_Click">
                     <MenuItem.Icon>
-                        <Image Source="Resources/icons8-start-64.png" Width="16"/>
+                        <Image Source="Resources/icons8-video-record-64.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="_Stop Recording" Click="MenuItem_StopRecording_Click">
@@ -69,20 +69,29 @@
                 </MenuItem>
                 <MenuItem Header="_Reset Items" Click="MenuItem_ResetItems_Click">
                     <MenuItem.Icon>
-                        <Image Source="Resources/icons8-stop-64.png" Width="16"/>
+                        <Image Source="Resources/icons8-refresh-64.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Player">
                 <MenuItem Header="Start Playing" Click="MenuItem_StartPlaying_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/icons8-play-64.png" Width="16"/>
+                    </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Stop Playing" Click="MenuItem_StopPlaying_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/icons8-stop-64.png" Width="16"/>
+                    </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Reset to Start" Click="MenuItem_ResetToStart_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/icons8-playuntil-64.png" Width="16"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem Header="_About..." Click="MenuItem_About_Click">
+                <MenuItem Header="_About Easy Recorder..." Click="MenuItem_About_Click">
                 </MenuItem>
             </MenuItem>
         </Menu>
