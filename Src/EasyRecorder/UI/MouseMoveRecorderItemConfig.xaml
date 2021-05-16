@@ -7,9 +7,11 @@
         xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
         IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False"
-        Title="Key Configuration" Height="220" Width="400">
+        Title="MouseMove Configuration" Height="220" Width="400">
     <Grid Margin="5,5,5,5">
         <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -26,14 +28,30 @@
         <!-- Icon -->
         <Image Source="/EasyRecorder;component/Resources/icons8-mouse-64.png" HorizontalAlignment="Left" Width="32"/>
 
+        <!-- Start X, Y-->
+        <Label Content="Start X:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxStartX" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,50,5" />
+        <Label Content="Start Y:" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxStartY" Grid.Row="1" Grid.Column="3"  Grid.ColumnSpan="2" Margin="5,0,50,5" />
+
+        <!-- End X, Y-->
+        <Label Content="End X:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxEndX" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,0,50,5" />
+        <Label Content="End Y:" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxEndY" Grid.Row="2" Grid.Column="3"  Grid.ColumnSpan="2" Margin="5,0,50,5" />
+
+        <Label Content="Time Duration:" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+        <TextBox x:Name="textBoxTimeDuration" Grid.Row="3" Grid.Column="3"  Grid.ColumnSpan="2" Margin="5,0,50,5" />
+        <Label Content="sec" Grid.Row="3" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="5,0,25,0"/>
+
         <!-- Ok & Cancel Button -->
-        <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Click="ButtonOK_Click">
+        <Button x:Name="buttonOK" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" Margin="5,5,5,5" Click="ButtonOK_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Width="Auto" Source="/EasyRecorder;component/Resources/icons8-ok-64.png" ></Image>
                 <Label VerticalAlignment="Center">OK</Label>
             </StackPanel>
         </Button>
-        <Button x:Name="buttonCancel" Grid.Row="4" Grid.Column="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
+        <Button x:Name="buttonCancel" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="2" Margin="5,5,5,5" Click="ButtonCancel_Click">
             <StackPanel Orientation="Horizontal">
                 <Image Width="Auto" Source="/EasyRecorder;component/Resources/icons8-cancel-64.png" ></Image>
                 <Label VerticalAlignment="Center">Cancel</Label>
