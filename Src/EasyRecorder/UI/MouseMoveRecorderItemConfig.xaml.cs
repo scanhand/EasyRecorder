@@ -53,7 +53,7 @@ namespace ESR.UI
 
             int endX = startX;
             int endY = startY;
-            if(this.RecorderItem.ChildItems.Last() != null)
+            if(this.RecorderItem.ChildItems.LastOrDefault() != null)
             {
                 timeDuration = this.RecorderItem.ChildItems.Last().Time - timeStart;
                 endX = (int)this.RecorderItem.ChildItems.Last().Point.X;
