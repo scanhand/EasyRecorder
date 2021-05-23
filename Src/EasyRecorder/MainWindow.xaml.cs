@@ -19,6 +19,7 @@ namespace ESR
     {
         #region Log
 
+
         private LogWindow LogWindow = new LogWindow();
 
         #endregion
@@ -77,8 +78,8 @@ namespace ESR
             //Log
             this.LogWindow.Show();
             this.LogWindow.Visibility = Visibility.Hidden;
-            //Test
-            this.LogWindow.Visibility = Visibility.Visible;
+            if(GM.Instance.IsTest)
+                this.LogWindow.Visibility = Visibility.Visible;
 
             //Hooking
             this.KeyboardWatcher = EventHookFactory.GetKeyboardWatcher();
@@ -248,15 +249,17 @@ namespace ESR
                 });
             };
 
-            //Test
-            this.Recorder.AddItem(new MouseWheelRecorderItem());
-            this.Recorder.AddItem(new MouseMoveRecorderItem());
-            this.Recorder.AddItem(new MouseUpDownRecorderItem());
-            this.Recorder.AddItem(new MouseSmartClickRecorderItem());
-            this.Recorder.AddItem(new KeyUpDownRecorderItem());
-            this.Recorder.AddItem(new KeyPressRecorderItem());
-            this.Recorder.AddItem(new WaitSmartRecorderItem());
-            this.Recorder.AddItem(new WaitTimeRecorderItem());
+            if (GM.Instance.IsTest)
+            {
+                this.Recorder.AddItem(new MouseWheelRecorderItem());
+                this.Recorder.AddItem(new MouseMoveRecorderItem());
+                this.Recorder.AddItem(new MouseUpDownRecorderItem());
+                this.Recorder.AddItem(new MouseSmartClickRecorderItem());
+                this.Recorder.AddItem(new KeyUpDownRecorderItem());
+                this.Recorder.AddItem(new KeyPressRecorderItem());
+                this.Recorder.AddItem(new WaitSmartRecorderItem());
+                this.Recorder.AddItem(new WaitTimeRecorderItem());
+            }
         }
 
         private void LayoutRoot_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
