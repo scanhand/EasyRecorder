@@ -89,6 +89,8 @@
                         <Image Source="Resources/icons8-playuntil-64.png" Width="16"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Infinite Repeat" x:Name="MenuInfiniteRepeatItem" Click="MenuInfiniteRepeatItem_Click" IsCheckable="True" >
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_About Easy Recorder..." Click="MenuItem_About_Click">

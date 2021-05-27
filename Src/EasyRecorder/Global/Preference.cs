@@ -14,6 +14,8 @@ namespace ESR.Global
 
         public string CommandKeyTextColor = "#3393DF";
 
+        public bool IsInfiniteRepeat { get; set; } = true;
+
         [JsonIgnore]
         public Window MainWindow { get; set; } = null;
 
@@ -23,15 +25,18 @@ namespace ESR.Global
         [JsonIgnore]
         public MenuItem MenuAlwaysTopItem { get; set; } = null;
 
+        [JsonIgnore]
+        public MenuItem MenuInfiniteRepeatItem { get; set; } = null;
+
         public bool Load()
         {
-
             return Adjust();
         }
 
         public bool Adjust()
         {
             this.MenuAlwaysTopItem.IsChecked = this.IsTopMost;
+            this.MenuInfiniteRepeatItem.IsChecked = this.IsInfiniteRepeat;
             this.MainWindow.Topmost = this.IsTopMost;
             this.LogWindow.Topmost = this.IsTopMost;
 

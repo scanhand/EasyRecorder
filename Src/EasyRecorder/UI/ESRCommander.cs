@@ -12,6 +12,8 @@ namespace ESR.UI
 
         public VirtualKeyCode PlayingVKeyCode = VirtualKeyCode.F10;
 
+        public VirtualKeyCode StopVKeyCode = VirtualKeyCode.ESCAPE;
+
         public MainWindow MainWindow
         {
             get
@@ -56,6 +58,12 @@ namespace ESR.UI
                     OnPushKey((VirtualKeyCode)e.KeyData.VkCode);
                 return true;
             }
+            else if (e.KeyData.VkCode == (int)this.StopVKeyCode)
+            {
+                if (e.KeyData.EventType != KeyEvent.up)
+                    OnStop();
+                return true;
+            }
             return false;
         }
 
@@ -85,6 +93,12 @@ namespace ESR.UI
             {
                 this.Recorder.PauseAll();
             }
+        }
+
+        private void OnStop()
+        {
+            ALog.Debug("State={0}", this.Recorder.State);
+            this.Recorder.PauseAll();
         }
 
         private void OnPushKey(VirtualKeyCode key)

@@ -120,6 +120,7 @@ namespace ESR
             Preference.Instance.MainWindow = this;
             Preference.Instance.LogWindow = this.LogWindow;
             Preference.Instance.MenuAlwaysTopItem = this.MenuAlwaysTopMostItem;
+            Preference.Instance.MenuInfiniteRepeatItem = this.MenuInfiniteRepeatItem;
             Preference.Instance.Load();
 
             this.Recorder.OnAddItem += (item) =>
@@ -392,6 +393,12 @@ namespace ESR
         {
             ALog.Debug("");
             this.Topmost = this.MenuAlwaysTopMostItem.IsChecked;
+        }
+
+        private void MenuInfiniteRepeatItem_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+            Preference.Instance.IsInfiniteRepeat = this.MenuInfiniteRepeatItem.IsChecked;
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
