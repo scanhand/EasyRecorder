@@ -53,8 +53,6 @@ namespace ESR.Recorder
 
             ResetLastItem();
 
-            bool isInfiniteRepeat = true;
-
             this.CancelToken = new CancellationTokenSource();
             ThreadPool.QueueUserWorkItem(new WaitCallback((obj) =>
             {
@@ -73,7 +71,7 @@ namespace ESR.Recorder
 
                     if (IsLastStep(items))
                     {
-                        if(isInfiniteRepeat)
+                        if(Preference.Instance.IsInfiniteRepeat)
                         {
                             this.CurrentRecorder = items.First();
                             continue;
