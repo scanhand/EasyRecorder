@@ -8,7 +8,31 @@
         Title="About" Height="200" Width="250" FontSize="10">
     <Grid>
         <DockPanel>
-            <StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"></RowDefinition>
+                    <RowDefinition Height="15"></RowDefinition>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Foreground="#3393DF" FontSize="14" FontWeight="Black" HorizontalAlignment="Center">Easy Recorder</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0,0" Text="{Binding Version}" HorizontalAlignment="Center"/>
+                <Image Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Source="icons8-record-64.ico" Width="48" Margin="10, 10, 10, 10"></Image>
+                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Margin="10, 10, 10, 0">Copyright(r) 2021 Easy Recorder</TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Margin="10, 0, 10, 0">
+                    <Hyperlink NavigateUri="https://icons8.com/" Click="Hyperlink_icons8_Click">
+                        https://icons8.com/
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+            <!--<StackPanel>
                 <TextBlock Foreground="#3393DF" FontSize="14" FontWeight="Black" HorizontalAlignment="Center">Easy Recorder</TextBlock>
                 <Image Source="icons8-record-64.ico" Width="48" Margin="10, 10, 10, 10"></Image>
                 <TextBlock Margin="10, 10, 10, 0">Copyright(r) 2021 Easy Recorder</TextBlock>
@@ -17,7 +41,7 @@
                         https://icons8.com/
                     </Hyperlink>
                 </TextBlock>
-            </StackPanel>
+            </StackPanel>-->
         </DockPanel>
     </Grid>
 </Window>

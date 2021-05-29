@@ -4,7 +4,7 @@ namespace ESR.Global
 {
     public class GM : SingletonBase<GM>
     {
-        public bool IsTest = true;
+        public bool IsTest = false;
 
         public InputSimulator InputSimulator = new InputSimulator();
 

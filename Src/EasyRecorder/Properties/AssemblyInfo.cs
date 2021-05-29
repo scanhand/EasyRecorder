@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using ESR.Global;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -9,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyDescription("Easy Recorder")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EasyRecorder")]
+[assembly: AssemblyProduct("Easy Recorder")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -49,5 +50,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.1.0")]
-[assembly: AssemblyFileVersion("0.0.1.0")]
+[assembly: AssemblyVersion(AConst.Version)]
+[assembly: AssemblyFileVersion(AConst.Version)]

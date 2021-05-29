@@ -1,8 +1,8 @@
 ﻿namespace ESR.Global
 {
-    public static class AConst
+    public class AConst
     {
-        public static string Version { get; set; } = "0.0.2.0";
+        public const string Version = "0.0.2.0";
 
         public static string LogPath { get; set; } = "./Log";
     }
