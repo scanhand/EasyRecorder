@@ -91,6 +91,8 @@
                 </MenuItem>
                 <MenuItem Header="Infinite Repeat" x:Name="MenuInfiniteRepeatItem" Click="MenuInfiniteRepeatItem_Click" IsCheckable="True" >
                 </MenuItem>
+                <MenuItem Header="Repeat Count" x:Name="MenuRepeatCountItem" Click="MenuRepeatCountItem_Click" >
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem Header="_About Easy Recorder..." Click="MenuItem_About_Click">

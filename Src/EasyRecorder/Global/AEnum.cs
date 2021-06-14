@@ -65,4 +65,10 @@ namespace ESR.Global
         EditItem,
         Memo,
     }
+
+    public enum RepeatType
+    {
+        Infinite,
+        Count,
+    }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MahApps.Metro.Controls;
+using Newtonsoft.Json;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,7 +15,7 @@ namespace ESR.Global
 
         public string CommandKeyTextColor = "#3393DF";
 
-        public bool IsInfiniteRepeat { get; set; } = true;
+        public RepeatType RepeatType { get; set; } = RepeatType.Infinite;
 
         [JsonIgnore]
         public Window MainWindow { get; set; } = null;
@@ -28,6 +29,12 @@ namespace ESR.Global
         [JsonIgnore]
         public MenuItem MenuInfiniteRepeatItem { get; set; } = null;
 
+        [JsonIgnore]
+        public MenuItem MenuRepeatCountItem { get; set; } = null;
+
+        [JsonIgnore]
+        public NumericUpDown RepeatCountControl { get; set; } = null;
+
         public bool Load()
         {
             return Adjust();
@@ -36,7 +43,8 @@ namespace ESR.Global
         public bool Adjust()
         {
             this.MenuAlwaysTopItem.IsChecked = this.IsTopMost;
-            this.MenuInfiniteRepeatItem.IsChecked = this.IsInfiniteRepeat;
+            this.MenuInfiniteRepeatItem.IsChecked = this.RepeatType == RepeatType.Infinite;
+            this.MenuRepeatCountItem.IsChecked = this.RepeatType == RepeatType.Count;
             this.MainWindow.Topmost = this.IsTopMost;
             this.LogWindow.Topmost = this.IsTopMost;
 

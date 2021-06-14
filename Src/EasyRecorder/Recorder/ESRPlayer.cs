@@ -71,7 +71,7 @@ namespace ESR.Recorder
 
                     if (IsLastStep(items))
                     {
-                        if(Preference.Instance.IsInfiniteRepeat)
+                        if(IsContinuePlaying())
                         {
                             this.CurrentRecorder = items.First();
                             continue;
@@ -90,6 +90,28 @@ namespace ESR.Recorder
             }), this.CancelToken.Token);
             ALog.Debug("Start Playing ThreadPool");
             return true;
+        }
+
+        private bool IsContinuePlaying()
+        {
+            ALog.Debug("");
+            if (Preference.Instance.RepeatType == RepeatType.Infinite)
+                return true;
+
+            if(Preference.Instance.RepeatType == RepeatType.Count)
+            {
+                bool isContinue = true;
+                Preference.Instance.MainWindow.InvokeIfRequired(() =>
+                {
+                    if (Preference.Instance.RepeatCountControl.Value <= 0)
+                        isContinue = false;
+
+                    Preference.Instance.RepeatCountControl.Value--;
+                });
+                return isContinue;
+            }
+
+            return false;
         }
 
         public void Stop()

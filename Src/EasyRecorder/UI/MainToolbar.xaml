@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ESR.UI"
+             xmlns:local="clr-namespace:ESR.UI" 
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d">
 
     <UserControl.Resources>
@@ -64,6 +65,6 @@
         
         <!-- Seperator-->
         <Rectangle Grid.Column="4" Fill="Gray" ></Rectangle>
-       
+        <mah:NumericUpDown Grid.Column="5" x:Name="numericRepeat" Margin="5,0,5,0" FontWeight="Bold" FontSize="20" Value="10" Maximum="99" Minimum="0"></mah:NumericUpDown>
     </Grid>
 </UserControl>

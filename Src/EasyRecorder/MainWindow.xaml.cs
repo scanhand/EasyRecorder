@@ -121,6 +121,8 @@ namespace ESR
             Preference.Instance.LogWindow = this.LogWindow;
             Preference.Instance.MenuAlwaysTopItem = this.MenuAlwaysTopMostItem;
             Preference.Instance.MenuInfiniteRepeatItem = this.MenuInfiniteRepeatItem;
+            Preference.Instance.MenuRepeatCountItem = this.MenuRepeatCountItem;
+            Preference.Instance.RepeatCountControl = this.MainToolbar.numericRepeat;
             Preference.Instance.Load();
 
             this.Recorder.OnAddItem += (item) =>
@@ -398,7 +400,24 @@ namespace ESR
         private void MenuInfiniteRepeatItem_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            Preference.Instance.IsInfiniteRepeat = this.MenuInfiniteRepeatItem.IsChecked;
+            this.MenuInfiniteRepeatItem.IsChecked = !this.MenuInfiniteRepeatItem.IsChecked;
+            Preference.Instance.RepeatType = this.MenuInfiniteRepeatItem.IsChecked ? RepeatType.Infinite : RepeatType.Count;
+            UpdateRepeatMenuChecked();
+        }
+
+        private void MenuRepeatCountItem_Click(object sender, RoutedEventArgs e)
+        {
+            ALog.Debug("");
+            this.MenuRepeatCountItem.IsChecked = !this.MenuRepeatCountItem.IsChecked;
+            Preference.Instance.RepeatType = this.MenuRepeatCountItem.IsChecked ? RepeatType.Count : RepeatType.Infinite;
+            UpdateRepeatMenuChecked();
+        }
+
+        private void UpdateRepeatMenuChecked()
+        {
+            ALog.Debug("");
+            this.MenuInfiniteRepeatItem.IsChecked = Preference.Instance.RepeatType == RepeatType.Infinite;
+            this.MenuRepeatCountItem.IsChecked = Preference.Instance.RepeatType == RepeatType.Count;
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
