@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using Newtonsoft.Json;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -47,6 +48,7 @@ namespace ESR.Global
             this.MenuRepeatCountItem.IsChecked = this.RepeatType == RepeatType.Count;
             this.MainWindow.Topmost = this.IsTopMost;
             this.LogWindow.Topmost = this.IsTopMost;
+            this.RepeatCountControl.IsEnabled = this.RepeatType == RepeatType.Count;
 
             AUtil.MoveToLeftBottom(this.LogWindow);
             return true;

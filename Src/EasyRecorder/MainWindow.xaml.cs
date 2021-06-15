@@ -62,10 +62,16 @@ namespace ESR
 
         #endregion
 
+        #region Control
+
+        private NumericUpDown NumericRepeat { get => this.MainToolbar.numericRepeat; }
+
+        #endregion
+
         public MainWindow()
         {
             InitializeComponent();
-
+            
             //Global Manager
             GM.Instance.MainWindow = this;
 
@@ -400,16 +406,14 @@ namespace ESR
         private void MenuInfiniteRepeatItem_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            this.MenuInfiniteRepeatItem.IsChecked = !this.MenuInfiniteRepeatItem.IsChecked;
-            Preference.Instance.RepeatType = this.MenuInfiniteRepeatItem.IsChecked ? RepeatType.Infinite : RepeatType.Count;
+            Preference.Instance.RepeatType = RepeatType.Infinite;
             UpdateRepeatMenuChecked();
         }
 
         private void MenuRepeatCountItem_Click(object sender, RoutedEventArgs e)
         {
             ALog.Debug("");
-            this.MenuRepeatCountItem.IsChecked = !this.MenuRepeatCountItem.IsChecked;
-            Preference.Instance.RepeatType = this.MenuRepeatCountItem.IsChecked ? RepeatType.Count : RepeatType.Infinite;
+            Preference.Instance.RepeatType = RepeatType.Count;
             UpdateRepeatMenuChecked();
         }
 
@@ -418,6 +422,7 @@ namespace ESR
             ALog.Debug("");
             this.MenuInfiniteRepeatItem.IsChecked = Preference.Instance.RepeatType == RepeatType.Infinite;
             this.MenuRepeatCountItem.IsChecked = Preference.Instance.RepeatType == RepeatType.Count;
+            this.NumericRepeat.IsEnabled = Preference.Instance.RepeatType == RepeatType.Count;
         }
 
         private void MenuItem_Exit_Click(object sender, RoutedEventArgs e)
