@@ -164,6 +164,10 @@ namespace ESR.Recorder
             {
                 this.PauseRecording();
             }
+            else if (this.State == ESRState.DragClick)
+            {
+                this.StopRecording();
+            }
         }
 
         public void StartRecordingWithConfirm()
@@ -202,6 +206,20 @@ namespace ESR.Recorder
             ALog.Debug("");
             this.State = ESRState.Stop;
             this.WaitingRecorder.Stop();
+            OnStopRecording();
+        }
+
+        public void StartDragClick()
+        {
+            ALog.Debug("");
+            this.State = ESRState.DragClick;
+            this.WaitingRecorder.Stop();
+        }
+
+        public void StopDragClick()
+        {
+            ALog.Debug("");
+            this.State = ESRState.Stop;
             OnStopRecording();
         }
 

@@ -52,6 +52,7 @@ namespace ESR.Global
         Playing,
         PlayingPause,
         PlayDone,
+        DragClick,
     }
 
     public enum RecorderItemState

@@ -14,6 +14,8 @@ namespace ESR.UI
 
         public VirtualKeyCode StopVKeyCode = VirtualKeyCode.ESCAPE;
 
+        public VirtualKeyCode DragClickStartVKKeyCode = VirtualKeyCode.F8;
+
         public MainWindow MainWindow
         {
             get
@@ -62,6 +64,12 @@ namespace ESR.UI
             {
                 if (e.KeyData.EventType != KeyEvent.up)
                     OnStop();
+                return true;
+            }
+            else if (e.KeyData.VkCode == (int)this.DragClickStartVKKeyCode)
+            {
+                if (e.KeyData.EventType != KeyEvent.up)
+                    OnDragClickStart();
                 return true;
             }
             return false;
@@ -116,6 +124,12 @@ namespace ESR.UI
             {
                 this.RecorderView.DeleteSelectedItems();
             });
+        }
+
+        private void OnDragClickStart()
+        {
+            ALog.Debug("OnDragClickStart={0}", this.Recorder.State);
+            this.Recorder.StartDragClick();
         }
     }
 }

@@ -18,6 +18,12 @@ namespace ESR.Global
 
         public RepeatType RepeatType { get; set; } = RepeatType.Infinite;
 
+        public ButtonType DragClickButtonType = ButtonType.Right;
+
+        public int DragClickNumberOfClicks = 10;
+
+        public int DragClickClickTimeIntervalMsec = 50;
+
         [JsonIgnore]
         public Window MainWindow { get; set; } = null;
 

@@ -135,6 +135,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Recorder\AbsRecorderItem.cs" />
+    <Compile Include="Recorder\DragClicker.cs" />
     <Compile Include="Recorder\ESRApplicationRecorder.cs" />
     <Compile Include="Recorder\ESRPlayer.cs" />
     <Compile Include="Recorder\ApplicationRecorderItem.cs" />
@@ -422,6 +423,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\icons8-refresh-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icons8-mouse-right-click-100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

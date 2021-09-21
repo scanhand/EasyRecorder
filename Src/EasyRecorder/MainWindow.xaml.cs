@@ -4,8 +4,10 @@ using ESR.Global;
 using ESR.Recorder;
 using ESR.UI;
 using EventHook;
+using EventHook.Hooks;
 using MahApps.Metro.Controls;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using WindowsInput.Native;
@@ -65,6 +67,12 @@ namespace ESR
         #region Control
 
         private NumericUpDown NumericRepeat { get => this.MainToolbar.numericRepeat; }
+
+        #endregion
+
+        #region DragClicker
+
+        private DragClicker DragClicker = new DragClicker();
 
         #endregion
 
@@ -295,6 +303,12 @@ namespace ESR
         {
             UpdateMousePosition(e);
 
+            if(this.Recorder.State == ESRState.DragClick)
+            {
+                this.DragClicker.MouseInput(e);
+                return;
+            }
+
             this.Recorder.Add(e);
         }
 
@@ -466,5 +480,10 @@ namespace ESR
             });
         }
 
+        private void MenuPreference_Click(object sender, RoutedEventArgs e)
+        {
+            PreferenceWindow preferenceWindow = new PreferenceWindow();
+            preferenceWindow.ShowDialog();
+        }
     }
 }

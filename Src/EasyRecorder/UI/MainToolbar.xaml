@@ -29,7 +29,8 @@
             <ColumnDefinition Width="90"></ColumnDefinition>
             <ColumnDefinition Width="2"></ColumnDefinition>
             <ColumnDefinition Width="90"></ColumnDefinition>
-            <ColumnDefinition Width="90"></ColumnDefinition>
+            <ColumnDefinition Width="2"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition Width="90"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -66,5 +67,13 @@
         <!-- Seperator-->
         <Rectangle Grid.Column="4" Fill="Gray" ></Rectangle>
         <mah:NumericUpDown Grid.Column="5" x:Name="numericRepeat" Margin="5,0,5,0" FontWeight="Bold" FontSize="20" Value="10" Maximum="99" Minimum="0"></mah:NumericUpDown>
+        
+        <Rectangle Grid.Column="6" Fill="Gray" ></Rectangle>
+        <Button x:Name="buttonDragClick" Click="buttonDragClick_Click" Grid.Column="7" BorderThickness="0" Margin="5,0,5,0">
+            <DockPanel Margin="-5, -5, -5, -5">
+                <Image Width="32" Source="/EasyRecorder;component/Resources/icons8-mouse-right-click-100.png" ></Image>
+                <Label VerticalAlignment="Center">Drag Click</Label>
+            </DockPanel>
+        </Button>
     </Grid>
 </UserControl>

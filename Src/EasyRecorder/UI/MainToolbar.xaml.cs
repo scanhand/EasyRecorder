@@ -65,6 +65,7 @@ namespace ESR.UI
                 buttonPause.IsEnabled = true;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = false;
+                buttonDragClick.IsEnabled = false;
             }
             else if (state == ESRState.Recording)
             {
@@ -72,6 +73,7 @@ namespace ESR.UI
                 buttonPause.IsEnabled = true;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = false;
+                buttonDragClick.IsEnabled = false;
             }
             else if (state == ESRState.Stop || state == ESRState.PlayDone)
             {
@@ -79,6 +81,7 @@ namespace ESR.UI
                 buttonPause.IsEnabled = false;
                 buttonStop.IsEnabled = false;
                 buttonRecord.IsEnabled = true;
+                buttonDragClick.IsEnabled = true;
             }
             else if (state == ESRState.PlayingPause)
             {
@@ -86,6 +89,7 @@ namespace ESR.UI
                 buttonPause.IsEnabled = false;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = false;
+                buttonDragClick.IsEnabled = false;
             }
             else if (state == ESRState.RecordingPause)
             {
@@ -93,7 +97,21 @@ namespace ESR.UI
                 buttonPause.IsEnabled = false;
                 buttonStop.IsEnabled = true;
                 buttonRecord.IsEnabled = true;
+                buttonDragClick.IsEnabled = false;
             }
+            else if(state == ESRState.DragClick)
+            {
+                buttonPlay.IsEnabled = false;
+                buttonPause.IsEnabled = true;
+                buttonStop.IsEnabled = true;
+                buttonRecord.IsEnabled = false;
+                buttonDragClick.IsEnabled = false;
+            }
+        }
+
+        private void buttonDragClick_Click(object sender, RoutedEventArgs e)
+        {
+            this.Recorder.StartDragClick();
         }
     }
 }

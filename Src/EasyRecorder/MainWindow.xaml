@@ -52,6 +52,11 @@
                 <MenuItem Header="Always Top most" x:Name="MenuAlwaysTopMostItem" Click="MenuItem_AlwaysTopMost_Click" IsCheckable="True" >
                 </MenuItem>
 
+                <Separator></Separator>
+
+                <MenuItem Header="Preference..." x:Name="MenuPreference" Click="MenuPreference_Click">
+                </MenuItem>
+
                 <MenuItem Header="Exit" Click="MenuItem_Exit_Click">
                 </MenuItem>
 

@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ESR"
         mc:Ignorable="d"
-        Title="PreferenceWindow" Height="450" Width="800">
+        Title="PreferenceWindow" Height="450" Width="600">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30*"></ColumnDefinition>
+            <ColumnDefinition Width="70*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TreeView Grid.Row="0" Grid.Column="0">
+            
+        </TreeView>
+
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Ok & Cancel Button -->
+            <Button x:Name="buttonOK" Grid.Column="1" Margin="5,5,5,5" Click="buttonOK_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="Auto" Source="/EasyRecorder;component/Resources/icons8-ok-64.png" ></Image>
+                    <Label VerticalAlignment="Center">OK</Label>
+                </StackPanel>
+            </Button>
+            <Button x:Name="buttonCancel" Grid.Column="2" Margin="5,5,5,5" Click="buttonCancel_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="Auto" Source="/EasyRecorder;component/Resources/icons8-cancel-64.png" ></Image>
+                    <Label VerticalAlignment="Center">Cancel</Label>
+                </StackPanel>
+            </Button>
+
+        </Grid>
         
     </Grid>
 </Window>

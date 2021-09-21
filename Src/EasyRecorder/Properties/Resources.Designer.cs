@@ -193,6 +193,16 @@ namespace ESR.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_mouse_right_click_100 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_mouse_right_click_100", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_mouse_rightclick_64 {
             get {
                 object obj = ResourceManager.GetObject("icons8_mouse_rightclick_64", resourceCulture);
