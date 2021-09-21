@@ -32,3 +32,9 @@
 
   - Support a Log Window (for Debugging)
 
+  - Support Drag Click
+
+    - Can configurate Left & Right button
+
+    - Can configurate Time Interval
+
